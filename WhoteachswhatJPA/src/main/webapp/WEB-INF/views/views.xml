@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+  <definition extends="standard" name="/index">
+    <put-attribute name="title" value="Welcome to Forge"/>
+    <put-attribute name="header" value="Welcome to Forge"/>
+    <put-attribute name="subheader" value="Your application is running."/>
+    <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
+  </definition>
+  <definition extends="standard" name="/error">
+    <put-attribute name="title" value="Server Error"/>
+    <put-attribute name="header" value="Oops!"/>
+    <put-attribute name="subheader" value="That's going to leave a mark!"/>
+    <put-attribute name="body" value="/WEB-INF/views/error.jsp"/>
+  </definition>
+  <definition extends="standard" name="createAccount">
+    <put-attribute name="title" value="Create Account"/>
+    <put-attribute name="header" value="Account"/>
+    <put-attribute name="subheader" value="Create a new Account"/>
+    <put-attribute name="body" value="/WEB-INF/views/Account/createAccount.jsp"/>
+  </definition>
+  <definition extends="standard" name="editAccount">
+    <put-attribute name="title" value="Edit Account"/>
+    <put-attribute name="header" value="Account"/>
+    <put-attribute name="subheader" value="Edit an existing Account"/>
+    <put-attribute name="body" value="/WEB-INF/views/Account/editAccount.jsp"/>
+  </definition>
+  <definition extends="standard" name="accounts">
+    <put-attribute name="title" value="Search Account entities"/>
+    <put-attribute name="header" value="Account"/>
+    <put-attribute name="subheader" value="Search Account entities"/>
+    <put-attribute name="body" value="/WEB-INF/views/Account/accounts.jsp"/>
+  </definition>
+  <definition extends="standard" name="viewAccount">
+    <put-attribute name="title" value="View Account"/>
+    <put-attribute name="header" value="Account"/>
+    <put-attribute name="subheader" value="View existing Account"/>
+    <put-attribute name="body" value="/WEB-INF/views/Account/viewAccount.jsp"/>
+  </definition>
+</tiles-definitions>
