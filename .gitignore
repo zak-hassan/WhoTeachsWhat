@@ -1,0 +1,12 @@
+*.class
+
+# Java Eclipse Settings
+.forge_settings/
+.settings/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+
