@@ -14,17 +14,14 @@ Setup Instructions:
 
 Should look like this:
 
-![][drag]
-
-file:///home/zmhassan/Pictures/Screenshot%20from%202014-03-07%2011:37:14.png
+https://drive.google.com/file/d/0B3OpUJRbtZsZMm5VYnczS3pKcUU/edit?usp=sharing
 
 Select existing maven project.
 
-
-file:///home/zmhassan/Pictures/Screenshot%20from%202014-03-07%2011:37:22.png
-
 Browse to the location that the project was cloned.
 
-file:///home/zmhassan/Pictures/Screenshot%20from%202014-03-07%2011:37:30.png
+https://drive.google.com/file/d/0B3OpUJRbtZsZNV9tUmhldnRZZ1U/edit?usp=sharing
+
+
 
 
