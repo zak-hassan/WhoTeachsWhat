@@ -15,7 +15,7 @@ public class Responsibility implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="responsibility_id")
 	private int responsibilityId;
 

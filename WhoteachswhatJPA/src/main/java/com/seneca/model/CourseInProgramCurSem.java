@@ -18,17 +18,17 @@ public class CourseInProgramCurSem implements Serializable {
 
 	//bi-directional many-to-one association to Course
 	@ManyToOne
-	@JoinColumn(name="course_id", insertable=false, updatable=false) 
+	@JoinColumn(name="course_id",insertable=false, updatable=false) 
 	private Course course;
 
 	//bi-directional many-to-one association to Program
 	@ManyToOne
-	@JoinColumn(name="program_id", insertable=false, updatable=false) 
+	@JoinColumn(name="program_id",insertable=false, updatable=false) 
 	private Program program;
 
 	//bi-directional many-to-one association to CurriculumSemester
 	@ManyToOne
-	@JoinColumn(name="cs_id", insertable=false, updatable=false) 
+	@JoinColumn(name="cs_id",insertable=false, updatable=false) 
 	private CurriculumSemester curriculumSemester;
 
 	public CourseInProgramCurSem() {

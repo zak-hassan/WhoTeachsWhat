@@ -12,13 +12,13 @@ public class CourseInProgramCurSemPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="course_id", insertable=false, updatable=false)
+	@Column(name="course_id")
 	private int courseId;
 
-	@Column(name="program_id", insertable=false, updatable=false)
+	@Column(name="program_id")
 	private int programId;
 
-	@Column(name="cs_id", insertable=false, updatable=false)
+	@Column(name="cs_id")
 	private int csId;
 
 	public CourseInProgramCurSemPK() {

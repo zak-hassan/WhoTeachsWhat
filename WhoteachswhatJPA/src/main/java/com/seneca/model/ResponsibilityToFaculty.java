@@ -21,17 +21,17 @@ public class ResponsibilityToFaculty implements Serializable {
 
 	//bi-directional many-to-one association to Responsibility
 	@ManyToOne
-	@JoinColumn(name="responsibility_id", insertable=false, updatable=false)
+	@JoinColumn(name="responsibility_id",insertable=false, updatable=false)
 	private Responsibility responsibility;
 
 	//bi-directional many-to-one association to Faculty
 	@ManyToOne
-	@JoinColumn(name="faculty_id", insertable=false, updatable=false)
+	@JoinColumn(name="faculty_id",insertable=false, updatable=false)
 	private Faculty faculty;
 
 	//bi-directional many-to-one association to Semester
 	@ManyToOne
-	@JoinColumn(name="semester_id", insertable=false, updatable=false)
+	@JoinColumn(name="semester_id",insertable=false, updatable=false)
 	private Semester semester;
 
 	public ResponsibilityToFaculty() {

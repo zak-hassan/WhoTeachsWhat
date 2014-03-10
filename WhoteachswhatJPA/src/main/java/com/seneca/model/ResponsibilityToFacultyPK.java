@@ -12,15 +12,15 @@ public class ResponsibilityToFacultyPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="faculty_id", insertable=false, updatable=false)
+	@Column(name="faculty_id")
 	private int facultyId;
 
-	@Column(name="responsibility_id", insertable=false, updatable=false)
+	@Column(name="responsibility_id")
 	private int responsibilityId;
 
 	private int year;
 
-	@Column(name="semester_id", insertable=false, updatable=false)
+	@Column(name="semester_id")
 	private int semesterId;
 
 	public ResponsibilityToFacultyPK() {
