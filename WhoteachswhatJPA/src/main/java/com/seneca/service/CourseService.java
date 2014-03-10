@@ -63,4 +63,8 @@ public class CourseService {
 		return courseDao.getAll();
 	}
 	
+	public Course getByCourseCode(String course_code) {
+		return courseDao.getByCourseCode(course_code);
+	}
+	
 }

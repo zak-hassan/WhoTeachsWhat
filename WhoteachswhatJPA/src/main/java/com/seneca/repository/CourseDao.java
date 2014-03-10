@@ -9,6 +9,8 @@ public interface CourseDao
    public List<Course> getAll();
 
    public Course getById(Long id);
+   
+   public Course getByCourseCode(String course_code);
 
    public void update(Course entity);
 
