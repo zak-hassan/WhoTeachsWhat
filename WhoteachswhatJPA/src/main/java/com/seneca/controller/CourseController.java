@@ -19,8 +19,8 @@ import com.seneca.service.CourseService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <Anil.D.SantokhI@gmail.com>
- * @lastmodified Feb 26, 2014
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified March 10, 2014
  * @version 0.0.1
  */
 
