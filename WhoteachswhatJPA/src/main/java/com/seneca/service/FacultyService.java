@@ -37,6 +37,7 @@ public class FacultyService {
 	}
 
 
+
 	public Faculty findFaculty(String name) {
 		return null;
 	}
@@ -45,17 +46,36 @@ public class FacultyService {
 		return false;
 	}
 
-
+	/*
+	 *  CRUD OPERATIONS SERVICE METHODS:
+	 *  
+	 *   add    -       addFaculty(String, String, TeachingType);
+	 *   update - 	 	update();
+	 *   delete -       delete();
+	 *   get    - 		getAllFaculty();
+	 *   
+	 */
+	
+	//TODO: Faculty should accept 'TeachingType_id'
 	public void addFaculty(String fname, String lname, String status) {
 		Faculty faculty = new Faculty();
 		faculty.setFacultyFirstName(fname);
 		faculty.setFacultyLastName(lname);
-		faculty.setPassword("pass");
-		faculty.setUserId("admin");
-		
 		facultyDao.create(faculty);
-	
-	
 	}
+
+	public void update(Long id) {
+		Faculty faculty = facultyDao.getById(id);
+		facultyDao.update(faculty);
+	}
+	
+	public void delete(Long id) {
+	 facultyDao.delete(id);
+	}
+
+	public  List<Faculty>  getAllFaculty() {
+		return facultyDao.getAll();
+	}
+
 
 }

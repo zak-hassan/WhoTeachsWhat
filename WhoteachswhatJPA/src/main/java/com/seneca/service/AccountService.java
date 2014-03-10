@@ -3,15 +3,19 @@ import javax.security.sasl.AuthenticationException;
 
 import org.springframework.stereotype.Service;
 
-import com.seneca.model.UserAccount;
+import com.seneca.model.Account;
 
 @Service("accountService")
 public class AccountService {
-	private UserAccount getAccount(String uname, String pass) {
-		return new UserAccount(uname, pass, "admin");
+	private Account getAccount(String uname, String pass) {
+		Account account= new Account();
+		account.setUsername(uname);
+		account.setPassword(pass);
+		return account;
+		//return new Account(uname, pass, "admin");
 	}
 
-	public UserAccount login(String uname, String pass)
+	public Account login(String uname, String pass)
 			throws AuthenticationException {
 		// TODO: SETUP AN LDAP CALL HERE TO CHECK IF USER IS REGISTERED After
 		// checking if user exists in our database;

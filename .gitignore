@@ -1,9 +1,9 @@
-*.class
+*/**.class
 
 # Java Eclipse Settings
 .forge_settings/
 .settings/
-
+WhoteachswhatJPA/target/**
 # Package Files #
 *.jar
 *.war

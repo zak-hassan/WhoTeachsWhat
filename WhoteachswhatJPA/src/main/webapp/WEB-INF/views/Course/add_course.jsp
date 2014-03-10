@@ -202,7 +202,7 @@
            */
             
            var validateAddCourse= function() {
-           	$.post("ajaxAddCourse",{ course_code: document.getElementById("course_code").value, 
+           	$.post("api/course",{ course_code: document.getElementById("course_code").value, 
            		course_name: document.getElementById("course_name").value,
            		crossover_input: document.getElementById("crossover_input").value,
            		reference_input: document.getElementById("reference_input").value })

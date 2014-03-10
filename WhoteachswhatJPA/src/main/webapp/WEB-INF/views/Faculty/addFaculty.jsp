@@ -58,6 +58,8 @@
 				fname : document.getElementById("fname").value,
 				lname : document.getElementById("lname").value,
 				fstatus : $('#fstatus').find('option:selected').text(),
+				accesslevel : $('#accesslevel').find('option:selected').text(),
+				userId : $('#email').find('option:selected').text()
 			}).done(function(data) {
 				console.log("Faculty added: " + JSON.stringify(data));
 				$.pnotify({
@@ -86,12 +88,18 @@
 					fstatus : {
 						valueNotEquals : ""
 					}
+				},
+				email : {
+					required : true,
+					email : true
 				}
 			},
 			messages : {
 				username : "first name must be a minimum of 3 characters",
 				lname : "last name must be a minimum of 3 characters",
-				fstatus : "Must select a status"
+				fstatus : "Must select a status",
+				email : "Email is not valid must be, HINT: ***@senecacollege.ca"
+				
 			}
 		});
 
@@ -187,33 +195,30 @@
 					<div id="Input_Field_with_Placeholder"
 					class="control-group row-fluid">
 					<div class="span3">
-						<label class="control-label" for="inputFieldPlaceholder">email</label>
+						<label class="control-label" for="email">Email Address / User ID:</label>
 					</div>
 					<div class="span9">
 						<div class="controls">
-							<input id="lname" value="" type="text"
-								placeholder="Last Name ..." name="email" />
+							<input id="email" value="" type="text"
+								placeholder="Email is used for Userid" name="email" />
 						</div>
 					</div>
 					
 				</div>
 				
-				
-				
-				
-					<div id="Input_Field_with_Placeholder"
+<!--  					<div id="Input_Field_with_Placeholder"
 					class="control-group row-fluid">
 					<div class="span3">
-						<label class="control-label" for="inputFieldPlaceholder">Max Hours To Teach per week:</label>
+						<label class="control-label" for="hours">Max Hours To Teach per week:</label>
 					</div>
 					<div class="span9">
 						<div class="controls">
-							<input id="lname" value="" type="text"
+							<input id="hours_to_teach" value="" type="text"
 								placeholder="Last Name ..." name="hours_to_teach" />
 						</div>
 					</div>
 				</div>
-				
+		 -->		
 				<div id="Input_Field_with_Auto_Complete"
 					class="control-group row-fluid">
 					<div class="span3">
@@ -223,13 +228,16 @@
 								class="icon-photon info-circle"></i></a>
 						</label>
 					</div>
+					<!--  TODO: NEED TO GET ALL ACCESSLEVELS AND FILL THIS: -->
 					<div class="span2">
 						<div class="controls">
-							<select name="fstatus" id="fstatus">
-								<option selected="" value="">- Choose -</option>
-								<option value="noaccess">No Access</option>
-								<option value="parttime"></option>
-								<option value="unavailable">Unavailable</option>
+							<select name="accesslevel" id="accesslevel">
+								<option value="0" selected="selected">No Access</option>
+								<option value="1">Web Master</option>
+								<option value="2">Scheduler</option>
+								<option value="3">Level One Coordinator</option>
+								<option value="4">Level Two Coordinator</option>
+								<option value="5">Administrator</option>
 							</select>
 						</div>
 					</div>

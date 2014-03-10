@@ -24,7 +24,7 @@ public class AccessLevel implements Serializable {
 
 	//bi-directional many-to-one association to Faculty
 	@OneToMany(mappedBy="accessLevel", fetch=FetchType.LAZY)
-	private List<Faculty> faculties;
+	private List<Account> account;
 
 	public AccessLevel() {
 	}
@@ -45,26 +45,25 @@ public class AccessLevel implements Serializable {
 		this.accessName = accessName;
 	}
 
-	public List<Faculty> getFaculties() {
-		return this.faculties;
+	public List<Account> getAccounts() {
+		return this.account;
 	}
 
-	public void setFaculties(List<Faculty> faculties) {
-		this.faculties = faculties;
+	public void setAccount(List<Account> accounts) {
+		this.account = accounts;
 	}
 
-	public Faculty addFaculty(Faculty faculty) {
-		getFaculties().add(faculty);
-		faculty.setAccessLevel(this);
+	public Account addAccount(Account account) {
+		getAccounts().add(account);
+		account.setAccessLevel(this);
 
-		return faculty;
+		return account;
 	}
 
-	public Faculty removeFaculty(Faculty faculty) {
-		getFaculties().remove(faculty);
-		faculty.setAccessLevel(null);
-
-		return faculty;
+	public Account removeFaculty(Account account) {
+		getAccounts().remove(account);
+		account.setAccessLevel(null);
+		return account;
 	}
 
 	@Override
@@ -74,8 +73,7 @@ public class AccessLevel implements Serializable {
 		result = prime * result + accessId;
 		result = prime * result
 				+ ((accessName == null) ? 0 : accessName.hashCode());
-		result = prime * result
-				+ ((faculties == null) ? 0 : faculties.hashCode());
+		result = prime * result + ((account == null) ? 0 : account.hashCode());
 		return result;
 	}
 
@@ -95,10 +93,10 @@ public class AccessLevel implements Serializable {
 				return false;
 		} else if (!accessName.equals(other.accessName))
 			return false;
-		if (faculties == null) {
-			if (other.faculties != null)
+		if (account == null) {
+			if (other.account != null)
 				return false;
-		} else if (!faculties.equals(other.faculties))
+		} else if (!account.equals(other.account))
 			return false;
 		return true;
 	}

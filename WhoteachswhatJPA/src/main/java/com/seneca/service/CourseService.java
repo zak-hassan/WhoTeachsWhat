@@ -10,6 +10,15 @@ import org.springframework.stereotype.Service;
 import com.seneca.model.Course;
 import com.seneca.repository.CourseDao;
 
+/**
+ * This class is the service which regulates all dialog between the course controller and course repository layer.
+ * 
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified March 10, 2014
+ * @version 0.0.1
+ */
+
+
 @Service("courseService")
 public class CourseService {
 
@@ -19,41 +28,43 @@ public class CourseService {
 	@Autowired
 	private CourseDao courseDao;
 	
-	public Course addCourse(String course_code, String course_name, String crossover_input, String reference_input){
-		boolean valid=true;
+	
+	//CRUD OPERATIONS:
+	
+	
+	public Course add(String course_code, String course_name){
 		
-		//TODO: Replace valid with validation logic
-		
-	//	if(valid){
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
 			logger.info("Entering courseDao.create : ");
 			courseDao.create(course);
 			logger.info("Exiting courseDao.create : ");
-			
-
-			//courseRepository.persist(course);
-			//TODO: if its valid then we will add the course to the database ...
-		//}
 		
-		return null;
-	}
-	
-	public Course updateCourse(String course_code, String course_name, String crossover_input, String reference_input) {
-		
-		//TODO: Method implementation
-		
-		return null;
-	}
-	
-	public void deleteCourse(String course_code) {
-		//TODO: Method implementation
+		return course;
 	}
 
-	public List<Course> allCourses() {
-		// TODO Auto-generated method stub
-		return 	courseDao.getAll();
+	
+	public Course update(Long id, String course_code, String course_name) {
+		Course course=courseDao.getById(id);
+		course.setCourseCode(course_code);
+		course.setCourseName(course_name);
+		
+		courseDao.update(course);
+		
+		return course;
+	}
+	
+	public void delete(Long id) {
+		courseDao.delete(id);
+	}
+
+	public List<Course> getAll() {
+		return courseDao.getAll();
+	}
+	
+	public Course getByCourseCode(String course_code) {
+		return courseDao.getByCourseCode(course_code);
 	}
 	
 }
