@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import com.seneca.controller.LoginController;
-import com.seneca.model.UserAccount;
+import com.seneca.model.Account;
 
 public class SecurityHandlerInterceptor extends HandlerInterceptorAdapter {
 
@@ -20,7 +20,7 @@ public class SecurityHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		UserAccount account = (UserAccount) WebUtils.getSessionAttribute(request,
+		Account account = (Account) WebUtils.getSessionAttribute(request,
 				LoginController.ACCOUNT_ATTRIBUTE);
 		  //UNComment this to get validation
 		String requestUrl = request.getRequestURI().substring(

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.seneca.model.UserAccount;
+import com.seneca.model.Account;
 import com.seneca.service.AccountService;
 
 @Controller
@@ -42,7 +42,7 @@ public class LoginController {
 		list.put("success", "true");
 
 		try {	
-			UserAccount account = aService.login(uname, pass);
+			Account account = aService.login(uname, pass);
 			session.setAttribute(LoginController.ACCOUNT_ATTRIBUTE, account);
 			String url = (String) session.getAttribute(LoginController.REDIRECT_URL);
 			session.removeAttribute(LoginController.REDIRECT_URL);
@@ -74,7 +74,7 @@ public class LoginController {
 		// TODO: Need to Send this username and password to the LoginService for
 		// validation
 		try {
-			UserAccount account = aService.login(uname, pass);
+			Account account = aService.login(uname, pass);
 			session.setAttribute(LoginController.ACCOUNT_ATTRIBUTE, account);
 
 			String url = (String) session.getAttribute(LoginController.REDIRECT_URL);

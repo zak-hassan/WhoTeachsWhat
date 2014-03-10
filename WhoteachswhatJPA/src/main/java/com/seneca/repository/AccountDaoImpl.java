@@ -15,35 +15,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.seneca.model.UserAccount;
+import com.seneca.model.AccessLevel;
+import com.seneca.model.Account;
 
 @Repository
 @Transactional
-public class UserAccountDaoImpl implements UserAccountDao
+public class AccountDaoImpl implements AccountDao
 {
    @Autowired
    private EntityManager entityManager;
 
    @SuppressWarnings("unchecked")
-   public List<UserAccount> getAll()
+   public List<Account> getAll()
    {
-      Query query = entityManager.createQuery("select e from " + "UserAccount" + " e");
-      List<UserAccount> entities = query.getResultList();
+      Query query = entityManager.createQuery("select e from " + "Account" + " e");
+      List<Account> entities = query.getResultList();
       return entities;
    }
 
-   public UserAccount getById(Long id)
+   public Account getById(Long id)
    {
-      return entityManager.find(UserAccount.class, id);
+      return entityManager.find(Account.class, id);
    }
 
-   public void update(UserAccount entity)
+   public void update(Account entity)
    {
       entityManager.merge(entity);
       return;
    }
 
-   public void create(UserAccount entity)
+   public void create(Account entity)
    {
       entityManager.persist(entity);
       return;
@@ -51,38 +52,38 @@ public class UserAccountDaoImpl implements UserAccountDao
 
    public void delete(Long id)
    {
-      entityManager.remove(entityManager.find(UserAccount.class, id));
+      entityManager.remove(entityManager.find(Account.class, id));
       return;
    }
 
-   public List<UserAccount> search(UserAccount search, Long first, Integer maxItems)
+   public List<Account> search(Account search, Long first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
       // Create and populate a query for the search
 
-      CriteriaQuery<UserAccount> criteria = builder.createQuery(UserAccount.class);
-      Root<UserAccount> root = criteria.from(UserAccount.class);
-      TypedQuery<UserAccount> query = this.entityManager.createQuery(criteria.select(root).where(getSearchPredicates(root, search)));
+      CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
+      Root<Account> root = criteria.from(Account.class);
+      TypedQuery<Account> query = this.entityManager.createQuery(criteria.select(root).where(getSearchPredicates(root, search)));
       query.setFirstResult(first.intValue()).setMaxResults(maxItems);
 
       return query.getResultList();
    }
 
-   public Long getCount(UserAccount search)
+   public Long getCount(Account search)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
       // Create and populate a query for the number of entities in the database
 
       CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-      Root<UserAccount> root = countCriteria.from(UserAccount.class);
+      Root<Account> root = countCriteria.from(Account.class);
       countCriteria = countCriteria.select(builder.count(root)).where(getSearchPredicates(root, search));
 
       return this.entityManager.createQuery(countCriteria).getSingleResult();
    }
 
-   private Predicate[] getSearchPredicates(Root<UserAccount> root, UserAccount search)
+   private Predicate[] getSearchPredicates(Root<Account> root, Account search)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
       List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -97,12 +98,15 @@ public class UserAccountDaoImpl implements UserAccountDao
       {
          predicatesList.add(builder.like(root.<String> get("password"), '%' + password + '%'));
       }
-      String role = search.getRole();
-      if (role != null && !"".equals(role))
+     /*
+        
+      AccessLevel access_id = search.getAccessLevel();
+      if (access_id != null && !"".equals(access_id))
       {
-         predicatesList.add(builder.like(root.<String> get("role"), '%' + role + '%'));
+         predicatesList.add(builder.e(root.<String> get("access_id"), '%' + access_id.getAccessId() + '%'));
       }
-
+ 
+ 	*/
       return predicatesList.toArray(new Predicate[predicatesList.size()]);
    }
 }

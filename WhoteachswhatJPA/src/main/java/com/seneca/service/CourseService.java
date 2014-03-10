@@ -19,40 +19,36 @@ public class CourseService {
 	@Autowired
 	private CourseDao courseDao;
 	
-	public Course addCourse(String course_code, String course_name, String crossover_input, String reference_input){
-		boolean valid=true;
+	
+	//CRUD OPERATIONS:
+	
+	
+	public Course add(String course_code, String course_name){
 		
-		//TODO: Replace valid with validation logic
-		
-	//	if(valid){
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
 			logger.info("Entering courseDao.create : ");
 			courseDao.create(course);
 			logger.info("Exiting courseDao.create : ");
-			
-
-			//courseRepository.persist(course);
-			//TODO: if its valid then we will add the course to the database ...
-		//}
 		
 		return null;
 	}
+
 	
-	public Course updateCourse(String course_code, String course_name, String crossover_input, String reference_input) {
+	public void update(Long id, String course_code, String course_name) {
+		Course course=courseDao.getById(id);
+		course.setCourseCode(course_code);
+		course.setCourseName(course_name);
 		
-		//TODO: Method implementation
-		
-		return null;
+		courseDao.update(course);
 	}
 	
-	public void deleteCourse(String course_code) {
-		//TODO: Method implementation
+	public void delete(Long id) {
+		courseDao.delete(id);
 	}
 
-	public List<Course> allCourses() {
-		// TODO Auto-generated method stub
+	public List<Course> getAll() {
 		return 	courseDao.getAll();
 	}
 	
