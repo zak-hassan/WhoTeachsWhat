@@ -10,6 +10,15 @@ import org.springframework.stereotype.Service;
 import com.seneca.model.Course;
 import com.seneca.repository.CourseDao;
 
+/**
+ * This class is the service which regulates all dialog between the course controller and course repository layer.
+ * 
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified March 10, 2014
+ * @version 0.0.1
+ */
+
+
 @Service("courseService")
 public class CourseService {
 
@@ -32,16 +41,18 @@ public class CourseService {
 			courseDao.create(course);
 			logger.info("Exiting courseDao.create : ");
 		
-		return null;
+		return course;
 	}
 
 	
-	public void update(Long id, String course_code, String course_name) {
+	public Course update(Long id, String course_code, String course_name) {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
 		
 		courseDao.update(course);
+		
+		return course;
 	}
 	
 	public void delete(Long id) {
@@ -49,7 +60,7 @@ public class CourseService {
 	}
 
 	public List<Course> getAll() {
-		return 	courseDao.getAll();
+		return courseDao.getAll();
 	}
 	
 }
