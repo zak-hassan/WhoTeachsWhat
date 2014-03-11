@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -138,37 +137,25 @@
      
    */
     
-    var validateAddResponsibilityType= function() {
-       	$.post("ajaxAddResponsibilty",{ responsibility_type: document.getElementById("responsibility_type").value })
-       		.done(function(data) {
-           		console.log("AJAX RETURNED"+JSON.stringify(data));
-           		
-           		if (data.success === "true") {
-           			// Success message
-           		}
-       		});
-       };
-
-       var deleteFaculty= function(id,uname) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/responsibility/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
+   var validateAddResponsibilityType= function() {
+	   	$.post("api/responsibility",{ responsibilityType: document.getElementById("responsibilityType").value
+	   	   	})
+	   		.done(function(data) {
+	       		console.log("AJAX RETURNED"+JSON.stringify(data));
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#addResponsibility").modal('hide');
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'New responsibility type added!',
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Added new responsibility type!'
 					});
-				  	 // Reload so the delete user is gone..
-	       			location.reload();
-			   	}
-		   	  }
-		   	});
-	   };	   
-
-	    
+	       		}
+	   		});
+		return	false;
+	   };
+    
 </script>
         <div class="wrapper">
             <div class="breadcrumb-container">
@@ -197,29 +184,9 @@
             	onsubmit="return validateAddResponsibilityType();" class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
-				<!--Sortable Non-responsive Table begin-->
-
-				<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-					<div class="span1">
-						<label class="control-label" for="facultyName">Responsibility</label>
-					</div>
-					<div class="span3">
-						<div class="controls">
-							<input id="responsibility_type" type="text" 
-								placeholder="Enter a new responsibility to add to the system."
-								name="responsibility_type" />
-						</div>
-					</div>
-					
-					<div class="span3" style="height: 25px; margin-top: 15px;">
-						<button type="submit" class="btn btn-info">Add</button>
-					</div>
-				</div>
-					
+				<!--Sortable Non-responsive Table begin-->	
 				<br/>
-				
-				
-				
+								
 					<style type="text/css">
 						td.align {
 							text-align: right;
@@ -230,6 +197,7 @@
 							vertical-align:middle;
 						}
 					</style>
+					
 					<div class="row-fluid">
 						<div class="span12">
 						   <table class="table table-striped" id="tableSortable">
@@ -237,23 +205,35 @@
 								   <tr>
 									   <tr>
 											<th>#</th>
-											<th>Responsibility Name</th>
-											<th>Responsibility Code</th>
+											<th>Responsibilities</th>
 											<th width="20%" style="text-align: right">Operation(s)</th>
 										</tr>
 								   </tr>
 							   </thead>
 							   <tbody>
-							   <tr>
-						    <c:forEach items="${allRespon }" var="respon">
-										<td>${respon.getResponsibilityId() }</td>
-										<td><label>${respon.getResponsibilityName() }</label></td>
-										<td><label>${respon.getResponsibilityCode() }</label></td>
-								<td class="align">
-									<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
-									<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
-								</td>
-								</c:forEach>
+								   <tr>
+										<td>1</td>
+										<td><label>Coordinator</label></td>
+										<td class="align">
+											<a href="Anil_UpdateResponsibility.html">Update</a> |
+											<a href="#">Remove</a>
+										</td>
+								   </tr>
+								   <tr>
+										<td>2</td>
+										<td><label>Professor</label></td>
+										<td class="align">
+											<a href="Anil_UpdateResponsibility.html">Update</a> |
+											<a href="#">Remove</a>
+										</td>
+								   </tr>
+								   <tr>
+										<td>3</td>
+										<td><label>Vacation</label></td>
+										<td class="align">
+											<a href="Anil_UpdateResponsibility.html">Update</a> |
+											<a href="#">Remove</a>
+										</td>
 								   </tr>
 								</tbody>
 							</table>
@@ -296,6 +276,48 @@
                 </div><!-- end container -->
 
             </form>
+            
+              <!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#addResponsibility">Add Responsibility</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addResponsibility" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add Responsibility</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility</span><br /> <input
+									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateAddResponsibilityType();"
+								class="btn btn-primary">Save changes</button>
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--  END OF ADD MODAL -->
+            
+            
         </div>
         </body>
 </html>
