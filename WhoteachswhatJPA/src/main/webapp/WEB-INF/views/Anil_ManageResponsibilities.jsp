@@ -230,11 +230,6 @@
 							vertical-align:middle;
 						}
 					</style>
-				<!--
-		//.getResponsibilityId()
-		//.getResponsibilityCode()
-		//.getResponsibilityName()
-				 -->	
 					<div class="row-fluid">
 						<div class="span12">
 						   <table class="table table-striped" id="tableSortable">
