@@ -158,5 +158,4 @@ public class CompHoursController {
 		list.put("success", "true");
 		return list;
 	}
-
 }

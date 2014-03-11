@@ -363,12 +363,8 @@
 			</div>
 		</div>
 
-		<!--  END OF UPDATE MODAL -->
+		<!--  END OF ADD MODAL -->
 		
-		 <!-- Button trigger modal (left as a test. No needed)-->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateCompHour">Update Comp Hour</button>
-
 		<!-- Modal -->
 		<div class="modal fade" id="updateCompHour" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -409,7 +405,6 @@
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
-            
             
         </div>
         </body>
