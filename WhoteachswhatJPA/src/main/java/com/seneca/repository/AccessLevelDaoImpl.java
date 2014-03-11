@@ -32,7 +32,7 @@ public class AccessLevelDaoImpl implements AccessLevelDao
       return entities;
    }
 
-   public AccessLevel getById(Long id)
+   public AccessLevel getById(Integer id)
    {
       return entityManager.find(AccessLevel.class, id);
    }
@@ -49,13 +49,13 @@ public class AccessLevelDaoImpl implements AccessLevelDao
       return;
    }
 
-   public void delete(Long id)
+   public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(AccessLevel.class, id));
       return;
    }
 
-   public List<AccessLevel> search(AccessLevel search, Long first, Integer maxItems)
+   public List<AccessLevel> search(AccessLevel search, Integer first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
@@ -95,4 +95,5 @@ public class AccessLevelDaoImpl implements AccessLevelDao
 
       return predicatesList.toArray(new Predicate[predicatesList.size()]);
    }
+
 }

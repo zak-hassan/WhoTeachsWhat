@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seneca.model.Faculty;
+import com.seneca.model.TeachingType;
 import com.seneca.repository.FacultyDao;
+import com.seneca.repository.TeachingTypeDao;
 /**
  * Service layer responsible for requesting data from the Persistance Layer (DAO).
  * Note: Don't forget to put @Transactional 
@@ -25,6 +27,9 @@ public class FacultyService {
 
 	@Autowired
 	FacultyDao facultyDao;
+	
+	@Autowired
+	TeachingTypeDao teachingTypeDao;
 	
 	public List<Faculty> findFacultyByCourse(String course) {
 		List<Faculty> faculty = new ArrayList<Faculty>();
@@ -57,19 +62,21 @@ public class FacultyService {
 	 */
 	
 	//TODO: Faculty should accept 'TeachingType_id'
-	public void addFaculty(String fname, String lname, String status) {
+	public void addFaculty(String fname, String lname, Integer status) {
 		Faculty faculty = new Faculty();
 		faculty.setFacultyFirstName(fname);
 		faculty.setFacultyLastName(lname);
+		TeachingType tType=teachingTypeDao.getById(status);
+		faculty.setTeachingType(tType);
 		facultyDao.create(faculty);
 	}
 
-	public void update(Long id) {
+	public void update(Integer id) {
 		Faculty faculty = facultyDao.getById(id);
 		facultyDao.update(faculty);
 	}
 	
-	public void delete(Long id) {
+	public void delete(Integer id) {
 	 facultyDao.delete(id);
 	}
 

@@ -32,7 +32,7 @@ public class TeachingTypeDaoImpl implements TeachingTypeDao
       return entities;
    }
 
-   public TeachingType getById(Long id)
+   public TeachingType getById(Integer id)
    {
       return entityManager.find(TeachingType.class, id);
    }
@@ -49,13 +49,13 @@ public class TeachingTypeDaoImpl implements TeachingTypeDao
       return;
    }
 
-   public void delete(Long id)
+   public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(TeachingType.class, id));
       return;
    }
 
-   public List<TeachingType> search(TeachingType search, Long first, Integer maxItems)
+   public List<TeachingType> search(TeachingType search, Integer first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 

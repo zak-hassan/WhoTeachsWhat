@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.seneca.model.AccessLevel;
 import com.seneca.model.Account;
 
 @Repository
@@ -33,7 +32,7 @@ public class AccountDaoImpl implements AccountDao
       return entities;
    }
 
-   public Account getById(Long id)
+   public Account getById(Integer id)
    {
       return entityManager.find(Account.class, id);
    }
@@ -50,7 +49,7 @@ public class AccountDaoImpl implements AccountDao
       return;
    }
 
-   public void delete(Long id)
+   public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(Account.class, id));
       return;
@@ -109,4 +108,6 @@ public class AccountDaoImpl implements AccountDao
  	*/
       return predicatesList.toArray(new Predicate[predicatesList.size()]);
    }
+
+
 }

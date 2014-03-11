@@ -1,28 +1,72 @@
 package com.seneca.service;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.security.sasl.AuthenticationException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seneca.model.AccessLevel;
 import com.seneca.model.Account;
+import com.seneca.repository.AccessLevelDao;
+import com.seneca.repository.AccountDao;
 
 @Service("accountService")
 public class AccountService {
+	
+	@Autowired
+	AccountDao accountDao;
+	
+	@Autowired
+	AccessLevelDao accessLevelDao;
+	
+	
 	private Account getAccount(String uname, String pass) {
-		Account account= new Account();
-		account.setUsername(uname);
-		account.setPassword(pass);
+			Account account= new Account();
+			account.setUsername(uname);
+			account.setPassword(pass);
 		return account;
-		//return new Account(uname, pass, "admin");
 	}
 
-	public Account login(String uname, String pass)
-			throws AuthenticationException {
-		// TODO: SETUP AN LDAP CALL HERE TO CHECK IF USER IS REGISTERED After
-		// checking if user exists in our database;
-		 if ( "zak.hassan1010@gmail.com".contentEquals(uname) &&  "a12345".contentEquals(pass) ) {
+	public Account login(String uname, String pass) throws AuthenticationException {
+ 		 if ( "zak.hassan1010@gmail.com".contentEquals(uname) &&  "a12345".contentEquals(pass) ) {
 			 return this.getAccount(uname, pass);
 		 } else {
 			throw new AuthenticationException("Invalid username or password");
 		 }
+	}
+
+	public List<Account> getAll() {
+		return accountDao.getAll();
+	}
+
+	public List<Account> getOne(Integer id) {
+		List<Account> list= new ArrayList<Account>();
+		list.add(accountDao.getById(id));
+		return list;
+	}
+
+	public void update(Integer id, String uname, Integer level) {
+		Account account= accountDao.getById(id);
+		account.setUsername(uname);
+		account.setPassword("a12345");
+		AccessLevel accessLevel=accessLevelDao.getById(level);
+		account.setAccessLevel(accessLevel);
+		accountDao.update(account);
+	}
+
+	public void add(String uname, Integer level) {
+		Account account= new Account();
+		account.setUsername(uname);
+		account.setPassword("a12345");
+		//Long id= level.longValue();
+		AccessLevel accessLevel =  accessLevelDao.getById(level); 
+		account.setAccessLevel(accessLevel);
+		accountDao.create(account);
+	}
+
+	public void delete(Integer id) {
+		 accountDao.delete(id);
 	}
 }

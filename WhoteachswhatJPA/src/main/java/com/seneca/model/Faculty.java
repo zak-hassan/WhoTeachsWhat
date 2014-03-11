@@ -14,13 +14,8 @@ public class Faculty implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-<<<<<<< HEAD
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="faculty_id")
-=======
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "faculty_id")
->>>>>>> 94e64ae13f9b0db5cb5295fdf1ab138c8f3bb123
 	private int facultyId;
 
 	@Column(name = "faculty_first_name")

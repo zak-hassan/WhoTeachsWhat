@@ -78,7 +78,7 @@
 <script type="text/javascript" src="static/js/plugins/bootstrapSwitch.js"></script>
 <script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
 <script type="text/javascript" src="static/js/common.js"></script>
-
+<script type="text/javascript" src="static/js/bootrestful.js"></script>
     </head>
 
     <body class="body-inner">

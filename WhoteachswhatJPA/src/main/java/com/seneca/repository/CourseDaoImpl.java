@@ -101,4 +101,10 @@ public class CourseDaoImpl implements CourseDao
 
       return predicatesList.toArray(new Predicate[predicatesList.size()]);
    }
+
+@Override
+public Course getByCourseCode(String course_code) {
+	// TODO using a predicate search for a given course code.
+	return null;
+}
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.Faculty;
 import com.seneca.service.FacultyService;
+import com.seneca.service.TeachingTypeService;
 
 /**
  * This class is the controller which regulates all faculty operations.
@@ -35,10 +37,19 @@ public class FacultyController {
 	@Autowired
 	FacultyService facultyService;
 
+	@Autowired 
+	TeachingTypeService teachingTypeService;
 
 	@RequestMapping(value = "/viewFaculty", method = RequestMethod.GET)
-	public String viewFaculty() {
+	public String viewFaculty(ModelMap model) {
 		// logger.info("WTWNavigator: \t /viewFaculty");
+		model.addAttribute("allFaculty", facultyService.getAllFaculty() );
+		model.addAttribute("allStatus", teachingTypeService.getAll() );
+		/*
+		 * .getTeachingType_id()
+		 * .getTeachingType_name()
+		 * 
+		 * */
 		return "Faculty/viewFaculty";
 	}
 
@@ -102,10 +113,9 @@ public class FacultyController {
 	Map<String, String> listAddFacultyJSON(
 			@RequestParam(value = "faculty_first_name", required = true) String faculty_first_name,
 			@RequestParam(value = "faculty_last_name", required = true) String faculty_last_name,
-			@RequestParam(value = "faculty_status", required = true) String faculty_status) {
+			@RequestParam(value = "faculty_status", required = true) Integer status) {
 
-		facultyService.addFaculty(faculty_first_name, faculty_first_name,
-				faculty_status);
+		facultyService.addFaculty(faculty_first_name, faculty_last_name, status);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
@@ -130,9 +140,9 @@ public class FacultyController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateFacultyJSON(@PathVariable("id") Long id) {
+	Map<String, String> listUpdateFacultyJSON(@PathVariable("id") Integer id) {
 
 		facultyService.update(id);
 
@@ -160,7 +170,7 @@ public class FacultyController {
 
 	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listDeleteFacultyJSON(@PathVariable("id") Long id) {
+	Map<String, String> listDeleteFacultyJSON(@PathVariable("id") Integer id) {
 
 		facultyService.delete(id);
 

@@ -8,13 +8,13 @@ public interface AccountDao
 {
    public List<Account> getAll();
 
-   public Account getById(Long id);
+   public Account getById(Integer id);
 
    public void update(Account entity);
 
    public void create(Account entity);
 
-   public void delete(Long id);
+   public void delete(Integer id);
 
    public List<Account> search(Account search, Long first, Integer maxItems);
 
