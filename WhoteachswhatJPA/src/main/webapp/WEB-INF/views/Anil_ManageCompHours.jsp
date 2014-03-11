@@ -168,7 +168,8 @@
 	   };	   
      
    var validateAddCompHourType= function() {
-	   	$.post("api/comphour",{ compHourType: document.getElementById("compHourType").value
+	   	$.post("api/comphour",{ compHourCode: document.getElementById("compHourCode").value,
+	   		compHourType: document.getElementById("compHourType").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -330,6 +331,12 @@
 					<div class="modal-body">
 						<!--  FORM ADD -->
 						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
+						
+							<div class="input-group">
+								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
+									type="text" class="form-control" name="compHourCode" id="compHourCode"
+									placeholder="Code" />
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
 									type="text" class="form-control" name="compHourType" id="compHourType"

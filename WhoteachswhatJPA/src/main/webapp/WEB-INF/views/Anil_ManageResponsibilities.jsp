@@ -138,7 +138,8 @@
    */
     
    var validateAddResponsibilityType= function() {
-	   	$.post("api/responsibility",{ responsibilityType: document.getElementById("responsibilityType").value
+	   	$.post("api/responsibility",{ responsibilityCode: document.getElementById("responsibilityCode").value,
+	   		responsibilityType: document.getElementById("responsibilityType").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -295,7 +296,13 @@
 						<!--  FORM ADD -->
 						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Responsibility</span><br /> <input
+								<span class="input-group-addon">Responsibility Code</span><br /> <input
+									type="text" class="form-control" name="responsibilityCode" id="responsibilityCode"
+									placeholder="Code" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility Type</span><br /> <input
 									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
 									placeholder="Type" />
 							</div>
