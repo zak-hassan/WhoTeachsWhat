@@ -198,6 +198,31 @@
 
                         });
                     });
+                         
+                       var validateAddCourse= function() {
+                   	   	$.post("api/course",{ courseCode: document.getElementById("courseCode").value,
+                   	   		courseName: document.getElementById("courseName").value,
+                   	   		crossoverCourse: document.getElementById("crossoverCourse").value,
+                   	   		referenceCourse: document.getElementById("referenceCourse").value
+                   	   	   	})
+                   	   		.done(function(data) {
+                   	       		console.log("AJAX RETURNED"+JSON.stringify(data));
+                   	       		
+                   	       		if (data.success === "true") {
+                   	       			// Success message
+                   	       			$("#addCourse").modal('hide');
+                   	       			$.pnotify({
+                   						title : 'New course added!',
+                   						type : 'info',
+                   						text : 'Added new course!'
+                   					});
+                   	       		}
+                   	   		});
+                   		return	false;
+                   	   };
+                       
+                       
+                    
                 </script>
                 <div class="sidebarMenuHolder">
 
@@ -571,6 +596,66 @@
                     </div>
                 </div>
             </form>
+            
+            
+             <!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#addCourse">Add Course</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addCourse" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add Course</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="addCourseForm" class="form-horizonatal">
+							<div class="input-group">
+								<span class="input-group-addon">Course Code</span><br /> <input
+									type="text" class="form-control" name="courseCode" id="courseCode"
+									placeholder="Type" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Subject Name</span><br /> <input
+									type="text" class="form-control" name="courseName" id="courseName"
+									placeholder="Type" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Crossover Course</span><br /> <input
+									type="text" class="form-control" name="crossoverCourse" id="crossoverCourse"
+									placeholder="Type" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Reference to old course</span><br /> <input
+									type="text" class="form-control" name="referenceCourse" id="referenceCourse"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateAddCourse();"
+								class="btn btn-primary">Save changes</button>
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--  END OF ADD MODAL -->
+            
         </div>
     </body>
 </html>
