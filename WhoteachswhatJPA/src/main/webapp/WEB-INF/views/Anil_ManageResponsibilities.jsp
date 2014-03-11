@@ -137,16 +137,24 @@
      
    */
     
-    var validateAddResponsibilityType= function() {
-       	$.post("ajaxAddResponsibilty",{ responsibility_type: document.getElementById("responsibility_type").value })
-       		.done(function(data) {
-           		console.log("AJAX RETURNED"+JSON.stringify(data));
-           		
-           		if (data.success === "true") {
-           			// Success message
-           		}
-       		});
-       };
+   var validateAddResponsibilityType= function() {
+	   	$.post("api/responsibility",{ responsibilityType: document.getElementById("responsibilityType").value
+	   	   	})
+	   		.done(function(data) {
+	       		console.log("AJAX RETURNED"+JSON.stringify(data));
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#addResponsibility").modal('hide');
+	       			$.pnotify({
+						title : 'New responsibility type added!',
+						type : 'info',
+						text : 'Added new responsibility type!'
+					});
+	       		}
+	   		});
+		return	false;
+	   };
     
 </script>
         <div class="wrapper">
@@ -176,29 +184,9 @@
             	onsubmit="return validateAddResponsibilityType();" class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
-				<!--Sortable Non-responsive Table begin-->
-
-				<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-					<div class="span1">
-						<label class="control-label" for="facultyName">Responsibility</label>
-					</div>
-					<div class="span3">
-						<div class="controls">
-							<input id="responsibility_type" type="text" 
-								placeholder="Enter a new responsibility to add to the system."
-								name="responsibility_type" />
-						</div>
-					</div>
-					
-					<div class="span3" style="height: 25px; margin-top: 15px;">
-						<button type="submit" class="btn btn-info">Add</button>
-					</div>
-				</div>
-					
+				<!--Sortable Non-responsive Table begin-->	
 				<br/>
-				
-				
-				
+								
 					<style type="text/css">
 						td.align {
 							text-align: right;
@@ -288,6 +276,48 @@
                 </div><!-- end container -->
 
             </form>
+            
+              <!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#addResponsibility">Add Responsibility</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addResponsibility" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add Responsibility</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility</span><br /> <input
+									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateAddResponsibilityType();"
+								class="btn btn-primary">Save changes</button>
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--  END OF ADD MODAL -->
+            
+            
         </div>
         </body>
 </html>

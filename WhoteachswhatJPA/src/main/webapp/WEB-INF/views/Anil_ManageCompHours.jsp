@@ -306,7 +306,7 @@
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
 									type="text" class="form-control" name="compHourType" id="compHourType"
