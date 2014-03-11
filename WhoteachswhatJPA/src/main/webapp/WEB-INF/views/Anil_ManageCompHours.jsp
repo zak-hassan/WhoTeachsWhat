@@ -133,29 +133,10 @@
     
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a comp hour type
+    @Purpose: AJAX posting and validation for adding, updating and deleting a comp hour type
      
    */
    
-  	  var deleteFaculty= function(id,uname) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/comphour/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'User :' + uname,
-						type : 'info',
-						text : 'User has been deleted'
-					});
-				  	 // Reload so the delete user is gone..
-	       			location.reload();
-			   	}
-		   	  }
-		   	});
-	   };	   
-     
    var validateAddCompHourType= function() {
 	   	$.post("api/comphour",{ compHourCode: document.getElementById("compHourCode").value,
 	   		compHourType: document.getElementById("compHourType").value
@@ -197,6 +178,23 @@
 			return	false;
 		   };
 
+		   var deleteCompHourType= function(id, compHourType) {
+			   	$.ajax({type:"DELETE", 
+				   	url : "api/comphours/"+id,
+				   	data : null,
+				   	cache : false,
+				   	success : function(data){
+			       		if (data.success === "true") {
+		       			$.pnotify({
+							title : 'Comp Hour :' + compHourType,
+							type : 'info',
+							text : compHourType + ' has been deleted'
+						});
+		       			location.reload();
+				   	}
+			   	  }
+			   	});
+		   };	   
     
 </script>
         <div class="wrapper">
