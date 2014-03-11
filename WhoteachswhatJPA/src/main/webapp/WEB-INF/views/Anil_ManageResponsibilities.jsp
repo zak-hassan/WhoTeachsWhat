@@ -167,7 +167,7 @@
 		       		
 		       		if (data.success === "true") {
 		       			// Success message
-		       			$("#addResponsibility").modal('hide');
+		       			$("#updateResponsibility").modal('hide');
 		       			$.pnotify({
 							title : 'New responsibility type added!',
 							type : 'info',

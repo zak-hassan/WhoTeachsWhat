@@ -86,12 +86,12 @@ public class ResponsibilityController {
 	 * This method accepts data posted from the AddCompHourTypeForm and adds a
 	 * comp hour type using the appropriate service method
 	 * 
-	 * @see com.seneca.service.CompHoursService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
 	 * @param comp_hour_type
 	 *            The name of the comp hour type
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/responsibility", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -116,7 +116,7 @@ public class ResponsibilityController {
 	 * @param id
 	 * 		Uniquely identifies the object
 	 *            
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -137,7 +137,8 @@ public class ResponsibilityController {
 	 * 
 	 * @param id
 	 * 			Uniquely identifies the object
-	 * @return A String containing the name of the view to render
+	 * 
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
