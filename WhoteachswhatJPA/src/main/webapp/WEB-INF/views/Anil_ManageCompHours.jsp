@@ -136,16 +136,24 @@
      
    */
     
-    var validateAddCompHourType= function() {
-       	$.post("ajaxAddCompHourType",{ faculty_first_name: document.getElementById("comp_hour_type").value })
-       		.done(function(data) {
-           		console.log("AJAX RETURNED"+JSON.stringify(data));
-           		
-           		if (data.success === "true") {
-           			// Success message
-           		}
-       		});
-       };
+   var validateAddCompHourType= function() {
+	   	$.post("api/comphour",{ compHourType: document.getElementById("compHourType").value
+	   	   	})
+	   		.done(function(data) {
+	       		console.log("AJAX RETURNED"+JSON.stringify(data));
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#addCompHour").modal('hide');
+	       			$.pnotify({
+						title : 'New Comp Hour type added!',
+						type : 'info',
+						text : 'Added new comp hour type!'
+					});
+	       		}
+	   		});
+		return	false;
+	   };
     
 </script>
         <div class="wrapper">
@@ -174,7 +182,7 @@
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
 
-					<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
+					<!--  <div id="Input_Field_with_Placeholder" class="control-group row-fluid">
 						<div class="span2">
 							<label class="control-label" for="facultyName">Complimentary Hour Type</label>
 						</div>
@@ -189,7 +197,7 @@
 						<div class="span3" style="height: 25px; margin-top: 15px;">
 							<button type="submit" class="btn btn-info">Add</button>
 						</div>
-					</div>
+					</div>-->
 					
 					<style type="text/css">
 						td.align {
@@ -280,6 +288,49 @@
                 </div><!-- end container -->
 
             </form>
+            
+            
+            <!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#addCompHour">Add Comp Hour</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addCompHour" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add Comp Hour</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+							<div class="input-group">
+								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
+									type="text" class="form-control" name="compHourType" id="compHourType"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateAddCompHourType();"
+								class="btn btn-primary">Save changes</button>
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--  END OF ADD MODAL -->
+            
+            
         </div>
         </body>
 </html>
