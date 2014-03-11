@@ -359,11 +359,7 @@
 
 		<!--  END OF ADD MODAL -->
             
-        <!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateCourse">Update Course</button>
-
-		<!-- Modal -->
+       	<!-- Modal -->
 		<div class="modal fade" id="updateCourse" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
