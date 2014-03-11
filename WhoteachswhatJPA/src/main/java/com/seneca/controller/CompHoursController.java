@@ -20,8 +20,7 @@ import com.seneca.service.CompHoursService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
- *         <anil.d.santokhi@gmail.com>
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
  * @lastmodified Feb 27, 2014
  * @version 0.0.1
  */

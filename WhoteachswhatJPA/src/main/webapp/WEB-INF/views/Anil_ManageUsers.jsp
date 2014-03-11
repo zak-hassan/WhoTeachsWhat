@@ -208,7 +208,6 @@
 		return	false;
 	   };
 
-
 	   var deleteUser= function(id,uname) {
 		   	$.ajax({type:"DELETE", 
 			   	url : "api/account/"+id,
