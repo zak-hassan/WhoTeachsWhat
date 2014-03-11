@@ -349,12 +349,7 @@ td {
 				<!-- END OF NEW CONTENT-->
 			</div>
 			<!-- end container -->
-
-
-
-
 		</form>
-
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
 			data-target="#addUser">Add user</button>

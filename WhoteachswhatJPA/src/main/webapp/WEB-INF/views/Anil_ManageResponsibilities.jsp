@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -147,7 +148,27 @@
            		}
        		});
        };
-    
+
+       var deleteFaculty= function(id,uname) {
+		   	$.ajax({type:"DELETE", 
+			   	url : "api/responsibility/"+id,
+			   	data : null,
+			   	cache : false,
+			   	success : function(data){
+		       		if (data.success === "true") {
+	       			$.pnotify({
+						title : 'User :' + uname,
+						type : 'info',
+						text : 'User has been deleted'
+					});
+				  	 // Reload so the delete user is gone..
+	       			location.reload();
+			   	}
+		   	  }
+		   	});
+	   };	   
+
+	    
 </script>
         <div class="wrapper">
             <div class="breadcrumb-container">
@@ -209,7 +230,11 @@
 							vertical-align:middle;
 						}
 					</style>
-					
+				<!--
+		//.getResponsibilityId()
+		//.getResponsibilityCode()
+		//.getResponsibilityName()
+				 -->	
 					<div class="row-fluid">
 						<div class="span12">
 						   <table class="table table-striped" id="tableSortable">
@@ -217,35 +242,23 @@
 								   <tr>
 									   <tr>
 											<th>#</th>
-											<th>Responsibilities</th>
+											<th>Responsibility Name</th>
+											<th>Responsibility Code</th>
 											<th width="20%" style="text-align: right">Operation(s)</th>
 										</tr>
 								   </tr>
 							   </thead>
 							   <tbody>
-								   <tr>
-										<td>1</td>
-										<td><label>Coordinator</label></td>
-										<td class="align">
-											<a href="Anil_UpdateResponsibility.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
-								   </tr>
-								   <tr>
-										<td>2</td>
-										<td><label>Professor</label></td>
-										<td class="align">
-											<a href="Anil_UpdateResponsibility.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
-								   </tr>
-								   <tr>
-										<td>3</td>
-										<td><label>Vacation</label></td>
-										<td class="align">
-											<a href="Anil_UpdateResponsibility.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
+							   <tr>
+						    <c:forEach items="${allRespon }" var="respon">
+										<td>${respon.getResponsibilityId() }</td>
+										<td><label>${respon.getResponsibilityName() }</label></td>
+										<td><label>${respon.getResponsibilityCode() }</label></td>
+								<td class="align">
+									<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
+									<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
+								</td>
+								</c:forEach>
 								   </tr>
 								</tbody>
 							</table>

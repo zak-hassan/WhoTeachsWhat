@@ -8,15 +8,15 @@ public interface ResponsibilityDao
 {
    public List<Responsibility> getAll();
 
-   public Responsibility getById(Long id);
+   public Responsibility getById(Integer id);
 
    public void update(Responsibility entity);
 
    public void create(Responsibility entity);
 
-   public void delete(Long id);
+   public void delete(Integer id);
 
-   public List<Responsibility> search(Responsibility search, Long first, Integer maxItems);
+   public List<Responsibility> search(Responsibility search, Integer first, Integer maxItems);
 
    public Long getCount(Responsibility search);
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +32,9 @@ public class ResponsibilityController {
 	ResponsibilityService responsibilityService;
 
 	@RequestMapping(value = "/viewResponsibility", method = RequestMethod.GET)
-	public String view() {
+	public String view(ModelMap model) {
+		model.addAttribute("allRespon", responsibilityService.getAll());
+		
 		return "Anil_ManageResponsibilities";
 	}
 
@@ -120,7 +123,7 @@ public class ResponsibilityController {
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Responsibility listGetOneJSON(@PathVariable("id") Long id) {
+	Responsibility listGetOneJSON(@PathVariable("id") Integer id) {
 		return responsibilityService.getOne(id);
 	}
 
@@ -167,9 +170,9 @@ public class ResponsibilityController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateJSON(@PathVariable("id") Long id) {
+	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id) {
 
 		responsibilityService.update(id);
 		Map<String, String> list = new HashMap<String, String>();
@@ -198,7 +201,7 @@ public class ResponsibilityController {
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listDeleteJSON(@PathVariable("id") Long id) {
+	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
 		responsibilityService.delete(id);
 

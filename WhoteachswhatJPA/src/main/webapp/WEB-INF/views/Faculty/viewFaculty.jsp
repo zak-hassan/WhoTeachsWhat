@@ -90,6 +90,26 @@
 	   		});
  	   };
 
+
+ 	  var deleteFaculty= function(id,uname) {
+		   	$.ajax({type:"DELETE", 
+			   	url : "api/account/"+id,
+			   	data : null,
+			   	cache : false,
+			   	success : function(data){
+		       		if (data.success === "true") {
+	       			$.pnotify({
+						title : 'User :' + uname,
+						type : 'info',
+						text : 'User has been deleted'
+					});
+				  	 // Reload so the delete user is gone..
+	       			location.reload();
+			   	}
+		   	  }
+		   	});
+	   };	   
+	   
 </script>
 	<div class="wrapper">
 		<!-- 
@@ -181,7 +201,7 @@
 <a class="bootstrap-tooltip" data-original-title="Responsibility" href="Anil_ManageFacultyResponsibilities.html"><i class="icon-list-alt"></i></a> 
 <a class="bootstrap-tooltip" data-original-title="Courses" href="Anil_ManageFacultyCourses.html"> <i class="icon-book"></i> </a>
 <a class="bootstrap-tooltip" data-original-title="Update" href="updateFaculty.html"><i class="icon-edit"></i></a> 
-<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')"><i class="icon-trash"></i> </a> 
+<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${users.getUserId() }', ' ${faculty.getFacultyFirstName()}  ${faculty.getFacultyLastName() } ')"><i class="icon-trash"></i> </a> 
 		
 									
 										</td>

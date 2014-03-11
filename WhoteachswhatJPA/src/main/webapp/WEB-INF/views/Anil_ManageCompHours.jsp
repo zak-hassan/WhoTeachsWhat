@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -146,6 +147,26 @@
            		}
        		});
        };
+
+  	  var deleteFaculty= function(id,uname) {
+		   	$.ajax({type:"DELETE", 
+			   	url : "api/comphour/"+id,
+			   	data : null,
+			   	cache : false,
+			   	success : function(data){
+		       		if (data.success === "true") {
+	       			$.pnotify({
+						title : 'User :' + uname,
+						type : 'info',
+						text : 'User has been deleted'
+					});
+				  	 // Reload so the delete user is gone..
+	       			location.reload();
+			   	}
+		   	  }
+		   	});
+	   };	   
+     
     
 </script>
         <div class="wrapper">
@@ -209,36 +230,26 @@
 								   <tr>
 									   <tr>
 											<th>#</th>
-											<th>Complimentary Hour Type(s)</th>
+											<th>Complimentary Hour Name</th>
+											<th>Complimentary Hour Code</th>
+							
 											<th width="20%" style="text-align: right">Operation(s)</th>
 										</tr>
 								   </tr>
 							   </thead>
-							   <tbody>
-								   <tr>
-										<td>1</td>
-										<td><label>Type 1</label></td>
-										<td class="align">
-											<a href="Anil_UpdateCompHourType.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
-								   </tr>
-								   <tr>
-										<td>2</td>
-										<td><label>Type 2</label></td>
-										<td class="align">
-											<a href="Anil_UpdateCompHourType.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
-								   </tr>
-								   <tr>
-										<td>3</td>
-										<td><label>Type 3</label></td>
-										<td class="align">
-											<a href="Anil_UpdateCompHourType.html">Update</a> |
-											<a href="#">Remove</a>
-										</td>
-								   </tr>
+						   <tbody>
+						 <c:forEach items="${allComphours }" var="comphours">
+							   <tr>
+								<td>${comphours.getCompHour_id() }</td>
+								<td><label>${comphours.getCompHour_name() }</label></td>
+								<td><label>${comphours.getCompHour_code() }</label></td>
+								<td class="align">
+							<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
+							<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
+
+								</td>
+						   </tr>
+					    </c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -248,6 +259,7 @@
 				   
 					<script>
 
+					
 					   $(document).ready(function() {
 
 						   $('#tableSortable, #tableSortableRes, #tableSortableResMed').dataTable( {

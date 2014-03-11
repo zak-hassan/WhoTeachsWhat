@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +38,10 @@ public class CompHoursController {
 	}
 
 	@RequestMapping(value = "/manageCompHours", method = RequestMethod.GET)
-	public String view() {
+	public String view(ModelMap model) {
+		
+		model.addAttribute("allComphours", compHoursService.getAll());
+		
 		return "Anil_ManageCompHours";
 	}
 
@@ -123,7 +127,7 @@ public class CompHoursController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/comphours", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/comphour", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "comp_hour_code", required = true) String comp_hour_code,
@@ -155,7 +159,7 @@ public class CompHoursController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
 			@RequestParam(value = "comp_hour_code", required = true) String comp_hour_code,

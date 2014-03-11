@@ -26,7 +26,7 @@ public class ResponsibilityDaoImpl implements ResponsibilityDao
       return entities;
    }
 
-   public Responsibility getById(Long id)
+   public Responsibility getById(Integer id)
    {
       return entityManager.find(Responsibility.class, id);
    }
@@ -43,7 +43,7 @@ public class ResponsibilityDaoImpl implements ResponsibilityDao
       return;
    }
 
-   public void delete(Long id)
+   public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(Responsibility.class, id));
       return;
@@ -98,7 +98,7 @@ public class ResponsibilityDaoImpl implements ResponsibilityDao
 */
 
 @Override
-public List<Responsibility> search(Responsibility search, Long first,
+public List<Responsibility> search(Responsibility search, Integer first,
 		Integer maxItems) {
 	// TODO Auto-generated method stub
 	return null;

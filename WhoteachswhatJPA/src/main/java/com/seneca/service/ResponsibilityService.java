@@ -26,19 +26,19 @@ public class ResponsibilityService {
 			responsibilityDao.create(r);
 		
 	}
-	public void update(Long id) {
+	public void update(Integer id) {
 		Responsibility r = responsibilityDao.getById(id);
 		responsibilityDao.update(r);
 	}
 	
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		responsibilityDao.delete(id);
 	}
 
 	public List<Responsibility> getAll() {
 		return 	responsibilityDao.getAll();
 	}
-	public Responsibility getOne(Long id) {
+	public Responsibility getOne(Integer id) {
 		return 	responsibilityDao.getById(id);
 	}
 	

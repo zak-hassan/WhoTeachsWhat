@@ -1,9 +1,15 @@
 package com.seneca.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,7 +32,7 @@ public class FacultyDaoImpl implements FacultyDao
       return entities;
    }
 
-   public Faculty getById(Long id)
+   public Faculty getById(Integer id)
    {
       return entityManager.find(Faculty.class, id);
    }
@@ -43,26 +49,15 @@ public class FacultyDaoImpl implements FacultyDao
       return;
    }
 
-   public void delete(Long id)
+   public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(Faculty.class, id));
       return;
    }
 
-@Override
-public List<Faculty> search(Faculty search, Long first, Integer maxItems) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
-@Override
-public Long getCount(Faculty search) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
-/*
-   public List<Faculty> search(Faculty search, Long first, Integer maxItems)
+   public List<Faculty> search(Faculty search, Integer first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
@@ -105,23 +100,19 @@ public Long getCount(Faculty search) {
       {
          predicatesList.add(builder.like(root.<String> get("faculty_last_name"), '%' + faculty_last_name + '%'));
       }
-      String hours_to_teach = search.getHoursToTeach();
+      /*String hours_to_teach = search.getHoursToTeach();
       if (hours_to_teach != null && !"".equals(hours_to_teach))
       {
          predicatesList.add(builder.like(root.<String> get("hours_to_teach"), '%' + hours_to_teach + '%'));
-      }
-      String password = search.getPassword();
-      if (password != null && !"".equals(password))
-      {
-         predicatesList.add(builder.like(root.<String> get("password"), '%' + password + '%'));
       }
       String userId = search.getUserId();
       if (userId != null && !"".equals(userId))
       {
          predicatesList.add(builder.like(root.<String> get("userId"), '%' + userId + '%'));
       }
-
+		*/
       return predicatesList.toArray(new Predicate[predicatesList.size()]);
    }
-*/
+
+
 }
