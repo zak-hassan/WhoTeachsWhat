@@ -234,27 +234,27 @@
 						<div class="span12">
 						   <table class="table table-striped" id="tableSortable">
 							   <thead>
-								   <tr>
-									   <tr>
+ 									   <tr>
 											<th>#</th>
 											<th>Responsibility Name</th>
 											<th>Responsibility Code</th>
 											<th width="20%" style="text-align: right">Operation(s)</th>
 										</tr>
-								   </tr>
-							   </thead>
+ 							   </thead>
 							   <tbody>
+							  <c:forEach items="${allRespon }" var="respon">
+							
 							   <tr>
-						    <c:forEach items="${allRespon }" var="respon">
-										<td>${respon.getResponsibilityId() }</td>
+						  			<td>${respon.getResponsibilityId() }</td>
 										<td><label>${respon.getResponsibilityName() }</label></td>
 										<td><label>${respon.getResponsibilityCode() }</label></td>
 								<td class="align">
 									<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
 									<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
 								</td>
-								</c:forEach>
+							
 								   </tr>
+								   	</c:forEach>
 								</tbody>
 							</table>
 						</div>

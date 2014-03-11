@@ -187,13 +187,7 @@
 								   		<c:forEach items="${allFaculty }" var="faculty">
 								   <tr>
 								   
-	  /*
-		.getFacultyId()
-		.getFacultyLastName()
-		.getFacultyFirstName()
-		.getTeachingType()
-		.getResponsibilityToFaculties()
-	*/
+	  
 										<td>${ faculty.getFacultyId() }</td>
 										<td><label><a href="#">${faculty.getFacultyFirstName()}  ${faculty.getFacultyLastName() }</a></label></td>
 										<td class="align">
