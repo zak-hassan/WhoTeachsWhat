@@ -156,21 +156,15 @@ public class ResponsibilityController {
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
+	 * @param id
+	 *            Uniquely identifies the object
+	 *            
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id) {
 

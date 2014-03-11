@@ -159,7 +159,7 @@ public class CompHoursController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
 			@RequestParam(value = "comp_hour_code", required = true) String comp_hour_code,
