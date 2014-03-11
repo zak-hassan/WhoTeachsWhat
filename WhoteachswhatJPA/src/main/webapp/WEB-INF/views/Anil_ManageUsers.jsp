@@ -123,7 +123,7 @@
 		</button>
 	</div>
 	<!-- Navigation starts -->
-	<jsp:include page="navigation-template.jsp" />
+	<jsp:include page="includes/navigation-template.jsp" />
 	<!-- Navigation end -->
 	<script>
     $(function(){

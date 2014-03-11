@@ -88,7 +88,7 @@
             <button class="btn btn-user-menu"><i class="icon-logo"></i></button>
         </div>
 <!-- Navigation starts -->
-<jsp:include page="navigation-template.jsp" />
+<jsp:include page="includes/navigation-template.jsp" />
 <!-- Navigation end -->
         <div class="panel">
             <div class="panel-content filler">

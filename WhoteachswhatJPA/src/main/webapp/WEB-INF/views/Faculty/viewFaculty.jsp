@@ -16,7 +16,7 @@
         <button class="btn btn-user-menu"><i class="icon-logo"></i></button>
     </div>
 <!-- Navigation starts -->
-<jsp:include page="../includes/menu.jsp" />
+<jsp:include page="../includes/navigation-template.jsp" />
 <!-- Navigation end -->
 <script>
     $(function(){

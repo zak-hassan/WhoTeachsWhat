@@ -118,7 +118,7 @@
 		</button>
 	</div>
 	<!-- Navigation starts -->
-	<jsp:include page="../includes/menu.jsp" />	
+	<jsp:include page="../includes/navigation-template.jsp" />	
 	<div class="wrapper">
 		<div class="breadcrumb-container">
 			<ul class="xbreadcrumbs">
