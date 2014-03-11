@@ -136,18 +136,7 @@
     @Purpose: AJAX posting and validation for adding a comp hour type
      
    */
-    
-    var validateAddCompHourType= function() {
-       	$.post("ajaxAddCompHourType",{ faculty_first_name: document.getElementById("comp_hour_type").value })
-       		.done(function(data) {
-           		console.log("AJAX RETURNED"+JSON.stringify(data));
-           		
-           		if (data.success === "true") {
-           			// Success message
-           		}
-       		});
-       };
-
+   
   	  var deleteFaculty= function(id,uname) {
 		   	$.ajax({type:"DELETE", 
 			   	url : "api/comphour/"+id,
@@ -186,6 +175,27 @@
 	   		});
 		return	false;
 	   };
+	   
+	   var validateUpdateCompHourType= function() {
+		   	$.post("api/comphour",{ compHourId: document.getElementById("compHourId").value,
+		   		compHourCode: document.getElementById("compHourCode").value,
+		   		compHourType: document.getElementById("compHourType").value
+		   	   	})
+		   		.done(function(data) {
+		       		console.log("AJAX RETURNED"+JSON.stringify(data));
+		       		
+		       		if (data.success === "true") {
+		       			// Success message
+		       			$("#updateCompHour").modal('hide');
+		       			$.pnotify({
+							title : 'Updated comp hour type!',
+							type : 'info',
+							text : 'Updated comp hour type!'
+						});
+		       		}
+		   		});
+			return	false;
+		   };
 
     
 </script>
@@ -313,8 +323,7 @@
 
             </form>
             
-            
-            <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
 			data-target="#addCompHour">Add Comp Hour</button>
 
@@ -347,18 +356,59 @@
 								data-dismiss="modal">Close</button>
 							<button type="submit" onclick="validateAddCompHourType();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
+		<!--  END OF UPDATE MODAL -->
+		
+		 <!-- Button trigger modal (left as a test. No needed)-->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#updateCompHour">Update Comp Hour</button>
 
-		<!--  END OF ADD MODAL -->
+		<!-- Modal -->
+		<div class="modal fade" id="updateCompHour" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Update Comp Hour</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="compHourId" id="compHourId" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
+									type="text" class="form-control" name="compHourCode" id="compHourCode"
+									placeholder="Code" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
+									type="text" class="form-control" name="compHourType" id="compHourType"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateUpdateCompHourType();"
+								class="btn btn-primary">Save changes</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<!--  END OF UPDATE MODAL -->
             
             
         </div>

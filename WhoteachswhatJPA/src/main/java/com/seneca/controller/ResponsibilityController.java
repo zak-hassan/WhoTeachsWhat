@@ -114,7 +114,7 @@ public class ResponsibilityController {
 	 * @see com.seneca.service.ResponsibilityService
 	 * 
 	 * @param id
-	 *            Uniquely identifies the object
+	 * 		Uniquely identifies the object
 	 *            
 	 * @return A String containing the name of the view to render
 	 */

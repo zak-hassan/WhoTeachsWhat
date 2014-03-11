@@ -45,48 +45,13 @@ public class CompHoursController {
 		return "Anil_ManageCompHours";
 	}
 
-	/**
-	 * This method accepts data posted from the AddCompHourTypeForm and adds a
-	 * comp hour type using the appropriate service method
-	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
-	 * @param comp_hour_type
-	 *            The name of the comp hour type
-	 * 
-	 * @return A String containing the name of the view to render
-	 */
-
-	@RequestMapping(value = "/ajaxAddCompHourType", method = RequestMethod.GET)
-	public String ajaxAddCompHourType() {
-		return "Anil_ManageCompHours";
-	}
-
-	/**
-	 * This method accepts data posted from the UpdateCompHourTypeForm and
-	 * updates a comp hour type using the appropriate service method
-	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
-	 * @param comp_hour_type
-	 *            The name of the comp hour type
-	 * 
-	 * @return A String containing the name of the view to render
-	 */
-
-	@RequestMapping(value = "/ajaxUpdateCompHourType", method = RequestMethod.GET)
-	public String ajaxUpdateCompHourType() {
-		return "Anil_UpdateCompHour";
-	}
-
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
+	 * This method accepts no parameters and returns all comp hour types in the
 	 * database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
+	 * @see com.seneca.service.CompHoursService
 	 * 
 	 * @return JSON object with a list of course to display in datatable
 	 */
@@ -97,14 +62,13 @@ public class CompHoursController {
 		return compHoursService.getAll();
 	}
 
-	// REST API ENDPOINTS:
-
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts an identifier and returns a CompHour object with a matching id
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.CompHoursService
 	 * 
+	 * @param id
+	 * 		 Uniquely identifies the object
 	 * 
 	 * @return JSON object with a list of course to display in datatable
 	 */
@@ -121,10 +85,12 @@ public class CompHoursController {
 	 * 
 	 * @see com.seneca.service.CompHoursService
 	 * 
+	 * @param comp_hour_code
+	 * 		A code uniquely identifying the comp hour type
 	 * @param comp_hour_type
-	 *            The name of the comp hour type
+	 * 		The name of the comp hour type
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/comphour", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -142,21 +108,19 @@ public class CompHoursController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method accepts data posted from the updateCompHourTypeForm and updates a
+	 * comp hour type using the appropriate service method
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.CompHoursService
 	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @param comp_hour_code
+	 * 		A code uniquely identifying the comp hour type
+	 * @param comp_hour_type
+	 * 		The name of the comp hour type
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -173,21 +137,15 @@ public class CompHoursController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method accepts an identifier and deletes a CompHour object with a matching id. Must be accessed through
+	 * HTTP DELETE
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.CompHoursService
 	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
+	 * @param id
+	 * 		 Uniquely identifies the object
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
