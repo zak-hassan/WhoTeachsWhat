@@ -17,9 +17,18 @@ INSERT INTO `test`.`TeachingType` (`teachingType_name`) VALUES('seasonal');
 -- TODO: Create a unique constraint on course_code because we don't want to add the same course again.
 -- ADDING COURSES: IFS
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('OPS105','Operating Systems: Practices'); 
+-- $1 can be between 1- 185 , $2 1-2  $3 WHICH Semester  1-8
+INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (1,1,1);
+
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('OPS110','Operating Systems: Principles'); 
+INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (2,1,2);
+
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('RIS120','Introduction to Web Management'); 
+INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (3,1,4);
+
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('DCN130','Computer Architecture & Networking'); 
+INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (4,2,3);
+
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('BTC140','Critical Thinking and Writing'); 
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('SPR200','Security Principles: Cryptography & Encryption'); 
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('SRT210','The Pragmatic Art of Administration'); 
@@ -268,10 +277,19 @@ INSERT INTO `test`.`Program` (`program_code`, `program_name`, `total_semester`) 
 INSERT INTO `test`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('BSD','Bachelor of Technology (Software Development)', 8);
 INSERT INTO `test`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('IFS','Bachelor of Technology (Informatics & Security)',8);
 
--- ADD curriculumSemester
+-- ADD curriculumSemester  This is equivalent to semester 1 , semester 2 , semester 3 ,....
 
 INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum1');
 INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum2');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum3');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum4');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum5');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum6');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum7');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum8');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum9');
+INSERT INTO `test`.`CurriculumSemester` (`name`) VALUES('Curriculum10');
+
 
 
 
@@ -335,12 +353,15 @@ VALUES
 
 
 -- ADD CourseInProgramCurSem
--- INCORRECT datatype for field(s) course_id, program_id
-INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (<{course_id: }>,<{cs_id: }>,<{program_id: }>);
 
 
 -- ADD facultyToCourseInSemesterYear
 -- INCORRECT datatype for field(s) course_id
+-- FACULTY ID: between 1 - 10
+-- COURSE ID: 1 - 370
+-- PREP TIME: 1 - 2 
+-- COMPHOUR_ID: 1-2
+
 INSERT INTO `test`.`FacultyToCourseInSemesterYear`
 (`addition_attribute`,
 `compHour_allowance`,
