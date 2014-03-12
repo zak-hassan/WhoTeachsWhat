@@ -52,151 +52,128 @@ public class UserController {
 		return "Anil_ManageUsers";
 	}
 	
-	/**
-	 * This method accepts data posted from the AddUserForm and adds a user using the appropriate
-	 * service method
-	 * 
-	 * @see					com.seneca.service.UserService
-	 * 
-	 * @param userId		The user id of the new user. Must be unique
-	 * 
-	 * @return				A String containing the name of the view to render
-	 */
-	
-	@RequestMapping(value = "/ajaxAddUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Map<String, String> listAddUserJSON(
-			@RequestParam(value = "userId", required = true) String userId) {
-
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("UserId", userId);
-		list.put("success", "true");
-		
-		return list;
-	}
-	
 	// REST API ENDPOINTS:
 	
 	
-				/**
-				 * This method accepts no parameters and returns all course in in the
-				 * database.
-				 * 
-				 * @see com.seneca.service.CourseService
-				 * 
-				 * 
-				 * @return JSON object with a list of course to display in datatable
-				 */
+	/**
+	 * This method accepts no parameters and returns all course in in the
+	 * database.
+	 * 
+	 * @see com.seneca.service.CourseService
+	 * 
+	 * 
+	 * @return JSON object with a list of course to display in datatable
+	 */
 
-				@RequestMapping(value = "/api/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-				public @ResponseBody
-				List<Account> listGetJSON() {
-					return accountService.getAll();
-				}
-			
-				// REST API ENDPOINTS:
-					/**
-					 * This method accepts no parameters and returns all course in in the
-					 * database.
-					 * 
-					 * @see com.seneca.service.CourseService
-					 * 
-					 * 
-					 * @return JSON object with a list of course to display in datatable
-					 */
+	@RequestMapping(value = "/api/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Account> listGetJSON() {
+		return accountService.getAll();
+	}
 
-					@RequestMapping(value = "/api/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-					public @ResponseBody
-					List<Account> listGetJSON(@PathVariable("id") Integer id) {
-						return accountService.getOne(id);
-					}
+	// REST API ENDPOINTS:
+		/**
+		 * This method accepts no parameters and returns all course in in the
+		 * database.
+		 * 
+		 * @see com.seneca.service.CourseService
+		 * 
+		 * 
+		 * @return JSON object with a list of course to display in datatable
+		 */
 
-					/**
-					 * This method is incomplete
-					 * course_code=CPA
-					 * &course_name=Computer+Programming+And+Analysis
-					 * &simpleSelectBox=1
-					 * &course_name=
-					 * &dualMultiSem1=DBDA5250&course_name=&dualMultiSem2=BACA3440&dualMultiSem2=DBAA6250&dualMultiSem2=UNXA5110&dualMultiSem2=VBAA5440&dualMultiSem2=WINA2100&dualMultiSem2=WSAA5000&course_name=&dualMultiSem3=DBWA6240&course_name=&dualMultiSem4=DBJA5650&course_name=&dualMultiSem5=DBLA6260&course_name=&dualMultiSem6=NETA6050&course_name=
-					 * 
-					 * @param responsibility_type
-					 * @return
-					 */
+		@RequestMapping(value = "/api/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public @ResponseBody
+		List<Account> listGetJSON(@PathVariable("id") Integer id) {
+			return accountService.getOne(id);
+		}
 
-					
-				/**
-				 * This method accepts data posted from the AddCompHourTypeForm and adds a comp hour type using the appropriate
-				 * service method
-				 * 
-				 * @see 							com.seneca.service.CompHoursService
-				 * 
-				 * @param comp_hour_type			The name of the comp hour type
-				 * 
-				 * @return							A String containing the name of the view to render
-				 */
+		/**
+		 * This method is incomplete
+		 * course_code=CPA
+		 * &course_name=Computer+Programming+And+Analysis
+		 * &simpleSelectBox=1
+		 * &course_name=
+		 * &dualMultiSem1=DBDA5250&course_name=&dualMultiSem2=BACA3440&dualMultiSem2=DBAA6250&dualMultiSem2=UNXA5110&dualMultiSem2=VBAA5440&dualMultiSem2=WINA2100&dualMultiSem2=WSAA5000&course_name=&dualMultiSem3=DBWA6240&course_name=&dualMultiSem4=DBJA5650&course_name=&dualMultiSem5=DBLA6260&course_name=&dualMultiSem6=NETA6050&course_name=
+		 * 
+		 * @param responsibility_type
+		 * @return
+		 */
 
-				@RequestMapping(value = "/api/account", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-				public @ResponseBody
-				Map<String, String> listAddJSON(
-						@RequestParam(value = "username", required = true) String uname, 
-						@RequestParam(value = "accessLevel", required = true) Integer level) {
-					logger.info("START: Adding Account");
-					accountService.add(uname, level);
-					logger.info("FINISH: Adding Account");
-					Map<String, String> list = new HashMap<String, String>();
-					list.put("success", "true");
-					return list;
-				}
+		
+	/**
+	 * This method accepts data posted from the AddCompHourTypeForm and adds a comp hour type using the appropriate
+	 * service method
+	 * 
+	 * @see 							com.seneca.service.CompHoursService
+	 * 
+	 * @param comp_hour_type			The name of the comp hour type
+	 * 
+	 * @return							A String containing the name of the view to render
+	 */
 
-				/**
-				 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
-				 * service method
-				 * 
-				 * @see 						com.seneca.service.CourseService
-				 * 
-				 * @param courseCode			The six to eight digit course code
-				 * @param courseName			The name of the course
-				 * @param crossoverCourse		The course code that is synonomous with this course code
-				 * @param oldCourse				The previous course code of the course, if any
-				 * 
-				 * @return						A String containing the name of the view to render
-				 */
+	@RequestMapping(value = "/api/account", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Map<String, String> listAddJSON(
+			@RequestParam(value = "username", required = true) String uname, 
+			@RequestParam(value = "accessLevel", required = true) Integer level) {
+		logger.info("START: Adding Account");
+		accountService.add(uname, level);
+		logger.info("FINISH: Adding Account");
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("success", "true");
+		return list;
+	}
 
-				@RequestMapping(value = "/api/account/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-				public @ResponseBody
-				Map<String, String> listUpdateJSON(@PathVariable("id") Integer id,
-						@RequestParam(value = "username", required = true) String uname, 
-						@RequestParam(value = "accessLevel", required = true) Integer level) {
+	/**
+	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
+	 * service method
+	 * 
+	 * @see 						com.seneca.service.CourseService
+	 * 
+	 * @param courseCode			The six to eight digit course code
+	 * @param courseName			The name of the course
+	 * @param crossoverCourse		The course code that is synonomous with this course code
+	 * @param oldCourse				The previous course code of the course, if any
+	 * 
+	 * @return						A String containing the name of the view to render
+	 */
 
-					accountService.update(id,uname, level);
-					Map<String, String> list = new HashMap<String, String>();
-					list.put("success", "true");
+	@RequestMapping(value = "/api/account/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id,
+			@RequestParam(value = "username", required = true) String uname, 
+			@RequestParam(value = "accessLevel", required = true) Integer level) {
 
-					return list;
-				}
+		accountService.update(id,uname, level);
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("success", "true");
 
-				/**
-				 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
-				 * service method
-				 * 
-				 * @see 						com.seneca.service.CourseService
-				 * 
-				 * @param courseCode			The six to eight digit course code
-				 * @param courseName			The name of the course
-				 * @param crossoverCourse		The course code that is synonomous with this course code
-				 * @param oldCourse				The previous course code of the course, if any
-				 * 
-				 * @return						A String containing the name of the view to render
-				 */
+		return list;
+	}
 
-				@RequestMapping(value = "/api/account/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-				public @ResponseBody
-				Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
+	/**
+	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
+	 * service method
+	 * 
+	 * @see 						com.seneca.service.CourseService
+	 * 
+	 * @param courseCode			The six to eight digit course code
+	 * @param courseName			The name of the course
+	 * @param crossoverCourse		The course code that is synonomous with this course code
+	 * @param oldCourse				The previous course code of the course, if any
+	 * 
+	 * @return						A String containing the name of the view to render
+	 */
 
-					accountService.delete(id);
+	@RequestMapping(value = "/api/account/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
-					Map<String, String> list = new HashMap<String, String>();
-					list.put("success", "true");
-					return list;
-				}
+		accountService.delete(id);
+
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("success", "true");
+		return list;
+	}
 }

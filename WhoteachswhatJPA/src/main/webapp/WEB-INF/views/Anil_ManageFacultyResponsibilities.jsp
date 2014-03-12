@@ -92,7 +92,7 @@
 
 
 <!-- Navigation Starts -->
-<jsp:include page="navigation-template.jsp" />
+<jsp:include page="includes/navigation-template.jsp" />
 <!-- Navigation ends -->     
 <script>
     $(function(){

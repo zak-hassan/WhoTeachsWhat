@@ -20,8 +20,8 @@ import com.seneca.service.ResponsibilityService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>
- * @lastmodified Dec 31, 2013
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
+ * @lastmodified March 11, 2014
  * @version 0.0.1
  */
 
@@ -43,61 +43,13 @@ public class ResponsibilityController {
 		return "Anil_UpdateResponsibilities";
 	}
 
-	/**
-	 * This method accepts data posted from the AddResponsibilityForm and adds a
-	 * responsibility using the appropriate service method
-	 * 
-	 * @see com.seneca.service.ResponsibilityService
-	 * 
-	 * @param responsibility_type
-	 *            The name of the responsibility. Must be unique
-	 * 
-	 * @return A String containing the name of the view to render
-	 */
-
-	@RequestMapping(value = "/ajaxAddResponsibilty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Map<String, String> listAddResponsibiltyJSON(
-			@RequestParam(value = "responsibility_type", required = true) String responsibility_type) {
-
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("ResponsibilityType", responsibility_type);
-		list.put("success", "true");
-
-		return list;
-	}
-
-	/**
-	 * This method accepts data posted from the UpdateResponsibilityForm and
-	 * updates a responsibility using the appropriate service method
-	 * 
-	 * @see com.seneca.service.ResponsibilityService
-	 * 
-	 * @param responsibility_type
-	 *            The name of the responsibility to be updated
-	 * 
-	 * @return A String containing the name of the view to render
-	 */
-
-	@RequestMapping(value = "/ajaxUpdateResponsibilty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Map<String, String> listUpdateResponsibiltyJSON(
-			@RequestParam(value = "responsibility_type", required = true) String responsibility_type) {
-
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("ResponsibilityType", responsibility_type);
-		list.put("success", "true");
-
-		return list;
-	}
-
 	// REST API ENDPOINTS:
 
 	/**
 	 * This method accepts no parameters and returns all course in in the
 	 * database.
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
 	 * 
 	 * @return JSON object with a list of course to display in datatable
@@ -110,13 +62,16 @@ public class ResponsibilityController {
 	}
 
 	// REST API ENDPOINTS:
+	
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
+	 * This method accepts an identifier and returns the responsibility object corresponding with that identifier in the
 	 * database.
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
+	 * @param id
+	 *		Unique identifier
 	 * 
 	 * @return JSON object with a list of course to display in datatable
 	 */
@@ -131,12 +86,12 @@ public class ResponsibilityController {
 	 * This method accepts data posted from the AddCompHourTypeForm and adds a
 	 * comp hour type using the appropriate service method
 	 * 
-	 * @see com.seneca.service.CompHoursService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
 	 * @param comp_hour_type
 	 *            The name of the comp hour type
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/responsibility", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -153,24 +108,18 @@ public class ResponsibilityController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method accepts data posted from the UpdateResponsibilityForm and updates a
+	 * responsibility using the appropriate service method
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @param id
+	 * 		Uniquely identifies the object
+	 *            
+	 * @return A list containing the success of the operation
 	 */
 
-	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id) {
 
@@ -182,21 +131,14 @@ public class ResponsibilityController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method accepts an identifier and deletes an object matching said identifier
 	 * 
-	 * @see com.seneca.service.CourseService
+	 * @see com.seneca.service.ResponsibilityService
 	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
+	 * @param id
+	 * 			Uniquely identifies the object
 	 * 
-	 * @return A String containing the name of the view to render
+	 * @return A list containing the success of the operation
 	 */
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)

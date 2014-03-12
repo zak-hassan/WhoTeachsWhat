@@ -91,7 +91,7 @@
     </div>
 
 <!-- Navigation starts -->
-<jsp:include page="navigation-template.jsp" />
+<jsp:include page="includes/navigation-template.jsp" />
 <!-- Navigation end -->
 
 <script>
@@ -156,6 +156,45 @@
 	   		});
 		return	false;
 	   };
+	   
+	   var validateUpdateResponsibilityType= function() {
+		   	$.put("api/responsibility",{ responsibilityId: document.getElementById("responsibilityId").value,
+		   		responsibilityCode: document.getElementById("responsibilityCode").value,
+		   		responsibilityType: document.getElementById("responsibilityType").value
+		   	   	})
+		   		.done(function(data) {
+		       		console.log("AJAX RETURNED"+JSON.stringify(data));
+		       		
+		       		if (data.success === "true") {
+		       			// Success message
+		       			$("#updateResponsibility").modal('hide');
+		       			$.pnotify({
+							title : 'New responsibility type added!',
+							type : 'info',
+							text : 'Added new responsibility type!'
+						});
+		       		}
+		   		});
+			return	false;
+		   };
+		   
+		   var deleteResponsibilityType= function(id, responsibilityType) {
+			   	$.ajax({type:"DELETE", 
+				   	url : "api/responsibility/"+id,
+				   	data : null,
+				   	cache : false,
+				   	success : function(data){
+			       		if (data.success === "true") {
+		       			$.pnotify({
+							title : 'Responsibility :' + responsibilityType,
+							type : 'info',
+							text : responsibilityType + ' has been deleted'
+						});
+		       			location.reload();
+				   	}
+			   	  }
+			   	});
+		   };	   
     
 </script>
         <div class="wrapper">
@@ -263,7 +302,7 @@
 
             </form>
             
-              <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
 			data-target="#addResponsibility">Add Responsibility</button>
 
@@ -296,16 +335,59 @@
 								data-dismiss="modal">Close</button>
 							<button type="submit" onclick="validateAddResponsibilityType();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
+		<!--  END OF ADD MODAL -->
+		
+		<!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#updateResponsibility">Update Responsibility</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="updateResponsibility" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Update Responsibility</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="responsibilityId" 
+									id="responsibilityId" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility Code</span><br /> <input
+									type="text" class="form-control" name="responsibilityCode" id="responsibilityCode"
+									placeholder="Code" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility Type</span><br /> <input
+									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
+									placeholder="Type" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" onclick="validateUpdateResponsibilityType();"
+								class="btn btn-primary">Save changes</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
 
 		<!--  END OF ADD MODAL -->
             
