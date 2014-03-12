@@ -22,6 +22,12 @@
 					<li>
 						<a href="manageCourseSection">Manage Course Sections</a>
 					</li>
+					<li>
+						<a href="viewPrepTime">Prep Time</a>
+					</li>
+					<li>
+						<a href="viewEvalFactor">Evaluation Factor</a>
+					</li>
 				</ul>
 			</div>
 		</li>
