@@ -9,4 +9,6 @@ WhoteachswhatJPA/target/**
 *.war
 *.ear
 
+RemoteSystemsTempFiles/**
+node_modules
 
