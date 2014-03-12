@@ -217,6 +217,13 @@ INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('PMC230','IT
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('PMC240','Quality Assurance and Testing in IT projects'); 
 INSERT INTO `test`.`Course` (`course_code`, `course_name`)  VALUES ('PMC250','Applied IT Project Management'); 
 
+INSERT INTO `test`.`Responsibility`
+(
+`responsibility_code`,
+`responsibility_name`)
+VALUES
+("RAAA_CODE",
+"RAA_NAME");
 
 -- ADD SEMESTERS
 INSERT INTO `test`.`Semester` (`semester_name`) VALUES ('WINTER');
@@ -288,9 +295,7 @@ INSERT INTO `test`.`CourseToProgram`
 (`course_id`,
 `program_id`)
 VALUES (4,4);
- /*
-
-
+ 
 INSERT INTO `test`.`Account`
 (`password`,
 `access_id`,
@@ -328,6 +333,7 @@ VALUES
 
 
 
+
 -- ADD CourseInProgramCurSem
 -- INCORRECT datatype for field(s) course_id, program_id
 INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) VALUES (<{course_id: }>,<{cs_id: }>,<{program_id: }>);
@@ -336,8 +342,7 @@ INSERT INTO `test`.`CourseInProgramCurSem` (`course_id`, `cs_id`, `program_id`) 
 -- ADD facultyToCourseInSemesterYear
 -- INCORRECT datatype for field(s) course_id
 INSERT INTO `test`.`FacultyToCourseInSemesterYear`
-(`cisy_id`,
-`addition_attribute`,
+(`addition_attribute`,
 `compHour_allowance`,
 `compHour_assigned`,
 `section_number`,
@@ -348,8 +353,7 @@ INSERT INTO `test`.`FacultyToCourseInSemesterYear`
 `faculty_id`,
 `prepType_id`)
 VALUES
-(<{cisy_id: }>,
-<{addition_attribute: }>,
+(<{addition_attribute: }>,
 <{compHour_allowance: }>,
 <{compHour_assigned: }>,
 <{section_number: }>,
@@ -364,8 +368,7 @@ VALUES
 -- INCORRECT datatype for field(s) course_id
 
  INSERT INTO `test`.`CoursesInSemester`
-(`cis_id`,
-`addition_attribute`,
+(`addition_attribute`,
 `eval_1_ans`,
 `eval_2_ans`,
 `eval_3_ans`,
@@ -377,8 +380,7 @@ VALUES
 `eval_3`,
 `semester_id`)
 VALUES
-(<{cis_id: }>,
-<{addition_attribute: }>,
+(<{addition_attribute: }>,
 <{eval_1_ans: }>,
 <{eval_2_ans: }>,
 <{eval_3_ans: }>,
@@ -389,4 +391,3 @@ VALUES
 <{eval_2: }>,
 <{eval_3: }>,
 <{semester_id: }>);
-*/
