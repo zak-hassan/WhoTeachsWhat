@@ -34,7 +34,8 @@ public class FacultyToCourseInSemesterYearController {
 
 	@RequestMapping(value = "/viewFacultyToCourseInSemesterYear", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		// model.addAttribute("", attributeValue);
+		model.addAttribute("entityList",
+				facultyToCourseInSemesterYearService.getAll());
 
 		return "FacultyToCourseInSemesterYear/viewFacultyToCourseInSemesterYear";
 	}
@@ -78,20 +79,25 @@ public class FacultyToCourseInSemesterYearController {
 	@RequestMapping(value = "/api/FacultyToCourseInSemesterYear", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
-			@RequestParam(value = "facultyId", required = true) Integer facultyId,
-			@RequestParam(value = "responsibilityId", required = true) Integer responsibilityId,
+			@RequestParam(value = "additionAttribute", required = true) String addition_attribute,
+			@RequestParam(value = "comphourAllowance", required = true) String compHour_allowance,
+			@RequestParam(value = "comphourAssigned", required = true) String compHour_assigned,
+			@RequestParam(value = "sectionNumber", required = true) Integer section_number,
+			@RequestParam(value = "semesterId", required = true) Integer semester_id,
 			@RequestParam(value = "year", required = true) Integer year,
-			@RequestParam(value = "semesterId", required = true) Integer semesterId,
-			@RequestParam(value = "hoursperweek", required = true) String hoursperweek) {
+			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
+			@RequestParam(value = "courseId", required = true) Integer course_id,
+			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
+			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
 
-		float hours = Float.parseFloat(hoursperweek);
-		facultyToCourseInSemesterYearService.add(facultyId, responsibilityId,
-				year,
-				semesterId, hours);
-
+		float comphoursAllowance = Float.parseFloat(compHour_allowance);
+		float additionAttribute = Float.parseFloat(addition_attribute);
+		float comphourAssigned = Float.parseFloat(compHour_assigned);
+		facultyToCourseInSemesterYearService.add(faculty_id, prepType_id,
+				course_id, compHour_id, year, semester_id, section_number,
+				comphoursAllowance, additionAttribute, comphourAssigned);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
 		return list;
 	}
 
@@ -117,17 +123,24 @@ public class FacultyToCourseInSemesterYearController {
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
-			@RequestParam(value = "facultyId", required = true) Integer facultyId,
-			@RequestParam(value = "responsibilityId", required = true) Integer responsibilityId,
+			@RequestParam(value = "additionAttribute", required = true) String addition_attribute,
+			@RequestParam(value = "comphourAllowance", required = true) String compHour_allowance,
+			@RequestParam(value = "comphourAssigned", required = true) String compHour_assigned,
+			@RequestParam(value = "sectionNumber", required = true) Integer section_number,
+			@RequestParam(value = "semesterId", required = true) Integer semester_id,
 			@RequestParam(value = "year", required = true) Integer year,
-			@RequestParam(value = "semesterId", required = true) Integer semesterId,
-			@RequestParam(value = "hoursperweek", required = true) String hoursperweek) {
+			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
+			@RequestParam(value = "courseId", required = true) Integer course_id,
+			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
+			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
 
-		float hours = Float.valueOf(hoursperweek);
-
-		facultyToCourseInSemesterYearService.update(id, facultyId,
-				responsibilityId,
-				year, semesterId, hours);
+		float comphoursAllowance = Float.parseFloat(compHour_allowance);
+		float additionAttribute = Float.parseFloat(addition_attribute);
+		float comphourAssigned = Float.parseFloat(compHour_assigned);
+		facultyToCourseInSemesterYearService.update(id, faculty_id,
+				prepType_id, course_id, compHour_id, year, semester_id,
+				section_number, comphoursAllowance, additionAttribute,
+				comphourAssigned);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");

@@ -7,65 +7,88 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seneca.model.ResponsibilityToFaculty;
+import com.seneca.model.FacultyToCourseInSemesterYear;
+import com.seneca.repository.CompHourDao;
+import com.seneca.repository.CourseDao;
 import com.seneca.repository.FacultyDao;
-import com.seneca.repository.ResponsibilityDao;
-import com.seneca.repository.ResponsibilityToFacultyDao;
-import com.seneca.repository.SemesterDao;
+import com.seneca.repository.FacultyToCourseInSemesterYearDao;
+import com.seneca.repository.PrepTimeDao;
 
-@Service("responsibilityToFacultyService")
+@Service("facultyToCourseInSemesterYearService")
 public class FacultyToCourseInSemesterYearService {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(FacultyToCourseInSemesterYearService.class);
 
 	@Autowired
-	ResponsibilityToFacultyDao ResponsibilityToFacultyDao;
+	FacultyToCourseInSemesterYearDao facultyToCourseInSemesterYearDao;
+
+	@Autowired
+	CourseDao courseDao;
+
+	@Autowired
+	CompHourDao compHourDao;
 
 	@Autowired
 	FacultyDao facultyDao;
 
 	@Autowired
-	ResponsibilityDao responsibilityDao;
-
-	@Autowired
-	SemesterDao semesterDao;
+	PrepTimeDao prepTimeDao;
 
 	// CRUD OPERATIONS:
-	public ResponsibilityToFaculty add(Integer facultyId, Integer responsibilityId,  Integer year,
-			 Integer semesterId,  Float hours) {
-		ResponsibilityToFaculty rToFaculty = new ResponsibilityToFaculty();
-		rToFaculty.setFaculty(facultyDao.getById(facultyId) );
-		rToFaculty.setResponsibility(responsibilityDao.getById(responsibilityId));
-		rToFaculty.setSemester(semesterDao.getById(semesterId));
-		rToFaculty.setHoursPerWeek(hours);
-		logger.info("Entering courseDao.create : ");
-		ResponsibilityToFacultyDao.create(rToFaculty);
-		logger.info("Exiting courseDao.create : ");
+	public FacultyToCourseInSemesterYear add(Integer faculty_id,
+			Integer prepType_id, Integer course_id, Integer compHour_id,
+			Integer year, Integer semester_id, Integer section_number,
+			float comphoursAllowance, float additionAttribute,
+			float comphourAssigned) {
+		FacultyToCourseInSemesterYear rToFaculty = new FacultyToCourseInSemesterYear();
+
+		rToFaculty.setCourse(courseDao.getById(course_id));
+		rToFaculty.setFaculty(facultyDao.getById(faculty_id));
+		rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
+		rToFaculty.setCompHour(compHourDao.getById(compHour_id));
+		rToFaculty.setYear(year);
+		// TODO: You need to map the semester to a semester id
+		rToFaculty.setSemesterId(semester_id);
+		rToFaculty.setCompHour_allowance(comphoursAllowance);
+		rToFaculty.setAdditionAttribute(additionAttribute);
+		rToFaculty.setCompHour_assigned(comphourAssigned);
+		facultyToCourseInSemesterYearDao.create(rToFaculty);
 		return rToFaculty;
 	}
 
-	public ResponsibilityToFaculty update(Integer id, Integer facultyId,
-			Integer responsibilityId, Integer year, Integer semesterId,
-			Float hours) {
-		ResponsibilityToFaculty rToFaculty = ResponsibilityToFacultyDao
+	public FacultyToCourseInSemesterYear update(Integer id, Integer faculty_id,
+			Integer prepType_id, Integer course_id, Integer compHour_id,
+			Integer year, Integer semester_id, Integer section_number,
+			float comphoursAllowance, float additionAttribute,
+			float comphourAssigned) {
+
+		FacultyToCourseInSemesterYear rToFaculty = facultyToCourseInSemesterYearDao
 				.getById(id);
-		rToFaculty.setFaculty(facultyDao.getById(facultyId));
-		rToFaculty.setResponsibility(responsibilityDao
-				.getById(responsibilityId));
-		rToFaculty.setSemester(semesterDao.getById(semesterId));
-		rToFaculty.setHoursPerWeek(hours);
-		ResponsibilityToFacultyDao.update(rToFaculty);
+
+		// TODO: SET values into rToFaculty
+
+		rToFaculty.setCourse(courseDao.getById(course_id));
+		rToFaculty.setFaculty(facultyDao.getById(faculty_id));
+		rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
+		rToFaculty.setCompHour(compHourDao.getById(compHour_id));
+		rToFaculty.setYear(year);
+		// TODO: You need to map the semester to a semester id
+		rToFaculty.setSemesterId(semester_id);
+		rToFaculty.setCompHour_allowance(comphoursAllowance);
+		rToFaculty.setAdditionAttribute(additionAttribute);
+		rToFaculty.setCompHour_assigned(comphourAssigned);
+
+		facultyToCourseInSemesterYearDao.update(rToFaculty);
 		return rToFaculty;
 	}
 
 	public void delete(Integer id) {
-		ResponsibilityToFacultyDao.delete(id);
+		facultyToCourseInSemesterYearDao.delete(id);
 	}
 
-	public List<ResponsibilityToFaculty> getAll() {
-		return ResponsibilityToFacultyDao.getAll();
+	public List<FacultyToCourseInSemesterYear> getAll() {
+		return facultyToCourseInSemesterYearDao.getAll();
 	}
-
 
 }

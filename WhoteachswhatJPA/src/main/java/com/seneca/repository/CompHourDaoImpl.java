@@ -32,7 +32,7 @@ public class CompHourDaoImpl implements CompHourDao
       return entities;
    }
 
-   public CompHour getById(Long id)
+	public CompHour getById(Integer id)
    {
       return entityManager.find(CompHour.class, id);
    }
@@ -49,13 +49,14 @@ public class CompHourDaoImpl implements CompHourDao
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(CompHour.class, id));
       return;
    }
 
-   public List<CompHour> search(CompHour search, Long first, Integer maxItems)
+	public List<CompHour> search(CompHour search, Integer first,
+			Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 

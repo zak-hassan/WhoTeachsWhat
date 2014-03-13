@@ -26,7 +26,7 @@ public class FacultyToCourseInSemesterYearDaoImpl implements FacultyToCourseInSe
       return entities;
    }
 
-   public FacultyToCourseInSemesterYear getById(Long id)
+	public FacultyToCourseInSemesterYear getById(Integer id)
    {
       return entityManager.find(FacultyToCourseInSemesterYear.class, id);
    }
@@ -43,15 +43,16 @@ public class FacultyToCourseInSemesterYearDaoImpl implements FacultyToCourseInSe
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(FacultyToCourseInSemesterYear.class, id));
       return;
    }
 
 @Override
-public List<FacultyToCourseInSemesterYear> search(
-		FacultyToCourseInSemesterYear search, Long first, Integer maxItems) {
+	public List<FacultyToCourseInSemesterYear> search(
+			FacultyToCourseInSemesterYear search, Integer first,
+			Integer maxItems) {
 	// TODO Auto-generated method stub
 	return null;
 }

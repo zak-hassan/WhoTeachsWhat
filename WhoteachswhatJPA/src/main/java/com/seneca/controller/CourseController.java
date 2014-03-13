@@ -112,7 +112,8 @@ public class CourseController {
 
 	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
+	Map<String, String> listUpdateJSON(
+			@PathVariable("id") Integer id,
 			@RequestParam(value = "course_code", required = true) String courseCode,
 			@RequestParam(value = "course_name", required = true) String courseName,
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
@@ -142,7 +143,7 @@ public class CourseController {
 
 	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listDeleteJSON(@PathVariable("id") Long id) {
+	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
 		courseService.delete(id);
 

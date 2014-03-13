@@ -8,15 +8,17 @@ public interface FacultyToCourseInSemesterYearDao
 {
    public List<FacultyToCourseInSemesterYear> getAll();
 
-   public FacultyToCourseInSemesterYear getById(Long id);
+	public FacultyToCourseInSemesterYear getById(Integer id);
 
    public void update(FacultyToCourseInSemesterYear entity);
 
    public void create(FacultyToCourseInSemesterYear entity);
 
-   public void delete(Long id);
+	public void delete(Integer id);
 
-   public List<FacultyToCourseInSemesterYear> search(FacultyToCourseInSemesterYear search, Long first, Integer maxItems);
+	public List<FacultyToCourseInSemesterYear> search(
+			FacultyToCourseInSemesterYear search, Integer first,
+			Integer maxItems);
 
    public Long getCount(FacultyToCourseInSemesterYear search);
 }

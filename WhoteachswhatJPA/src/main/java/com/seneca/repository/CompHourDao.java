@@ -8,15 +8,16 @@ public interface CompHourDao
 {
    public List<CompHour> getAll();
 
-   public CompHour getById(Long id);
+	public CompHour getById(Integer id);
 
    public void update(CompHour entity);
 
    public void create(CompHour entity);
 
-   public void delete(Long id);
+	public void delete(Integer id);
 
-   public List<CompHour> search(CompHour search, Long first, Integer maxItems);
+	public List<CompHour> search(CompHour search, Integer first,
+			Integer maxItems);
 
    public Long getCount(CompHour search);
 }

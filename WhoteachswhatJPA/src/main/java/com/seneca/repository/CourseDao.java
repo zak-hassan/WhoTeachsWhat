@@ -8,7 +8,7 @@ public interface CourseDao
 {
    public List<Course> getAll();
 
-   public Course getById(Long id);
+	public Course getById(Integer id);
    
    public Course getByCourseCode(String course_code);
 
@@ -16,9 +16,9 @@ public interface CourseDao
 
    public void create(Course entity);
 
-   public void delete(Long id);
+	public void delete(Integer id);
 
-   public List<Course> search(Course search, Long first, Integer maxItems);
+	public List<Course> search(Course search, Integer first, Integer maxItems);
 
    public Long getCount(Course search);
 }

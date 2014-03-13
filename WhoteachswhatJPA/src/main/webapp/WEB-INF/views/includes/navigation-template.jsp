@@ -37,6 +37,9 @@
 					<li>
 						<a href="viewCurriculumSemester">Manage Curriculum Semester</a>
 					</li>
+					<li>
+						<a href="viewFacultyToCourseInSemesterYear">Manage Faculty To Course In Semester Year</a>
+					</li>
 				</ul>
 			</div>
 		</li>

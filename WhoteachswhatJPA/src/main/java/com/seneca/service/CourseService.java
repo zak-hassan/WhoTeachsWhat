@@ -45,7 +45,7 @@ public class CourseService {
 	}
 
 	
-	public Course update(Long id, String course_code, String course_name) {
+	public Course update(Integer id, String course_code, String course_name) {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
@@ -55,7 +55,7 @@ public class CourseService {
 		return course;
 	}
 	
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		courseDao.delete(id);
 	}
 
