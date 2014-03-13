@@ -34,6 +34,9 @@
 					<li>
 						<a href="viewResponsibilityToFaculty">Manage Responsibility To Faculty</a>
 					</li>
+					<li>
+						<a href="viewCurriculumSemester">Manage Curriculum Semester</a>
+					</li>
 				</ul>
 			</div>
 		</li>

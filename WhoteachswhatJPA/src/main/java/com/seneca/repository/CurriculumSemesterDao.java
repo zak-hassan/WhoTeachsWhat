@@ -8,15 +8,16 @@ public interface CurriculumSemesterDao
 {
    public List<CurriculumSemester> getAll();
 
-   public CurriculumSemester getById(Long id);
+	public CurriculumSemester getById(Integer id);
 
    public void update(CurriculumSemester entity);
 
    public void create(CurriculumSemester entity);
 
-   public void delete(Long id);
+	public void delete(Integer id);
 
-   public List<CurriculumSemester> search(CurriculumSemester search, Long first, Integer maxItems);
+	public List<CurriculumSemester> search(CurriculumSemester search,
+			Integer first, Integer maxItems);
 
    public Long getCount(CurriculumSemester search);
 }

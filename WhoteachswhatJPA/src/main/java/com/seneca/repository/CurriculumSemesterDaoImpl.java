@@ -26,7 +26,7 @@ public class CurriculumSemesterDaoImpl implements CurriculumSemesterDao
       return entities;
    }
 
-   public CurriculumSemester getById(Long id)
+	public CurriculumSemester getById(Integer id)
    {
       return entityManager.find(CurriculumSemester.class, id);
    }
@@ -43,7 +43,7 @@ public class CurriculumSemesterDaoImpl implements CurriculumSemesterDao
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(CurriculumSemester.class, id));
       return;
@@ -102,7 +102,8 @@ public class CurriculumSemesterDaoImpl implements CurriculumSemesterDao
 */
 
 @Override
-public List<CurriculumSemester> search(CurriculumSemester search, Long first,
+	public List<CurriculumSemester> search(CurriculumSemester search,
+			Integer first,
 		Integer maxItems) {
 	// TODO Auto-generated method stub
 	return null;
