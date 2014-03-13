@@ -23,10 +23,16 @@
 						<a href="manageCourseSection">Manage Course Sections</a>
 					</li>
 					<li>
-						<a href="viewPrepTime">Prep Time</a>
+						<a href="viewPrepTime">Manage Prep Time</a>
 					</li>
 					<li>
-						<a href="viewEvalFactor">Evaluation Factor</a>
+						<a href="viewEvalFactor">Manage Evaluation Factor</a>
+					</li>
+					<li>
+						<a href="viewSemester">Manage Semester</a>
+					</li>
+					<li>
+						<a href="viewResponsibilityToFaculty">Manage Responsibility To Faculty</a>
 					</li>
 				</ul>
 			</div>

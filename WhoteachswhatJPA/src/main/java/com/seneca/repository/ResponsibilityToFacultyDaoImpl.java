@@ -26,7 +26,7 @@ public class ResponsibilityToFacultyDaoImpl implements ResponsibilityToFacultyDa
       return entities;
    }
 
-   public ResponsibilityToFaculty getById(Long id)
+	public ResponsibilityToFaculty getById(Integer id)
    {
       return entityManager.find(ResponsibilityToFaculty.class, id);
    }
@@ -43,7 +43,7 @@ public class ResponsibilityToFacultyDaoImpl implements ResponsibilityToFacultyDa
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(ResponsibilityToFaculty.class, id));
       return;
@@ -93,7 +93,7 @@ public class ResponsibilityToFacultyDaoImpl implements ResponsibilityToFacultyDa
 
 @Override
 public List<ResponsibilityToFaculty> search(ResponsibilityToFaculty search,
-		Long first, Integer maxItems) {
+			Integer first, Integer maxItems) {
 	// TODO Auto-generated method stub
 	return null;
 }
