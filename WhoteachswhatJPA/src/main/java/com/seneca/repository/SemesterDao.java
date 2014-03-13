@@ -8,15 +8,16 @@ public interface SemesterDao
 {
    public List<Semester> getAll();
 
-   public Semester getById(Long id);
+	public Semester getById(Integer id);
 
    public void update(Semester entity);
 
    public void create(Semester entity);
 
-   public void delete(Long id);
+	public void delete(Integer id);
 
-   public List<Semester> search(Semester search, Long first, Integer maxItems);
+	public List<Semester> search(Semester search, Integer first,
+			Integer maxItems);
 
    public Long getCount(Semester search);
 }

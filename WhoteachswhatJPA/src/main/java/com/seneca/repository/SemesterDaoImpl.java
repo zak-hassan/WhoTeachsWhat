@@ -26,7 +26,7 @@ public class SemesterDaoImpl implements SemesterDao
       return entities;
    }
 
-   public Semester getById(Long id)
+	public Semester getById(Integer id)
    {
       return entityManager.find(Semester.class, id);
    }
@@ -43,7 +43,7 @@ public class SemesterDaoImpl implements SemesterDao
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(Semester.class, id));
       return;
@@ -92,7 +92,8 @@ public class SemesterDaoImpl implements SemesterDao
    */
 
 @Override
-public List<Semester> search(Semester search, Long first, Integer maxItems) {
+	public List<Semester> search(Semester search, Integer first,
+			Integer maxItems) {
 	// TODO Auto-generated method stub
 	return null;
 }
