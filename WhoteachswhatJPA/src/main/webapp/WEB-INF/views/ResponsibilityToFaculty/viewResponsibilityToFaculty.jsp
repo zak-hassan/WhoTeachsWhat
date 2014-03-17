@@ -223,9 +223,9 @@
 			   	success : function(data){
 		       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'Responsibility has been removed from faculty',
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Responsibility has been removed from faculty'
 					});
 	       			location.reload();
 			   	}
@@ -357,42 +357,67 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add Faculty Responsibilities</button>
-
+			data-target="#addResponsibilityToFaculty">Add Faculty Responsibilities</button>
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addResponsibilityToFaculty" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Faculty Responsibilities</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="addResponsibilityToFacultyForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username" id="username"
-									placeholder="Username" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="accessLevel">
-									<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
+									<option value="${repToFac.getFaculty().getFacultyId() }">
+										${repToFac.getFaculty().getFacultyFirstName() } 
+										${repToFac.getFaculty().getFacultyLastName() } </option>
 									</c:forEach>
 								</select>
 							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility:</span> <br /> <select
+									class="form-control" id="responsibilityId">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
+										${responsibility.getResponsibility().getResponsibilityName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year"
+									id="up_year" placeholder="2014" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semester">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getSemester().getSemesterId() }">
+										${responsibility.getSemester().getSemesterName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Hours per week: </span><br /> <input
+									type="text" class="form-control" name="hoursperweek"
+									id="up_hoursperweek" placeholder="20" />
+							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" onclick="validateNewUser();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
@@ -405,86 +430,74 @@ td {
 
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
+			data-target="#updateResponsibilityToFaculty">Update Faculty Responsibilities</button>
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateResponsibilityToFaculty" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Faculty Responsibilities</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updateResponsibilityToFacultyForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
-							</div>
-
-							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
-							<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
+									<option value="${repToFac.getFaculty().getFacultyId() }">
+										${repToFac.getFaculty().getFacultyFirstName() } 
+										${repToFac.getFaculty().getFacultyLastName() } </option>
 									</c:forEach>
 								</select>
 							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility:</span> <br /> <select
+									class="form-control" id="responsibilityId">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
+										${responsibility.getResponsibility().getResponsibilityName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year"
+									id="up_year" placeholder="2014" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semester">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getSemester().getSemesterId() }">
+										${responsibility.getSemester().getSemesterName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Hours per week: </span><br /> <input
+									type="text" class="form-control" name="hoursperweek"
+									id="up_hoursperweek" placeholder="20" />
+							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" onclick="validateNewUser();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
-					<div class="modal-footer">
-					</div>
+					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		<!--  END OF UPDATE MODAL -->
 
 	</div>
 </body>
