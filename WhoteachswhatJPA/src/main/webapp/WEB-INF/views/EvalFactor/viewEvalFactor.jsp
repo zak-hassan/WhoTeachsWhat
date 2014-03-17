@@ -235,7 +235,7 @@
 		
 </script>
 	<div class="wrapper">
-		<div class="breadcrumb-container">
+		<div class="breadcrumb-container" style="width: 100%">
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
