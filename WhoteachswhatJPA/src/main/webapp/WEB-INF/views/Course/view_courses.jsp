@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Curriculum Semester - View</title>
+<title>Manage Course - View</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -232,7 +232,10 @@
 	   };	  	   
 
 	var updateForm=function(courseCode, courseName, crossoverCourse, oldCourse){
-			$("#up_curriculumSemesterName").val(curriculumSemesterName);
+			$("#up_courseCode").val(courseCode);
+			$("#up_courseName").val(courseName);
+			$("#up_crossoverCourse").val(crossoverCourse);
+			$("#up_oldCourse").val(oldCourse);
 		};											
 
 </script>
@@ -247,7 +250,7 @@
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Coure</small>
+				<small>Manage Cousre</small>
 			</h2>
 			<h3>
 				<small>Add, Update and Delete a course</small>
@@ -423,25 +426,25 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="courseCode" id="courseCode"
+									type="text" class="form-control" name="courseCode" id="up_courseCode"
 									placeholder="Course Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="courseName" id="courseName"
+									type="text" class="form-control" name="courseName" id="up_courseName"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossoverCourse" id="crossoverCourse"
+									type="text" class="form-control" name="crossoverCourse" id="up_crossoverCourse"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="referenceCourse" id="referenceCourse"
+									type="text" class="form-control" name="referenceCourse" id="up_referenceCourse"
 									placeholder="Reference" />
 							</div>
 							
