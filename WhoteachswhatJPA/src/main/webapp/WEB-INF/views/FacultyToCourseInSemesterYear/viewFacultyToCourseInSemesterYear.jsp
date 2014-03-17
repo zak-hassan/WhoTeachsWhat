@@ -366,15 +366,7 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCourseToSemester">Add user</button>
-
-	<!--  
-			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
-			@RequestParam(value = "courseId", required = true) Integer course_id,
-			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
-			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
-	-->
-
+			data-target="#addCourseToSemester">Add Faculty to Course</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="addCourseToSemester" tabindex="-1" role="dialog"
@@ -422,6 +414,35 @@ td {
 									type="text" class="form-control" name="year" id="year"
 									placeholder="2014" />
 							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Course:</span> <br /> <select
+									class="form-control" id="courseId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getCourse().getCourseId() }">
+										${fc.getCourse().getCourseCode() }
+									</option>
+									</c:forEach>
+								</select>
+							</div><div class="input-group">
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getFaculty().getFacultyId() }">
+										${fc.getFaculty().getFacultyFirstName() } ${fc.getFaculty().getFacultyLastName() } 
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Prep Time:</span> <br /> <select
+									class="form-control" id="preptimeId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getPrepTime().getPrepId() }">
+										${fc.getPrepTime().getPrepName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" onclick="validateNewUser();"
@@ -437,35 +458,78 @@ td {
 
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateCourseToSemester" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Faculty to Course</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updateCourseToSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
+								<span class="input-group-addon">Addition: </span><br /> <input
+									type="text" class="form-control" name="additionAttribute" id="additionAttribute"
+									placeholder="" />
 							</div>
-
 							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
-							<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
+									type="text" class="form-control" name="comphourAllowance" id="comphourAllowance"
+									placeholder="" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Section Number: </span><br /> <input
+									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
+									placeholder="5" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Comp Hours Assigned: </span><br /> <input
+									type="text" class="form-control" name="comphourAssigned" id="comphourAssigned"
+									placeholder="" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semesterId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getSemesterId() }">${fc.getSemesterName() }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year" id="year"
+									placeholder="2014" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Course:</span> <br /> <select
+									class="form-control" id="courseId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getCourse().getCourseId() }">
+										${fc.getCourse().getCourseCode() }
+									</option>
+									</c:forEach>
+								</select>
+							</div><div class="input-group">
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getFaculty().getFacultyId() }">
+										${fc.getFaculty().getFacultyFirstName() } ${fc.getFaculty().getFacultyLastName() } 
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Prep Time:</span> <br /> <select
+									class="form-control" id="preptimeId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getPrepTime().getPrepId() }">
+										${fc.getPrepTime().getPrepName() }
+									</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -475,52 +539,13 @@ td {
 								class="btn btn-primary">Save changes</button>
 
 						</form>
-
-
 					</div>
-					<div class="modal-footer">
-					</div>
+					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
+		<!--  END OF UPDATE MODAL -->
 	</div>
 </body>
 </html>
