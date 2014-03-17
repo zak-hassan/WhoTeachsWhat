@@ -223,7 +223,7 @@
 		return	false;
 	   };
 
-	   var deleteCourseInSemesterYear= function(id,courseId) {
+	   var deleteCourseInSemesterYear= function(id,course, faculty) {
 		   	$.ajax({type:"DELETE", 
 			   	url : "api/FacultyToCourseInSemesterYear"+id,
 			   	data : null,
@@ -231,11 +231,10 @@
 			   	success : function(data){
 		       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'Course :' + course + 'has been removed from' + faculty,
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Course has been removed'
 					});
-				  	 // Reload so the delete user is gone..
 	       			location.reload();
 			   	}
   		   	  }
@@ -259,20 +258,21 @@
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
-						Users</a></li>
+				<li class="current">
+					<a href="viewFacultyToCourseInSemesterYear">Manage Faculty To Course In Semester Year</a>
+				</li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Users</small>
+				<small>Manage Faculty to Course in Semester Year</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Update and Delete courses associated with a faculty member in a semester year</small>
 			</h3>
 		</header>
-		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
+		<form method="post" action="api/FacultyToCourseInSemesterYear" id="CourseInSemesterForm"
 			onsubmit="return validateNewUser();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
@@ -366,33 +366,61 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
+			data-target="#addCourseToSemester">Add user</button>
+
+	<!--  
+			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
+			@RequestParam(value = "courseId", required = true) Integer course_id,
+			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
+			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
+	-->
+
 
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addCourseToSemester" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Faculty to Course</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="addCourseToSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username" id="username"
-									placeholder="Username" />
+								<span class="input-group-addon">Addition: </span><br /> <input
+									type="text" class="form-control" name="additionAttribute" id="additionAttribute"
+									placeholder="" />
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="accessLevel">
-									<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
+									type="text" class="form-control" name="comphourAllowance" id="comphourAllowance"
+									placeholder="" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Section Number: </span><br /> <input
+									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
+									placeholder="5" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Comp Hours Assigned: </span><br /> <input
+									type="text" class="form-control" name="comphourAssigned" id="comphourAssigned"
+									placeholder="" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semesterId">
+									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
+									<option value="${fc.getSemesterId() }">${fc.getSemesterName() }</option>
 									</c:forEach>
 								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year" id="year"
+									placeholder="2014" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -400,8 +428,6 @@ td {
 								class="btn btn-primary">Save changes</button>
 
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
