@@ -368,7 +368,7 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Semester Name:</span> <br /> <input
 									type="text" class="form-control" name="semesterName" id="semesterName"
-									placeholder="" />
+									placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -384,13 +384,8 @@ td {
 
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateSemester">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateSemester" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">

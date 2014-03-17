@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Users - Admin Panel</title>
+<title>Manage Faculty - Faculty Responsibilities</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -167,21 +167,24 @@
     @Purpose: AJAX posting and validation for adding a user
      
    */
-    
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+   
+   var validateAddResponsibilityToFaculty= function() {
+   	$.post("api/ResponsibilityToFaculty",{ facultyId: document.getElementById("facultyId").value, 
+   		responsibilityId: document.getElementById("accessLevel").value,
+   		year: document.getElementById("year").value,
+   		semesterId: document.getElementById("semester").value,
+   		hoursperweek: document.getElementById("hoursperweek").value
    	   	})
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
        		if (data.success === "true") {
        			// Success message
-       			$("#addUser").modal('hide');
+       			$("#addResponsibilityToFaculty").modal('hide');
        			$.pnotify({
-					title : 'New User Added',
+					title : 'New Faculty Responsibility Added',
 					type : 'info',
-					text : 'Added new user !'
+					text : 'Added new faculty responsibility !'
 				});
        		}
    		});
@@ -189,28 +192,32 @@
    };
 
 
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
+   var validateUpdateResponsibilityToFaculty= function() {
+	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").value, 
+	   		responsibilityId: document.getElementById("accessLevel").value,
+	   		year: document.getElementById("year").value,
+	   		semesterId: document.getElementById("semester").value,
+	   		hoursperweek: document.getElementById("hoursperweek").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#updateResponsibilityToFaculty").modal('hide');
+	       			$.pnotify({
+						title : 'Faculty Responsibility Updated',
+						type : 'info',
+						text : 'faculty responsibility updated !'
+					});
+	       		}
+	   		});
 		return	false;
 	   };
 
-	   var deleteUser= function(id,uname) {
+	   var deleteResponsibilityToFaculty= function(id,uname) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
+			   	url : "api/ResponsibilityToFaculty"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
@@ -220,7 +227,6 @@
 						type : 'info',
 						text : 'User has been deleted'
 					});
-				  	 // Reload so the delete user is gone..
 	       			location.reload();
 			   	}
   		   	  }
@@ -244,21 +250,21 @@
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
-						Users</a></li>
+				<li class="current"><a href="viewResponsibilityToFaculty">Manage
+						Faculty Responsibilities</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Users</small>
+				<small>Manage Faculty Responsibilities</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Update and Delete a faculty member's responsibilities</small>
 			</h3>
 		</header>
-		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
-			onsubmit="return validateNewUser();" class="form-horizontal">
+		<form method="post" action="api/ResponsibilityToFaculty" id="ManageResponsibilityToFacultyForm"
+			onsubmit="return validateAddResponsibilityToFaculty();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -351,7 +357,7 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
+			data-target="#addUser">Add Faculty Responsibilities</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
