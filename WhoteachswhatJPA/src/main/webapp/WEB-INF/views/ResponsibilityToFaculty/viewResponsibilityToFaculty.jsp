@@ -169,10 +169,10 @@
    */
    
    var validateAddResponsibilityToFaculty= function() {
-   	$.post("api/ResponsibilityToFaculty",{ facultyId: document.getElementById("facultyId").value, 
-   		responsibilityId: document.getElementById("accessLevel").value,
+   	$.post("api/ResponsibilityToFaculty",{ facultyId: document.getElementById("facultyId").selectedIndex +1,
+   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
    		year: document.getElementById("year").value,
-   		semesterId: document.getElementById("semester").value,
+   		semesterId: document.getElementById("semester").selectedIndex +1,
    		hoursperweek: document.getElementById("hoursperweek").value
    	   	})
    		.done(function(data) {
@@ -192,10 +192,10 @@
    };
 
    var validateUpdateResponsibilityToFaculty= function() {
-	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").value, 
-	   		responsibilityId: document.getElementById("accessLevel").value,
+	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").selectedIndex +1,
+	   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
 	   		year: document.getElementById("year").value,
-	   		semesterId: document.getElementById("semester").value,
+	   		semesterId: document.getElementById("semester").selectedIndex +1,
 	   		hoursperweek: document.getElementById("hoursperweek").value
 	   	   	})
 	   		.done(function(data) {

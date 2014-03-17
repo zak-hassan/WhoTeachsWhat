@@ -190,7 +190,7 @@
 
 
    var validateUpdatePrepTime= function() {
-	   	$.post("api/preptime"+id,{ preptimeName: document.getElementById("preptimeName").value, 
+	   	$.put("api/preptime"+id,{ preptimeName: document.getElementById("preptimeName").value, 
 	   		preptimeFactor: document.getElementById("preptimeFactor").value
 	   	   	})
 	   		.done(function(data) {

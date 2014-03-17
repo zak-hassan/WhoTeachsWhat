@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Users - Admin Panel</title>
+<title>Manage Faculty - Course in Semester Yearl</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -168,20 +168,27 @@
      
    */
     
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+   var validateAddCourseInSemesterYear= function() {
+   	$.post("api/FacultyToCourseInSemesterYear",{ additionAttribute: document.getElementById("additionAttribute").value, 
+   		comphourAllowance: document.getElementById("comphourAllowance").value,
+   		comphourAssigned: document.getElementById("comphourAssigned").value,
+   		sectionNumber: document.getElementById("sectionNumber").value,
+   		year: document.getElementById("year").value,
+   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
+   		courseId: document.getElementById("courseId").selectedIndex + 1,
+   		facultyId: document.getElementById("facultyId").selectedIndex + 1,
+   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1
    	   	})
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
        		if (data.success === "true") {
        			// Success message
-       			$("#addUser").modal('hide');
+       			$("#addCourseInSemesterYear").modal('hide');
        			$.pnotify({
-					title : 'New User Added',
+					title : 'New Course In Semester Year Added to Faculty',
 					type : 'info',
-					text : 'Added new user !'
+					text : 'New Course in Semester Year added to faculty !'
 				});
        		}
    		});
@@ -189,28 +196,36 @@
    };
 
 
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
+   var validateUpdateCourseInSemesterYear= function() {
+	   	$.put("api/FacultyToCourseInSemesterYear"+id,{ additionAttribute: document.getElementById("additionAttribute").value, 
+	   		comphourAllowance: document.getElementById("comphourAllowance").value,
+	   		comphourAssigned: document.getElementById("comphourAssigned").value,
+	   		sectionNumber: document.getElementById("sectionNumber").value,
+	   		year: document.getElementById("year").value,
+	   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
+	   		courseId: document.getElementById("courseId").selectedIndex + 1,
+	   		facultyId: document.getElementById("facultyId").selectedIndex + 1,
+	   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#updateCourseInSemesterYear").modal('hide');
+	       			$.pnotify({
+						title : 'Course In Semester Year updated',
+						type : 'info',
+						text : 'Course in Semester Year updated !'
+					});
+	       		}
+	   		});
 		return	false;
 	   };
 
-	   var deleteUser= function(id,uname) {
+	   var deleteCourseInSemesterYear= function(id,courseId) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
+			   	url : "api/FacultyToCourseInSemesterYear"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
