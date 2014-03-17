@@ -445,7 +445,7 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateAddCourseInSemesterYear();"
 								class="btn btn-primary">Save changes</button>
 
 						</form>
@@ -535,7 +535,7 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateUpdateCourseInSemesterYear();"
 								class="btn btn-primary">Save changes</button>
 
 						</form>
