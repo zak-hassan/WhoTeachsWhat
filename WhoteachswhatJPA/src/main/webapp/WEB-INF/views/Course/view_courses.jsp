@@ -447,7 +447,7 @@ td {
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddCourse();"
+							<button type="submit" onclick="validateUpdateCourse();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
