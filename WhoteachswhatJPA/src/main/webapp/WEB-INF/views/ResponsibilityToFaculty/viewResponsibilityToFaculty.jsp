@@ -191,7 +191,6 @@
 	return	false;
    };
 
-
    var validateUpdateResponsibilityToFaculty= function() {
 	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").value, 
 	   		responsibilityId: document.getElementById("accessLevel").value,
@@ -415,7 +414,7 @@ td {
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateAddResponsibilityToFaculty();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -427,10 +426,6 @@ td {
 
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateResponsibilityToFaculty">Update Faculty Responsibilities</button>
 		<!-- Modal -->
 		<div class="modal fade" id="updateResponsibilityToFaculty" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -488,7 +483,7 @@ td {
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateUpdateResponsibilityToFaculty();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
