@@ -131,7 +131,7 @@
 				});
 				</script>
 				<div class="wrapper" style="margin-left:30px;">
-					<div class="breadcrumb-container">
+					<div class="breadcrumb-container" style="width: 100%">
 						<ul class="xbreadcrumbs">
 							<li>
 								<a href="dashboard.html">

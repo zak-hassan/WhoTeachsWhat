@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Users - Admin Panel</title>
+<title>Manage Faculty - Faculty Responsibilities</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -167,60 +167,65 @@
     @Purpose: AJAX posting and validation for adding a user
      
    */
-    
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+   
+   var validateAddResponsibilityToFaculty= function() {
+   	$.post("api/ResponsibilityToFaculty",{ facultyId: document.getElementById("facultyId").selectedIndex +1,
+   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
+   		year: document.getElementById("year").value,
+   		semesterId: document.getElementById("semester").selectedIndex +1,
+   		hoursperweek: document.getElementById("hoursperweek").value
    	   	})
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
        		if (data.success === "true") {
        			// Success message
-       			$("#addUser").modal('hide');
+       			$("#addResponsibilityToFaculty").modal('hide');
        			$.pnotify({
-					title : 'New User Added',
+					title : 'New Faculty Responsibility Added',
 					type : 'info',
-					text : 'Added new user !'
+					text : 'Added new faculty responsibility !'
 				});
        		}
    		});
 	return	false;
    };
 
-
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
+   var validateUpdateResponsibilityToFaculty= function() {
+	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").selectedIndex +1,
+	   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
+	   		year: document.getElementById("year").value,
+	   		semesterId: document.getElementById("semester").selectedIndex +1,
+	   		hoursperweek: document.getElementById("hoursperweek").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#updateResponsibilityToFaculty").modal('hide');
+	       			$.pnotify({
+						title : 'Faculty Responsibility Updated',
+						type : 'info',
+						text : 'faculty responsibility updated !'
+					});
+	       		}
+	   		});
 		return	false;
 	   };
 
-	   var deleteUser= function(id,uname) {
+	   var deleteResponsibilityToFaculty= function(id,uname) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
+			   	url : "api/ResponsibilityToFaculty"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
 		       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'Responsibility has been removed from faculty',
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Responsibility has been removed from faculty'
 					});
-				  	 // Reload so the delete user is gone..
 	       			location.reload();
 			   	}
   		   	  }
@@ -239,26 +244,26 @@
 		}
 </script>
 	<div class="wrapper">
-		<div class="breadcrumb-container">
+		<div class="breadcrumb-container" style="width: 100%">
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
-						Users</a></li>
+				<li class="current"><a href="viewResponsibilityToFaculty">Manage
+						Faculty Responsibilities</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Users</small>
+				<small>Manage Faculty Responsibilities</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Update and Delete a faculty member's responsibilities</small>
 			</h3>
 		</header>
-		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
-			onsubmit="return validateNewUser();" class="form-horizontal">
+		<form method="post" action="api/ResponsibilityToFaculty" id="ManageResponsibilityToFacultyForm"
+			onsubmit="return validateAddResponsibilityToFaculty();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -351,42 +356,67 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
-
+			data-target="#addResponsibilityToFaculty">Add Faculty Responsibilities</button>
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addResponsibilityToFaculty" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Faculty Responsibilities</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="addResponsibilityToFacultyForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username" id="username"
-									placeholder="Username" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="accessLevel">
-									<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
+									<option value="${repToFac.getFaculty().getFacultyId() }">
+										${repToFac.getFaculty().getFacultyFirstName() } 
+										${repToFac.getFaculty().getFacultyLastName() } </option>
 									</c:forEach>
 								</select>
 							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility:</span> <br /> <select
+									class="form-control" id="responsibilityId">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
+										${responsibility.getResponsibility().getResponsibilityName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year"
+									id="up_year" placeholder="2014" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semester">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getSemester().getSemesterId() }">
+										${responsibility.getSemester().getSemesterName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Hours per week: </span><br /> <input
+									type="text" class="form-control" name="hoursperweek"
+									id="up_hoursperweek" placeholder="20" />
+							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateAddResponsibilityToFaculty();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
@@ -396,89 +426,73 @@ td {
 
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateResponsibilityToFaculty" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Faculty Responsibilities</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updateResponsibilityToFacultyForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
-							</div>
-
-							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
-							<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
+								<span class="input-group-addon">Faculty:</span> <br /> <select
+									class="form-control" id="facultyId">
+									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
+									<option value="${repToFac.getFaculty().getFacultyId() }">
+										${repToFac.getFaculty().getFacultyFirstName() } 
+										${repToFac.getFaculty().getFacultyLastName() } </option>
 									</c:forEach>
 								</select>
 							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Responsibility:</span> <br /> <select
+									class="form-control" id="responsibilityId">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
+										${responsibility.getResponsibility().getResponsibilityName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Year: </span><br /> <input
+									type="text" class="form-control" name="year"
+									id="up_year" placeholder="2014" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Semester:</span> <br /> <select
+									class="form-control" id="semester">
+									<c:forEach items="${allResponsibility }" var="responsibility">
+									<option value="${responsibility.getSemester().getSemesterId() }">
+										${responsibility.getSemester().getSemesterName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Hours per week: </span><br /> <input
+									type="text" class="form-control" name="hoursperweek"
+									id="up_hoursperweek" placeholder="20" />
+							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateUpdateResponsibilityToFaculty();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
-					<div class="modal-footer">
-					</div>
+					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		<!--  END OF UPDATE MODAL -->
 
 	</div>
 </body>

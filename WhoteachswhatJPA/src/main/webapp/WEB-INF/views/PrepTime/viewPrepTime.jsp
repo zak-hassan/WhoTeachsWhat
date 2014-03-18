@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Users - Admin Panel</title>
+<title>Manage Prep Time - View</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -168,20 +168,20 @@
      
    */
     
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+   var validateAddPrepTime= function() {
+   	$.post("api/preptime",{ preptimeName: document.getElementById("preptimeName").value, 
+   		preptimeFactor: document.getElementById("preptimeFactor").value
    	   	})
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
        		if (data.success === "true") {
        			// Success message
-       			$("#addUser").modal('hide');
+       			$("#addPreptime").modal('hide');
        			$.pnotify({
-					title : 'New User Added',
+					title : 'New Prep Time Added',
 					type : 'info',
-					text : 'Added new user !'
+					text : 'Added new prep time !'
 				});
        		}
    		});
@@ -189,38 +189,38 @@
    };
 
 
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
+   var validateUpdatePrepTime= function() {
+	   	$.put("api/preptime"+id,{ preptimeName: document.getElementById("preptimeName").value, 
+	   		preptimeFactor: document.getElementById("preptimeFactor").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#addPreptime").modal('hide');
+	       			$.pnotify({
+						title : 'Prep Time Updated',
+						type : 'info',
+						text : 'Prep time updated !'
+					});
+	       		}
+	   		});
 		return	false;
 	   };
 
-	   var deleteUser= function(id,uname) {
+	   var deletePreptime= function(id,preptime) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
+			   	url : "api/preptime"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
 		       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'Prep time :' + preptime,
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Prep time has been deleted'
 					});
-				  	 // Reload so the delete user is gone..
 	       			location.reload();
 			   	}
   		   	  }
@@ -232,32 +232,27 @@
 			$("#up_accessLevel").val(ac_level);
 		};											
 
-		var setViewSummary=function(uname, role){
-			$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-			$("#viewUser").modal('show');
-			
-		}
 </script>
 	<div class="wrapper">
-		<div class="breadcrumb-container">
+		<div class="breadcrumb-container" style="width: 100%">
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
-						Users</a></li>
+				<li class="current"><a href="viewPrepTime">Manage
+						Prep Time</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Users</small>
+				<small>Manage Prep Time</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Update and Delete users</small>
 			</h3>
 		</header>
-		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
+		<form method="post" action="api/preptime" id="AddPreptimeForm"
 			onsubmit="return validateNewUser();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
@@ -289,19 +284,22 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allUsers }" var="users">
+								<c:forEach items="${allPreptimes }" var="pt">
 									<tr>
 
-										<td>${users.getUserId() }</td>
+										<td>${pt.getPrepName() }</td>
 
-										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
-										<td class="align"><a
-											onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend</a>
-											| <a
-											onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete</a>
-											| <a
-											onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-											data-toggle="modal" data-target="#updateUser">Permissions</a>
+										<td>${pt.getPrepFactor() }</td>
+										<td class="align">
+											<a
+												onclick="updateForm('${pt.getPrepName()}',${pt.getPrepFactor()} )"
+												data-toggle="modal" data-target="#updatePreptime">Update</a>
+											
+											<a
+												onclick="deletePreptime('${pt.getPrepId()}', ' ${pt.getPrepName() } ')">
+												Delete
+											</a>
+											
 										</td>
 									</tr>
 
@@ -351,91 +349,73 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
+			data-target="#addPreptime">Add Prep Time</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addPreptime" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Prep Time</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username" id="username"
-									placeholder="Username" />
+								<span class="input-group-addon">Prep Time Name: </span><br /> <input
+									type="text" class="form-control" name="preptimeName" id="preptimeName"
+									placeholder="Prep Time Name" />
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="accessLevel">
-									<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
-									</c:forEach>
-								</select>
+								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
+									type="text" class="form-control" name="preptimeFactor" id="preptimeFactor"
+									placeholder="Prep Time Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateAddPrepTime();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
-
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updatePreptime" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Prep Time</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updatePreptimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
+								<span class="input-group-addon">Prep Time Name: </span><br /> <input
+									type="text" class="form-control" name="preptimeName" id="preptimeName"
+									placeholder="Prep Time Name" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
+									type="text" class="form-control" name="preptimeFactor" id="preptimeFactor"
+									placeholder="Prep Time Name" />
 							</div>
 
-							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
-							<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
-									</c:forEach>
-								</select>
-							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateUpdatePrepTime();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer">
 					</div>
@@ -443,42 +423,7 @@ td {
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		<!--  END OF UPDATE MODAL -->
 
 	</div>
 </body>

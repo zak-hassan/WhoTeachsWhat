@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Users - Admin Panel</title>
+<title>Semester - View</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -168,20 +168,20 @@
      
    */
     
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+   var validateAddSemester= function() {
+   	$.post("api/semester",{ semesterId: document.getElementById("semesterId").value, 
+   		semesterName: document.getElementById("semesterName").value
    	   	})
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
        		if (data.success === "true") {
        			// Success message
-       			$("#addUser").modal('hide');
+       			$("#addSemester").modal('hide');
        			$.pnotify({
-					title : 'New User Added',
+					title : 'New Semester Added',
 					type : 'info',
-					text : 'Added new user !'
+					text : 'Added new semester !'
 				});
        		}
    		});
@@ -189,76 +189,69 @@
    };
 
 
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
+   var validateUpdateSemester= function() {
+	   	$.put("api/semester"+id,{ semesterId: document.getElementById("semesterId").value, 
+	   		semesterName: document.getElementById("semesterName").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
+	       		
+	       		if (data.success === "true") {
+	       			// Success message
+	       			$("#updateSemester").modal('hide');
+	       			$.pnotify({
+						title : 'Updated semester',
+						type : 'info',
+						text : 'Updated semester !'
+					});
+	       		}
+	   		});
 		return	false;
 	   };
 
-	   var deleteUser= function(id,uname) {
+	   var deleteSemester= function(id,semesterName) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
+			   	url : "api/semester/"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
 		       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'User :' + uname,
+						title : 'Semester :' + semesterName,
 						type : 'info',
-						text : 'User has been deleted'
+						text : 'Semester has been deleted'
 					});
-				  	 // Reload so the delete user is gone..
 	       			location.reload();
 			   	}
   		   	  }
 		   	});
 	   };	   
 
-	var updateForm=function(uname,ac_level){
-			$("#up_username").val(uname);
-			$("#up_accessLevel").val(ac_level);
+	var updateForm=function(semesterId,semesterName){
+			$("#up_semesterId").val(semesterId);
+			$("#up_semesterName").val(semesterName);
 		};											
 
-		var setViewSummary=function(uname, role){
-			$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-			$("#viewUser").modal('show');
-			
-		}
 </script>
 	<div class="wrapper">
-		<div class="breadcrumb-container">
+		<div class="breadcrumb-container" style="width: 100%">
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
-				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
-						Users</a></li>
+				<li><a href="viewSemester">Manage Semester</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Users</small>
+				<small>Semester - View</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Update and Delete semester names</small>
 			</h3>
 		</header>
-		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
-			onsubmit="return validateNewUser();" class="form-horizontal">
+		<form method="post" action="api/semester" id="AddSemesterForm"
+			onsubmit="return validateAddSemester();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -283,25 +276,26 @@ td {
 								<tr>
 								<tr>
 									<th>#</th>
-									<th>User(s)</th>
+									<th>Semester(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allUsers }" var="users">
+								<c:forEach items="${allSemesters }" var="semester">
 									<tr>
 
-										<td>${users.getUserId() }</td>
+										<td>${semester.getSemesterId() }</td>
 
-										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
-										<td class="align"><a
-											onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend</a>
-											| <a
-											onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete</a>
-											| <a
-											onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-											data-toggle="modal" data-target="#updateUser">Permissions</a>
+										<td>${semester.getSemesterName() }</td>
+										<td class="align">
+											<a
+												onclick="updateForm('${semester.getSemesterId() }',${semester.getSemesterName()} )"
+												data-toggle="modal" data-target="#updateSemester">Update
+											</a>
+											<a 
+												onclick="deleteSemester('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')">Delete
+											</a>
 										</td>
 									</tr>
 
@@ -351,42 +345,36 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
+			data-target="#addSemester">Add semester</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addSemester" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Semester</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="AddSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username" id="username"
-									placeholder="Username" />
+								<span class="input-group-addon">Semester Id: </span><br /> <input
+									type="text" class="form-control" name="semesterId" id="semesterId"
+									placeholder="Semester Id" />
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="accessLevel">
-									<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
-									</c:forEach>
-								</select>
+								<span class="input-group-addon">Semester Name:</span> <br /> <input
+									type="text" class="form-control" name="semesterName" id="semesterName"
+									placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateNewSemester();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
@@ -396,46 +384,35 @@ td {
 
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateSemester" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Semester</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updateSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
+								<span class="input-group-addon">Semester Id: </span><br /> <input
+									type="text" class="form-control" name="semesterId"
+									id="up_semesterId" placeholder="Semester Id" />
 							</div>
 
 							<div class="input-group">
-								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
-							<c:forEach items="${allRoles }" var="roles">
-									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
-									</c:forEach>
-								</select>
+								<span class="input-group-addon">Semester Name: </span><br /> <input
+									type="text" class="form-control" name="semesterName"
+									id="up_semesterName" placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="submit" onclick="validateUpdateSemester();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer">
 					</div>
@@ -443,42 +420,7 @@ td {
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		<!--  END OF UPDATE MODAL -->
 
 	</div>
 </body>
