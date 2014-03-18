@@ -52,7 +52,7 @@ public class FacultyToCourseInSemesterYearController {
 	 * @return JSON object with a list of course to display in datatable
 	 */
 
-	@RequestMapping(value = "/api/FacultyToCourseInSemesterYear", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/facultyToCourseInSemesterYear", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<FacultyToCourseInSemesterYear> listGetJSON() {
 		return facultyToCourseInSemesterYearService.getAll();
@@ -76,7 +76,7 @@ public class FacultyToCourseInSemesterYearController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/FacultyToCourseInSemesterYear", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/facultyToCourseInSemesterYear", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "additionAttribute", required = true) String addition_attribute,
@@ -119,7 +119,7 @@ public class FacultyToCourseInSemesterYearController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/FacultyToCourseInSemesterYear/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
@@ -166,7 +166,7 @@ public class FacultyToCourseInSemesterYearController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/FacultyToCourseInSemesterYear/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 

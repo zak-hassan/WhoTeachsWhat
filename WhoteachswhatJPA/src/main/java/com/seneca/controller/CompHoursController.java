@@ -58,6 +58,7 @@ public class CompHoursController {
 	@RequestMapping(value = "/api/comphour", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<CompHour> listGetJSON() {
+
 		return compHoursService.getAll();
 	}
 
@@ -74,7 +75,7 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	CompHour listGetOneJSON(@PathVariable("id") Long id) {
+	CompHour listGetOneJSON(@PathVariable("id") Integer id) {
 		return compHoursService.getOne(id);
 	}
 
@@ -124,7 +125,8 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
+	Map<String, String> listUpdateJSON(
+			@PathVariable("id") Integer id,
 			@RequestParam(value = "comp_hour_code", required = true) String comp_hour_code,
 			@RequestParam(value = "comp_hour_name", required = true) String comp_hour_name) {
 
@@ -149,7 +151,7 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listDeleteJSON(@PathVariable("id") Long id) {
+	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
 		compHoursService.delete(id);
 

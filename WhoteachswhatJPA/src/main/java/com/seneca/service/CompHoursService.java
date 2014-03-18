@@ -36,7 +36,7 @@ public class CompHoursService {
 	 * 
 	 * @return					The updated comp hour
 	 */
-	public void update(Long id, String compHour_code, String compHour_name) {
+	public void update(Integer id, String compHour_code, String compHour_name) {
 		CompHour c=compHourDao.getById(id);
 		if(! compHour_name.isEmpty())
 		   c.setCompHour_name(compHour_name);
@@ -50,7 +50,7 @@ public class CompHoursService {
 	 * 
 	 * @param compHourType		The name of the permission to be deleted
 	 */
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		compHourDao.delete(id);
 	}
 
@@ -58,7 +58,7 @@ public class CompHoursService {
 		return	compHourDao.getAll();
 	}
 	
-	public CompHour getOne(Long id) {
+	public CompHour getOne(Integer id) {
 		return	compHourDao.getById(id);
 	}
 	

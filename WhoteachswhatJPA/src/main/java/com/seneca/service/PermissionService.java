@@ -1,6 +1,12 @@
 package com.seneca.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.seneca.model.AccessLevel;
+import com.seneca.repository.AccessLevelDao;
 
 /**
  * This class is a service which contains methods to handle validation, add, update and delete operations for 
@@ -14,6 +20,8 @@ import org.springframework.stereotype.Service;
 @Service("permissionService")
 public class PermissionService {
 	
+	@Autowired
+	AccessLevelDao accessLevelDao;
 	/**
 	 * This method accepts a permission id and creates a permission using the appropriate repository method
 	 * 
@@ -21,8 +29,11 @@ public class PermissionService {
 	 * 
 	 * @return					The Permission added
 	 */
-	public void addPermission(String permissionId) {
+	public void add(String accessName) {
 		//TODO: Method implementation
+		AccessLevel access = new AccessLevel();
+		access.setAccessName(accessName);
+		accessLevelDao.create(access);
 	}
 	
 	/**
@@ -32,8 +43,10 @@ public class PermissionService {
 	 * 
 	 * @return					The Permission updated
 	 */
-	public void updatePermission(String permissionId) {
-		//TODO: Method implementation
+	public void update(Integer id, String accessName) {
+		AccessLevel access = accessLevelDao.getById(id);
+		access.setAccessName(accessName);
+		accessLevelDao.update(access);
 	}
 	
 	/**
@@ -41,8 +54,16 @@ public class PermissionService {
 	 * 
 	 * @param permissionId		The name of the permission to be deleted
 	 */
-	public void deletePermission(String permissionId) {
-		//TODO: Method implementation
+	public void delete(Integer id) {
+		accessLevelDao.delete(id);
+	}
+
+	public List<AccessLevel> getAll() {
+		return accessLevelDao.getAll();
 	}
 	
+	public AccessLevel getOne(Integer id) {
+		return accessLevelDao.getById(id);
+	}
+
 }

@@ -34,7 +34,7 @@ public class CurriculumSemesterController {
 
 	@RequestMapping(value = "/viewCurriculumSemester", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		// model.addAttribute("", attributeValue);
+		model.addAttribute("entityList", curriculumSemesterService.getAll());
 
 		return "CurriculumSemester/viewCurriculumSemester";
 	}
