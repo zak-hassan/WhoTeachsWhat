@@ -78,10 +78,10 @@ public class CurriculumSemesterController {
 	@RequestMapping(value = "/api/CurriculumSemester", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
-			@RequestParam(value = "CurriculumSemesterName", required = true) String CurriculumSemesterName) {
+			@RequestParam(value = "curriculumSemesterName", required = true) String curriculumSemesterName) {
 
 
-		curriculumSemesterService.add(CurriculumSemesterName);
+		curriculumSemesterService.add(curriculumSemesterName);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 
