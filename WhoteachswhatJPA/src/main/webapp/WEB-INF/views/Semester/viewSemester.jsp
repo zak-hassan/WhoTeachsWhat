@@ -187,7 +187,7 @@
    };
 
 
-   var validateUpdateSemester= function() {
+   var validateUpdateSemester= function(id) {
 	   	$.put("api/semester"+id,{ semesterName: document.getElementById("semesterName").value })
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -223,8 +223,9 @@
 		   	});
 	   };	   
 
-	var updateForm=function(semesterName){
-			$("#up_semesterName").val(semesterName);
+	var updateForm=function(semesterId, semesterName){
+		$("#up_semesterId").val(semesterId);
+		$("#up_semesterName").val(semesterName);
 	};											
 
 </script>
@@ -285,7 +286,7 @@ td {
 										<td>${semester.getSemesterName() }</td>
 										<td class="align">
 											<a
-												onclick="updateForm('${semester.getSemesterName()}' )"
+												onclick="updateForm('${semester.getSemesterId() }', '${semester.getSemesterName() }')"
 												data-toggle="modal" data-target="#updateSemester">Update
 											</a>
 											<a 
@@ -388,13 +389,17 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateSemesterForm" class="form-horizonatal">
 							<div class="input-group">
+								<input type="hidden" class="form-control" name="semesterId"
+									id="up_semesterId" />
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Semester Name: </span><br /> <input
 									type="text" class="form-control" name="semesterName"
 									id="up_semesterName" placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateSemester();"
+							<button type="submit" onclick="validateUpdateSemester(document.getElementById('semesterName').value);"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
