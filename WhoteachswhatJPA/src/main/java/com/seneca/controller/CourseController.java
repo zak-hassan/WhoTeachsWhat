@@ -33,7 +33,7 @@ public class CourseController {
 	
 	@RequestMapping(value = "/viewCourse", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("entityList", courseService.getAll());
+		model.addAttribute("allCourses", courseService.getAll());
 
 		return "Course/view_courses";
 	}
@@ -91,7 +91,7 @@ public class CourseController {
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
 			@RequestParam(value = "reference_input", required = false) String oldCourse) {
 
-		courseService.add(courseCode, courseName);
+		courseService.add(courseCode, courseName, crossoverCourse, oldCourse);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
@@ -122,7 +122,8 @@ public class CourseController {
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
 			@RequestParam(value = "reference_input", required = false) String oldCourse) {
 
-		courseService.update( id, courseName, courseCode );
+		courseService.update(id, courseName, courseCode, crossoverCourse,
+				oldCourse);
 		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");

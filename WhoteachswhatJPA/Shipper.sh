@@ -16,9 +16,9 @@ echo "BUILD RENAMING TO ROOT.war to display on ROOT context"
 
 #UPLOADING WAR FILE TO SERVER
 rsync -av --progress --inplace --rsh='ssh -p9134' target/ROOT.war student@zenit.senecac.on.ca:/home/student/jboss-as-7.1.1.Final/standalone/deployments/
-echo "UPLOAD COMPLETE" || ;
+echo "UPLOAD COMPLETE";
 if [ "$?" != 0 ]; then
-  echo "YOUR NOT CONNECTED TO THE INTERNET!!"
+  echo "YOUR NOT CONNECTED TO THE INTERNET!!";
 fi
 
 

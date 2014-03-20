@@ -1,8 +1,19 @@
 package com.seneca.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -24,6 +35,10 @@ public class Course implements Serializable {
 
 	@Column(name="course_name")
 	private String courseName;
+
+	private String crossover_course;
+
+	private String old_course;
 
 	//bi-directional many-to-one association to CourseInProgramCurSem
 	@OneToMany(mappedBy="course", fetch=FetchType.LAZY)
@@ -170,8 +185,13 @@ public class Course implements Serializable {
 						.hashCode());
 		result = prime
 				* result
+				+ ((crossover_course == null) ? 0 : crossover_course.hashCode());
+		result = prime
+				* result
 				+ ((facultyToCourseInSemesterYears == null) ? 0
 						: facultyToCourseInSemesterYears.hashCode());
+		result = prime * result
+				+ ((old_course == null) ? 0 : old_course.hashCode());
 		result = prime * result
 				+ ((programs == null) ? 0 : programs.hashCode());
 		return result;
@@ -208,11 +228,21 @@ public class Course implements Serializable {
 				return false;
 		} else if (!coursesInSemesters.equals(other.coursesInSemesters))
 			return false;
+		if (crossover_course == null) {
+			if (other.crossover_course != null)
+				return false;
+		} else if (!crossover_course.equals(other.crossover_course))
+			return false;
 		if (facultyToCourseInSemesterYears == null) {
 			if (other.facultyToCourseInSemesterYears != null)
 				return false;
 		} else if (!facultyToCourseInSemesterYears
 				.equals(other.facultyToCourseInSemesterYears))
+			return false;
+		if (old_course == null) {
+			if (other.old_course != null)
+				return false;
+		} else if (!old_course.equals(other.old_course))
 			return false;
 		if (programs == null) {
 			if (other.programs != null)
@@ -230,6 +260,22 @@ public class Course implements Serializable {
 				+ ", coursesInSemesters=" + coursesInSemesters
 				+ ", facultyToCourseInSemesterYears="
 				+ facultyToCourseInSemesterYears + "]";
+	}
+
+	public String getCrossover_course() {
+		return crossover_course;
+	}
+
+	public void setCrossover_course(String crossover_course) {
+		this.crossover_course = crossover_course;
+	}
+
+	public String getOld_course() {
+		return old_course;
+	}
+
+	public void setOld_course(String old_course) {
+		this.old_course = old_course;
 	}
 
 }
