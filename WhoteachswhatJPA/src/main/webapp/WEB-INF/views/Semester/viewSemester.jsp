@@ -169,9 +169,7 @@
    */
     
    var validateAddSemester= function() {
-   	$.post("api/semester",{ semesterId: document.getElementById("semesterId").value, 
-   		semesterName: document.getElementById("semesterName").value
-   	   	})
+   	$.post("api/semester",{ semesterName: document.getElementById("semesterName").value })
    		.done(function(data) {
        		console.log("AJAX RETURNED"+JSON.stringify(data));
        		
@@ -190,9 +188,8 @@
 
 
    var validateUpdateSemester= function() {
-	   	$.put("api/semester"+id,{ semesterId: document.getElementById("semesterId").value, 
-	   		semesterName: document.getElementById("semesterName").value
-	   	   	})
+	   	$.put("api/semester"+document.getElementById('up_semesterId').value,
+	   		{ semesterName: document.getElementById("up_semesterName").value })
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
 	       		
@@ -227,10 +224,10 @@
 		   	});
 	   };	   
 
-	var updateForm=function(semesterId,semesterName){
-			$("#up_semesterId").val(semesterId);
-			$("#up_semesterName").val(semesterName);
-		};											
+	var updateForm=function(semesterId, semesterName){
+		$("#up_semesterId").val(semesterId);
+		$("#up_semesterName").val(semesterName);
+	};											
 
 </script>
 	<div class="wrapper">
@@ -290,7 +287,7 @@ td {
 										<td>${semester.getSemesterName() }</td>
 										<td class="align">
 											<a
-												onclick="updateForm('${semester.getSemesterId() }',${semester.getSemesterName()} )"
+												onclick="updateForm('${semester.getSemesterId() }', '${semester.getSemesterName() }')"
 												data-toggle="modal" data-target="#updateSemester">Update
 											</a>
 											<a 
@@ -361,18 +358,13 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="AddSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Semester Id: </span><br /> <input
-									type="text" class="form-control" name="semesterId" id="semesterId"
-									placeholder="Semester Id" />
-							</div>
-							<div class="input-group">
 								<span class="input-group-addon">Semester Name:</span> <br /> <input
 									type="text" class="form-control" name="semesterName" id="semesterName"
 									placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewSemester();"
+							<button type="submit" onclick="validateAddSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -398,14 +390,12 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Semester Id: </span><br /> <input
-									type="text" class="form-control" name="semesterId"
-									id="up_semesterId" placeholder="Semester Id" />
+								<input type="hidden" class="form-control" name="up_semesterId"
+									id="up_semesterId" />
 							</div>
-
 							<div class="input-group">
 								<span class="input-group-addon">Semester Name: </span><br /> <input
-									type="text" class="form-control" name="semesterName"
+									type="text" class="form-control" name="up_semesterName"
 									id="up_semesterName" placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"

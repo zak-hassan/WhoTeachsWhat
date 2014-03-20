@@ -190,8 +190,9 @@
 
 
    var validateUpdatePrepTime= function() {
-	   	$.put("api/preptime"+id,{ preptimeName: document.getElementById("preptimeName").value, 
-	   		preptimeFactor: document.getElementById("preptimeFactor").value
+	   	$.put("api/preptime/"+document.getElementById("up_preptimeId").value,{ 
+	   		preptimeName: document.getElementById("up_preptimeName").value, 
+	   		preptimeFactor: document.getElementById("up_preptimeFactor").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -227,10 +228,11 @@
 		   	});
 	   };	   
 
-	var updateForm=function(uname,ac_level){
-			$("#up_username").val(uname);
-			$("#up_accessLevel").val(ac_level);
-		};											
+	var updateForm=function(up_prepTimeId, up_preptimeName, up_preptimeFactor){
+		$("#up_preptimeId").val(up_preptimeId);
+		$("#up_preptimeName").val(up_preptimeName);
+		$("#up_preptimeFactor").val(up_preptimeFactor);
+	};											
 
 </script>
 	<div class="wrapper">
@@ -292,11 +294,11 @@ td {
 										<td>${pt.getPrepFactor() }</td>
 										<td class="align">
 											<a
-												onclick="updateForm('${pt.getPrepName()}',${pt.getPrepFactor()} )"
+												onclick="updateForm('${pt.getPrepId()}', '${pt.getPrepName()}', '${pt.getPrepFactor()}' )"
 												data-toggle="modal" data-target="#updatePreptime">Update</a>
 											
 											<a
-												onclick="deletePreptime('${pt.getPrepId()}', ' ${pt.getPrepName() } ')">
+												onclick="deletePreptime('${pt.getPrepId()}', '${pt.getPrepName()}')">
 												Delete
 											</a>
 											
@@ -401,14 +403,16 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updatePreptimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Prep Time Name: </span><br /> <input
-									type="text" class="form-control" name="preptimeName" id="preptimeName"
+								<input type="hidden" class="form-control" name="up_preptimeId" id="up_preptimeId"
 									placeholder="Prep Time Name" />
 							</div>
 							<div class="input-group">
+								<span class="input-group-addon">Prep Time Name: </span><br /> <input
+									type="text" class="form-control" name="up_preptimeName" id="up_preptimeName" />
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
-									type="text" class="form-control" name="preptimeFactor" id="preptimeFactor"
-									placeholder="Prep Time Name" />
+									type="text" class="form-control" name="up_preptimeFactor" id="up_preptimeFactor" />
 							</div>
 
 							<button type="button" class="btn btn-default"

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Faculty - Course in Semester Yearl</title>
+<title>Manage Faculty - Course in Semester Year</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -242,15 +242,10 @@
 	   };	   
 
 	var updateForm=function(uname,ac_level){
-			$("#up_username").val(uname);
-			$("#up_accessLevel").val(ac_level);
-		};											
+		$("#up_username").val(uname);
+		$("#up_accessLevel").val(ac_level);
+	};											
 
-		var setViewSummary=function(uname, role){
-			$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-			$("#viewUser").modal('show');
-			
-		}
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">

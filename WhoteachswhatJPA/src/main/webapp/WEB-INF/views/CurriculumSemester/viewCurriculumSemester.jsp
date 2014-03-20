@@ -188,8 +188,9 @@
    };
 
 
-   var validateAddCurriculumSemester= function() {
-	   	$.put("api/CurriculumSemester"+id,{ curriculumSemesterName: document.getElementById("curriculumSemesterName").value
+   var validateUpdateCurriculumSemester= function() {
+	   	$.put("api/CurriculumSemester/"+document.getElementById("up_curriculumSemesterId").value,{ 
+	   		curriculumSemesterName: document.getElementById("curriculumSemesterName").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -225,9 +226,10 @@
 		   	});
 	   };	   
 
-	var updateForm=function(curriculumSemesterName){
-			$("#up_curriculumSemesterName").val(curriculumSemesterName);
-		};											
+	var updateForm=function(up_curriculumSemesterId, up_curriculumSemesterName){
+		$("#up_curriculumSemesterId").val(up_curriculumSemesterId);
+		$("#up_curriculumSemesterName").val(up_curriculumSemesterName);
+	};											
 
 </script>
 	<div class="wrapper">
@@ -287,7 +289,7 @@ td {
 
 										<td class="align">
 											<a
-												onclick="updateForm('${cs.getName() })"
+												onclick="updateForm('${cs.getCurriculumId() }', '${cs.getName() })"
 												data-toggle="modal" data-target="#updateCurriculumSemester">Update |
 											</a>
 											
@@ -393,9 +395,13 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="addCurriculumSemesterForm" class="form-horizonatal">
 							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_curriculumSemesterId" 
+									id="up_curriculumSemesterId" />
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Curriculum Semester Name: </span><br /> <input
-									type="text" class="form-control" name="curriculumSemesterName" id="up_curriculumSemesterName"
-									placeholder="Name" />
+									type="text" class="form-control" name="up_curriculumSemesterName" 
+									id="up_curriculumSemesterName" placeholder="Name" />
 							</div>
 					
 							<button type="button" class="btn btn-default"

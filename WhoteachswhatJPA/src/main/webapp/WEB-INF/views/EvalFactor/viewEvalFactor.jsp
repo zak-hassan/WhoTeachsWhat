@@ -190,7 +190,8 @@
 
 
    var validateUpdateEvalFactor= function() {
-	   	$.put("api/evalfactor"+id,{ evalName: document.getElementById("evalName").value, 
+	   	$.put("api/evalfactor/"+document.getElementById("up_evalId").value,{ 
+	   		evalName: document.getElementById("evalName").value, 
 	   		evalFactor: document.getElementById("evalFactor").value
 	   	   	})
 	   		.done(function(data) {
@@ -227,10 +228,11 @@
 		   	});
 	   };	   
 
-	var updateForm=function(evalName,evalFactor){
-			$("#up_evalName").val(evalName);
-			$("#up_evalFactor").val(evalFactor);
-		};											
+	var updateForm=function(up_evalId, evalName,evalFactor){
+		$("#up_evalId").val(up_evalId);
+		$("#up_evalName").val(evalName);
+		$("#up_evalFactor").val(evalFactor);
+	};											
 
 		
 </script>
@@ -401,13 +403,16 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="addEvalFactorForm" class="form-horizonatal">
 							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_evalId" id="up_evalId" />
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Evaluation Name: </span><br /> <input
-									type="text" class="form-control" name="evalName" id="up_evalName"
+									type="text" class="form-control" name="up_evalName" id="up_evalName"
 									placeholder="Name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Evaluation Factor: </span><br /> <input
-									type="text" class="form-control" name="evalFactor" id="up_evalFactor"
+									type="text" class="form-control" name="up_evalFactor" id="up_evalFactor"
 									placeholder="Factor" />
 							</div>
 							<button type="button" class="btn btn-default"
