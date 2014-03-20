@@ -169,10 +169,10 @@
    */
     
    var validateAddCourse= function() {
-  	   	$.post("api/course",{ courseCode: document.getElementById("courseCode").value,
-  	   		courseName: document.getElementById("courseName").value,
-  	   		crossoverCourse: document.getElementById("crossover_course").value,
-  	   		referenceCourse: document.getElementById("reference_course").value
+  	   	$.post("api/course",{ course_code: document.getElementById("course_code").value,
+  	   		course_name: document.getElementById("course_name").value,
+  	   		crossover_input: document.getElementById("crossover_input").value,
+  	   		reference_input: document.getElementById("reference_input").value
   	   	   	})
   	   		.done(function(data) {
   	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -191,11 +191,11 @@
   	   };
       	   
       	var validateUpdateCourse= function() {
-      	   	$.put("api/course",{ courseId: document.getElementById("courseId").value,
-      	   		courseCode: document.getElementById("courseCode").value,
-      	   		courseName: document.getElementById("courseName").value,
-      	   		crossoverCourse: document.getElementById("crossover_course").value,
-      	   		referenceCourse: document.getElementById("reference_course").value
+      	   	$.put("api/course"+document.getElementById("up_course_id").value,{
+	      	   	course_code: document.getElementById("up_course_code").value,
+	  	   		course_name: document.getElementById("up_course_name").value,
+	  	   		crossover_input: document.getElementById("up_crossover_input").value,
+	  	   		reference_input: document.getElementById("up_reference_input").value
       	   	   	})
       	   		.done(function(data) {
       	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -231,12 +231,13 @@
 		   	});
 	   };	  	   
 
-	var updateForm=function(courseCode, courseName, crossoverCourse, oldCourse){
-			$("#up_courseCode").val(courseCode);
-			$("#up_courseName").val(courseName);
-			$("#up_crossover_course").val(crossoverCourse);
-			$("#up_old_course").val(oldCourse);
-		};											
+	var updateForm=function(up_course_id, up_course_code, up_course_name, crossoverCourse, up_reference_input){
+		$("#up_course_id").val(up_course_id);
+		$("#up_course_code").val(up_course_code);
+		$("#up_course_name").val(up_course_name);
+		$("#up_crossover_input").val(up_crossover_input);
+		$("#up_reference_input").val(up_reference_input);
+	};											
 
 </script>
 	<div class="wrapper">
@@ -297,7 +298,7 @@ td {
 
 										<td class="align">
 											<a
-												onclick="updateForm('${course.getCourseCode() }, ${course.getCourseName() },
+												onclick="updateForm('${course.getCourseId() } ', '${course.getCourseCode() }, ${course.getCourseName() },
 													${course.getCourseName() }, ${course.getCourseCode() })"
 												data-toggle="modal" data-target="#updateCourse">Update |
 											</a>
@@ -372,25 +373,25 @@ td {
 						<form role="form" id="addCourseForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="courseCode" id="courseCode"
+									type="text" class="form-control" name="course_code" id="course_code"
 									placeholder="Course Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="courseName" id="courseName"
+									type="text" class="form-control" name="course_name" id="course_name"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossover_course" id="crossover_course"
+									type="text" class="form-control" name="crossover_input" id="crossover_input"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="reference_course" id="reference_course"
+									type="text" class="form-control" name="reference_input" id="reference_input"
 									placeholder="Reference" />
 							</div>
 							
@@ -421,30 +422,30 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="addCourseForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="courseId" id="courseId" />
+								<input type="hidden" class="form-control" name="up_course_id" id="up_course_id" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="courseCode" id="up_courseCode"
+									type="text" class="form-control" name="up_course_code" id="up_course_code"
 									placeholder="Course Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="courseName" id="up_courseName"
+									type="text" class="form-control" name="up_course_name" id="up_course_name"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossover_course" id="up_crossover_course"
+									type="text" class="form-control" name="up_crossover_input" id="up_crossover_input"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="reference_course" id="up_reference_course"
+									type="text" class="form-control" name="up_reference_input" id="up_reference_input"
 									placeholder="Reference" />
 							</div>
 							
