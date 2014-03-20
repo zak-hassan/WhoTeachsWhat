@@ -187,8 +187,9 @@
    };
 
 
-   var validateUpdateSemester= function(id) {
-	   	$.put("api/semester"+id,{ semesterName: document.getElementById("semesterName").value })
+   var validateUpdateSemester= function() {
+	   	$.put("api/semester"+document.getElementById('up_semesterId').value,
+	   		{ semesterName: document.getElementById("up_semesterName").value })
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
 	       		
@@ -389,17 +390,17 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="semesterId"
+								<input type="hidden" class="form-control" name="up_semesterId"
 									id="up_semesterId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester Name: </span><br /> <input
-									type="text" class="form-control" name="semesterName"
+									type="text" class="form-control" name="up_semesterName"
 									id="up_semesterName" placeholder="Semester Name" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateSemester(document.getElementById('up_semesterId').value);"
+							<button type="submit" onclick="validateUpdateSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

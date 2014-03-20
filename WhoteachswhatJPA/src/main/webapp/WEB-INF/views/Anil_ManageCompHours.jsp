@@ -138,8 +138,8 @@
    */
    
    var validateAddCompHourType= function() {
-	   	$.post("api/comphour",{ compHourCode: document.getElementById("compHourCode").value,
-	   		compHourType: document.getElementById("compHourType").value
+	   	$.post("api/comphour",{ comp_hour_code: document.getElementById("comp_hour_code").value,
+	   		comp_hour_name: document.getElementById("compHourType").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -158,9 +158,9 @@
 	   };
 	   
 	   var validateUpdateCompHourType= function() {
-		   	$.put("api/comphour"+id,{ compHourId: document.getElementById("compHourId").value,
-		   		compHourCode: document.getElementById("compHourCode").value,
-		   		compHourType: document.getElementById("compHourType").value
+		   	$.put("api/comphour"+document.getElementById("up_comp_hour_id").value,{
+		   		comp_hour_code: document.getElementById("up_comp_hour_code").value,
+		   		comp_hour_name: document.getElementById("up_comp_hour_name").value
 		   	   	})
 		   		.done(function(data) {
 		       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -194,7 +194,13 @@
 				   	}
 			   	  }
 			   	});
-		   };	   
+		   };
+		   
+		   var updateForm=function(comp_hour_id, comp_hour_code, comp_hour_name){
+				$("#up_comp_hour_id").val(comp_hour_id);
+				$("#up_comp_hour_code").val(comp_hour_code);
+				$("#up_comp_hour_name").val(comp_hour_name);
+			};	
     
 </script>
         <div class="wrapper">
@@ -209,7 +215,7 @@
             <a href="#">Admin Panel</a>
         </li>
         <li class="current">
-            <a href="Anil_AccessList.html">Complimentary Hours</a>
+            <a href="manageCompHours">Complimentary Hours</a>
         </li>
     </ul>
 </div>            <header>
@@ -272,8 +278,8 @@
 								<td><label>${comphours.getCompHour_name() }</label></td>
 								<td><label>${comphours.getCompHour_code() }</label></td>
 								<td class="align">
-							<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
-							<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
+							<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateForm('${comphours.getCompHour_id() }', '${comphours.getCompHour_code() }', '${comphours.getCompHour_name() })"><i class="icon-edit"></i></a> 
+							<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteCompHourType('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
 
 								</td>
 						   </tr>
@@ -341,12 +347,12 @@
 						
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
-									type="text" class="form-control" name="compHourCode" id="compHourCode"
+									type="text" class="form-control" name="comp_hour_code" id="comp_hour_code"
 									placeholder="Code" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
-									type="text" class="form-control" name="compHourType" id="compHourType"
+									type="text" class="form-control" name="compHourType" id="comp_hour_name"
 									placeholder="Type" />
 							</div>
 							
@@ -377,17 +383,17 @@
 						<!--  FORM ADD -->
 						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="compHourId" id="compHourId" />
+								<input type="hidden" class="form-control" name="up_comp_hour_id" id="up_comp_hour_id" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
-									type="text" class="form-control" name="compHourCode" id="compHourCode"
+									type="text" class="form-control" name="comp_hour_code" id="comp_hour_code"
 									placeholder="Code" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
-									type="text" class="form-control" name="compHourType" id="compHourType"
+									type="text" class="form-control" name="comp_hour_name" id="comp_hour_name"
 									placeholder="Type" />
 							</div>
 							

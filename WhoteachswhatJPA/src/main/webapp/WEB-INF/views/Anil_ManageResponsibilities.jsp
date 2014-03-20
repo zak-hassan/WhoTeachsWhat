@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Manage Responsibilities</title>
+        <title>Manage Responsibilities - View</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
         <link rel="shortcut icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="iosicon.png" />
@@ -138,8 +138,8 @@
    */
     
    var validateAddResponsibilityType= function() {
-	   	$.post("api/responsibility",{ responsibilityCode: document.getElementById("responsibilityCode").value,
-	   		responsibilityType: document.getElementById("responsibilityType").value
+	   	$.post("api/responsibility",{ respon_code: document.getElementById("respon_code").value,
+	   		respon_name: document.getElementById("respon_name").value
 	   	   	})
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -158,9 +158,9 @@
 	   };
 	   
 	   var validateUpdateResponsibilityType= function() {
-		   	$.put("api/responsibility",{ responsibilityId: document.getElementById("responsibilityId").value,
-		   		responsibilityCode: document.getElementById("responsibilityCode").value,
-		   		responsibilityType: document.getElementById("responsibilityType").value
+		   	$.put("api/responsibility"+document.getElementById("up_respon_id").value,{
+		   		respon_code: document.getElementById("up_respon_code").value,
+		   		respon_name: document.getElementById("up_respon_name").value
 		   	   	})
 		   		.done(function(data) {
 		       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -194,7 +194,13 @@
 				   	}
 			   	  }
 			   	});
-		   };	   
+		   };
+		   
+		   var updateForm=function(up_respon_id, up_respon_code, up_respon_name){
+				$("#up_respon_id").val(up_respon_id);
+				$("#up_respon_code").val(up_respon_code);
+				$("#up_respon_name").val(up_respon_name);
+			};	
     
 </script>
         <div class="wrapper">
@@ -208,11 +214,8 @@
         <li>
             <a href="#">Admin Panel</a>
         </li>
-		<li>
-			<a href="Anil_ManageFacultyOperations.html">Manage Faculty</a>
-		</li>
         <li class="current">
-            <a href="Anil_ManageResponsibilities.html">Responsibilities</a>
+            <a href="viewResponsibility">Responsibilities</a>
         </li>
     </ul>
 </div>            <header>
@@ -220,7 +223,7 @@
                 <h2><small>Manage Responsibilities</small></h2>
                 <h3><small>Update and remove responsibilities</small></h3>
             </header>
-            <form method="post" action="ajaxAddResponsibilty" id="AddResponsibilityTypeForm" 
+            <form method="post" action="api/responsibility" id="AddResponsibilityTypeForm" 
             	onsubmit="return validateAddResponsibilityType();" class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
@@ -255,8 +258,8 @@
 										<td><label>${respon.getResponsibilityName() }</label></td>
 										<td><label>${respon.getResponsibilityCode() }</label></td>
 									<td class="align">
-										<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
-										<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteFaculty('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
+										<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateForm('${comphours.getCompHour_id() }', '${comphours.getResponsibilityCode() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
+										<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteResponsibilityType('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
 									</td>
 								</tr>							
 							  </c:forEach>
@@ -318,16 +321,16 @@
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
+						<form role="form" id="addResponsibilityForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Code</span><br /> <input
-									type="text" class="form-control" name="responsibilityCode" id="responsibilityCode"
+									type="text" class="form-control" name="respon_code" id="respon_code"
 									placeholder="Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Type</span><br /> <input
-									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
+									type="text" class="form-control" name="respon_name" id="respon_name"
 									placeholder="Type" />
 							</div>
 							
@@ -360,21 +363,21 @@
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageResponsibilityForm" class="form-horizonatal">
+						<form role="form" id="updateResponsibilityForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="responsibilityId" 
+								<input type="hidden" class="form-control" name="up_respon_id" 
 									id="responsibilityId" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Code</span><br /> <input
-									type="text" class="form-control" name="responsibilityCode" id="responsibilityCode"
+									type="text" class="form-control" name="up_respon_code" id="up_respon_code"
 									placeholder="Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Type</span><br /> <input
-									type="text" class="form-control" name="responsibilityType" id="responsibilityType"
+									type="text" class="form-control" name="up_respon_name" id="up_respon_name"
 									placeholder="Type" />
 							</div>
 							
