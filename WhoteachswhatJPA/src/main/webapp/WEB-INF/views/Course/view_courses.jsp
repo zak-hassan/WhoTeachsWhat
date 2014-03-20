@@ -171,8 +171,8 @@
    var validateAddCourse= function() {
   	   	$.post("api/course",{ courseCode: document.getElementById("courseCode").value,
   	   		courseName: document.getElementById("courseName").value,
-  	   		crossoverCourse: document.getElementById("crossoverCourse").value,
-  	   		referenceCourse: document.getElementById("referenceCourse").value
+  	   		crossoverCourse: document.getElementById("crossover_course").value,
+  	   		referenceCourse: document.getElementById("reference_course").value
   	   	   	})
   	   		.done(function(data) {
   	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -194,8 +194,8 @@
       	   	$.put("api/course",{ courseId: document.getElementById("courseId").value,
       	   		courseCode: document.getElementById("courseCode").value,
       	   		courseName: document.getElementById("courseName").value,
-      	   		crossoverCourse: document.getElementById("crossoverCourse").value,
-      	   		referenceCourse: document.getElementById("referenceCourse").value
+      	   		crossoverCourse: document.getElementById("crossover_course").value,
+      	   		referenceCourse: document.getElementById("reference_course").value
       	   	   	})
       	   		.done(function(data) {
       	       		console.log("AJAX RETURNED"+JSON.stringify(data));
@@ -234,8 +234,8 @@
 	var updateForm=function(courseCode, courseName, crossoverCourse, oldCourse){
 			$("#up_courseCode").val(courseCode);
 			$("#up_courseName").val(courseName);
-			$("#up_crossoverCourse").val(crossoverCourse);
-			$("#up_oldCourse").val(oldCourse);
+			$("#up_crossover_course").val(crossoverCourse);
+			$("#up_old_course").val(oldCourse);
 		};											
 
 </script>
@@ -384,13 +384,13 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossoverCourse" id="crossoverCourse"
+									type="text" class="form-control" name="crossover_course" id="crossover_course"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="referenceCourse" id="referenceCourse"
+									type="text" class="form-control" name="reference_course" id="reference_course"
 									placeholder="Reference" />
 							</div>
 							
@@ -438,13 +438,13 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossoverCourse" id="up_crossoverCourse"
+									type="text" class="form-control" name="crossover_course" id="up_crossover_course"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="referenceCourse" id="up_referenceCourse"
+									type="text" class="form-control" name="reference_course" id="up_reference_course"
 									placeholder="Reference" />
 							</div>
 							
