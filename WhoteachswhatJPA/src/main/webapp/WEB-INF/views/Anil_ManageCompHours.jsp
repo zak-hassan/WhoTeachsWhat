@@ -158,7 +158,7 @@
 	   };
 	   
 	   var validateUpdateCompHourType= function() {
-		   	$.put("api/comphour"+document.getElementById("up_comp_hour_id").value,{
+		   	$.put("api/comphour/"+document.getElementById("up_comp_hour_id").value,{
 		   		comp_hour_code: document.getElementById("up_comp_hour_code").value,
 		   		comp_hour_name: document.getElementById("up_comp_hour_name").value
 		   	   	})

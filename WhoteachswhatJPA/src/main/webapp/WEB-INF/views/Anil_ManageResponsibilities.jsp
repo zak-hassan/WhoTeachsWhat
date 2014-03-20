@@ -158,7 +158,7 @@
 	   };
 	   
 	   var validateUpdateResponsibilityType= function() {
-		   	$.put("api/responsibility"+document.getElementById("up_respon_id").value,{
+		   	$.put("api/responsibility/"+document.getElementById("up_respon_id").value,{
 		   		respon_code: document.getElementById("up_respon_code").value,
 		   		respon_name: document.getElementById("up_respon_name").value
 		   	   	})

@@ -188,8 +188,8 @@
    };
 
 
-   var validateAddCurriculumSemester= function() {
-	   	$.put("api/CurriculumSemester"+document.getElementById("up_curriculumSemesterId").value,{ 
+   var validateUpdateCurriculumSemester= function() {
+	   	$.put("api/CurriculumSemester/"+document.getElementById("up_curriculumSemesterId").value,{ 
 	   		curriculumSemesterName: document.getElementById("curriculumSemesterName").value
 	   	   	})
 	   		.done(function(data) {

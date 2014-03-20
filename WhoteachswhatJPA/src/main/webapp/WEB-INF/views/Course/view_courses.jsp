@@ -191,7 +191,7 @@
   	   };
       	   
       	var validateUpdateCourse= function() {
-      	   	$.put("api/course"+document.getElementById("up_course_id").value,{
+      	   	$.put("api/course/"+document.getElementById("up_course_id").value,{
 	      	   	course_code: document.getElementById("up_course_code").value,
 	  	   		course_name: document.getElementById("up_course_name").value,
 	  	   		crossover_input: document.getElementById("up_crossover_input").value,

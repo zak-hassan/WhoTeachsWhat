@@ -190,7 +190,7 @@
 
 
    var validateUpdateEvalFactor= function() {
-	   	$.put("api/evalfactor"+document.getElementById("up_evalId").value,{ 
+	   	$.put("api/evalfactor/"+document.getElementById("up_evalId").value,{ 
 	   		evalName: document.getElementById("evalName").value, 
 	   		evalFactor: document.getElementById("evalFactor").value
 	   	   	})
