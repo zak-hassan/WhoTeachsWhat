@@ -399,7 +399,7 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateSemester(document.getElementById('semesterName').value);"
+							<button type="submit" onclick="validateUpdateSemester(document.getElementById('up_semesterId').value);"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
