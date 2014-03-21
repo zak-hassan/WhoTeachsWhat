@@ -164,35 +164,17 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding a semester
      
    */
     
-   var validateAddSemester= function() {
-   	$.post("api/semester",{ semesterName: document.getElementById("semesterName").value })
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addSemester").modal('hide');
-       			$.pnotify({
-					title : 'New Semester Added',
-					type : 'info',
-					text : 'Added new semester !'
-				});
-       		}
-   		});
-	return	false;
-   };
-
-
    var validateUpdateSemester= function() {
+	   alert("Entered update "+ document.getElementById('up_semesterId').value + " " + document.getElementById("up_semesterName").value);
 	   	$.put("api/semester/"+document.getElementById('up_semesterId').value,
 	   		{ semesterName: document.getElementById("up_semesterName").value })
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
+	       		alert("Done");
 	       		if (data.success === "true") {
 	       			// Success message
 	       			$("#updateSemester").modal('hide');
@@ -224,6 +206,28 @@
 		   	});
 	   };	   
 
+	var addSemester=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/semester",
+			data: { semesterName: document.getElementById('semesterName').value },
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Semester added',
+						type : 'info',
+						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
+					});
+		    		// Form needs resetting due to never being submitted
+		    		// document.getElementById("AddSemesterForm").reset();
+		    		location.reload();
+			   	}
+			}
+		});
+	};
+	   
 	var updateForm=function(semesterId, semesterName){
 		$("#up_semesterId").val(semesterId);
 		$("#up_semesterName").val(semesterName);
@@ -364,8 +368,8 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddSemester();"
-								class="btn btn-primary">Save changes</button>
+							<button type="button" onclick="addSemester();"
+								class="btn btn-primary" data-dismiss="modal">Save changes</button>
 						</form>
 					</div>
 					<div class="modal-footer"></div>

@@ -80,7 +80,6 @@ public class SemesterController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "semesterName", required = true) String semesterName) {
 
-
 		semesterService.add(semesterName);
 
 		Map<String, String> list = new HashMap<String, String>();

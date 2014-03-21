@@ -34,7 +34,7 @@ public class PermissionController {
 	@RequestMapping(value = "/managePermission", method = RequestMethod.GET)
 	public String ViewPermission(ModelMap model) {
 		model.addAttribute("entityList", permissionService.getAll());
-		return "manage_permission";
+		return "Admin/manage_permission";
 	}
 	
 	@RequestMapping(value = "/updatePermission", method = RequestMethod.GET)
@@ -64,7 +64,7 @@ public class PermissionController {
 			
 		}
 		
-		return "manage_permission";
+		return "Admin/manage_permission?id="+permissionId;
 	}
 	
 	/**
