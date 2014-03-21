@@ -34,7 +34,7 @@ public class ProgramController {
 	
 	@RequestMapping(value = "/viewProgram", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("entityList", programService.getAll());
+		model.addAttribute("allPrograms", programService.getAll());
 		return "Program/view_programs";
 	}
 

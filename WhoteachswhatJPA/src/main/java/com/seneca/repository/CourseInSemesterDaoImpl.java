@@ -32,7 +32,7 @@ public class CourseInSemesterDaoImpl implements CourseInSemesterDao
       return entities;
    }
 
-   public CoursesInSemester getById(Long id)
+	public CoursesInSemester getById(Integer id)
    {
       return entityManager.find(CoursesInSemester.class, id);
    }
@@ -49,13 +49,14 @@ public class CourseInSemesterDaoImpl implements CourseInSemesterDao
       return;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(CoursesInSemester.class, id));
       return;
    }
 
-   public List<CoursesInSemester> search(CoursesInSemester search, Long first, Integer maxItems)
+	public List<CoursesInSemester> search(CoursesInSemester search,
+			Integer first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 

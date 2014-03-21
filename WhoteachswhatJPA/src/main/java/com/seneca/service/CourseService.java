@@ -32,11 +32,14 @@ public class CourseService {
 	//CRUD OPERATIONS:
 	
 	
-	public Course add(String course_code, String course_name){
+	public Course add(String course_code, String course_name, String crossover,
+			String oldcourse) {
 		
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
+			course.setCrossover_course(crossover);
+			course.setOld_course(oldcourse);
 			logger.info("Entering courseDao.create : ");
 			courseDao.create(course);
 			logger.info("Exiting courseDao.create : ");
@@ -45,11 +48,13 @@ public class CourseService {
 	}
 
 	
-	public Course update(Integer id, String course_code, String course_name) {
+	public Course update(Integer id, String course_code, String course_name,
+			String crossover, String oldcourse) {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
-		
+		course.setCrossover_course(crossover);
+		course.setOld_course(oldcourse);
 		courseDao.update(course);
 		
 		return course;

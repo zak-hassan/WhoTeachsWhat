@@ -32,7 +32,7 @@ public class EvalFactorController {
 		
 		@RequestMapping(value = "/viewEvalFactor", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("entityList", evalFactorService.getAll());
+		model.addAttribute("allEvalFactors", evalFactorService.getAll());
 
 			return "EvalFactor/viewEvalFactor";
 		}

@@ -32,7 +32,7 @@ public class PrepTimeController {
 		
 		@RequestMapping(value = "/viewPrepTime", method = RequestMethod.GET)
 		public String view(ModelMap model) {
-		model.addAttribute("entityList", prepTimeService.getAll());
+		model.addAttribute("allPreptimes", prepTimeService.getAll());
 			
 			return "PrepTime/viewPrepTime";
 		}

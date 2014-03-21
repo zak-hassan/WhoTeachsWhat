@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.ResponsibilityToFaculty;
+import com.seneca.service.ResponsibilityService;
 import com.seneca.service.ResponsibilityToFacultyService;
 
 @Controller
@@ -32,9 +33,14 @@ public class ResponsibilityToFacultyController {
 	@Autowired
 	private ResponsibilityToFacultyService responsibilityToFacultyService;
 
+	@Autowired
+	private ResponsibilityService responsibilityService;
+
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		// model.addAttribute("", attributeValue);
+		model.addAttribute("allResponsibilityToFaculty",
+				responsibilityToFacultyService.getAll());
+		model.addAttribute("allResponsibility", responsibilityService.getAll());
 
 		return "ResponsibilityToFaculty/viewResponsibilityToFaculty";
 	}
