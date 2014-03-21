@@ -220,9 +220,8 @@
 						type : 'info',
 						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
 					});
-		    		// Form needs resetting due to never being submitted
-		    		// document.getElementById("AddSemesterForm").reset();
-		    		location.reload();
+		    		document.getElementById("AddSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		location.reload(); // Soft reset to show updated data
 			   	}
 			}
 		});
