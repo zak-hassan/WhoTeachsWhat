@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,15 @@ public class SemesterController {
 
 	@RequestMapping(value = "/api/semester", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Semester> listGetJSON() {
-		return semesterService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (Semester c : semesterService.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("name", c.getSemesterName() + "");
+			map.put("id", c.getSemesterId() + "");
+			items.add(map);
+		}
+		return items;
 	}
 
 	/**
