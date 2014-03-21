@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,8 +66,21 @@ public class UserController {
 
 	@RequestMapping(value = "/api/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Account> listGetJSON() {
-		return accountService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Account> accounts = accountService.getAll();
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+
+		for (Account account : accounts) {
+			Map<String, String> mapAccount = new HashMap<String, String>();
+			mapAccount.put("username", account.getUsername());
+			mapAccount.put("accessLevel", account.getAccessLevel()
+					.getAccessName());
+			mapAccount.put("accessLevelID", account.getAccessLevel()
+					.getAccessId() + "");
+			items.add(mapAccount);
+
+		}
+		return items;
 	}
 
 	// REST API ENDPOINTS:
