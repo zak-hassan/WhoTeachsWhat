@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +55,24 @@ public class FacultyToCourseInSemesterYearController {
 
 	@RequestMapping(value = "/api/facultyToCourseInSemesterYear", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<FacultyToCourseInSemesterYear> listGetJSON() {
-		return facultyToCourseInSemesterYearService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (FacultyToCourseInSemesterYear c : facultyToCourseInSemesterYearService
+				.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("additionAttribute", c.getAdditionAttribute() + "");
+			map.put("comphourAllowance", c.getCompHour_allowance() + "");
+			map.put("comphourAssigned", c.getCompHour_assigned() + "");
+			map.put("sectionNumber", c.getSectionNumber() + "");
+			map.put("semesterId", c.getSemesterId() + "");
+			map.put("year", c.getYear() + "");
+			map.put("comphourId", c.getCompHour().getCompHour_id() + "");
+			map.put("courseId", c.getCourse().getCourseId() + "");
+			map.put("facultyId", c.getFaculty().getFacultyId() + "");
+			map.put("prepTypeId", c.getPrepTime().getPrepId() + "");
+			items.add(map);
+		}
+		return items;
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,9 +107,15 @@ public class PermissionController {
 
 	@RequestMapping(value = "/api/permission", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<AccessLevel> listGetJSON() {
-
-		return permissionService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (AccessLevel c : permissionService.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("pname", c.getAccessName() + "");
+			map.put("pid", c.getAccessId() + "");
+			items.add(map);
+		}
+		return items;
 	}
 
 	/**
