@@ -39,6 +39,8 @@ public class ResponsibilityToFacultyService {
 		rToFaculty.setResponsibility(responsibilityDao.getById(responsibilityId));
 		rToFaculty.setSemester(semesterDao.getById(semesterId));
 		rToFaculty.setHoursPerWeek(hours);
+		// rToFaculty.setYear(year);
+		rToFaculty.getId().setYear(year);
 		logger.info("Entering courseDao.create : ");
 		ResponsibilityToFacultyDao.create(rToFaculty);
 		logger.info("Exiting courseDao.create : ");
@@ -54,6 +56,8 @@ public class ResponsibilityToFacultyService {
 		rToFaculty.setResponsibility(responsibilityDao
 				.getById(responsibilityId));
 		rToFaculty.setSemester(semesterDao.getById(semesterId));
+		rToFaculty.getId().setYear(year);
+		// rToFaculty.setYear(year);
 		rToFaculty.setHoursPerWeek(hours);
 		ResponsibilityToFacultyDao.update(rToFaculty);
 		return rToFaculty;
@@ -66,6 +70,5 @@ public class ResponsibilityToFacultyService {
 	public List<ResponsibilityToFaculty> getAll() {
 		return ResponsibilityToFacultyDao.getAll();
 	}
-
 
 }

@@ -27,7 +27,8 @@ public class CourseInSemesterDaoImpl implements CourseInSemesterDao
    @SuppressWarnings("unchecked")
    public List<CoursesInSemester> getAll()
    {
-      Query query = entityManager.createQuery("select e from " + "CourseInSemester" + " e");
+		Query query = entityManager.createQuery("select e from "
+				+ "CoursesInSemester" + " e");
       List<CoursesInSemester> entities = query.getResultList();
       return entities;
    }

@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +58,17 @@ public class ResponsibilityController {
 
 	@RequestMapping(value = "/api/responsibility", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Responsibility> listGetJSON() {
-		return responsibilityService.getAll();
+	List<Map<String, String>> listGetJSON() {
+
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (Responsibility c : responsibilityService.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("r_name", c.getResponsibilityName() + "");
+			map.put("r_code", c.getResponsibilityCode() + "");
+			map.put("r_id", c.getResponsibilityId() + "");
+			items.add(map);
+		}
+		return items;
 	}
 
 	// REST API ENDPOINTS:

@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +60,20 @@ public class ResponsibilityToFacultyController {
 
 	@RequestMapping(value = "/api/ResponsibilityToFaculty", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<ResponsibilityToFaculty> listGetJSON() {
-		return responsibilityToFacultyService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (ResponsibilityToFaculty c : responsibilityToFacultyService
+				.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("facultyId", c.getFaculty().getFacultyId() + "");
+			map.put("responsibilityId", c.getResponsibility()
+					.getResponsibilityId() + "");
+			// map.put("year", c.getYear() + "");
+			map.put("semesterId", c.getSemester().getSemesterId() + "");
+			map.put("hoursperweek", c.getHoursPerWeek() + "");
+			items.add(map);
+		}
+		return items;
 	}
 
 	/**

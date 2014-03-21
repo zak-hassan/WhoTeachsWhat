@@ -1,7 +1,13 @@
 package com.seneca.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -18,6 +24,7 @@ public class ResponsibilityToFaculty implements Serializable {
 // insert="false" update="false"
 	@Column(name="hours_per_week")
 	private float hoursPerWeek;
+
 
 	//bi-directional many-to-one association to Responsibility
 	@ManyToOne
@@ -125,5 +132,6 @@ public class ResponsibilityToFaculty implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

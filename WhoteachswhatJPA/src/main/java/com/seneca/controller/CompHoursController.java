@@ -1,5 +1,6 @@
 package com.seneca.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,9 +58,15 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphour", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<CompHour> listGetJSON() {
-
-		return compHoursService.getAll();
+	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (CompHour compHour : compHoursService.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("name", compHour.getCompHour_name());
+			map.put("code", compHour.getCompHour_code());
+			items.add(map);
+		}
+		return items;
 	}
 
 	/**
