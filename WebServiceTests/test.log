@@ -1,0 +1,1524 @@
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/CurriculumSemester 
+Status : 200 
+[
+  {
+    "CurriculumSemesterName": "Curriculum1",
+    "CurriculumSemesterId": "1"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum2",
+    "CurriculumSemesterId": "2"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum3",
+    "CurriculumSemesterId": "3"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum4",
+    "CurriculumSemesterId": "4"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum5",
+    "CurriculumSemesterId": "5"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum6",
+    "CurriculumSemesterId": "6"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum7",
+    "CurriculumSemesterId": "7"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum8",
+    "CurriculumSemesterId": "8"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum9",
+    "CurriculumSemesterId": "9"
+  },
+  {
+    "CurriculumSemesterName": "Curriculum10",
+    "CurriculumSemesterId": "10"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/ResponsibilityToFaculty 
+Status : 200 
+[
+  {
+    "hoursperweek": "5.0",
+    "responsibilityId": "1",
+    "semesterId": "1",
+    "facultyId": "1"
+  },
+  {
+    "hoursperweek": "10.0",
+    "responsibilityId": "2",
+    "semesterId": "2",
+    "facultyId": "2"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/account 
+Status : 200 
+[
+  {
+    "username": "Emile.Ohan",
+    "accessLevelID": "2",
+    "accessLevel": "administrator"
+  },
+  {
+    "username": "Diana.Steward",
+    "accessLevelID": "2",
+    "accessLevel": "administrator"
+  },
+  {
+    "username": "Fred.Flinstron",
+    "accessLevelID": "2",
+    "accessLevel": "administrator"
+  },
+  {
+    "username": "Jim.Carey",
+    "accessLevelID": "2",
+    "accessLevel": "administrator"
+  },
+  {
+    "username": "ascasc",
+    "accessLevelID": "1",
+    "accessLevel": "noaccess"
+  },
+  {
+    "username": "ascasc",
+    "accessLevelID": "1",
+    "accessLevel": "noaccess"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/comphour 
+Status : 200 
+[
+  {
+    "name": "NAME1",
+    "code": "CODE1"
+  },
+  {
+    "name": "NAME2",
+    "code": "CODE2"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/course 
+Status : 200 
+[
+  {
+    "name": "Operating Systems: Practices",
+    "crossOver": null,
+    "code": "OPS105",
+    "oldname": null
+  },
+  {
+    "name": "Operating Systems: Principles",
+    "crossOver": null,
+    "code": "OPS110",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Web Management",
+    "crossOver": null,
+    "code": "RIS120",
+    "oldname": null
+  },
+  {
+    "name": "Computer Architecture & Networking",
+    "crossOver": null,
+    "code": "DCN130",
+    "oldname": null
+  },
+  {
+    "name": "Critical Thinking and Writing",
+    "crossOver": null,
+    "code": "BTC140",
+    "oldname": null
+  },
+  {
+    "name": "Security Principles: Cryptography & Encryption",
+    "crossOver": null,
+    "code": "SPR200",
+    "oldname": null
+  },
+  {
+    "name": "The Pragmatic Art of Administration",
+    "crossOver": null,
+    "code": "SRT210",
+    "oldname": null
+  },
+  {
+    "name": "Foundations of Database Management",
+    "crossOver": null,
+    "code": "RIS220",
+    "oldname": null
+  },
+  {
+    "name": "Protocols: Standards & Models",
+    "crossOver": null,
+    "code": "DCN230",
+    "oldname": null
+  },
+  {
+    "name": "Interpersonal Communications in Organizations",
+    "crossOver": null,
+    "code": "BTC240",
+    "oldname": null
+  },
+  {
+    "name": "Business Presentations",
+    "crossOver": null,
+    "code": "BTC340",
+    "oldname": null
+  },
+  {
+    "name": "Secure Scripting",
+    "crossOver": null,
+    "code": "SRT311",
+    "oldname": null
+  },
+  {
+    "name": "Principles of Computer & Network Security",
+    "crossOver": null,
+    "code": "SPR300",
+    "oldname": null
+  },
+  {
+    "name": "Risk Management: Data Management & Protection",
+    "crossOver": null,
+    "code": "RIS320",
+    "oldname": null
+  },
+  {
+    "name": "Data Comm: Real World Interconnectivity",
+    "crossOver": null,
+    "code": "DCN330",
+    "oldname": null
+  },
+  {
+    "name": "Security Arts: Digital Data Analysis",
+    "crossOver": null,
+    "code": "SRT411",
+    "oldname": null
+  },
+  {
+    "name": "Security Principles: Forensics",
+    "crossOver": null,
+    "code": "SPR401",
+    "oldname": null
+  },
+  {
+    "name": "Risk Management: Public and Private Systems",
+    "crossOver": null,
+    "code": "RIS420",
+    "oldname": null
+  },
+  {
+    "name": "Data Comm: Wireless & Mobile",
+    "crossOver": null,
+    "code": "DCN430",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Investigative Research Project",
+    "crossOver": null,
+    "code": "BTR491",
+    "oldname": null
+  },
+  {
+    "name": "Security Arts: Ethics",
+    "crossOver": null,
+    "code": "SRT511",
+    "oldname": null
+  },
+  {
+    "name": "Security Principles: Defenses",
+    "crossOver": null,
+    "code": "SPR500",
+    "oldname": null
+  },
+  {
+    "name": "Risk Management: Emergent Technologies",
+    "crossOver": null,
+    "code": "RIS520",
+    "oldname": null
+  },
+  {
+    "name": "System Analysis & Project Management",
+    "crossOver": null,
+    "code": "PRJ505",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Security Principles: Detection",
+    "crossOver": null,
+    "code": "SPR600",
+    "oldname": null
+  },
+  {
+    "name": "Security Arts: Privacy Issues",
+    "crossOver": null,
+    "code": "SRT611",
+    "oldname": null
+  },
+  {
+    "name": "Research Methodologies",
+    "crossOver": null,
+    "code": "REA605",
+    "oldname": null
+  },
+  {
+    "name": "Co-op Professional Practice",
+    "crossOver": null,
+    "code": "CPP600",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "DPIXXX",
+    "oldname": null
+  },
+  {
+    "name": "Coop Work Term",
+    "crossOver": null,
+    "code": "BTW699",
+    "oldname": null
+  },
+  {
+    "name": "Business Continuity Planning",
+    "crossOver": null,
+    "code": "SRT711",
+    "oldname": null
+  },
+  {
+    "name": "Law, Property & Legislation",
+    "crossOver": null,
+    "code": "SRT710",
+    "oldname": null
+  },
+  {
+    "name": "Research Project Work",
+    "crossOver": null,
+    "code": "REA705",
+    "oldname": null
+  },
+  {
+    "name": "Co-op Integration and Career Planning",
+    "crossOver": null,
+    "code": "CPP700",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "DPIXXX",
+    "oldname": null
+  },
+  {
+    "name": "Coop Work Term",
+    "crossOver": null,
+    "code": "BTW799",
+    "oldname": null
+  },
+  {
+    "name": "Technology Planning and Acquisition",
+    "crossOver": null,
+    "code": "SRT810",
+    "oldname": null
+  },
+  {
+    "name": "Security Audit",
+    "crossOver": null,
+    "code": "SPR800",
+    "oldname": null
+  },
+  {
+    "name": "Capstone Project",
+    "crossOver": null,
+    "code": "REA820",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "DPIXXX",
+    "oldname": null
+  },
+  {
+    "name": "Programming Fundamentals using C",
+    "crossOver": null,
+    "code": "BTP100",
+    "oldname": null
+  },
+  {
+    "name": "Accounting for the Business Environment",
+    "crossOver": null,
+    "code": "BTB110",
+    "oldname": null
+  },
+  {
+    "name": "Operating Systems for Programmers - UNIX",
+    "crossOver": null,
+    "code": "BTO120",
+    "oldname": null
+  },
+  {
+    "name": "Operating Systems for Programmers - Windows",
+    "crossOver": null,
+    "code": "BTO130",
+    "oldname": null
+  },
+  {
+    "name": "Critical Thinking and Writing",
+    "crossOver": null,
+    "code": "BTC140",
+    "oldname": null
+  },
+  {
+    "name": "The Object-Oriented Paradigm using C++",
+    "crossOver": null,
+    "code": "BTP200",
+    "oldname": null
+  },
+  {
+    "name": "Database Design Principles",
+    "crossOver": null,
+    "code": "BTD210",
+    "oldname": null
+  },
+  {
+    "name": "Internet Architecture and Development",
+    "crossOver": null,
+    "code": "BTI220",
+    "oldname": null
+  },
+  {
+    "name": "Interpersonal Communications in Organizations",
+    "crossOver": null,
+    "code": "BTC240",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Object Oriented Software Development I - C++",
+    "crossOver": null,
+    "code": "BTP300",
+    "oldname": null
+  },
+  {
+    "name": "SQL Database Design using Oracle",
+    "crossOver": null,
+    "code": "BTD310",
+    "oldname": null
+  },
+  {
+    "name": "Web Programming on UNIX",
+    "crossOver": null,
+    "code": "BTI320",
+    "oldname": null
+  },
+  {
+    "name": "Business Requirements Analysis using OO Models",
+    "crossOver": null,
+    "code": "BTS330",
+    "oldname": null
+  },
+  {
+    "name": "Business Presentations",
+    "crossOver": null,
+    "code": "BTC340",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Object-Oriented Software Development II - Java",
+    "crossOver": null,
+    "code": "BTP400",
+    "oldname": null
+  },
+  {
+    "name": "Data Communications - Networks",
+    "crossOver": null,
+    "code": "BTN410",
+    "oldname": null
+  },
+  {
+    "name": "Web Programming on Windows",
+    "crossOver": null,
+    "code": "BTI420",
+    "oldname": null
+  },
+  {
+    "name": "System Analysis and Design using UML",
+    "crossOver": null,
+    "code": "BTS430",
+    "oldname": null
+  },
+  {
+    "name": "Business and Technical Writing",
+    "crossOver": null,
+    "code": "BTC440",
+    "oldname": null
+  },
+  {
+    "name": "Investigative Research Internship",
+    "crossOver": null,
+    "code": "BTR490",
+    "oldname": null
+  },
+  {
+    "name": "Data Structures and Algorithms",
+    "crossOver": null,
+    "code": "BTP500",
+    "oldname": null
+  },
+  {
+    "name": "Canadian Business Environment",
+    "crossOver": null,
+    "code": "BTB520",
+    "oldname": null
+  },
+  {
+    "name": "Design for User Interfaces",
+    "crossOver": null,
+    "code": "BTH540",
+    "oldname": null
+  },
+  {
+    "name": "Major Project - Plannng and Design",
+    "crossOver": null,
+    "code": "BTS530",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Design Patterns in UML",
+    "crossOver": null,
+    "code": "BTP600",
+    "oldname": null
+  },
+  {
+    "name": "Law, Ethics and Social Responsibility",
+    "crossOver": null,
+    "code": "BTE620",
+    "oldname": null
+  },
+  {
+    "name": "Major Project - Implementation",
+    "crossOver": null,
+    "code": "BTS630",
+    "oldname": null
+  },
+  {
+    "name": "Multimedia Presentations",
+    "crossOver": null,
+    "code": "BTC640",
+    "oldname": null
+  },
+  {
+    "name": "Co-op Professional Practice",
+    "crossOver": null,
+    "code": "CPP600",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Coop Work Term",
+    "crossOver": null,
+    "code": "BTW699",
+    "oldname": null
+  },
+  {
+    "name": "Information Security",
+    "crossOver": null,
+    "code": "BTN710",
+    "oldname": null
+  },
+  {
+    "name": "Marketing Principles and Practices -or- Introduction to Marketing (during Fall 2013) ",
+    "crossOver": null,
+    "code": "BTB720 -or- BAB235 ",
+    "oldname": null
+  },
+  {
+    "name": "Project Management Methodologies",
+    "crossOver": null,
+    "code": "BTS730",
+    "oldname": null
+  },
+  {
+    "name": "Human Factors in Computing",
+    "crossOver": null,
+    "code": "BTH740",
+    "oldname": null
+  },
+  {
+    "name": "Co-op Integration and Career Planning",
+    "crossOver": null,
+    "code": "CPP700",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Coop Work Term",
+    "crossOver": null,
+    "code": "BTW799",
+    "oldname": null
+  },
+  {
+    "name": "Research Methodologies and Project",
+    "crossOver": null,
+    "code": "BTR820",
+    "oldname": null
+  },
+  {
+    "name": "Technology Planning and Acquisition",
+    "crossOver": null,
+    "code": "BTS830",
+    "oldname": null
+  },
+  {
+    "name": "Liberal Studies Option",
+    "crossOver": null,
+    "code": "LSOXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Applied Professional Communications",
+    "crossOver": null,
+    "code": "APC100",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Programming Using C",
+    "crossOver": null,
+    "code": "IPC144",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Unix/Linux and the Internet",
+    "crossOver": null,
+    "code": "ULI101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Operating Systems Using Windows",
+    "crossOver": null,
+    "code": "IOS110",
+    "oldname": null
+  },
+  {
+    "name": "College English",
+    "crossOver": null,
+    "code": "EAC150",
+    "oldname": null
+  },
+  {
+    "name": "iSERIES Business Computing",
+    "crossOver": null,
+    "code": "IBC233",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Object Oriented Programming",
+    "crossOver": null,
+    "code": "OOP244",
+    "oldname": null
+  },
+  {
+    "name": "Internet I - Internet Fundamentals",
+    "crossOver": null,
+    "code": "INT222",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Database Design and SQL",
+    "crossOver": null,
+    "code": "DBS201",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Database Design II and SQL using Oracle",
+    "crossOver": null,
+    "code": "DBS301",
+    "oldname": null
+  },
+  {
+    "name": "Internet II - Web Programming on UNIX",
+    "crossOver": null,
+    "code": "INT322",
+    "oldname": null
+  },
+  {
+    "name": "Requirements Gathering using OO Models",
+    "crossOver": null,
+    "code": "SYS366",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Object Oriented Programming II Using C++",
+    "crossOver": null,
+    "code": "OOP344",
+    "oldname": null
+  },
+  {
+    "name": "Data Communications Networks",
+    "crossOver": null,
+    "code": "DCN455",
+    "oldname": null
+  },
+  {
+    "name": "Business Report Writing",
+    "crossOver": null,
+    "code": "EAC397",
+    "oldname": null
+  },
+  {
+    "name": "Internet III - Web Programming on Windows",
+    "crossOver": null,
+    "code": "INT422",
+    "oldname": null
+  },
+  {
+    "name": "Analysis and Design using OO Models",
+    "crossOver": null,
+    "code": "SYS466",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Java for C++ Programmers",
+    "crossOver": null,
+    "code": "JAC444",
+    "oldname": null
+  },
+  {
+    "name": "Project Planning and Management",
+    "crossOver": null,
+    "code": "PRJ566",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Project Implementation",
+    "crossOver": null,
+    "code": "PRJ666",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Professional Option",
+    "crossOver": null,
+    "code": "PROXXX",
+    "oldname": null
+  },
+  {
+    "name": "Applied Professional Communications",
+    "crossOver": null,
+    "code": "APC100",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Programming Using C",
+    "crossOver": null,
+    "code": "IPC144",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Unix/Linux and the Internet",
+    "crossOver": null,
+    "code": "ULI101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Operating Systems Using Windows",
+    "crossOver": null,
+    "code": "IOS110",
+    "oldname": null
+  },
+  {
+    "name": "College English",
+    "crossOver": null,
+    "code": "EAC150",
+    "oldname": null
+  },
+  {
+    "name": "iSERIES Business Computing",
+    "crossOver": null,
+    "code": "IBC233",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Object Oriented Programming",
+    "crossOver": null,
+    "code": "OOP244",
+    "oldname": null
+  },
+  {
+    "name": "Internet I - Internet Fundamentals",
+    "crossOver": null,
+    "code": "INT222",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Database Design and SQL",
+    "crossOver": null,
+    "code": "DBS201",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Database Design II and SQL using Oracle",
+    "crossOver": null,
+    "code": "DBS301",
+    "oldname": null
+  },
+  {
+    "name": "Internet II - Web Programming on UNIX",
+    "crossOver": null,
+    "code": "INT322",
+    "oldname": null
+  },
+  {
+    "name": "Requirements Gathering using OO Models",
+    "crossOver": null,
+    "code": "SYS366",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Applied Professional Communications",
+    "crossOver": null,
+    "code": "APC100",
+    "oldname": null
+  },
+  {
+    "name": "PC Hardware I",
+    "crossOver": null,
+    "code": "HWD101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Unix/Linux and the Internet",
+    "crossOver": null,
+    "code": "ULI101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Operating Systems Using Windows",
+    "crossOver": null,
+    "code": "IOS110",
+    "oldname": null
+  },
+  {
+    "name": "College English",
+    "crossOver": null,
+    "code": "EAC150",
+    "oldname": null
+  },
+  {
+    "name": "Basic Administration of Microsoft Windows",
+    "crossOver": null,
+    "code": "WIN210",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Data Communications Technology",
+    "crossOver": null,
+    "code": "DCN286",
+    "oldname": null
+  },
+  {
+    "name": "Introduction To Scripting and Powershell",
+    "crossOver": null,
+    "code": "WIN213",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Open System Servers",
+    "crossOver": null,
+    "code": "OPS235",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Microsoft Windows Network Infrastructure",
+    "crossOver": null,
+    "code": "WIN310",
+    "oldname": null
+  },
+  {
+    "name": "Advance Data Communications",
+    "crossOver": null,
+    "code": "DCN386",
+    "oldname": null
+  },
+  {
+    "name": "Business Report Writing",
+    "crossOver": null,
+    "code": "EAC397",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to databases for administrators",
+    "crossOver": null,
+    "code": "DAT702",
+    "oldname": null
+  },
+  {
+    "name": "Applied Professional Communications",
+    "crossOver": null,
+    "code": "APC100",
+    "oldname": null
+  },
+  {
+    "name": "PC Hardware I",
+    "crossOver": null,
+    "code": "HWD101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Unix/Linux and the Internet",
+    "crossOver": null,
+    "code": "ULI101",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Operating Systems Using Windows",
+    "crossOver": null,
+    "code": "IOS110",
+    "oldname": null
+  },
+  {
+    "name": "College English",
+    "crossOver": null,
+    "code": "EAC150",
+    "oldname": null
+  },
+  {
+    "name": "Basic Administration of Microsoft Windows",
+    "crossOver": null,
+    "code": "WIN210",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Data Communications Technology",
+    "crossOver": null,
+    "code": "DCN286",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Scripting and Powershell",
+    "crossOver": null,
+    "code": "WIN213",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to Open System Servers",
+    "crossOver": null,
+    "code": "OPS235",
+    "oldname": null
+  },
+  {
+    "name": "English and Liberal Studies Elective",
+    "crossOver": null,
+    "code": "LIBXXX",
+    "oldname": null
+  },
+  {
+    "name": "Microsoft Windows Network Infrastructure",
+    "crossOver": null,
+    "code": "WIN310",
+    "oldname": null
+  },
+  {
+    "name": "Advance Data Communications",
+    "crossOver": null,
+    "code": "DCN386",
+    "oldname": null
+  },
+  {
+    "name": "Business Report Writing",
+    "crossOver": null,
+    "code": "EAC397",
+    "oldname": null
+  },
+  {
+    "name": "Introduction to databases for administrators",
+    "crossOver": null,
+    "code": "DAT702",
+    "oldname": null
+  },
+  {
+    "name": "UNIX/Linux and Internet Programming",
+    "crossOver": null,
+    "code": "ULI705",
+    "oldname": null
+  },
+  {
+    "name": "Database Administration using SQL Server",
+    "crossOver": null,
+    "code": "SQL710",
+    "oldname": null
+  },
+  {
+    "name": "Database Design",
+    "crossOver": null,
+    "code": "DES715",
+    "oldname": null
+  },
+  {
+    "name": "SQL and PL/SQL using ORACLE",
+    "crossOver": null,
+    "code": "ORA725",
+    "oldname": null
+  },
+  {
+    "name": "Programming using JAVA",
+    "crossOver": null,
+    "code": "JAV745",
+    "oldname": null
+  },
+  {
+    "name": "Database Connectivity using JAVA",
+    "crossOver": null,
+    "code": "CJV805",
+    "oldname": null
+  },
+  {
+    "name": "Database Connectivity using VISUAL BASIC",
+    "crossOver": null,
+    "code": "CVB815",
+    "oldname": null
+  },
+  {
+    "name": "Data Warehousing",
+    "crossOver": null,
+    "code": "DBW825",
+    "oldname": null
+  },
+  {
+    "name": "Security in Databases and Web Applications",
+    "crossOver": null,
+    "code": "SEC835",
+    "oldname": null
+  },
+  {
+    "name": "Project Management and Implementation",
+    "crossOver": null,
+    "code": "PRJ845",
+    "oldname": null
+  },
+  {
+    "name": "IT Project Management Fundamentals",
+    "crossOver": null,
+    "code": "PMC100",
+    "oldname": null
+  },
+  {
+    "name": "Project Management Tools and Techniques",
+    "crossOver": null,
+    "code": "PMC110",
+    "oldname": null
+  },
+  {
+    "name": "Business Systems Environments",
+    "crossOver": null,
+    "code": "PMC120",
+    "oldname": null
+  },
+  {
+    "name": "Fundamentals of Systems Development",
+    "crossOver": null,
+    "code": "PMC130",
+    "oldname": null
+  },
+  {
+    "name": "Project Leadership",
+    "crossOver": null,
+    "code": "PMC140",
+    "oldname": null
+  },
+  {
+    "name": "Business Finance",
+    "crossOver": null,
+    "code": "PMC150",
+    "oldname": null
+  },
+  {
+    "name": "Advanced IT Project Management",
+    "crossOver": null,
+    "code": "PMC200",
+    "oldname": null
+  },
+  {
+    "name": "Project Management Communication Skills",
+    "crossOver": null,
+    "code": "PMC210",
+    "oldname": null
+  },
+  {
+    "name": "Contract Law, Ethics, and IT Professionalism",
+    "crossOver": null,
+    "code": "PMC220",
+    "oldname": null
+  },
+  {
+    "name": "IT Project Management Case Studies",
+    "crossOver": null,
+    "code": "PMC230",
+    "oldname": null
+  },
+  {
+    "name": "Quality Assurance and Testing in IT projects",
+    "crossOver": null,
+    "code": "PMC240",
+    "oldname": null
+  },
+  {
+    "name": "Applied IT Project Management",
+    "crossOver": null,
+    "code": "PMC250",
+    "oldname": null
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/courseinsemester 
+Status : 200 
+[
+  {
+    "eval_3_ans": "0.3",
+    "eval_1_ans": "0.1",
+    "total_semester": "4",
+    "eval_2_id": "2",
+    "semester_id": "4",
+    "eval_3_id": "2",
+    "eval_2_ans": "0.2",
+    "year": "2014",
+    "course_id": "1",
+    "semester_name": "FALL",
+    "eval_1_id": "1"
+  },
+  {
+    "eval_3_ans": "0.2",
+    "eval_1_ans": "0.1",
+    "total_semester": "4",
+    "eval_2_id": "2",
+    "semester_id": "4",
+    "eval_3_id": "2",
+    "eval_2_ans": "0.5",
+    "year": "2014",
+    "course_id": "2",
+    "semester_name": "FALL",
+    "eval_1_id": "1"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/evalfactor 
+Status : 200 
+[
+  {
+    "efFactor": "12.0",
+    "efName": "Evaluation1",
+    "efId": "1"
+  },
+  {
+    "efFactor": "24.0",
+    "efName": "Evaluation2",
+    "efId": "2"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/faculty 
+Status : 200 
+[
+  {
+    "fid": "1",
+    "lname": "diep",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "thao"
+  },
+  {
+    "fid": "2",
+    "lname": "sheehan",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "lisa"
+  },
+  {
+    "fid": "3",
+    "lname": "ravetti",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "paul"
+  },
+  {
+    "fid": "4",
+    "lname": "tee",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "janice"
+  },
+  {
+    "fid": "5",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "phil"
+  },
+  {
+    "fid": "6",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "bob"
+  },
+  {
+    "fid": "7",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "jim"
+  },
+  {
+    "fid": "8",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "timmy"
+  },
+  {
+    "fid": "9",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "carey"
+  },
+  {
+    "fid": "10",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "eric"
+  },
+  {
+    "fid": "11",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "javan"
+  },
+  {
+    "fid": "12",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "chase"
+  },
+  {
+    "fid": "13",
+    "lname": "francisco",
+    "teachingTypeName": "fulltime",
+    "teachingHours": "1.0",
+    "fname": "tyron"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/facultyToCourseInSemesterYear 
+Status : 200 
+[
+  {
+    "comphourAssigned": "0.3",
+    "comphourId": "1",
+    "semesterId": "1",
+    "sectionNumber": "1",
+    "prepTypeId": "2",
+    "year": "2014",
+    "additionAttribute": "0.1",
+    "facultyId": "8",
+    "courseId": "14",
+    "comphourAllowance": "0.2"
+  },
+  {
+    "comphourAssigned": "0.3",
+    "comphourId": "1",
+    "semesterId": "1",
+    "sectionNumber": "1",
+    "prepTypeId": "1",
+    "year": "2014",
+    "additionAttribute": "0.2",
+    "facultyId": "6",
+    "courseId": "35",
+    "comphourAllowance": "0.2"
+  },
+  {
+    "comphourAssigned": "0.3",
+    "comphourId": "1",
+    "semesterId": "1",
+    "sectionNumber": "1",
+    "prepTypeId": "2",
+    "year": "2014",
+    "additionAttribute": "0.3",
+    "facultyId": "2",
+    "courseId": "22",
+    "comphourAllowance": "0.2"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/permission 
+Status : 200 
+[
+  {
+    "pname": "noaccess",
+    "pid": "1"
+  },
+  {
+    "pname": "administrator",
+    "pid": "2"
+  },
+  {
+    "pname": "levelone",
+    "pid": "3"
+  },
+  {
+    "pname": "leveltwo",
+    "pid": "4"
+  },
+  {
+    "pname": "webmaster",
+    "pid": "5"
+  },
+  {
+    "pname": "scheduler",
+    "pid": "6"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/preptime 
+Status : 200 
+[
+  {
+    "pfactor": "10.0",
+    "pname": "PREP1",
+    "pid": "1"
+  },
+  {
+    "pfactor": "13.0",
+    "pname": "PREP2",
+    "pid": "2"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/program 
+Status : 200 
+[
+  {
+    "pTotalSemester": "4",
+    "program_name": "Computer Programmer Diploma",
+    "program_id": "1"
+  },
+  {
+    "pTotalSemester": "6",
+    "program_name": "Computer Programming and Analysis",
+    "program_id": "2"
+  },
+  {
+    "pTotalSemester": "2",
+    "program_name": "Database Application Developer",
+    "program_id": "3"
+  },
+  {
+    "pTotalSemester": "8",
+    "program_name": "Project Management - Information Technology",
+    "program_id": "4"
+  },
+  {
+    "pTotalSemester": "4",
+    "program_name": "Computer Networking & Technical Support",
+    "program_id": "5"
+  },
+  {
+    "pTotalSemester": "4",
+    "program_name": "Computer Systems Technology",
+    "program_id": "6"
+  },
+  {
+    "pTotalSemester": "8",
+    "program_name": "Bachelor of Technology (Software Development)",
+    "program_id": "7"
+  },
+  {
+    "pTotalSemester": "8",
+    "program_name": "Bachelor of Technology (Informatics & Security)",
+    "program_id": "8"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/responsibility 
+Status : 200 
+[
+  {
+    "r_id": "1",
+    "r_code": "RAAA_CODE",
+    "r_name": "RAA_NAME"
+  },
+  {
+    "r_id": "2",
+    "r_code": "RESEARCH",
+    "r_name": "Research"
+  },
+  {
+    "r_id": "3",
+    "r_code": "TEACHING",
+    "r_name": "Teaching"
+  }
+]
+GET Request: http://localhost:8080/WhoteachswhatJPA/api/semester 
+Status : 200 
+[
+  {
+    "id": "1",
+    "name": "WINTER"
+  },
+  {
+    "id": "2",
+    "name": "WINTER"
+  },
+  {
+    "id": "3",
+    "name": "SUMMER"
+  },
+  {
+    "id": "4",
+    "name": "FALL"
+  }
+]

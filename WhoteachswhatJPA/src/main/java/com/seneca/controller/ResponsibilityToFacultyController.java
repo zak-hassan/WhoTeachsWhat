@@ -62,13 +62,15 @@ public class ResponsibilityToFacultyController {
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
 		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
-		for (ResponsibilityToFaculty c : responsibilityToFacultyService.getAll()) {
+		for (ResponsibilityToFaculty c : responsibilityToFacultyService
+				.getAll()) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("facultyId", c.getFaculty().getFacultyId() + "");
-			map.put("responsibilityId", c.getResponsibility().getResponsibilityId() + "");
-			map.put("year", c.getYear() + "");
-			map.put("semesterId",c.getSemester().getSemesterId()+"");
-			map.put("hoursperweek",c.getHoursPerWeek()+"");
+			map.put("responsibilityId", c.getResponsibility()
+					.getResponsibilityId() + "");
+			// map.put("year", c.getYear() + "");
+			map.put("semesterId", c.getSemester().getSemesterId() + "");
+			map.put("hoursperweek", c.getHoursPerWeek() + "");
 			items.add(map);
 		}
 		return items;

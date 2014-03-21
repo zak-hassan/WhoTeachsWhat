@@ -25,7 +25,6 @@ public class ResponsibilityToFaculty implements Serializable {
 	@Column(name="hours_per_week")
 	private float hoursPerWeek;
 
-	private int year;
 
 	//bi-directional many-to-one association to Responsibility
 	@ManyToOne
@@ -96,7 +95,6 @@ public class ResponsibilityToFaculty implements Serializable {
 				+ ((responsibility == null) ? 0 : responsibility.hashCode());
 		result = prime * result
 				+ ((semester == null) ? 0 : semester.hashCode());
-		result = prime * result + year;
 		return result;
 	}
 
@@ -132,17 +130,8 @@ public class ResponsibilityToFaculty implements Serializable {
 				return false;
 		} else if (!semester.equals(other.semester))
 			return false;
-		if (year != other.year)
-			return false;
 		return true;
 	}
 
-	public int getYear() {
-		return year;
-	}
-
-	public void setYear(int year) {
-		this.year = year;
-	}
 
 }

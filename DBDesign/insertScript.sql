@@ -347,8 +347,61 @@ VALUES
 "Jim.Carey");
 
 
+-- ADDING COURSESINSEMESTER - FK: course_id (1-185), semester_id (1-4) , eval_id(1-2) , semester_id (1-4)
 
+INSERT INTO `test`.`CoursesInSemester`
+(`addition_attribute`,
+`eval_1_ans`,
+`eval_2_ans`,
+`eval_3_ans`,
+`total_section`,
+`year`,
+`course_id`,
+`eval_1`,
+`eval_2`,
+`eval_3`,
+`semester_id`)
+VALUES
+(
+1,
+0.1,
+0.2,
+0.3,
+4,
+2014,
+160,
+1,
+2,
+2,
+4
+);
 
+INSERT INTO `test`.`CoursesInSemester`
+(`addition_attribute`,
+`eval_1_ans`,
+`eval_2_ans`,
+`eval_3_ans`,
+`total_section`,
+`year`,
+`course_id`,
+`eval_1`,
+`eval_2`,
+`eval_3`,
+`semester_id`)
+VALUES
+(
+1,
+0.1,
+0.5,
+0.2,
+4,
+2014,
+158,
+1,
+2,
+2,
+4
+);
 
 
 -- ADD CourseInProgramCurSem
