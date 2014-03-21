@@ -188,7 +188,7 @@
 
 
    var validateUpdateSemester= function() {
-	   	$.put("api/semester"+document.getElementById('up_semesterId').value,
+	   	$.put("api/semester/"+document.getElementById('up_semesterId').value,
 	   		{ semesterName: document.getElementById("up_semesterName").value })
 	   		.done(function(data) {
 	       		console.log("AJAX RETURNED"+JSON.stringify(data));
