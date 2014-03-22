@@ -289,8 +289,8 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>User(s)</th>
+									<th>Code(s)</th>
+									<th>Name(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 							</thead>

@@ -171,7 +171,7 @@
    // document.getElementById("accessLevel").selectedIndex +1
    
    var addUser=function() {
-    	alert("username: " + document.getElementById("username").value)
+    	alert("username: " + document.getElementById("username").value + "accessLevel " + document.getElementById("accessLevel").selectedIndex +1)
 		$.ajax({
 			type: "POST",
 			url: "api/account",
@@ -202,7 +202,7 @@
 			url: "api/account/"+document.getElementById("up_userId").value,
 			data: { 
 				username: document.getElementById("up_username").value, 
-		   		accesslevel: document.getElementById("up_accessLevel").selectedIndex +1
+		   		accesslevel: document.getElementById("up_accessLevel").selectedIndex+1
 		   	},
 			dataType: "json",
 			cache: false,
@@ -225,10 +225,10 @@
 		$.ajax({
 			type: "POST",
 			url: "api/account/"+id,
-			data: { 
+			data: JSON.stringify({ 
 				username: document.getElementById("up_username").value, 
 		   		accesslevel: 0 // Zero denotes no access 
-		   	},
+		   	}),
 			dataType: "json",
 			cache: false,
 			success : function(data){
@@ -266,11 +266,6 @@
 		$("#up_accessLevel").val(ac_level);
 	};											
 
-	var setViewSummary=function(uname, role){
-		$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-		$("#viewUserModal").modal('show');
-		
-	}
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -315,11 +310,10 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
 									<th>#</th>
 									<th>User(s)</th>
+									<th>Role</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
@@ -328,11 +322,14 @@ td {
 
 										<td>${users.getUserId() }</td>
 
-										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
+										<td>${users.getUsername() }</td>
+										
+										<td>${users.accessLevel.getAccessName() }</td>
+										
 										<td class="align">
 											 <a
 												onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-												data-toggle="modal" data-target="#updateUserModal">Permissions
+												data-toggle="modal" data-target="#updateUserModal">Update
 											</a>
 											|
 											<a
