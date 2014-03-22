@@ -164,8 +164,7 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
-     
+    @Purpose: AJAX posting and validation for adding, updating and deleting a course
    */
     
    var validateAddCourse= function() {
@@ -213,23 +212,23 @@
       		return	false;
       	   };
           
-      	var deleteCourse= function(id, course_code) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/course/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
+  	var deleteCourse= function(id, course_code) {
+ 		$.ajax({type:"DELETE", 
+  			url : "api/course/"+id,
+  			data : null,
+  			cache : false,
+  			success : function(data){
+     			if (data.success === "true") {
+    				$.pnotify({
 						title : 'Course :' + course_code,
 						type : 'info',
 						text : 'Course has been deleted'
 					});
-	       			location.reload();
-			   	}
- 		   	  }
-		   	});
-	   };	  	   
+    			location.reload();
+  				}
+  	 		 }
+ 		});
+	};	  	   
 
 	var updateForm=function(up_course_id, up_course_code, up_course_name, crossoverCourse, up_reference_input){
 		$("#up_course_id").val(up_course_id);

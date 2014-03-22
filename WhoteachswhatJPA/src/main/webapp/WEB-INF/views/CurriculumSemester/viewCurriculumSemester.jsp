@@ -164,67 +164,73 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
-     
+    @Purpose: AJAX posting and validation for adding, updating and deleting a curriculum semester
    */
     
-   var validateAddCurriculumSemester= function() {
-   	$.post("api/CurriculumSemester",{ curriculumSemesterName: document.getElementById("curriculumSemesterName").value
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addCurriculumSemester").modal('hide');
-       			$.pnotify({
-					title : 'New Curriculum Semester Added',
-					type : 'info',
-					text : 'Added new curriculum semester !'
-				});
-       		}
-   		});
-	return	false;
-   };
-
-
-   var validateUpdateCurriculumSemester= function() {
-	   	$.put("api/CurriculumSemester/"+document.getElementById("up_curriculumSemesterId").value,{ 
-	   		curriculumSemesterName: document.getElementById("curriculumSemesterName").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#addCurriculumSemester").modal('hide');
-	       			$.pnotify({
-						title : 'Updated Curriculum Semester',
+   var addCurriculumSemester=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/CurriculumSemester",
+			data: { curriculumSemesterName: document.getElementById("curriculumSemesterName").value },
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Curriculum Semester added',
 						type : 'info',
-						text : 'Curriculum semester updated !'
+						text : 'Curriculum Semester ' + document.getElementById('curriculumSemesterName').value 
+							+ ' has been added'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
+		    		
+		    		document.getElementById("addCurriculumSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addCurriculumSemesterModal').modal('hide');
+			   	}
+			}
+		});
+	};
+   
+	var updateCurriculumSemester=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/CurriculumSemester/"+document.getElementById("up_curriculumSemesterId").value,
+			data: { curriculumSemesterName: document.getElementById("up_curriculumSemesterName").value },
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Curriculum Semester updated',
+						type : 'info',
+						text : 'Curriculum Semester ' + document.getElementById('up_curriculumSemesterName').value 
+							+ ' has been updated'
+					});
+		    		
+		    		document.getElementById("updateCurriculumSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateCurriculumSemesterrModal').modal('hide');
+			   	}
+			}
+		});
+	};
 
-	   var deleteCurriculumSemester= function(id,curriculumSemesterName) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/CurriculumSemester"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
+	var deleteCurriculumSemester= function(id,curriculumSemesterName) {
+	 	$.ajax({
+	 		type:"DELETE", 
+		  	url : "api/CurriculumSemester/"+id,
+		  	data : null,
+		  	cache : false,
+		  	success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
 						title : 'Curriculum semester :' + curriculumSemesterName,
 						type : 'info',
 						text : 'Curriculum semester has been deleted'
 					});
-	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
+	    			location.reload();
+  				}
+	   	  	}
+	 	});
+	};	   
 
 	var updateForm=function(up_curriculumSemesterId, up_curriculumSemesterName){
 		$("#up_curriculumSemesterId").val(up_curriculumSemesterId);
@@ -274,25 +280,23 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
 									<th>#</th>
-									<th>User(s)</th>
+									<th>Semester Name(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allCurriculumSemesters }" var="cs">
+								<c:forEach items="${allCurSem }" var="cs">
 									<tr>
-
+										<td>${cs.getCurriculumId() }</td>
 										<td>${cs.getName() }</td>
 
 										<td class="align">
 											<a
 												onclick="updateForm('${cs.getCurriculumId() }', '${cs.getName() })"
-												data-toggle="modal" data-target="#updateCurriculumSemester">Update |
+												data-toggle="modal" data-target="#updateCurriculumSemesterModal">Update
 											</a>
-											
+											|
 											 <a
 												onclick="deleteCurriculumSemester('${cs.getCurriculumId() }', ' ${cs.getName() } ')">
 												Delete
@@ -346,10 +350,10 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCurriculumSemester">Add Curriculum Semester</button>
+			data-target="#addCurriculumSemesterModal">Add Curriculum Semester</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addCurriculumSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addCurriculumSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -369,7 +373,7 @@ td {
 					
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddCurriculumSemester();"
+							<button type="button" onclick="addCurriculumSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -382,7 +386,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateCurriculumSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateCurriculumSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -393,7 +397,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCurriculumSemesterForm" class="form-horizonatal">
+						<form role="form" id="updateCurriculumSemesterForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_curriculumSemesterId" 
 									id="up_curriculumSemesterId" />
@@ -406,7 +410,7 @@ td {
 					
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateCurriculumSemester();"
+							<button type="button" onclick="updateCurriculumSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

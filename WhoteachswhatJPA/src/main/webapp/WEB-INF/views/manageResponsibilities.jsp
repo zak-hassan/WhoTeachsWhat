@@ -133,74 +133,84 @@
     
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for updating a responsibility type
+    @Purpose: AJAX posting and validation for adding, updating and deleting a responsibility type
      
    */
     
-   var validateAddResponsibilityType= function() {
-	   	$.post("api/responsibility",{ respon_code: document.getElementById("respon_code").value,
-	   		respon_name: document.getElementById("respon_name").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#addResponsibility").modal('hide');
-	       			$.pnotify({
-						title : 'New responsibility type added!',
+   var addResponsibility=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/responsibility",
+			data: { 
+				respon_code: document.getElementById("respon_code").value, 
+				respon_name: document.getElementById("respon_name").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Responsibility added',
 						type : 'info',
-						text : 'Added new responsibility type!'
+						text : 'Responsibility ' + document.getElementById('respon_name').value + ' has been added'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
-	   
-	   var validateUpdateResponsibilityType= function() {
-		   	$.put("api/responsibility/"+document.getElementById("up_respon_id").value,{
-		   		respon_code: document.getElementById("up_respon_code").value,
-		   		respon_name: document.getElementById("up_respon_name").value
-		   	   	})
-		   		.done(function(data) {
-		       		console.log("AJAX RETURNED"+JSON.stringify(data));
-		       		
-		       		if (data.success === "true") {
-		       			// Success message
-		       			$("#updateResponsibility").modal('hide');
-		       			$.pnotify({
-							title : 'New responsibility type added!',
+		    		
+		    		document.getElementById("addResponsibilityForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addResponsibilityModal').modal('hide');
+			   	}
+			}
+		});
+	};
+   	   
+	 var updateResponsibility=function() {
+			$.ajax({
+				type: "POST",
+				url: "api/responsibility/"+document.getElementById("up_respon_id").value,
+				data: { 
+					respon_code: document.getElementById("up_respon_code").value, 
+					respon_name: document.getElementById("up_respon_name").value
+			   	},
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'Responsibility updated',
 							type : 'info',
-							text : 'Added new responsibility type!'
+							text : 'Responsibility ' + document.getElementById('up_respon_name').value + ' has been updated'
 						});
-		       		}
-		   		});
-			return	false;
-		   };
-		   
-		   var deleteResponsibilityType= function(id, responsibilityType) {
-			   	$.ajax({type:"DELETE", 
-				   	url : "api/responsibility/"+id,
-				   	data : null,
-				   	cache : false,
-				   	success : function(data){
-			       		if (data.success === "true") {
-		       			$.pnotify({
-							title : 'Responsibility :' + responsibilityType,
-							type : 'info',
-							text : responsibilityType + ' has been deleted'
-						});
-		       			location.reload();
+			    		
+			    		document.getElementById("updateResponsibilityForm").reset(); // Form needs resetting due to never being submitted
+			    		$('#updateResponsibilityModal').modal('hide');
 				   	}
-			   	  }
-			   	});
-		   };
+				}
+			});
+		};
 		   
-		   var updateForm=function(up_respon_id, up_respon_code, up_respon_name){
-				$("#up_respon_id").val(up_respon_id);
-				$("#up_respon_code").val(up_respon_code);
-				$("#up_respon_name").val(up_respon_name);
-			};	
+	var deleteResponsibilityType= function(id, responsibilityType) {
+	 	$.ajax({
+	 		type:"DELETE", 
+	  		url : "api/responsibility/"+id,
+	  		data : null,
+	  		cache : false,
+	  		success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
+						title : 'Responsibility :' + responsibilityType,
+						type : 'info',
+						text : responsibilityType + ' has been deleted'
+					});
+	    			location.reload();
+	  			}
+	 		}
+	 	});
+	};
+
+   var updateForm=function(up_respon_id, up_respon_code, up_respon_name){
+		$("#up_respon_id").val(up_respon_id);
+		$("#up_respon_code").val(up_respon_code);
+		$("#up_respon_name").val(up_respon_name);
+	};	
     
 </script>
         <div class="wrapper">
@@ -258,8 +268,18 @@
 										<td><label>${respon.getResponsibilityName() }</label></td>
 										<td><label>${respon.getResponsibilityCode() }</label></td>
 									<td class="align">
-										<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateForm('${comphours.getCompHour_id() }', '${comphours.getResponsibilityCode() }', '${comphours.getCompHour_name() }')"><i class="icon-edit"></i></a> 
-										<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteResponsibilityType('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
+										<a 
+											class="bootstrap-tooltip" data-original-title="Update"
+											onclick="updateForm('${comphours.getCompHour_id() }', 
+												'${comphours.getResponsibilityCode() }', 
+												'${comphours.getCompHour_name() }')">
+												<i class="icon-edit"></i>
+										</a> 
+										<a 
+											class="bootstrap-tooltip" data-original-title="Delete" 
+											onclick="deleteResponsibilityType('${comphours.getCompHour_id() }', 
+											'${comphours.getCompHour_name() }')">
+											<i class="icon-trash"></i></a> 
 									</td>
 								</tr>							
 							  </c:forEach>
@@ -307,10 +327,10 @@
             
         <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addResponsibility">Add Responsibility</button>
+			data-target="#addResponsibilityModal">Add Responsibility</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addResponsibility" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addResponsibilityModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -336,7 +356,7 @@
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddResponsibilityType();"
+							<button type="button" onclick="addResponsibility();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -347,12 +367,8 @@
 
 		<!--  END OF ADD MODAL -->
 		
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateResponsibility">Update Responsibility</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateResponsibility" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateResponsibilityModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -366,24 +382,22 @@
 						<form role="form" id="updateResponsibilityForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_respon_id" 
-									id="responsibilityId" />
+									id="up_respon_id" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Code</span><br /> <input
-									type="text" class="form-control" name="up_respon_code" id="up_respon_code"
-									placeholder="Code" />
+									type="text" class="form-control" name="up_respon_code" id="up_respon_code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility Type</span><br /> <input
-									type="text" class="form-control" name="up_respon_name" id="up_respon_name"
-									placeholder="Type" />
+									type="text" class="form-control" name="up_respon_name" id="up_respon_name" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateResponsibilityType();"
+							<button type="button" onclick="updateResponsibility();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

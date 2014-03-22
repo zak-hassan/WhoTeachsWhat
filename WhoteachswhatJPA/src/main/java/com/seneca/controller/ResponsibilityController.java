@@ -36,12 +36,7 @@ public class ResponsibilityController {
 	public String view(ModelMap model) {
 		model.addAttribute("allRespon", responsibilityService.getAll());
 		
-		return "Anil_ManageResponsibilities";
-	}
-
-	@RequestMapping(value = "/updateResponsibility", method = RequestMethod.GET)
-	public String update() {
-		return "Anil_UpdateResponsibilities";
+		return "manageResponsibilities";
 	}
 
 	// REST API ENDPOINTS:

@@ -35,7 +35,7 @@ public class CurriculumSemesterController {
 
 	@RequestMapping(value = "/viewCurriculumSemester", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("entityList", curriculumSemesterService.getAll());
+		model.addAttribute("AllCurSem", curriculumSemesterService.getAll());
 
 		return "CurriculumSemester/viewCurriculumSemester";
 	}
@@ -89,8 +89,8 @@ public class CurriculumSemesterController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "curriculumSemesterName", required = true) String curriculumSemesterName) {
 
-
 		curriculumSemesterService.add(curriculumSemesterName);
+		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 
@@ -115,7 +115,7 @@ public class CurriculumSemesterController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/CurriculumSemester/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/CurriculumSemester/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
