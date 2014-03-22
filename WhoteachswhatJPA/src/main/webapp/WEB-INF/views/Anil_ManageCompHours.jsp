@@ -81,7 +81,7 @@
 <script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
 
 <script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript" src="static/js/bootrestful.js"></script>
+<script type="text/javascript" src="static/js/bootRestful/bootrestful.js"></script>
     </head>
 
     <body class="body-inner">
@@ -137,70 +137,81 @@
      
    */
    
-   var validateAddCompHourType= function() {
-	   	$.post("api/comphour",{ comp_hour_code: document.getElementById("comp_hour_code").value,
-	   		comp_hour_name: document.getElementById("compHourType").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#addCompHour").modal('hide');
-	       			$.pnotify({
-						title : 'New Comp Hour type added!',
+	var addCompHour=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/comphour",
+			data: { 
+				comp_hour_code: document.getElementById("comp_hour_code").value, 
+				comp_hour_name: document.getElementById("comp_hour_name").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Complimentary Hour added',
 						type : 'info',
-						text : 'Added new comp hour type!'
+						text : 'Complimentary Hour ' + document.getElementById('comp_hour_name').value + ' has been added'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
-	   
-	   var validateUpdateCompHourType= function() {
-		   	$.put("api/comphour/"+document.getElementById("up_comp_hour_id").value,{
-		   		comp_hour_code: document.getElementById("up_comp_hour_code").value,
-		   		comp_hour_name: document.getElementById("up_comp_hour_name").value
-		   	   	})
-		   		.done(function(data) {
-		       		console.log("AJAX RETURNED"+JSON.stringify(data));
-		       		
-		       		if (data.success === "true") {
-		       			// Success message
-		       			$("#updateCompHour").modal('hide');
-		       			$.pnotify({
-							title : 'Updated comp hour type!',
-							type : 'info',
-							text : 'Updated comp hour type!'
-						});
-		       		}
-		   		});
-			return	false;
-		   };
+		    		
+		    		document.getElementById("addCompHourForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addCompHourModal').modal('hide');
+			   	}
+			}
+		});
+	};
 
-		   var deleteCompHourType= function(id, compHourType) {
-			   	$.ajax({type:"DELETE", 
-				   	url : "api/comphours/"+id,
-				   	data : null,
-				   	cache : false,
-				   	success : function(data){
-			       		if (data.success === "true") {
-		       			$.pnotify({
-							title : 'Comp Hour :' + compHourType,
-							type : 'info',
-							text : compHourType + ' has been deleted'
-						});
-		       			location.reload();
-				   	}
-			   	  }
-			   	});
-		   };
+	   
+	var updateCompHour=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/comphour/"+document.getElementById("up_comp_hour_id").value,
+			data: { 
+				comp_hour_code: document.getElementById("up_comp_hour_code").value, 
+				comp_hour_name: document.getElementById("up_comp_hour_name").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Complimentary Hour updated',
+						type : 'info',
+						text : 'Complimentary Hour ' + document.getElementById('up_comp_hour_name').value + ' has been updated'
+					});
+		    		
+		    		document.getElementById("updateCompHourForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateCompHourModal').modal('hide');
+			   	}
+			}
+		});
+	};
+
+	var deleteCompHourType= function(id, compHourType) {
+	 	$.ajax({
+	 		type:"DELETE", 
+		  	url : "api/comphours/"+id,
+		  	data : null,
+		  	cache : false,
+		  	success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
+						title : 'Comp Hour :' + compHourType,
+						type : 'info',
+						text : compHourType + ' has been deleted'
+					});
+    				location.reload();
+	  			}
+	 	  	}
+	 	});
+	};
 		   
-		   var updateForm=function(comp_hour_id, comp_hour_code, comp_hour_name){
-				$("#up_comp_hour_id").val(comp_hour_id);
-				$("#up_comp_hour_code").val(comp_hour_code);
-				$("#up_comp_hour_name").val(comp_hour_name);
-			};	
+   var updateForm=function(comp_hour_id, comp_hour_code, comp_hour_name){
+		$("#up_comp_hour_id").val(comp_hour_id);
+		$("#up_comp_hour_code").val(comp_hour_code);
+		$("#up_comp_hour_name").val(comp_hour_name);
+	};	
     
 </script>
         <div class="wrapper">
@@ -223,29 +234,12 @@
                 <h2><small>Manage Complimentary Hour Types</small></h2>
                 <h3><small>Update and remove complimentary hour types</small></h3>
             </header>
-            <form method="post" action="ajaxAddCompHourType" id="AddCompHourTypeForm" onsubmit="return validateAddCompHourType();"
+            <form method="post" action="ajaxAddCompHourType" id="manageCompHourTypeForm"
             	class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
-
-					<!--  <div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-						<div class="span2">
-							<label class="control-label" for="facultyName">Complimentary Hour Type</label>
-						</div>
-						<div class="span3">
-							<div class="controls">
-								<input id="comp_hour_type" type="text" 
-									placeholder="Enter a new complimentary hour type to add to the system."
-									name="comp_hour_type" />
-							</div>
-						</div>
-						
-						<div class="span3" style="height: 25px; margin-top: 15px;">
-							<button type="submit" class="btn btn-info">Add</button>
-						</div>
-					</div>-->
-					
+	
 					<style type="text/css">
 						td.align {
 							text-align: right;
@@ -262,28 +256,35 @@
 						   <table class="table table-striped" id="tableSortable">
 							   <thead>
 								   <tr>
-									   <tr>
-											<th>#</th>
-											<th>Complimentary Hour Name</th>
-											<th>Complimentary Hour Code</th>
-							
-											<th width="20%" style="text-align: right">Operation(s)</th>
-										</tr>
-								   </tr>
+										<th>#</th>
+										<th>Complimentary Hour Name</th>
+										<th>Complimentary Hour Code</th>
+						
+										<th width="25%" style="text-align: right">Operation(s)</th>
+									</tr>
 							   </thead>
-						   <tbody>
-						 <c:forEach items="${allComphours }" var="comphours">
-							   <tr>
-								<td>${comphours.getCompHour_id() }</td>
-								<td><label>${comphours.getCompHour_name() }</label></td>
-								<td><label>${comphours.getCompHour_code() }</label></td>
-								<td class="align">
-							<a class="bootstrap-tooltip" data-original-title="Update" onclick="updateForm('${comphours.getCompHour_id() }', '${comphours.getCompHour_code() }', '${comphours.getCompHour_name() })"><i class="icon-edit"></i></a> 
-							<a class="bootstrap-tooltip" data-original-title="Delete" onclick="deleteCompHourType('${comphours.getCompHour_id() }', '${comphours.getCompHour_name() }')"><i class="icon-trash"></i></a> 
-
-								</td>
-						   </tr>
-					    </c:forEach>
+							   <tbody>
+									<c:forEach items="${allComphours }" var="comphours">
+									<tr>
+										<td>${comphours.getCompHour_id() }</td>
+										<td><label>${comphours.getCompHour_name() }</label></td>
+										<td><label>${comphours.getCompHour_code() }</label></td>
+										<td class="align">
+											<a 
+												class="bootstrap-tooltip" data-original-title="Update" 
+													onclick="updateForm('${comphours.getCompHour_id() }', 
+														'${comphours.getCompHour_code() }', '${comphours.getCompHour_name() }')"
+													data-toggle="modal" data-target="#updateCompHourModal">
+													<i class="icon-edit"></i>
+											</a> 
+											<a class="bootstrap-tooltip" data-original-title="Delete" 
+												onclick="deleteCompHourType('${comphours.getCompHour_id() }', 
+													'${comphours.getCompHour_name() }')">
+												<i class="icon-trash"></i>
+											</a> 
+										</td>
+									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -329,10 +330,10 @@
             
         <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCompHour">Add Comp Hour</button>
+			data-target="#addCompHourModal">Add Comp Hour</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addCompHour" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addCompHourModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -343,7 +344,7 @@
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
+						<form role="form" id="addCompHourForm" class="form-horizonatal">
 						
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
@@ -352,13 +353,13 @@
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
-									type="text" class="form-control" name="compHourType" id="comp_hour_name"
+									type="text" class="form-control" name="comp_hour_type" id="comp_hour_name"
 									placeholder="Type" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddCompHourType();"
+							<button type="button" onclick="addCompHour();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -370,7 +371,7 @@
 		<!--  END OF ADD MODAL -->
 		
 		<!-- Modal -->
-		<div class="modal fade" id="updateCompHour" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateCompHourModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -381,25 +382,23 @@
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageCompHoursForm" class="form-horizonatal">
+						<form role="form" id="updateCompHourForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_comp_hour_id" id="up_comp_hour_id" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Code </span><br /> <input
-									type="text" class="form-control" name="comp_hour_code" id="comp_hour_code"
-									placeholder="Code" />
+									type="text" class="form-control" name="up_comp_hour_code" id="up_comp_hour_code" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Complimentary Hour Type </span><br /> <input
-									type="text" class="form-control" name="comp_hour_name" id="comp_hour_name"
-									placeholder="Type" />
+									type="text" class="form-control" name="up_comp_hour_name" id="up_comp_hour_name" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateCompHourType();"
+							<button type="button" onclick="updateCompHour();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
