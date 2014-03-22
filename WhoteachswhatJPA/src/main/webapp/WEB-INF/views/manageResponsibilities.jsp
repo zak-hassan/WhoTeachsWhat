@@ -270,15 +270,15 @@
 									<td class="align">
 										<a 
 											class="bootstrap-tooltip" data-original-title="Update"
-											onclick="updateForm('${respon.getCompHour_id() }', 
+											onclick="updateForm('${respon.getResponsibilityId() }', 
 												'${respon.getResponsibilityCode() }', 
 												'${respon.getResponsibilityName()}')">
 												<i class="icon-edit"></i>
 										</a> 
 										<a 
 											class="bootstrap-tooltip" data-original-title="Delete" 
-											onclick="deleteResponsibilityType('${comphours.getCompHour_id() }', 
-											'${comphours.getCompHour_name() }')">
+											onclick="deleteResponsibilityType('${respon.getResponsibilityId() }', 
+											'${respon.getResponsibilityName() }')">
 											<i class="icon-trash"></i></a> 
 									</td>
 								</tr>							

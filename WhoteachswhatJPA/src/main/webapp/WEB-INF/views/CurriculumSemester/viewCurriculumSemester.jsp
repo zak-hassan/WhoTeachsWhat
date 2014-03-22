@@ -288,6 +288,7 @@ td {
 							<tbody>
 								<c:forEach items="${allCurSem }" var="cs">
 									<tr>
+									
 										<td>${cs.getCurriculumId() }</td>
 										<td>${cs.getName() }</td>
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.seneca.model.CurriculumSemester;
 import com.seneca.repository.CurriculumSemesterDao;
 
-@Service("curriculumCurriculumSemesterService")
+@Service("curriculumSemesterService")
 public class CurriculumSemesterService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(CurriculumSemesterService.class);
