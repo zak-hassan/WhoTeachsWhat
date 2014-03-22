@@ -181,7 +181,9 @@
 						type : 'info',
 						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
 					});
+		    		
 		    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addSemesterModal').modal('hide');
 			   	}
 			}
 		});
@@ -202,6 +204,7 @@
 						text : 'Semester ' + document.getElementById('up_semesterName').value + ' has been updated'
 					});
 		    		document.getElementById("updateSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateSemesterModal').modal('hide');
 			   	}
 			}
 		});
@@ -249,8 +252,7 @@
 				<small>Add, Update and Delete semester names</small>
 			</h3>
 		</header>
-		<form method="post" action="api/semester" id="AddSemesterForm"
-			onsubmit="return validateAddSemester();" class="form-horizontal">
+		<form method="post" action="api/semester" id="manageSemesterForm" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -364,7 +366,7 @@ td {
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="button" onclick="addSemester();"
-								class="btn btn-primary" data-dismiss="modal">Save changes</button>
+								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
 					<div class="modal-footer"></div>

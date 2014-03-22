@@ -164,59 +164,68 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding, updating and deleting a user
      
    */
-    
-   var validateAddProgram= function() {
-  	   	$.post("api/program",{ programCode: document.getElementById("programCode").value,
-  	   		programName: document.getElementById("programName").value,
-  	   		semesterNum: document.getElementById("semesterNum").value
-  	   	   	})
-  	   		.done(function(data) {
-  	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-  	       		
-  	       		if (data.success === "true") {
-  	       			// Success message
-  	       			$("#addProgram").modal('hide');
-  	       			$.pnotify({
-  						title : 'New program added!',
-  						type : 'info',
-  						text : 'Added new program!'
-  					});
-  	       		}
-  	   		});
-  		return	false;
-  	   };
+    	   
+	var addProgram=function() {
+ 		$.ajax({
+ 			type: "POST",
+ 			url: "api/program",
+ 			data: { 
+ 					pcode: document.getElementById('pcode').value,
+ 					pname: document.getElementById('pname').value,
+ 					pnumSemester: document.getElementById('pnumSemester').value
+ 			},
+ 			dataType: "json",
+ 			cache: false,
+ 			success : function(data){
+ 		    	if (data.success === "true") {
+ 		    		$.pnotify({
+ 						title : 'New Program added',
+ 						type : 'info',
+ 						text : 'Program ' + document.getElementById('pname').value + ' has been added'
+ 					});
+ 		    		document.getElementById("addProgramForm").reset(); // Form needs resetting due to never being submitted
+ 		    		$('#addProgramModal').modal('hide');
+ 			   	}
+ 			}
+ 		});
+ 	};
       	   
-  	 var validateAddProgram= function() {
-   	   	$.put("api/program"+id,{ programCode: document.getElementById("programCode").value,
-   	   		programName: document.getElementById("programName").value,
-   	   		semesterNum: document.getElementById("semesterNum").value
-   	   	   	})
-   	   		.done(function(data) {
-   	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-   	       		
-   	       		if (data.success === "true") {
-   	       			// Success message
-   	       			$("#updateProgram").modal('hide');
-   	       			$.pnotify({
-   						title : 'Program updated!',
-   						type : 'info',
-   						text : 'Program updated!'
-   					});
-   	       		}
-   	   		});
-   		return	false;
-   	   };
+ 	var updateProgram=function() {
+ 		$.ajax({
+ 			type: "POST",
+ 			url: "api/program/"+ document.getElementById('up_pId').value,
+ 			data: { 
+ 					pcode: document.getElementById('up_pcode').value,
+ 					pname: document.getElementById('up_pname').value,
+ 					pnumSemester: document.getElementById('up_pnumSemester').value
+ 			},
+ 			dataType: "json",
+ 			cache: false,
+ 			success : function(data){
+ 		    	if (data.success === "true") {
+ 		    		$.pnotify({
+ 						title : 'Program updated',
+ 						type : 'info',
+ 						text : 'Program ' + document.getElementById('up_pname').value + ' has been updated'
+ 					});
+ 		    		document.getElementById("updateProgramForm").reset(); // Form needs resetting due to never being submitted
+ 		    		$('#updateProgramModal').modal('hide');
+ 			   	}
+ 			}
+ 		});
+ 	};
           
-      	var deleteProgram= function(id, programCode) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/program"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
+  	var deleteProgram= function(id, programCode) {
+  		$.ajax({
+			type:"DELETE", 
+			url : "api/program/"+id,
+			data : null,
+			cache : false,
+			success : function(data){
+		    	if (data.success === "true") {
 	       			$.pnotify({
 						title : 'Program :' + programCode,
 						type : 'info',
@@ -224,14 +233,15 @@
 					});
 	       			location.reload();
 			   	}
- 		   	  }
-		   	});
-	   };	  	   
+			}
+		});
+	};	  	   
 
-	var updateForm=function(programCode, programName, semesterNum){
-		$("#up_programCode").val(programCode);
-		$("#up_programName").val(programName);
-		$("#up_semesterNum").val(semesterNum);
+	var updateForm=function(pId, pcode, pname, pnumSemester){
+		$("#up_pId").val(pId);
+		$("#up_pcode").val(pcode);
+		$("#up_pname").val(pname);
+		$("#up_pnumSemester").val(pnumSemester);
 	};											
 
 </script>
@@ -252,8 +262,7 @@
 				<small>Add, Update and Delete a program/small>
 			</h3>
 		</header>
-		<form method="post" action="api/course" id="addCourseForm"
-			onsubmit="return validateAddCourse();" class="form-horizontal">
+		<form method="post" action="api/program" id="manageProgramForm" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -291,11 +300,11 @@ td {
 
 										<td class="align">
 											<a
-												onclick="updateForm('${program.getProgramCode()}, ${program.getProgramName() },
-													${program.getTotalSemester() })"
-												data-toggle="modal" data-target="#updateProgram">Update |
+												onclick="updateForm('${program.getProgramId() }', '${program.getProgramCode() }',
+												 '${program.getProgramName() }', '${program.getTotalSemester()}')"
+												data-toggle="modal" data-target="#updateProgramModal">Update
 											</a>
-											
+											|
 											 <a
 												onclick="deleteProgram('${program.getProgramId() }', ' ${program.getProgramCode()} ')">
 												Delete
@@ -349,10 +358,10 @@ td {
 		</form>
 		 <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addProgram">Add Program</button>
+			data-target="#addProgramModal">Add Program</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addProgram" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addProgramModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -363,29 +372,28 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCourseForm" class="form-horizonatal">
+						<form role="form" id="addProgramForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Program Code: </span><br /> <input
-									type="text" class="form-control" name="programCode" id="programCode"
-									placeholder="Course Code" />
+									type="text" class="form-control" name="pcode" id="pcode"
+									placeholder="Program Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Program Name: </span><br /> <input
-									type="text" class="form-control" name="programName" id="programName"
+									type="text" class="form-control" name="pname" id="pname"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Number of semesters: </span><br /> <input
-									type="text" class="form-control" name="semesterNum" id="semesterNum"
-									placeholder="Course" />
+									type="text" class="form-control" name="pnumSemester" id="pnumSemester" />
 							</div>
 							
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddProgram();"
+							<button type="button" onclick="addProgram();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -397,7 +405,7 @@ td {
 		<!--  END OF ADD MODAL -->
 		
 		<!-- Modal -->
-		<div class="modal fade" id="updateProgram" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateProgramModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -408,29 +416,29 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCourseForm" class="form-horizonatal">
+						<form role="form" id="updateProgramForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_pId" id="up_pId" />
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Program Code: </span><br /> <input
-									type="text" class="form-control" name="programCode" id="up_programCode"
-									placeholder="Course Code" />
+									type="text" class="form-control" name="up_pcode" id="up_pcode" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Program Name: </span><br /> <input
-									type="text" class="form-control" name="programName" id="up_programName"
-									placeholder="Subject Name" />
+									type="text" class="form-control" name="up_pname" id="up_pname" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Number of semesters: </span><br /> <input
-									type="text" class="form-control" name="semesterNum" id="up_semesterNum"
-									placeholder="Course" />
+									type="text" class="form-control" name="up_pnumSemester" id="up_pnumSemester" />
 							</div>
 							
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateProgram();"
+							<button type="button" onclick="updateProgram();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

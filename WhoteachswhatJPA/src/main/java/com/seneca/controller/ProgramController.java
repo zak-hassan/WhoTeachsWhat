@@ -49,18 +49,6 @@ public class ProgramController {
 		return "Program/add_program";
 	}
 
-	@RequestMapping(value = "/ajaxAddProgram", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	Map<String, String> listUpdateResponsibiltyJSON(
-			@RequestParam(value = "responsibility_type", required = true) String responsibility_type) {
-
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("ResponsibilityType", responsibility_type);
-		list.put("success", "true");
-
-		return list;
-	}
-
 	// REST API ENDPOINTS:
 
 	/**

@@ -91,6 +91,7 @@ public class SemesterController {
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", "1");
 
 		return list;
 	}
