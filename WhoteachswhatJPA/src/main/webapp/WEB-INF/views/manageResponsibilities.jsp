@@ -270,9 +270,9 @@
 									<td class="align">
 										<a 
 											class="bootstrap-tooltip" data-original-title="Update"
-											onclick="updateForm('${comphours.getCompHour_id() }', 
-												'${comphours.getResponsibilityCode() }', 
-												'${comphours.getCompHour_name() }')">
+											onclick="updateForm('${respon.getCompHour_id() }', 
+												'${respon.getResponsibilityCode() }', 
+												'${respon.getResponsibilityName()}')">
 												<i class="icon-edit"></i>
 										</a> 
 										<a 
