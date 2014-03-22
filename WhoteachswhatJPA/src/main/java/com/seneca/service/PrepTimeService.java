@@ -56,4 +56,9 @@ public class PrepTimeService {
 		return prepTimeDao.getAll();
 	}
 
+	public PrepTime getById(Integer id) {
+		return prepTimeDao.getById(id);
+
+	}
+
 }

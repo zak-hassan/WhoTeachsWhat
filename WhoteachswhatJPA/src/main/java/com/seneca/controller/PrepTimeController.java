@@ -66,6 +66,23 @@ public class PrepTimeController {
 	}
 
 	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/api/preptime/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Map<String, String> getByIDJSON(@PathVariable("id") Integer id) {
+
+		PrepTime prep = prepTimeService.getById(id);
+
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("preptimeName", prep.getPrepName());
+		list.put("preptimeFactor", prep.getPrepFactor() + "");
+		return list;
+	}
+
+	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
 	 * 
