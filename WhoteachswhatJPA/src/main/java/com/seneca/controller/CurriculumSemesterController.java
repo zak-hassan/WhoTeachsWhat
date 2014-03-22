@@ -35,7 +35,16 @@ public class CurriculumSemesterController {
 
 	@RequestMapping(value = "/viewCurriculumSemester", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("AllCurSem", curriculumSemesterService.getAll());
+
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (CurriculumSemester c : curriculumSemesterService.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("CurriculumSemesterName", c.getName() + "");
+			map.put("CurriculumSemesterId", c.getCurriculumId() + "");
+			items.add(map);
+		}
+
+		model.addAttribute("AllCurSem", items);
 
 		return "CurriculumSemester/viewCurriculumSemester";
 	}

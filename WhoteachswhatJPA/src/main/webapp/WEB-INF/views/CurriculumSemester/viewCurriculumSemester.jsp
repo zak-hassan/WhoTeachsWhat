@@ -286,20 +286,21 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allCurSem }" var="cs">
+		
+							<c:forEach items="${allCurSem }" var="cs">
 									<tr>
 									
-										<td>${cs.getCurriculumId() }</td>
-										<td>${cs.getName() }</td>
+										<td>${cs.CurriculumSemesterName }</td>
+										<td>${cs.CurriculumSemesterId }</td>
 
 										<td class="align">
 											<a
-												onclick="updateForm('${cs.getCurriculumId() }', '${cs.getName() })"
+												onclick="updateForm('${cs.CurriculumSemesterId }', '${cs.CurriculumSemesterName }')"
 												data-toggle="modal" data-target="#updateCurriculumSemesterModal">Update
 											</a>
 											|
 											 <a
-												onclick="deleteCurriculumSemester('${cs.getCurriculumId() }', ' ${cs.getName() } ')">
+												onclick="deleteCurriculumSemester('${cs.CurriculumSemesterId }', ' ${cs.CurriculumSemesterName }')">
 												Delete
 											</a>
 										</td>
