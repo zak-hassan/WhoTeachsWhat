@@ -196,11 +196,11 @@
  	var updateProgram=function() {
  		$.ajax({
  			type: "POST",
- 			url: "api/program/"+ document.getElementById('up_pId').value,
+ 			url: "api/program/"+document.getElementById('up_pId').value,
  			data: { 
  					pcode: document.getElementById('up_pcode').value,
  					pname: document.getElementById('up_pname').value,
- 					pnumSemester: document.getElementById('up_pnumSemester').value
+ 					pnumSemester: parseInt(document.getElementById('up_pnumSemester').value)
  			},
  			dataType: "json",
  			cache: false,
@@ -221,7 +221,7 @@
   	var deleteProgram= function(id, programCode) {
   		$.ajax({
 			type:"DELETE", 
-			url : "api/program/"+id,
+			url: "api/program/"+id,
 			data : null,
 			cache : false,
 			success : function(data){
@@ -306,7 +306,7 @@ td {
 											</a>
 											|
 											 <a
-												onclick="deleteProgram('${program.getProgramId() }', ' ${program.getProgramCode()} ')">
+												onclick="deleteProgram('${program.getProgramId() }', '${program.getProgramCode()}')">
 												Delete
 											</a>
 										</td>
@@ -382,7 +382,7 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Program Name: </span><br /> <input
 									type="text" class="form-control" name="pname" id="pname"
-									placeholder="Subject Name" />
+									placeholder="Program Name" />
 							</div>
 							
 							<div class="input-group">

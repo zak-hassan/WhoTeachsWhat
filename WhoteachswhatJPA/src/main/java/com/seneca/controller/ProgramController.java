@@ -94,23 +94,6 @@ public class ProgramController {
 	}
 
 	/**
-	 * This method is incomplete course_code=CPA
-	 * &course_name=Computer+Programming+And+Analysis &simpleSelectBox=1
-	 * &course_name=
-	 * &dualMultiSem1=DBDA5250&course_name=&dualMultiSem2=BACA3440&
-	 * dualMultiSem2=
-	 * DBAA6250&dualMultiSem2=UNXA5110&dualMultiSem2=VBAA5440&dualMultiSem2
-	 * =WINA2100
-	 * &dualMultiSem2=WSAA5000&course_name=&dualMultiSem3=DBWA6240&course_name
-	 * =&dualMultiSem4
-	 * =DBJA5650&course_name=&dualMultiSem5=DBLA6260&course_name=&
-	 * dualMultiSem6=NETA6050&course_name=
-	 * 
-	 * @param responsibility_type
-	 * @return
-	 */
-
-	/**
 	 * This method accepts data posted from the AddCompHourTypeForm and adds a
 	 * comp hour type using the appropriate service method
 	 * 
@@ -129,8 +112,8 @@ public class ProgramController {
 			@RequestParam(value = "pname", required = true) String pname,
 			@RequestParam(value = "pnumSemester", required = true) int num) {
 
-		programService.add(pcode, pname, num);
-
+		 programService.add(pcode, pname, num);
+		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 

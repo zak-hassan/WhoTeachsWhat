@@ -168,75 +168,109 @@
      
    */
     
-   var validateNewUser= function() {
-   	$.post("api/account",{ username: document.getElementById("username").value, 
-   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'New User Added',
-					type : 'info',
-					text : 'Added new user !'
-				});
-       		}
-   		});
-	return	false;
-   };
+   // document.getElementById("accessLevel").selectedIndex +1
+   
+   var addUser=function() {
+    	alert("username: " + document.getElementById("username").value)
+		$.ajax({
+			type: "POST",
+			url: "api/account",
+			data: { 
+				username: document.getElementById("username").value, 
+		   		accesslevel: document.getElementById("accessLevel").selectedIndex +1
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New User added',
+						type : 'info',
+						text : 'User ' + document.getElementById('username').value + ' has been added'
+					});
+		    		
+		    		document.getElementById("addUserForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addUserModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var updateUser=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/account/"+document.getElementById("up_userId").value,
+			data: { 
+				username: document.getElementById("up_username").value, 
+		   		accesslevel: document.getElementById("up_accessLevel").selectedIndex +1
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New User added',
+						type : 'info',
+						text : 'User ' + document.getElementById('user').value + ' has been added'
+					});
+		    		
+		    		document.getElementById("updateUserForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateUserModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var suspendUser=function(id, username) {
+		$.ajax({
+			type: "POST",
+			url: "api/account/"+id,
+			data: { 
+				username: document.getElementById("up_username").value, 
+		   		accesslevel: 0 // Zero denotes no access 
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'User Suspended',
+						type : 'info',
+						text : 'User ' + username + ' has been suspended'
+					});
+			   	}
+			}
+		});
+	};
 
-
-   var suspendUser= function(id,uname) {
-	   	$.post("api/account/"+id,{ username: uname, 
-	   		accessLevel: 0  // 1 means suspended noaccess
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       if (data.success === "true") {
-       			// Success message
-       			//$("#addUser").modal('hide');
-       			$.pnotify({
-					title : 'User :' + uname,
-					type : 'info',
-					text : 'User has been suspended'
-				});
-       		}
-   		});
-		return	false;
-	   };
-
-	   var deleteUser= function(id,uname) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
+	var deleteUser= function(id,uname) {
+	 	$.ajax({type:"DELETE", 
+		  	url : "api/account/"+id,
+		  	data : null,
+		  	cache : false,
+		  	success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
 						title : 'User :' + uname,
 						type : 'info',
 						text : 'User has been deleted'
 					});
-				  	 // Reload so the delete user is gone..
-	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
+    				location.reload();
+  				}
+   	  		}
+ 		});
+	};	   
 
 	var updateForm=function(uname,ac_level){
-			$("#up_username").val(uname);
-			$("#up_accessLevel").val(ac_level);
-		};											
+		$("#up_username").val(uname);
+		$("#up_accessLevel").val(ac_level);
+	};											
 
-		var setViewSummary=function(uname, role){
-			$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-			$("#viewUser").modal('show');
-			
-		}
+	var setViewSummary=function(uname, role){
+		$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
+		$("#viewUserModal").modal('show');
+		
+	}
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -244,7 +278,7 @@
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
-				<li class="current"><a href="Anil_ManageUsers.html">Manage
+				<li class="current"><a href="manageUsers">Manage
 						Users</a></li>
 			</ul>
 		</div>
@@ -254,7 +288,7 @@
 				<small>Manage Users</small>
 			</h2>
 			<h3>
-				<small>Add, Delete and Suspend users</small>
+				<small>Add, Upate, Delete and Suspend users</small>
 			</h3>
 		</header>
 		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
@@ -295,16 +329,21 @@ td {
 										<td>${users.getUserId() }</td>
 
 										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
-										<td class="align"><a
-											onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend</a>
-											| <a
-											onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete</a>
-											| <a
-											onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-											data-toggle="modal" data-target="#updateUser">Permissions</a>
+										<td class="align">
+											 <a
+												onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
+												data-toggle="modal" data-target="#updateUserModal">Permissions
+											</a>
+											|
+											<a
+												onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend
+											</a>
+											| 
+											<a
+												onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete
+											</a>
 										</td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>
@@ -351,10 +390,10 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addUser">Add user</button>
+			data-target="#addUserModal">Add user</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -365,7 +404,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="addUserForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">User Name: </span><br /> <input
 									type="text" class="form-control" name="username" id="username"
@@ -381,43 +420,36 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="button" onclick="addUser();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
 
-
 		<!--  END OF ADD MODAL -->
 
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#updateUser">Update user</button>
-
 		<!-- Modal -->
-		<div class="modal fade" id="updateUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Set User Permissions</h4>
+						<h4 class="modal-title" id="myModalLabel">Update User</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="ManageUsersForm" class="form-horizonatal">
+						<form role="form" id="updateUserForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_userId" id="up_userId" />
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="username"
-									id="up_username" placeholder="Username" />
+									type="text" class="form-control" name="up_username" id="up_username" />
 							</div>
 
 							<div class="input-group">
@@ -430,12 +462,9 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateNewUser();"
+							<button type="button" onclick="updateUser();"
 								class="btn btn-primary">Save changes</button>
-
 						</form>
-
-
 					</div>
 					<div class="modal-footer">
 					</div>
@@ -443,20 +472,10 @@ td {
 			</div>
 		</div>
 
-
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
+		<!--  END OF UPDATE MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
+		<div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
