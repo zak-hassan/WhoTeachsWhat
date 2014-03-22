@@ -208,7 +208,7 @@ public class ProgramController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/program/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/program/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
 			@RequestParam(value = "pcode", required = true) String pcode,
