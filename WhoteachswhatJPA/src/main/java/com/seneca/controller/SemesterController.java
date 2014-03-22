@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.seneca.model.Semester;
 import com.seneca.service.SemesterService;
 
@@ -92,6 +91,7 @@ public class SemesterController {
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", "1");
 
 		return list;
 	}
@@ -114,7 +114,7 @@ public class SemesterController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/semester/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/semester/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

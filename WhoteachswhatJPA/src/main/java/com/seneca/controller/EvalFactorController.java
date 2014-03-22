@@ -22,7 +22,7 @@ import com.seneca.service.EvalFactorService;
 public class EvalFactorController {
 	/**
 	 * This class is the controller which regulates all evalfactor operations.
-	 * 
+	 *
 	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
 	 *         <anil.d.santokhI@gmail.com>
 	 * @lastmodified March 10, 2014
@@ -44,10 +44,10 @@ public class EvalFactorController {
 	/**
 	 * This method accepts no parameters and returns all course in in the
 	 * database.
-	 * 
+	 *
 	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
+	 *
+	 *
 	 * @return JSON object with a list of course to display in datatable
 	 */
 
@@ -68,9 +68,9 @@ public class EvalFactorController {
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
-	 * 
+	 *
 	 * @see com.seneca.service.CourseService
-	 * 
+	 *
 	 * @param courseCode
 	 *            The six to eight digit course code
 	 * @param courseName
@@ -79,7 +79,7 @@ public class EvalFactorController {
 	 *            The course code that is syncronomous with this course code
 	 * @param oldCourse
 	 *            The previous course code of the course, if any
-	 * 
+	 *
 	 * @return A String containing the name of the view to render
 	 */
 
@@ -102,9 +102,9 @@ public class EvalFactorController {
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
-	 * 
+	 *
 	 * @see com.seneca.service.CourseService
-	 * 
+	 *
 	 * @param courseCode
 	 *            The six to eight digit course code
 	 * @param courseName
@@ -113,7 +113,7 @@ public class EvalFactorController {
 	 *            The course code that is synonomous with this course code
 	 * @param oldCourse
 	 *            The previous course code of the course, if any
-	 * 
+	 *
 	 * @return A String containing the name of the view to render
 	 */
 
@@ -133,9 +133,9 @@ public class EvalFactorController {
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
-	 * 
+	 *
 	 * @see com.seneca.service.CourseService
-	 * 
+	 *
 	 * @param courseCode
 	 *            The six to eight digit course code
 	 * @param courseName
@@ -144,7 +144,7 @@ public class EvalFactorController {
 	 *            The course code that is synonomous with this course code
 	 * @param oldCourse
 	 *            The previous course code of the course, if any
-	 * 
+	 *
 	 * @return A String containing the name of the view to render
 	 */
 

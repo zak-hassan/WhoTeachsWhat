@@ -164,48 +164,9 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a semester
-     
+    @Purpose: AJAX posting and validation for adding, updating and deleting a semester
    */
     
-   var validateUpdateSemester= function() {
-	   alert("Entered update "+ document.getElementById('up_semesterId').value + " " + document.getElementById("up_semesterName").value);
-	   	$.put("api/semester/"+document.getElementById('up_semesterId').value,
-	   		{ semesterName: document.getElementById("up_semesterName").value })
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		alert("Done");
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#updateSemester").modal('hide');
-	       			$.pnotify({
-						title : 'Updated semester',
-						type : 'info',
-						text : 'Updated semester !'
-					});
-	       		}
-	   		});
-		return	false;
-	   };
-
-	   var deleteSemester= function(id,semesterName) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/semester/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Semester :' + semesterName,
-						type : 'info',
-						text : 'Semester has been deleted'
-					});
-	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
-
 	var addSemester=function() {
 		$.ajax({
 			type: "POST",
@@ -220,13 +181,54 @@
 						type : 'info',
 						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
 					});
-		    		document.getElementById("AddSemesterForm").reset(); // Form needs resetting due to never being submitted
-		    		location.reload(); // Soft reset to show updated data
+		    		
+		    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addSemesterModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var updateSemester=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/semester/"+document.getElementById('up_semesterId').value,
+			data: { semesterName: document.getElementById('up_semesterName').value },
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Semester updated',
+						type : 'info',
+						text : 'Semester ' + document.getElementById('up_semesterName').value + ' has been updated'
+					});
+		    		document.getElementById("updateSemesterForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateSemesterModal').modal('hide');
 			   	}
 			}
 		});
 	};
 	   
+	var deleteSemester= function(id,semesterName) {
+		$.ajax({
+			type:"DELETE", 
+			url : "api/semester/"+id,
+			data : null,
+			cache : false,
+			success : function(data){
+		    	if (data.success === "true") {
+	       			$.pnotify({
+						title : 'Semester :' + semesterName,
+						type : 'info',
+						text : 'Semester has been deleted'
+					});
+	       			location.reload();
+			   	}
+			}
+		});
+	};	   
+	
 	var updateForm=function(semesterId, semesterName){
 		$("#up_semesterId").val(semesterId);
 		$("#up_semesterName").val(semesterName);
@@ -250,8 +252,7 @@
 				<small>Add, Update and Delete semester names</small>
 			</h3>
 		</header>
-		<form method="post" action="api/semester" id="AddSemesterForm"
-			onsubmit="return validateAddSemester();" class="form-horizontal">
+		<form method="post" action="api/semester" id="manageSemesterForm" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -274,11 +275,9 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
 									<th>#</th>
 									<th>Semester(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
@@ -291,14 +290,13 @@ td {
 										<td class="align">
 											<a
 												onclick="updateForm('${semester.getSemesterId() }', '${semester.getSemesterName() }')"
-												data-toggle="modal" data-target="#updateSemester">Update
+												data-toggle="modal" data-target="#updateSemesterModal">Update
 											</a>
 											<a 
 												onclick="deleteSemester('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')">Delete
 											</a>
 										</td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>
@@ -345,10 +343,10 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addSemester">Add semester</button>
+			data-target="#addSemesterModal">Add semester</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -359,7 +357,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="AddSemesterForm" class="form-horizonatal">
+						<form role="form" id="addSemesterForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Semester Name:</span> <br /> <input
 									type="text" class="form-control" name="semesterName" id="semesterName"
@@ -368,7 +366,7 @@ td {
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="button" onclick="addSemester();"
-								class="btn btn-primary" data-dismiss="modal">Save changes</button>
+								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
 					<div class="modal-footer"></div>
@@ -380,7 +378,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -403,8 +401,8 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateSemester();"
-								class="btn btn-primary">Save changes</button>
+							<button type="button" onclick="updateSemester();"
+								class="btn btn-primary" data-dismiss="modal">Save changes</button>
 						</form>
 					</div>
 					<div class="modal-footer">

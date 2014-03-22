@@ -164,71 +164,81 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding, updating and deleting an Evaluation Factor
      
    */
     
-   var validateAddEvalFactor= function() {
-   	$.post("api/evalfactor",{ evalName: document.getElementById("evalName").value, 
-   		evalFactor: document.getElementById("evalFactor").value
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addEvalFactor").modal('hide');
-       			$.pnotify({
-					title : 'New Evaluation Factor Added',
-					type : 'info',
-					text : 'Added new evaluation factor !'
-				});
-       		}
-   		});
-	return	false;
-   };
-
-
-   var validateUpdateEvalFactor= function() {
-	   	$.put("api/evalfactor/"+document.getElementById("up_evalId").value,{ 
-	   		evalName: document.getElementById("evalName").value, 
-	   		evalFactor: document.getElementById("evalFactor").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#updateEvalFactor").modal('hide');
-	       			$.pnotify({
-						title : 'Evaluation Factor Updated',
+   var addEvalFactor=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/evalfactor",
+			data: { 
+				evalName: document.getElementById("evalName").value, 
+		   		evalFactor: document.getElementById("evalFactor").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Evaluation Factor added',
 						type : 'info',
-						text : 'Updated evaluation factor !'
+						text : 'Evaluation Factor ' + document.getElementById('evalName').value + ' has been added'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
+		    		
+		    		document.getElementById("addEvalFactorForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addEvalFactorModal').modal('hide');
+			   	}
+			}
+		});
+	};
+   
 
-	   var deleteEvalFactor= function(id,evalName) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/account/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
+	var updateEvalFactor=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/evalfactor/"+document.getElementById("up_evalId").value,
+			data: { 
+				evalName: document.getElementById("up_evalName").value, 
+		   		evalFactor: document.getElementById("up_evalFactor").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Evaluation Factor updated',
+						type : 'info',
+						text : 'Evaluation Factor ' + document.getElementById('up_evalName').value + ' has been updated'
+					});
+		    		
+		    		document.getElementById("updateEvalFactorForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateEvalFactorModal').modal('hide');
+			   	}
+			}
+		});
+	};
+
+	var deleteEvalFactor= function(id,evalName) {
+	 	$.ajax({
+	 		type:"DELETE", 
+	  		url : "api/evalfactor/"+id,
+	  		data : null,
+	  		cache : false,
+	  		success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
 						title : 'Evaluation Factor :' + evalName,
 						type : 'info',
 						text : 'Evaluation factor has been deleted'
 					});
-	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
+	    			location.reload();
+	  			}
+	   	 	}
+	 	});
+	};	   
 
-	var updateForm=function(up_evalId, evalName,evalFactor){
+	var updateForm=function(up_evalId, evalName, evalFactor){
 		$("#up_evalId").val(up_evalId);
 		$("#up_evalName").val(evalName);
 		$("#up_evalFactor").val(evalFactor);
@@ -278,11 +288,9 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
-									<th>#</th>
-									<th>User(s)</th>
+									<th>Name</th>
+									<th>Evaluation Factor(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
@@ -294,8 +302,9 @@ td {
 										<td>${evalFactor.getEvalFactor() }</td>
 										<td class="align">
 											<a
-												onclick="updateForm('${evalFactor.getEvalName() }',${evalFactor.getEvalFactor()} )"
-												data-toggle="modal" data-target="#updateEvalFactor">Update |
+												onclick="updateForm('${evalFactor.getEvalId() }', '${evalFactor.getEvalName() }',
+													'${evalFactor.getEvalFactor()}' )"
+												data-toggle="modal" data-target="#updateEvalFactorModal">Update |
 											</a>
 											
 											 <a
@@ -351,10 +360,10 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addEvalFactor">Add Evaluation Factor</button>
+			data-target="#addEvalFactorModal">Add Evaluation Factor</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addEvalFactor" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addEvalFactorModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -378,7 +387,7 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddEvalFactor();"
+							<button type="button" onclick="addEvalFactor();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -390,7 +399,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateEvalFactor" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateEvalFactorModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -401,23 +410,21 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addEvalFactorForm" class="form-horizonatal">
+						<form role="form" id="updateEvalFactorForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_evalId" id="up_evalId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Evaluation Name: </span><br /> <input
-									type="text" class="form-control" name="up_evalName" id="up_evalName"
-									placeholder="Name" />
+									type="text" class="form-control" name="up_evalName" id="up_evalName" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Evaluation Factor: </span><br /> <input
-									type="text" class="form-control" name="up_evalFactor" id="up_evalFactor"
-									placeholder="Factor" />
+									type="text" class="form-control" name="up_evalFactor" id="up_evalFactor" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateEvalFactor();"
+							<button type="button" onclick="updateEvalFactor();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

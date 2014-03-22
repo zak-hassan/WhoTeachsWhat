@@ -164,55 +164,64 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding, updating and deleting a prep time
      
    */
     
-   var validateAddPrepTime= function() {
-   	$.post("api/preptime",{ preptimeName: document.getElementById("preptimeName").value, 
-   		preptimeFactor: document.getElementById("preptimeFactor").value
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addPreptime").modal('hide');
-       			$.pnotify({
-					title : 'New Prep Time Added',
-					type : 'info',
-					text : 'Added new prep time !'
-				});
-       		}
-   		});
-	return	false;
-   };
+   var addPrepTime=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/preptime",
+			data: { 
+				preptimeName: document.getElementById("preptimeName").value, 
+		   		preptimeFactor: document.getElementById("preptimeFactor").value 
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Prep Time added',
+						type : 'info',
+						text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been added'
+					});
+		    		
+		    		document.getElementById("addPrepTimeForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addPrepTimeModal').modal('hide');
+			   	}
+			}
+		});
+	};
 
 
-   var validateUpdatePrepTime= function() {
-	   	$.put("api/preptime/"+document.getElementById("up_preptimeId").value,{ 
-	   		preptimeName: document.getElementById("up_preptimeName").value, 
-	   		preptimeFactor: document.getElementById("up_preptimeFactor").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#addPreptime").modal('hide');
-	       			$.pnotify({
+	var updatePrepTime=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/preptime/"+document.getElementById("up_preptimeId").value,
+			data: { 
+				preptimeName: document.getElementById("up_preptimeName").value, 
+		   		preptimeFactor: document.getElementById("up_preptimeFactor").value 
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
 						title : 'Prep Time Updated',
 						type : 'info',
-						text : 'Prep time updated !'
+						text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been updated'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
+		    		
+		    		document.getElementById("updatePrepTimeForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updatePrepTimeModal').modal('hide');
+			   	}
+			}
+		});
+	};
 
 	   var deletePreptime= function(id,preptime) {
 		   	$.ajax({type:"DELETE", 
-			   	url : "api/preptime"+id,
+			   	url : "api/preptime/"+id,
 			   	data : null,
 			   	cache : false,
 			   	success : function(data){
@@ -228,7 +237,7 @@
 		   	});
 	   };	   
 
-	var updateForm=function(up_prepTimeId, up_preptimeName, up_preptimeFactor){
+	var updateForm=function(up_preptimeId, up_preptimeName, up_preptimeFactor){
 		$("#up_preptimeId").val(up_preptimeId);
 		$("#up_preptimeName").val(up_preptimeName);
 		$("#up_preptimeFactor").val(up_preptimeFactor);
@@ -295,7 +304,7 @@ td {
 										<td class="align">
 											<a
 												onclick="updateForm('${pt.getPrepId()}', '${pt.getPrepName()}', '${pt.getPrepFactor()}' )"
-												data-toggle="modal" data-target="#updatePreptime">Update</a>
+												data-toggle="modal" data-target="#updatePrepTimeModal">Update</a>
 											
 											<a
 												onclick="deletePreptime('${pt.getPrepId()}', '${pt.getPrepName()}')">
@@ -351,10 +360,10 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addPreptime">Add Prep Time</button>
+			data-target="#addPrepTimeModal">Add Prep Time</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addPreptime" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addPrepTimeModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -378,7 +387,7 @@ td {
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddPrepTime();"
+							<button type="button" onclick="addPrepTime();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -390,7 +399,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updatePreptime" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updatePrepTimeModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -401,10 +410,9 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="updatePreptimeForm" class="form-horizonatal">
+						<form role="form" id="updatePrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_preptimeId" id="up_preptimeId"
-									placeholder="Prep Time Name" />
+								<input type="hidden" class="form-control" name="up_preptimeId" id="up_preptimeId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
@@ -417,7 +425,7 @@ td {
 
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdatePrepTime();"
+							<button type="button" onclick="updatePrepTime();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
