@@ -123,7 +123,7 @@ public class CourseController {
 	 * @return						A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
@@ -132,7 +132,7 @@ public class CourseController {
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
 			@RequestParam(value = "reference_input", required = false) String oldCourse) {
 
-		courseService.update(id, courseName, courseCode, crossoverCourse,
+		courseService.update(id, courseCode, courseName, crossoverCourse,
 				oldCourse);
 		
 		Map<String, String> list = new HashMap<String, String>();

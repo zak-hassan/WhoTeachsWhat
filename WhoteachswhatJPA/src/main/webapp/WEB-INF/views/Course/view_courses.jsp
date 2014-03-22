@@ -167,51 +167,60 @@
     @Purpose: AJAX posting and validation for adding, updating and deleting a course
    */
     
-   var validateAddCourse= function() {
-  	   	$.post("api/course",{ course_code: document.getElementById("course_code").value,
-  	   		course_name: document.getElementById("course_name").value,
-  	   		crossover_input: document.getElementById("crossover_input").value,
-  	   		reference_input: document.getElementById("reference_input").value
-  	   	   	})
-  	   		.done(function(data) {
-  	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-  	       		
-  	       		if (data.success === "true") {
-  	       			// Success message
-  	       			$("#addCourse").modal('hide');
-  	       			$.pnotify({
-  						title : 'New course added!',
-  						type : 'info',
-  						text : 'Added new course!'
-  					});
-  	       		}
-  	   		});
-  		return	false;
-  	   };
-      	   
-      	var validateUpdateCourse= function() {
-      	   	$.put("api/course/"+document.getElementById("up_course_id").value,{
-	      	   	course_code: document.getElementById("up_course_code").value,
+   var addCourse=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/course",
+			data: { 
+				course_code: document.getElementById("course_code").value,
+	  	   		course_name: document.getElementById("course_name").value,
+	  	   		crossover_input: document.getElementById("crossover_input").value,
+	  	   		reference_input: document.getElementById("reference_input").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Course added',
+						type : 'info',
+						text : 'Course ' + document.getElementById('course_code').value + ' has been added'
+					});
+		    		
+		    		document.getElementById("addCourseForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addCourseModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var updateCourse=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/course/"+document.getElementById("up_course_id").value,
+			data: { 
+				course_code: document.getElementById("up_course_code").value,
 	  	   		course_name: document.getElementById("up_course_name").value,
 	  	   		crossover_input: document.getElementById("up_crossover_input").value,
 	  	   		reference_input: document.getElementById("up_reference_input").value
-      	   	   	})
-      	   		.done(function(data) {
-      	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-      	       		
-      	       		if (data.success === "true") {
-      	       			// Success message
-      	       			$("#updateCourse").modal('hide');
-      	       			$.pnotify({
-      						title : 'New course added!',
-      						type : 'info',
-      						text : 'Added new course!'
-      					});
-      	       		}
-      	   		});
-      		return	false;
-      	   };
-          
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Course Updated',
+						type : 'info',
+						text : 'Course ' + document.getElementById('up_course_code').value + ' has been updated'
+					});
+		    		
+		    		document.getElementById("updateCourseForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateCourseModal').modal('hide');
+			   	}
+			}
+		});
+	};
+   
   	var deleteCourse= function(id, course_code) {
  		$.ajax({type:"DELETE", 
   			url : "api/course/"+id,
@@ -230,7 +239,7 @@
  		});
 	};	  	   
 
-	var updateForm=function(up_course_id, up_course_code, up_course_name, crossoverCourse, up_reference_input){
+	var updateForm=function(up_course_id, up_course_code, up_course_name, up_crossover_input, up_reference_input){
 		$("#up_course_id").val(up_course_id);
 		$("#up_course_code").val(up_course_code);
 		$("#up_course_name").val(up_course_name);
@@ -280,11 +289,9 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
 									<th>#</th>
 									<th>User(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
@@ -297,9 +304,10 @@ td {
 
 										<td class="align">
 											<a
-												onclick="updateForm('${course.getCourseId() } ', '${course.getCourseCode() }, ${course.getCourseName() },
-													${course.getCourseName() }, ${course.getCourseCode() })"
-												data-toggle="modal" data-target="#updateCourse">Update |
+												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
+													'${course.getCourseName() }','${course.getCrossover_course() }', 
+													'${course.getOld_course() }')"
+												data-toggle="modal" data-target="#updateCourseModal">Update |
 											</a>
 											
 											 <a
@@ -355,10 +363,10 @@ td {
 		</form>
 		 <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCourse">Add Course</button>
+			data-target="#addCourseModal">Add Course</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addCourse" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -396,7 +404,7 @@ td {
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddCourse();"
+							<button type="button" onclick="addCourse();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -408,7 +416,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 			<!-- Modal -->
-		<div class="modal fade" id="updateCourse" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -419,7 +427,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCourseForm" class="form-horizonatal">
+						<form role="form" id="updateCourseForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_course_id" id="up_course_id" />
 							</div>
@@ -450,7 +458,7 @@ td {
 							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateCourse();"
+							<button type="button" onclick="updateCourse();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
