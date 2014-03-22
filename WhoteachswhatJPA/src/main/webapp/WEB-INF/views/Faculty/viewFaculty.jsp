@@ -57,6 +57,12 @@
 
     });
 
+    /**
+    @Author: Anil Santokhi
+    @Purpose: AJAX posting and validation for adding, updating and deleting a faculty member
+     
+   */
+    
 	function deleteDialog(){
 		bootbox.dialog('<h3>Confirming</h3><br /> Are you sure you would like to delete this faculty member? <br /> <br /> <br /><button class="btn btn-danger btn-small"  onclick=\'deleteJob();\'><i class="icon-white icon-download-alt"></i> Confirm Delete </button><button class="btn btn-primary btn-small" onclick="closeAll();"><i class="icon-white icon-download-alt"></i> Cancel</button>');
 	};
