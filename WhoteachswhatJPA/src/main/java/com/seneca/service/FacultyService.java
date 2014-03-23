@@ -71,8 +71,13 @@ public class FacultyService {
 		facultyDao.create(faculty);
 	}
 
-	public void update(Integer id) {
+	public void update(Integer id, String fname, String lname, Integer status) {
 		Faculty faculty = facultyDao.getById(id);
+		faculty.setFacultyFirstName(fname);
+		faculty.setFacultyLastName(lname);
+		TeachingType tType=teachingTypeDao.getById(status);
+		faculty.setTeachingType(tType);
+		
 		facultyDao.update(faculty);
 	}
 	
@@ -83,6 +88,4 @@ public class FacultyService {
 	public  List<Faculty>  getAllFaculty() {
 		return facultyDao.getAll();
 	}
-
-
 }

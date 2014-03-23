@@ -101,11 +101,11 @@
 	 var updateFaculty=function() {
 		$.ajax({
 			type: "POST",
-			url: "api/faculty/"+document.getElementById("up_facId"),
+			url: "api/faculty/"+document.getElementById("up_facId").value,
 			data: { 
 				faculty_first_name : document.getElementById("up_fname").value, 
 				faculty_last_name : document.getElementById("up_lname").value,
-				faculty_status : document.getElementById("up_status").selectedIndex+1  
+				faculty_status : document.getElementById("up_accessLevel").selectedIndex+1  
 		   	},
 			dataType: "json",
 			cache: false,
@@ -144,10 +144,11 @@
 	   	});
    };
    
-   var updateForm=function(up_preptimeId, up_preptimeName, up_preptimeFactor){
-		$("#up_preptimeId").val(up_preptimeId);
-		$("#up_preptimeName").val(up_preptimeName);
-		$("#up_preptimeFactor").val(up_preptimeFactor);
+   var updateForm=function(up_facId, up_fname, up_lname, up_status){
+		$("#up_facId").val(up_facId);
+		$("#up_fname").val(up_fname);
+		$("#up_lname").val(up_lname);
+		$("#up_accessLevel").val(up_status);
 	};	
 	
 </script>
@@ -218,6 +219,7 @@
 								   <tr>
 										<th>#</th>
 										<th>Faculty Member(s)</th>
+										<th>Status</th>
 										<th width="25%" style="text-align: right">Operation(s)</th>
 								   </tr>
 							   </thead>
@@ -232,24 +234,32 @@
 													</a>
 												</label>
 											</td>
+											<td>
+												${faculty.getTeachingType().getTeachingType_name() }
+											</td>
 											<td class="align">
 												<a class="bootstrap-tooltip" data-original-title="Complimentary Hours"
 													 data-placement="top" href="Anil_ManageFacultyCompHours.html"> 
 													<i class="icon-time"></i> 
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Responsibility" 
-													href="Anil_ManageFacultyResponsibilities.html">
+													href="viewResponsibilityToFaculty?id=5">
 													<i class="icon-list-alt"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Courses" 
 													href="Anil_ManageFacultyCourses.html"> <i class="icon-book"></i>
 												</a>
 												<a class="bootstrap-tooltip" data-original-title="Update" 
-													href="updateFaculty.html"><i class="icon-edit"></i>
+													onclick="updateForm('${faculty.getFacultyId()}', 
+														'${faculty.getFacultyFirstName()}', 
+														'${faculty.getFacultyLastName()}',
+														'${faculty.getTeachingType().getTeachingType_name() }' )"
+													data-toggle="modal" data-target="#updateFacultyModal">
+													<i class="icon-edit"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Delete" 
-													onclick="deleteFaculty('${users.getUserId() }', 
-														'${faculty.getFacultyFirstName()}  ${faculty.getFacultyLastName() }')">
+													onclick="deleteFaculty('${faculty.getFacultyId() }', 
+														'${faculty.getFacultyFirstName()}', '${faculty.getFacultyLastName() }')">
 													<i class="icon-trash"></i>
 												</a> 
 											</td>
@@ -362,15 +372,19 @@
 								<input type="hidden" class="form-control" name="up_facId" id="up_facId" />
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">User Name: </span><br /> <input
+								<span class="input-group-addon">First Name: </span><br /> <input
 									type="text" class="form-control" name="up_fname" id="up_fname" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Last Name: </span><br /> <input
+									type="text" class="form-control" name="up_lname" id="up_lname" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Access Level:</span> <br /> 
 									<select class="form-control" id="up_accessLevel">
-										<c:forEach items="${allRoles }" var="roles">
-											<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
-										</c:forEach>
+										<c:forEach items="${allStatus }" var="status">
+										<option value="${status.getTeachingType_id() }">${status.getTeachingType_name() }</option>
+									</c:forEach>
 								</select>
 							</div>
 							<button type="button" class="btn btn-default"
@@ -386,41 +400,7 @@
 		</div>
 
 
-		<!--  END OF ADD MODAL -->
-
-
-
-
-
-
-		<!-- Button trigger modal -->
-		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#viewUser">View User</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="viewUser" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">View User</h4>
-					</div>
-					<div class="modal-body">
-
-						<div id="userSummary"></div>
-
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		<!--  END OF UPDATE MODAL -->
 
         </div>
         </body>

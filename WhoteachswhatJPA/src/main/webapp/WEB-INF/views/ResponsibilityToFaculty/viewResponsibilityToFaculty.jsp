@@ -286,14 +286,13 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
 									<th>#</th>
 									<th>User(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
-								</tr>
 							</thead>
 							<tbody>
+							<!--  
 								<c:forEach items="${allUsers }" var="users">
 									<tr>
 
@@ -311,6 +310,7 @@ td {
 									</tr>
 
 								</c:forEach>
+							-->
 							</tbody>
 						</table>
 					</div>
