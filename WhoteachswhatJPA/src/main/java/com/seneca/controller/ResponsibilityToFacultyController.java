@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.seneca.model.ResponsibilityToFaculty;
 import com.seneca.service.ResponsibilityService;
 import com.seneca.service.ResponsibilityToFacultyService;
+import com.seneca.service.SemesterService;
 
 @Controller
 public class ResponsibilityToFacultyController {
@@ -36,12 +37,16 @@ public class ResponsibilityToFacultyController {
 
 	@Autowired
 	private ResponsibilityService responsibilityService;
+	
+	@Autowired
+	private SemesterService semesterService;
 
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allResponsibilityToFaculty",
 				responsibilityToFacultyService.getAll());
 		model.addAttribute("allResponsibility", responsibilityService.getAll());
+		model.addAttribute("allSemesters", semesterService.getAll());
 
 		return "ResponsibilityToFaculty/viewResponsibilityToFaculty";
 	}
@@ -61,6 +66,24 @@ public class ResponsibilityToFacultyController {
 	@RequestMapping(value = "/api/ResponsibilityToFaculty", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		for (ResponsibilityToFaculty c : responsibilityToFacultyService
+				.getAll()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("facultyId", c.getFaculty().getFacultyId() + "");
+			map.put("responsibilityId", c.getResponsibility()
+					.getResponsibilityId() + "");
+			// map.put("year", c.getYear() + "");
+			map.put("semesterId", c.getSemester().getSemesterId() + "");
+			map.put("hoursperweek", c.getHoursPerWeek() + "");
+			items.add(map);
+		}
+		return items;
+	}
+	
+	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGetOneJSON() {
 		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
 		for (ResponsibilityToFaculty c : responsibilityToFacultyService
 				.getAll()) {
@@ -131,7 +154,7 @@ public class ResponsibilityToFacultyController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

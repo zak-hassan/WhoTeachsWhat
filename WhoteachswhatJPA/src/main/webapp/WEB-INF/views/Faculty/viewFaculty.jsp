@@ -243,7 +243,7 @@
 													<i class="icon-time"></i> 
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Responsibility" 
-													href="viewResponsibilityToFaculty?id=5">
+													href="viewResponsibilityToFaculty?id=6">
 													<i class="icon-list-alt"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Courses" 

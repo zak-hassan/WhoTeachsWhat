@@ -24,7 +24,7 @@ import com.seneca.service.TeachingTypeService;
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
  *         <Anil.D.Santokhi@gmail.com>
- * @lastmodified February 15, 2014
+ * @lastmodified March 22, 2014
  * @version 0.0.1
  */
 
@@ -68,12 +68,7 @@ public class FacultyController {
 		return "Faculty/addFaculty";
 	}
 
-
-	
-	
 	// REST API ENDPOINTS:
-	
-	
 	
 	/**
 	 * This method accepts no parameters and returns all faculty in in the
