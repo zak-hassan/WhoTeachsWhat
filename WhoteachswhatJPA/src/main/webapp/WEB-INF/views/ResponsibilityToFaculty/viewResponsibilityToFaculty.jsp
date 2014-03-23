@@ -200,7 +200,8 @@
 	};
 	
 	var updateRepToFac=function() {
-		var facultyId = encodeURI($_GET['id']);
+		//var facultyId = encodeURI($_GET['id']);
+		var facultyId = 6;
 		
 		$.ajax({
 			type: "POST",
@@ -248,10 +249,10 @@
 	   	});
   	};	 
 
-	var updateForm=function(up_repToFacId, up_responsibility, up_year, up_semester, up_hoursperweek){
+	var updateForm=function(up_responsibility, up_semester, up_year, up_hoursperweek){
 		$("#up_responsibility").val(up_responsibility);
-		$("#up_year").val(up_year);
 		$("#up_semester").val(up_semester);
+		$("#up_year").val(up_year);
 		$("#up_hoursperweek").val(up_hoursperweek);
 	};											
 

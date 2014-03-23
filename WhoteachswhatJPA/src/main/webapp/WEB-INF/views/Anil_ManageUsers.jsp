@@ -328,7 +328,7 @@ td {
 										
 										<td class="align">
 											 <a
-												onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
+												onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()} )"
 												data-toggle="modal" data-target="#updateUserModal">Update
 											</a>
 											|

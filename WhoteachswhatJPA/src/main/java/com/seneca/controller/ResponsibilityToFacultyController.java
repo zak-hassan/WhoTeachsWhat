@@ -44,12 +44,24 @@ public class ResponsibilityToFacultyController {
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allResponsibilityToFaculty",
-				responsibilityToFacultyService.getAll());
+				responsibilityToFacultyService.getAll()); // Once issue with id is resolved, change to getOne(id);
 		model.addAttribute("allResponsibility", responsibilityService.getAll());
 		model.addAttribute("allSemesters", semesterService.getAll());
 
 		return "ResponsibilityToFaculty/viewResponsibilityToFaculty";
 	}
+	
+	@RequestMapping(value = "viewResponsibilityToFaculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String viewOne(@PathVariable("id") Integer id, ModelMap model) {
+		model.addAttribute("oneResponsibilityToFaculty",
+				responsibilityToFacultyService.getOne(id)); // Once issue with id is resolved, change to getOne(id);
+		
+		model.addAttribute("allResponsibility", responsibilityService.getAll());
+		model.addAttribute("allSemesters", semesterService.getAll());
+
+		return "ResponsibilityToFaculty/viewResponsibilityToFaculty/"+id;
+	}
+	
 
 	// REST API ENDPOINTS:
 
@@ -81,24 +93,6 @@ public class ResponsibilityToFacultyController {
 		return items;
 	}
 	
-	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody
-	List<Map<String, String>> listGetOneJSON() {
-		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
-		for (ResponsibilityToFaculty c : responsibilityToFacultyService
-				.getAll()) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("facultyId", c.getFaculty().getFacultyId() + "");
-			map.put("responsibilityId", c.getResponsibility()
-					.getResponsibilityId() + "");
-			// map.put("year", c.getYear() + "");
-			map.put("semesterId", c.getSemester().getSemesterId() + "");
-			map.put("hoursperweek", c.getHoursPerWeek() + "");
-			items.add(map);
-		}
-		return items;
-	}
-
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method

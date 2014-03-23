@@ -70,5 +70,8 @@ public class ResponsibilityToFacultyService {
 	public List<ResponsibilityToFaculty> getAll() {
 		return ResponsibilityToFacultyDao.getAll();
 	}
-
+	
+	public ResponsibilityToFaculty getOne(Integer id) {
+		return ResponsibilityToFacultyDao.getById(id);
+	}
 }
