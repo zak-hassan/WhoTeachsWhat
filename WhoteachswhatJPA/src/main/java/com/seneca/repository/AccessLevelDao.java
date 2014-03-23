@@ -12,7 +12,7 @@ public interface AccessLevelDao
 
    public void update(AccessLevel entity);
 
-   public void create(AccessLevel entity);
+	public AccessLevel create(AccessLevel entity);
 
    public void delete(Integer id);
 

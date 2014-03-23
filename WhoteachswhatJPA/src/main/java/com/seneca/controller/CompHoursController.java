@@ -82,8 +82,15 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	CompHour listGetOneJSON(@PathVariable("id") Integer id) {
-		return compHoursService.getOne(id);
+	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
+
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		CompHour compHour = compHoursService.getOne(id);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", compHour.getCompHour_name());
+		map.put("code", compHour.getCompHour_code());
+		items.add(map);
+		return items;
 	}
 
 	/**
@@ -106,11 +113,12 @@ public class CompHoursController {
 			@RequestParam(value = "comp_hour_code", required = true) String comp_hour_code,
 			@RequestParam(value = "comp_hour_name", required = true) String comp_hour_name) {
 
-		compHoursService.add(comp_hour_code, comp_hour_name);
+		CompHour comphour = compHoursService
+				.add(comp_hour_code, comp_hour_name);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		list.put("id", comphour.getCompHour_id() + "");
 		return list;
 	}
 

@@ -37,10 +37,10 @@ public class PrepTimeDaoImpl implements PrepTimeDao
       return;
    }
 
-   public void create(PrepTime entity)
+	public PrepTime create(PrepTime entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
    public void delete(Integer id)

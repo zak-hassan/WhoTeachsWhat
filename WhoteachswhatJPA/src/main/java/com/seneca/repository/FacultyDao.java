@@ -12,7 +12,7 @@ public interface FacultyDao
 
    public void update(Faculty entity);
 
-   public void create(Faculty entity);
+	public Faculty create(Faculty entity);
 
    public void delete(Integer id);
 

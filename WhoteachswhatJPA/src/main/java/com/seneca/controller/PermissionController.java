@@ -132,8 +132,13 @@ public class PermissionController {
 
 	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	AccessLevel listGetOneJSON(@PathVariable("id") Integer id) {
-		return permissionService.getOne(id);
+	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
+		AccessLevel accesslevel = permissionService.getOne(id);
+
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("a_Id", accesslevel.getAccessId() + "");
+		list.put("a_Name", accesslevel.getAccessName());
+		return list;
 	}
 
 	/**
@@ -155,10 +160,11 @@ public class PermissionController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "permission_name", required = true) String pname) {
 
-		permissionService.add(pname);
+		AccessLevel accesslevel = permissionService.add(pname);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", accesslevel.getAccessId() + "");
 
 		return list;
 	}

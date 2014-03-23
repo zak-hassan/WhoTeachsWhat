@@ -110,11 +110,13 @@ public class FacultyToCourseInSemesterYearController {
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
-		facultyToCourseInSemesterYearService.add(faculty_id, prepType_id,
+	 FacultyToCourseInSemesterYear fcsyear=	facultyToCourseInSemesterYearService.add(faculty_id, prepType_id,
 				course_id, compHour_id, year, semester_id, section_number,
 				comphoursAllowance, additionAttribute, comphourAssigned);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", fcsyear.getCisyId() + "");
+
 		return list;
 	}
 

@@ -12,7 +12,7 @@ public interface CurriculumSemesterDao
 
    public void update(CurriculumSemester entity);
 
-   public void create(CurriculumSemester entity);
+	public CurriculumSemester create(CurriculumSemester entity);
 
 	public void delete(Integer id);
 

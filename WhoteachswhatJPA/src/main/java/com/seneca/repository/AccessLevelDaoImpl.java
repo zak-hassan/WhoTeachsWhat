@@ -43,10 +43,10 @@ public class AccessLevelDaoImpl implements AccessLevelDao
       return;
    }
 
-   public void create(AccessLevel entity)
+	public AccessLevel create(AccessLevel entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
    public void delete(Integer id)

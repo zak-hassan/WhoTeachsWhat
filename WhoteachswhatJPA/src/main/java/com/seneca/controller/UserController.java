@@ -95,8 +95,19 @@ public class UserController {
 
 		@RequestMapping(value = "/api/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 		public @ResponseBody
-		List<Account> listGetJSON(@PathVariable("id") Integer id) {
-			return accountService.getOne(id);
+	List<Map<String, String>> listGetJSON(@PathVariable("id") Integer id) {
+
+			Account account = accountService.getOne(id);
+			List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+
+				Map<String, String> mapAccount = new HashMap<String, String>();
+				mapAccount.put("username", account.getUsername());
+				mapAccount.put("accessLevel", account.getAccessLevel()
+						.getAccessName());
+				mapAccount.put("accessLevelID", account.getAccessLevel()
+						.getAccessId() + "");
+				items.add(mapAccount);
+			return items;
 		}
 
 		/**
@@ -129,10 +140,11 @@ public class UserController {
 			@RequestParam(value = "username", required = true) String uname, 
 			@RequestParam(value = "accessLevel", required = true) Integer level) {
 		logger.info("START: Adding Account");
-		accountService.add(uname, level);
+		Account account = accountService.add(uname, level);
 		logger.info("FINISH: Adding Account");
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", account.getUserId() + "");
 		return list;
 	}
 
@@ -155,11 +167,9 @@ public class UserController {
 	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id,
 			@RequestParam(value = "username", required = true) String uname, 
 			@RequestParam(value = "accessLevel", required = true) Integer level) {
-
 		accountService.update(id,uname, level);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
 		return list;
 	}
 

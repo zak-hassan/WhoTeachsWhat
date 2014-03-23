@@ -13,7 +13,7 @@ public interface EvalFactorDao
   
    public void update(EvalFactor entity);
 
-   public void create(EvalFactor entity);
+	public EvalFactor create(EvalFactor entity);
 
    public void delete(Integer id);
 

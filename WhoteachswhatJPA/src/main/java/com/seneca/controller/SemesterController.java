@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.seneca.model.Semester;
 import com.seneca.service.SemesterService;
 
@@ -87,11 +88,43 @@ public class SemesterController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "semesterName", required = true) String semesterName) {
 
-		semesterService.add(semesterName);
+		Semester semester = semesterService.add(semesterName);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-		list.put("id", "1");
+		list.put("id", semester.getSemesterId() + "");
+
+		return list;
+	}
+
+	/**
+	 * This method accepts data posted from the UpdateCourseForm and updates a
+	 * course using the appropriate service method
+	 * 
+	 * @see com.seneca.service.CourseService
+	 * 
+	 * @param courseCode
+	 *            The six to eight digit course code
+	 * @param courseName
+	 *            The name of the course
+	 * @param crossoverCourse
+	 *            The course code that is synonomous with this course code
+	 * @param oldCourse
+	 *            The previous course code of the course, if any
+	 * 
+	 * @return A String containing the name of the view to render
+	 */
+
+	@RequestMapping(value = "/api/semester/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGETOneJSON(@PathVariable("id") Integer id) {
+
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Semester c = semesterService.getOne(id);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", c.getSemesterName() + "");
+		map.put("id", c.getSemesterId() + "");
+		list.add(map);
 
 		return list;
 	}

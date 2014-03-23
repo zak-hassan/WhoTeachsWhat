@@ -108,11 +108,11 @@ public class PrepTimeController {
 
 		float preptimefact = Float.parseFloat(preptimeFactor);
 
-		prepTimeService.add(preptimeName, preptimefact);
+		PrepTime preptime = prepTimeService.add(preptimeName, preptimefact);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		list.put("id", preptime.getPrepId() + "");
 		return list;
 	}
 

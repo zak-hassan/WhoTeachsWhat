@@ -12,7 +12,7 @@ public interface PrepTimeDao
 
    public void update(PrepTime entity);
 
-   public void create(PrepTime entity);
+	public PrepTime create(PrepTime entity);
 
    public void delete(Integer id);
 

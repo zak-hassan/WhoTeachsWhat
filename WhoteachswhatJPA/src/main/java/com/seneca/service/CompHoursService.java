@@ -21,12 +21,11 @@ public class CompHoursService {
 	 * 
 	 * @return					The comp hour added to the system
 	 */
-	public void add( String compHour_code, String compHour_name ) {
+	public CompHour add(String compHour_code, String compHour_name) {
 		CompHour comphour= new CompHour();
 		comphour.setCompHour_code(compHour_code);
 		comphour.setCompHour_name(compHour_name);
-		compHourDao.create(comphour);
-
+		return compHourDao.create(comphour);
 	}
 	
 	/**

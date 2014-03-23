@@ -32,7 +32,7 @@ public class ProgramDaoImpl implements ProgramDao
       return entities;
    }
 
-   public Program getById(Long id)
+	public Program getById(Integer id)
    {
       return entityManager.find(Program.class, id);
    }
@@ -43,19 +43,19 @@ public class ProgramDaoImpl implements ProgramDao
       return;
    }
 
-   public void create(Program entity)
+	public Program create(Program entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
-   public void delete(Long id)
+	public void delete(Integer id)
    {
       entityManager.remove(entityManager.find(Program.class, id));
       return;
    }
 
-   public List<Program> search(Program search, Long first, Integer maxItems)
+	public List<Program> search(Program search, Integer first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 

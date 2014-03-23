@@ -85,6 +85,7 @@ public class ResponsibilityToFacultyController {
 			map.put("facultyId", c.getFaculty().getFacultyId() + "");
 			map.put("responsibilityId", c.getResponsibility()
 					.getResponsibilityId() + "");
+			map.put("id", c.getId().getResponsibilityId() + "");
 			// map.put("year", c.getYear() + "");
 			map.put("semesterId", c.getSemester().getSemesterId() + "");
 			map.put("hoursperweek", c.getHoursPerWeek() + "");
@@ -121,12 +122,14 @@ public class ResponsibilityToFacultyController {
 			@RequestParam(value = "hoursperweek", required = true) String hoursperweek) {
 
 		float hours = Float.parseFloat(hoursperweek);
-		responsibilityToFacultyService.add(facultyId, responsibilityId, year,
+		ResponsibilityToFaculty rToFaculty = responsibilityToFacultyService
+				.add(facultyId, responsibilityId, year,
 				semesterId, hours);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		// TODO: MUST RETURN THE ID
+		list.put("id", rToFaculty.getId().getResponsibilityId() + "");
 		return list;
 	}
 

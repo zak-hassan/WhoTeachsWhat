@@ -78,6 +78,29 @@ public class CourseController {
 		return items;
 	}
 	
+	/**
+	 * This method accepts no parameters and returns all course in in the
+	 * database.
+	 * 
+	 * @see com.seneca.service.CourseService
+	 * 
+	 * 
+	 * @return JSON object with a list of course to display in datatable
+	 */
+
+	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		Course c = courseService.getById(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("name", c.getCourseName());
+			map.put("code", c.getCourseCode());
+			map.put("crossOver", c.getCrossover_course());
+			map.put("oldname", c.getOld_course());
+			items.add(map);
+		return items;
+	}
 	
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
@@ -101,7 +124,8 @@ public class CourseController {
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
 			@RequestParam(value = "reference_input", required = false) String oldCourse) {
 
-		courseService.add(courseCode, courseName, crossoverCourse, oldCourse);
+		Course course = courseService.add(courseCode, courseName,
+				crossoverCourse, oldCourse);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");

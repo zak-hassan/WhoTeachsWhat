@@ -22,10 +22,7 @@ public class CurriculumSemesterService {
 	public CurriculumSemester add(String name) {
 		CurriculumSemester sem = new CurriculumSemester();
 		sem.setName(name);
-		logger.info("Entering courseDao.create : ");
-		curriculumSemesterDao.create(sem);
-		logger.info("Exiting courseDao.create : ");
-		return sem;
+		return curriculumSemesterDao.create(sem);
 	}
 
 	public CurriculumSemester update(Integer id, String name) {
@@ -43,4 +40,7 @@ public class CurriculumSemesterService {
 		return curriculumSemesterDao.getAll();
 	}
 
+	public CurriculumSemester getOne(Integer id) {
+		return curriculumSemesterDao.getById(id);
+	}
 }
