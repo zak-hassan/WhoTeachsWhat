@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Manage Complimentary Hour Types - Admin Panel</title>
+        <title>Manage Faculty - Comp Hours</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
         <link rel="shortcut icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="iosicon.png" />
@@ -137,7 +137,7 @@
      
    */
    
-	var addCompHour=function() {
+	var addFacultyCompHour=function() {
 		$.ajax({
 			type: "POST",
 			url: "api/comphour",

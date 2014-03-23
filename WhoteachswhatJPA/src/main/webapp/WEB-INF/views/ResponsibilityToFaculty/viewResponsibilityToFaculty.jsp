@@ -168,10 +168,10 @@
      
    */
     
-   var addRepToFac=function() {
-    	//var facultyId = encodeURI($_GET['id']);
-    	var facultyId = 6;
-    	
+	var facultyId = window.location.search.slice(4); // Removes ?id=
+	facultyId = encodeURI(facultyId);  	
+	
+	var addRepToFac=function() {
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty",
@@ -200,9 +200,7 @@
 	};
 	
 	var updateRepToFac=function() {
-		//var facultyId = encodeURI($_GET['id']);
-		var facultyId = 6;
-		
+		//var facultyId = encodeURI($_GET['id']);		
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty/"+document.getElementById("up_repToFacId").value,
@@ -308,7 +306,11 @@ td {
 								</tr>
 							</thead>
 							<tbody>
+								<c:set var="facultyId">
+								    <c:out value = "${param.id}" />
+								</c:set>
 								<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
+									<c:if test="${repToFac.getFaculty().getFacultyId() == facultyId }">
 									<tr>
 										<td>${repToFac.getId().getYear()  }</td>
 
@@ -329,6 +331,7 @@ td {
 											</a>
 										</td>
 									</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
