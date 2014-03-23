@@ -138,7 +138,7 @@ public class FacultyToCourseInSemesterYearController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

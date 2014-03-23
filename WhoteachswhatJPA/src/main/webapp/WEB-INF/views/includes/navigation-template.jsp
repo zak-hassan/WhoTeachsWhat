@@ -20,7 +20,7 @@
 						<a href="manageUsers">Manage Users</a>
 					</li>
 					<li>
-						<a href="manageCourseSection">Manage Course Sections</a>
+						<a href="viewCourseInSemester">Manage Course Sections</a>
 					</li>
 					<li>
 						<a href="viewPrepTime">Manage Prep Time</a>
