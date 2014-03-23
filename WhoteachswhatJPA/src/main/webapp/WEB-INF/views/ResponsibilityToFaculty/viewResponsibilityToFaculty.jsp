@@ -369,8 +369,6 @@ td {
 
 					</script>
 
-
-
 				<!-- END OF NEW CONTENT-->
 			</div>
 			<!-- end container -->

@@ -42,7 +42,7 @@ public class CompHoursController {
 		
 		model.addAttribute("allComphours", compHoursService.getAll());
 		
-		return "Anil_ManageCompHours";
+		return "manageCompHours";
 	}
 
 	// REST API ENDPOINTS:

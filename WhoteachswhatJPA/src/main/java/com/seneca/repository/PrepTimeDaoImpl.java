@@ -101,10 +101,10 @@ public class PrepTimeDaoImpl implements PrepTimeDao
       {
          predicatesList.add(builder.like(root.<String> get("program_name"), '%' + program_name + '%'));
       }
-      int total_semester = search.getTotal_semester();
-      if (total_semester != 0)
+      int sectionNumber = search.getsectionNumber();
+      if (sectionNumber != 0)
       {
-         predicatesList.add(builder.equal(root.get("total_semester"), total_semester));
+         predicatesList.add(builder.equal(root.get("sectionNumber"), sectionNumber));
       }
 
       return predicatesList.toArray(new Predicate[predicatesList.size()]);

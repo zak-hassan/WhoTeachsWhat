@@ -37,7 +37,7 @@ public class CourseInSemesterController {
 	public String view(ModelMap model) {
 		model.addAttribute("entityList", courseInSemesterService.getAll());
 
-		return "Course/view_courses";
+		return "Course/viewCourseInSemester";
 	}
 
 	@RequestMapping(value = "/updateCourseInSemester", method = RequestMethod.GET)
@@ -76,7 +76,7 @@ public class CourseInSemesterController {
 			map.put("eval_1_id", c.getEvalFactor1().getEvalId() + "");
 			map.put("eval_2_id", c.getEvalFactor2().getEvalId() + "");
 			map.put("eval_3_id", c.getEvalFactor3().getEvalId() + "");
-			map.put("total_semester", c.getTotalSection() + "");
+			map.put("sectionNumber", c.getTotalSection() + "");
 			map.put("year", c.getYear() + "");
 			map.put("course_id", c.getCisId() + "");
 			map.put("semester_id", c.getSemester().getSemesterId() + "");
@@ -116,7 +116,7 @@ public class CourseInSemesterController {
 			@RequestParam(value = "eval_1", required = true) Integer eval_1,
 			@RequestParam(value = "eval_2", required = true) Integer eval_2,
 			@RequestParam(value = "eval_3", required = true) Integer eval_3,
-			@RequestParam(value = "total_semester", required = true) Integer total_semesters,
+			@RequestParam(value = "sectionNumber", required = true) Integer sectionNumbers,
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "course_id", required = true) Integer course_id,
 			@RequestParam(value = "semester_id", required = true) Integer semester_id) {
@@ -127,7 +127,7 @@ public class CourseInSemesterController {
 		float e3_ans = Float.valueOf(eval_3_ans);
 
 		courseInSemesterService.add(addition_attribute, e1_ans, e2_ans, e3_ans,
-				eval_1, eval_2, eval_3, total_semesters, year, course_id,
+				eval_1, eval_2, eval_3, sectionNumbers, year, course_id,
 				semester_id);
 
 		Map<String, String> list = new HashMap<String, String>();
@@ -165,7 +165,7 @@ public class CourseInSemesterController {
 			@RequestParam(value = "eval_1", required = true) Integer eval_1,
 			@RequestParam(value = "eval_2", required = true) Integer eval_2,
 			@RequestParam(value = "eval_3", required = true) Integer eval_3,
-			@RequestParam(value = "total_semester", required = true) Integer total_semesters,
+			@RequestParam(value = "sectionNumber", required = true) Integer sectionNumbers,
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "course_id", required = true) Integer course_id,
 			@RequestParam(value = "semester_id", required = true) Integer semester_id) {
@@ -176,7 +176,7 @@ public class CourseInSemesterController {
 		float e3_ans = Float.valueOf(eval_3_ans);
 
 		courseInSemesterService.update(id, addition_attribute, e1_ans, e2_ans,
-				e3_ans, eval_1, eval_2, eval_3, total_semesters, year,
+				e3_ans, eval_1, eval_2, eval_3, sectionNumbers, year,
 				course_id, semester_id);
 		
 		Map<String, String> list = new HashMap<String, String>();

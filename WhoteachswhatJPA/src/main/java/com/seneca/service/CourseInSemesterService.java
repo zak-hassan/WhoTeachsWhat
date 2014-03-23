@@ -42,7 +42,7 @@ public class CourseInSemesterService {
 	
 	public void add(Integer addition_attribute, float e1_ans, float e2_ans,
 			float e3_ans, Integer eval_1, Integer eval_2, Integer eval_3,
-			Integer total_semesters, Integer year, Integer course_id,
+			Integer sectionNumbers, Integer year, Integer course_id,
 			Integer semester_id) {
 
 		CoursesInSemester course = new CoursesInSemester();
@@ -50,7 +50,7 @@ public class CourseInSemesterService {
 		course.setEval1Ans(e1_ans);
 		course.setEval2Ans(e2_ans);
 		course.setEval3Ans(e3_ans);
-		course.setTotalSection(total_semesters);
+		course.setTotalSection(sectionNumbers);
 		// TODO: GET THE EVALFACTOR DAO & COURSE DAO...
 		course.setEvalFactor1(evalFactorDao.getById(eval_1));
 		course.setEvalFactor2(evalFactorDao.getById(eval_2));
@@ -63,10 +63,9 @@ public class CourseInSemesterService {
 
 	}
 	
-
 	public CoursesInSemester update(Integer id, Integer addition_attribute,
 			float e1_ans, float e2_ans, float e3_ans, Integer eval_1,
-			Integer eval_2, Integer eval_3, Integer total_semesters,
+			Integer eval_2, Integer eval_3, Integer sectionNumbers,
 			Integer year, Integer course_id, Integer semester_id) {
 
 		CoursesInSemester course = courseInSemesterDao.getById(id);
@@ -74,7 +73,7 @@ public class CourseInSemesterService {
 		course.setEval1Ans(e1_ans);
 		course.setEval2Ans(e2_ans);
 		course.setEval3Ans(e3_ans);
-		course.setTotalSection(total_semesters);
+		course.setTotalSection(sectionNumbers);
 		// TODO: GET THE EVALFACTOR DAO & COURSE DAO...
 		course.setEvalFactor1(evalFactorDao.getById(eval_1));
 		course.setEvalFactor2(evalFactorDao.getById(eval_2));

@@ -293,8 +293,8 @@ INSERT INTO prepTime('prep_name','prep_factor') VALUES('PREP2',13);
 
 -- ADD Program
 
-INSERT INTO program('program_id','program_code','program_name','total_semester') VALUES('CPA','Computer Programming and Analysis',6);
-INSERT INTO program('program_id','program_code','program_name','total_semester') VALUES('DAD','Database Application Developer',2);
+INSERT INTO program('program_id','program_code','program_name','sectionNumber') VALUES('CPA','Computer Programming and Analysis',6);
+INSERT INTO program('program_id','program_code','program_name','sectionNumber') VALUES('DAD','Database Application Developer',2);
 
 
 -- ADD curriculumSemester
