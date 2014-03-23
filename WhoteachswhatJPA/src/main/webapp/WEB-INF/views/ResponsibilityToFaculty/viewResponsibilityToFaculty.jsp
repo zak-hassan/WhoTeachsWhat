@@ -199,8 +199,7 @@
 		});
 	};
 	
-	var updateRepToFac=function() {
-		//var facultyId = encodeURI($_GET['id']);		
+	var updateRepToFac=function() {	
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty/"+document.getElementById("up_repToFacId").value,

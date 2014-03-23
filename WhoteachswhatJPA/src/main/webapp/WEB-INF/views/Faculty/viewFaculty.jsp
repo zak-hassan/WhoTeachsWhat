@@ -237,13 +237,17 @@
 											<td>
 												${faculty.getTeachingType().getTeachingType_name() }
 											</td>
+											
+											<c:set var="facultyId" value = "${ faculty.getFacultyId() }"></c:set>
+											
 											<td class="align">
 												<a class="bootstrap-tooltip" data-original-title="Complimentary Hours"
 													 data-placement="top" href="Anil_ManageFacultyCompHours.html"> 
 													<i class="icon-time"></i> 
 												</a> 
+												
 												<a class="bootstrap-tooltip" data-original-title="Responsibility" 
-													href="viewResponsibilityToFaculty?id=6">
+													href="viewResponsibilityToFaculty?id=${facultyId }">
 													<i class="icon-list-alt"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Courses" 
