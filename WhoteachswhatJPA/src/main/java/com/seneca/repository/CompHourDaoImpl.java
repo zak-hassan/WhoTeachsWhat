@@ -43,10 +43,10 @@ public class CompHourDaoImpl implements CompHourDao
       return;
    }
 
-   public void create(CompHour entity)
+	public CompHour create(CompHour entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
 	public void delete(Integer id)

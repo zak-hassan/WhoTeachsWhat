@@ -12,7 +12,7 @@ public interface ResponsibilityDao
 
    public void update(Responsibility entity);
 
-   public void create(Responsibility entity);
+	public Responsibility create(Responsibility entity);
 
    public void delete(Integer id);
 

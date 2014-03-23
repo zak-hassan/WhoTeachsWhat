@@ -43,10 +43,10 @@ public class FacultyDaoImpl implements FacultyDao
       return;
    }
 
-   public void create(Faculty entity)
+	public Faculty create(Faculty entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
    public void delete(Integer id)

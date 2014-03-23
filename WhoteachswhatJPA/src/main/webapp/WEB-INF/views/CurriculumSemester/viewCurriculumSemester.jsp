@@ -286,24 +286,17 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-		
-							<c:forEach items="${allCurSem }" var="cs">
-									<tr>
-									
-										<td>${cs.CurriculumSemesterName }</td>
-										<td>${cs.CurriculumSemesterId }</td>
 
-										<td class="align">
-											<a
-												onclick="updateForm('${cs.CurriculumSemesterId }', '${cs.CurriculumSemesterName }')"
-												data-toggle="modal" data-target="#updateCurriculumSemesterModal">Update
-											</a>
-											|
-											 <a
-												onclick="deleteCurriculumSemester('${cs.CurriculumSemesterId }', ' ${cs.CurriculumSemesterName }')">
-												Delete
-											</a>
-										</td>
+								<c:forEach items="${allCurSem }" var="c">
+									<tr>
+										<td>${ c.getCurriculumId() }</td>
+										<td>${ c.getName()  }</td>
+										<td class="align"><a
+											onclick="updateForm('${c.getCurriculumId() }', '${c.getName() }')"
+											data-toggle="modal"
+											data-target="#updateCurriculumSemesterModal">Update </a> | <a
+											onclick="deleteCurriculumSemester('${ c.getCurriculumId() }', ' ${ c.getName() }')">
+												Delete </a></td>
 									</tr>
 
 								</c:forEach>
@@ -316,36 +309,18 @@ td {
 
 				<script>
 
-					   $(document).ready(function() {
-
-						   $('#tableSortable, #tableSortableRes, #tableSortableResMed').dataTable( {
-
-							   "sPaginationType": "bootstrap",
-
-							   "fnInitComplete": function(){
-
-								   $(".dataTables_wrapper select").select2({
-
-									   dropdownCssClass: 'noSearch'
-
-								   });
-
-							   }
-
-						   });
-
-						   //                            $("#simpleSelectBox").select2({
-
-						   //                                dropdownCssClass: 'noSearch'
-
-						   //                            }); 
-
-					   });
-
+				$(document).ready(function() {
+					$('#tableSortable, #tableSortableRes, #tableSortableResMed')
+						.dataTable( {
+							"sPaginationType" : "bootstrap",
+							"fnInitComplete" : function() {
+								$(".dataTables_wrapper select").select2({
+													dropdownCssClass : 'noSearch'
+												});
+							}
+						});
+				   });
 					</script>
-
-
-
 				<!-- END OF NEW CONTENT-->
 			</div>
 			<!-- end container -->

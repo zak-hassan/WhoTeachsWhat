@@ -29,11 +29,11 @@ public class PermissionService {
 	 * 
 	 * @return					The Permission added
 	 */
-	public void add(String accessName) {
+	public AccessLevel add(String accessName) {
 		//TODO: Method implementation
 		AccessLevel access = new AccessLevel();
 		access.setAccessName(accessName);
-		accessLevelDao.create(access);
+		return accessLevelDao.create(access);
 	}
 	
 	/**

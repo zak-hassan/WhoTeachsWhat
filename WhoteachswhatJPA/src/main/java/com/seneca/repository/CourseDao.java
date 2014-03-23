@@ -14,7 +14,7 @@ public interface CourseDao
 
    public void update(Course entity);
 
-   public void create(Course entity);
+	public Course create(Course entity);
 
 	public void delete(Integer id);
 

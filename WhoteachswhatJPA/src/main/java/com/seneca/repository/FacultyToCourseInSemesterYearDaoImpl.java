@@ -37,10 +37,11 @@ public class FacultyToCourseInSemesterYearDaoImpl implements FacultyToCourseInSe
       return;
    }
 
-   public void create(FacultyToCourseInSemesterYear entity)
+	public FacultyToCourseInSemesterYear create(
+			FacultyToCourseInSemesterYear entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
 	public void delete(Integer id)

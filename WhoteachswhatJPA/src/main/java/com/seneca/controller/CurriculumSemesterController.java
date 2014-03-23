@@ -34,22 +34,13 @@ public class CurriculumSemesterController {
 	private CurriculumSemesterService curriculumSemesterService;
 
 	@RequestMapping(value = "/viewCurriculumSemester", method = RequestMethod.GET)
-	public String view(ModelMap model) {
-
-		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
-		for (CurriculumSemester c : curriculumSemesterService.getAll()) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("CurriculumSemesterName", c.getName() + "");
-			map.put("CurriculumSemesterId", c.getCurriculumId() + "");
-			items.add(map);
-		}
-
-		model.addAttribute("AllCurSem", items);
-
+	public String viewCurriculum(ModelMap model) {
+		model.addAttribute("AllCurSem", curriculumSemesterService.getAll());
 		return "CurriculumSemester/viewCurriculumSemester";
 	}
 
 	// REST API ENDPOINTS:
+
 
 	/**
 	 * This method accepts no parameters and returns all course in in the
@@ -76,6 +67,29 @@ public class CurriculumSemesterController {
 	}
 
 	/**
+	 * This method accepts no parameters and returns all course in in the
+	 * database.
+	 * 
+	 * @see com.seneca.service.CourseService
+	 * 
+	 * 
+	 * @return JSON object with a list of course to display in datatable
+	 */
+
+	@RequestMapping(value = "/api/CurriculumSemester/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGetOneJSON(
+			@PathVariable("id") Integer id) {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		CurriculumSemester c = curriculumSemesterService.getOne(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("CurriculumSemesterName", c.getName() + "");
+			map.put("CurriculumSemesterId", c.getCurriculumId() + "");
+			items.add(map);
+		return items;
+	}
+
+	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
 	 * 
@@ -98,11 +112,12 @@ public class CurriculumSemesterController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "curriculumSemesterName", required = true) String curriculumSemesterName) {
 
-		curriculumSemesterService.add(curriculumSemesterName);
+		CurriculumSemester cSemester = curriculumSemesterService
+				.add(curriculumSemesterName);
 		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		list.put("id", cSemester.getCurriculumId() + "");
 		return list;
 	}
 

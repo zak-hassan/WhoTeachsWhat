@@ -37,10 +37,10 @@ public class CurriculumSemesterDaoImpl implements CurriculumSemesterDao
       return;
    }
 
-   public void create(CurriculumSemester entity)
+	public CurriculumSemester create(CurriculumSemester entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
 	public void delete(Integer id)

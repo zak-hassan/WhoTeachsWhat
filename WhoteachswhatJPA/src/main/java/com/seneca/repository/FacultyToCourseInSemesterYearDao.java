@@ -12,7 +12,8 @@ public interface FacultyToCourseInSemesterYearDao
 
    public void update(FacultyToCourseInSemesterYear entity);
 
-   public void create(FacultyToCourseInSemesterYear entity);
+	public FacultyToCourseInSemesterYear create(
+			FacultyToCourseInSemesterYear entity);
 
 	public void delete(Integer id);
 

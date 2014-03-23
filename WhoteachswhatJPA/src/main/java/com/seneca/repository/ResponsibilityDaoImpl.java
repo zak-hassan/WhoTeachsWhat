@@ -37,10 +37,10 @@ public class ResponsibilityDaoImpl implements ResponsibilityDao
       return;
    }
 
-   public void create(Responsibility entity)
+	public Responsibility create(Responsibility entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
    public void delete(Integer id)

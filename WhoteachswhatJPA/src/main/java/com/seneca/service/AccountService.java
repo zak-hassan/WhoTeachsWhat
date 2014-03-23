@@ -1,5 +1,4 @@
 package com.seneca.service;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.sasl.AuthenticationException;
@@ -41,10 +40,8 @@ public class AccountService {
 		return accountDao.getAll();
 	}
 
-	public List<Account> getOne(Integer id) {
-		List<Account> list= new ArrayList<Account>();
-		list.add(accountDao.getById(id));
-		return list;
+	public Account getOne(Integer id) {
+		return accountDao.getById(id);
 	}
 
 	public void update(Integer id, String uname, Integer level) {
@@ -56,14 +53,15 @@ public class AccountService {
 		accountDao.update(account);
 	}
 
-	public void add(String uname, Integer level) {
+	public Account add(String uname, Integer level) {
 		Account account= new Account();
 		account.setUsername(uname);
 		account.setPassword("a12345");
 		//Long id= level.longValue();
 		AccessLevel accessLevel =  accessLevelDao.getById(level); 
 		account.setAccessLevel(accessLevel);
-		accountDao.create(account);
+		return accountDao.create(account);
+
 	}
 
 	public void delete(Integer id) {

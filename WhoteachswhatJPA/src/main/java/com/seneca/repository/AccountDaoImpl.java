@@ -43,10 +43,10 @@ public class AccountDaoImpl implements AccountDao
       return;
    }
 
-   public void create(Account entity)
+	public Account create(Account entity)
    {
       entityManager.persist(entity);
-      return;
+		return entity;
    }
 
    public void delete(Integer id)

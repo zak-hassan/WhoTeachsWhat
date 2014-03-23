@@ -53,8 +53,7 @@ public class FacultyToCourseInSemesterYearService {
 		rToFaculty.setCompHour_allowance(comphoursAllowance);
 		rToFaculty.setAdditionAttribute(additionAttribute);
 		rToFaculty.setCompHour_assigned(comphourAssigned);
-		facultyToCourseInSemesterYearDao.create(rToFaculty);
-		return rToFaculty;
+		return facultyToCourseInSemesterYearDao.create(rToFaculty);
 	}
 
 	public FacultyToCourseInSemesterYear update(Integer id, Integer faculty_id,

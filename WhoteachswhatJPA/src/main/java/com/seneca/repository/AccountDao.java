@@ -12,7 +12,7 @@ public interface AccountDao
 
    public void update(Account entity);
 
-   public void create(Account entity);
+	public Account create(Account entity);
 
    public void delete(Integer id);
 

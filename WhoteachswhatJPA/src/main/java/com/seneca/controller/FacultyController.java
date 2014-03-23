@@ -73,7 +73,34 @@ public class FacultyController {
 	
 	// REST API ENDPOINTS:
 	
+
 	
+	/**
+	 * This method accepts no parameters and returns all faculty in in the
+	 * database.
+	 * 
+	 * @see com.seneca.service.FacultyService
+	 * 
+	 * 
+	 * @return JSON object with a list of faculty to display in datatable
+	 */
+
+	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGetOneFacultyJSON(
+			@PathVariable("id") Integer id) {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		Faculty c = facultyService.getOne(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("fname", c.getFacultyFirstName() + "");
+			map.put("lname", c.getFacultyLastName());
+			map.put("fid", c.getFacultyId() + "");
+			map.put("teachingHours", c.getHoursToTeach() + "");
+			map.put("teachingTypeName", c.getTeachingType()
+					.getTeachingType_name());
+			items.add(map);
+		return items;
+	}
 	
 	/**
 	 * This method accepts no parameters and returns all faculty in in the
@@ -127,10 +154,12 @@ public class FacultyController {
 			@RequestParam(value = "faculty_last_name", required = true) String faculty_last_name,
 			@RequestParam(value = "faculty_status", required = true) Integer status) {
 
-		facultyService.addFaculty(faculty_first_name, faculty_last_name, status);
+		Faculty faculty = facultyService.addFaculty(faculty_first_name,
+				faculty_last_name, status);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
+		list.put("id", faculty.getFacultyId() + "");
 
 		return list;
 	}

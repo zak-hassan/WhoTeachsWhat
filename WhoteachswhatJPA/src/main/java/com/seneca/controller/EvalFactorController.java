@@ -66,11 +66,34 @@ public class EvalFactorController {
 	}
 
 	/**
+	 * This method accepts no parameters and returns all course in in the
+	 * database.
+	 * 
+	 * @see com.seneca.service.CourseService
+	 * 
+	 * 
+	 * @return JSON object with a list of course to display in datatable
+	 */
+
+	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		EvalFactor c = evalFactorService.getOne(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("efName", c.getEvalName() + "");
+			map.put("efId", c.getEvalId() + "");
+			map.put("efFactor", c.getEvalFactor() + "");
+			items.add(map);
+		return items;
+	}
+
+	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method
-	 *
+	 * 
 	 * @see com.seneca.service.CourseService
-	 *
+	 * 
 	 * @param courseCode
 	 *            The six to eight digit course code
 	 * @param courseName
@@ -79,7 +102,7 @@ public class EvalFactorController {
 	 *            The course code that is syncronomous with this course code
 	 * @param oldCourse
 	 *            The previous course code of the course, if any
-	 *
+	 * 
 	 * @return A String containing the name of the view to render
 	 */
 
@@ -88,14 +111,11 @@ public class EvalFactorController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "evalName", required = true) String evalName,
 			@RequestParam(value = "evalFactor", required = true) String evalFactor) {
-
 		float efact = Float.parseFloat(evalFactor);
-
-		evalFactorService.add(evalName, efact);
-
+		EvalFactor ef = evalFactorService.add(evalName, efact);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		list.put("id", ef.getEvalId() + "");
 		return list;
 	}
 
@@ -117,7 +137,7 @@ public class EvalFactorController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

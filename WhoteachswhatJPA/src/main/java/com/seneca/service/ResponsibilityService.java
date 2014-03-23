@@ -17,13 +17,13 @@ public class ResponsibilityService {
 	//CRUD OPERATIONS:
 	
 	
-	public void add(String R_code, String R_name){
+	public Responsibility add(String R_code, String R_name) {
 		
 		Responsibility r= new Responsibility();
 		
 			r.setResponsibilityCode(R_code);
 			r.setResponsibilityName(R_name);
-			responsibilityDao.create(r);
+		return responsibilityDao.create(r);
 		
 	}
 	public void update(Integer id) {

@@ -15,15 +15,15 @@ public class ProgramService {
 	ProgramDao programDao;
 	//CRUD OPERATIONS:
 
-	public void add( String p_code, String p_name, int totalSem ) {
+	public Program add(String p_code, String p_name, int totalSem) {
 		Program p = new Program();
 		p.setProgramCode(p_code);
 		p.setProgramName(p_name);
 		p.setTotalSemester(totalSem);
-		programDao.create(p);
+		return programDao.create(p);
 	}
 
-	public Program update( Long id, String p_code, String p_name, int totalSem ) {
+	public Program update(Integer id, String p_code, String p_name, int totalSem) {
 		Program p = programDao.getById(id);
 		p.setProgramCode(p_code);
 		p.setProgramName(p_name);
@@ -32,7 +32,7 @@ public class ProgramService {
 		return null;
 	}
 
-	public void delete( Long id ) {
+	public void delete(Integer id) {
 		programDao.delete(id);
 	}
 
@@ -40,7 +40,7 @@ public class ProgramService {
 		return programDao.getAll();
 	}
 
-	public Program getOne(Long id) {
+	public Program getOne(Integer id) {
 		return programDao.getById(id);
 	}
 

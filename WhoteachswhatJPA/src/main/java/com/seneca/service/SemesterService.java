@@ -43,4 +43,8 @@ public class SemesterService {
 		return semesterDao.getAll();
 	}
 
+	public Semester getOne(Integer id) {
+		return semesterDao.getById(id);
+	}
+
 }

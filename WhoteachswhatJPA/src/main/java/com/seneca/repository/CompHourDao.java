@@ -12,7 +12,7 @@ public interface CompHourDao
 
    public void update(CompHour entity);
 
-   public void create(CompHour entity);
+	public CompHour create(CompHour entity);
 
 	public void delete(Integer id);
 

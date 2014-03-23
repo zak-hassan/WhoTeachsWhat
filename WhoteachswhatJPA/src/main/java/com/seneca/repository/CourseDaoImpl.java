@@ -43,11 +43,10 @@ public class CourseDaoImpl implements CourseDao
       return;
    }
 
-   public void create(Course entity)
+	public Course create(Course entity)
    {
       entityManager.persist(entity);
-    
-      return;
+		return entity;
    }
 
 	public void delete(Integer id)

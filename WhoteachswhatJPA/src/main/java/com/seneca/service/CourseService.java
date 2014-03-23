@@ -40,11 +40,7 @@ public class CourseService {
 			course.setCourseName(course_name);
 			course.setCrossover_course(crossover);
 			course.setOld_course(oldcourse);
-			logger.info("Entering courseDao.create : ");
-			courseDao.create(course);
-			logger.info("Exiting courseDao.create : ");
-		
-		return course;
+		return courseDao.create(course);
 	}
 
 	
@@ -70,6 +66,11 @@ public class CourseService {
 	
 	public Course getByCourseCode(String course_code) {
 		return courseDao.getByCourseCode(course_code);
+	}
+
+	public Course getById(Integer id) {
+		// TODO Auto-generated method stub
+		return courseDao.getById(id);
 	}
 	
 }

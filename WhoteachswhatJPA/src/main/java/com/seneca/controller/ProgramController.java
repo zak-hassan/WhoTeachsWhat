@@ -89,8 +89,15 @@ public class ProgramController {
 
 	@RequestMapping(value = "/api/program/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Program listGetJSON(@PathVariable("id") Long id) {
-		return programService.getOne(id);
+	List<Map<String, String>> listGetJSON(@PathVariable("id") Integer id) {
+		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		Program c = programService.getOne(id);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("program_name", c.getProgramName() + "");
+			map.put("program_id", c.getProgramId() + "");
+			map.put("pTotalSemester", c.getTotalSemester() + "");
+			items.add(map);
+		return items;
 	}
 
 	/**
@@ -129,11 +136,11 @@ public class ProgramController {
 			@RequestParam(value = "pname", required = true) String pname,
 			@RequestParam(value = "pnumSemester", required = true) int num) {
 
-		programService.add(pcode, pname, num);
+		Program p = programService.add(pcode, pname, num);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
+		list.put("id", p.getProgramId() + "");
 		return list;
 	}
 
@@ -210,7 +217,7 @@ public class ProgramController {
 
 	@RequestMapping(value = "/api/program/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateJSON(@PathVariable("id") Long id,
+	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id,
 			@RequestParam(value = "pcode", required = true) String pcode,
 			@RequestParam(value = "pname", required = true) String pname,
 			@RequestParam(value = "pnumSemester", required = true) int num) {
@@ -242,7 +249,7 @@ public class ProgramController {
 
 	@RequestMapping(value = "/api/program/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listDeleteJSON(@PathVariable("id") Long id) {
+	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
 		programService.delete(id);
 

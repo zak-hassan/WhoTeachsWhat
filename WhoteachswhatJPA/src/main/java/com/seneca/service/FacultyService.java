@@ -62,13 +62,13 @@ public class FacultyService {
 	 */
 	
 	//TODO: Faculty should accept 'TeachingType_id'
-	public void addFaculty(String fname, String lname, Integer status) {
+	public Faculty addFaculty(String fname, String lname, Integer status) {
 		Faculty faculty = new Faculty();
 		faculty.setFacultyFirstName(fname);
 		faculty.setFacultyLastName(lname);
 		TeachingType tType=teachingTypeDao.getById(status);
 		faculty.setTeachingType(tType);
-		facultyDao.create(faculty);
+		return facultyDao.create(faculty);
 	}
 
 	public void update(Integer id) {
@@ -84,5 +84,8 @@ public class FacultyService {
 		return facultyDao.getAll();
 	}
 
+	public Faculty getOne(Integer id) {
+		return facultyDao.getById(id);
+	}
 
 }

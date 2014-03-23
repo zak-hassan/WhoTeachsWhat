@@ -43,11 +43,10 @@ public class EvalFactorDaoImpl implements EvalFactorDao
       return;
    }
 
-   public void create(EvalFactor entity)
+	public EvalFactor create(EvalFactor entity)
    {
-      entityManager.persist(entity);
-    
-      return;
+		entityManager.persist(entity);
+		return entity;
    }
 
    public void delete(Integer id)
