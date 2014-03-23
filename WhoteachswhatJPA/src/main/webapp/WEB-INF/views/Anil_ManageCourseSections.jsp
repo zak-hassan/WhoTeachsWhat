@@ -80,7 +80,7 @@
 <script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
 
 <script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript" src="static/js/bootrestful.js"></script>
+<script type="text/javascript" src="static/js/bootRestful/bootrestful.js"></script>
     </head>
 
     <body class="body-inner">
@@ -128,131 +128,313 @@
             }
         });
     });
+    /**
+    @Author: Anil Santokhi
+    @Purpose: AJAX posting and validation for adding, updating and deleting a course section
+   */
     
-    
-    
+   var addCourse=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/course",
+			data: { 
+				course_code: document.getElementById("course_code").value,
+	  	   		course_name: document.getElementById("course_name").value,
+	  	   		crossover_input: document.getElementById("crossover_input").value,
+	  	   		reference_input: document.getElementById("reference_input").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Course added',
+						type : 'info',
+						text : 'Course ' + document.getElementById('course_code').value + ' has been added'
+					});
+		    		
+		    		document.getElementById("addCourseForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addCourseModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var updateCourse=function() {
+		$.ajax({
+			type: "POST",
+			url: "api/course/"+document.getElementById("up_course_id").value,
+			data: { 
+				course_code: document.getElementById("up_course_code").value,
+	  	   		course_name: document.getElementById("up_course_name").value,
+	  	   		crossover_input: document.getElementById("up_crossover_input").value,
+	  	   		reference_input: document.getElementById("up_reference_input").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Course Updated',
+						type : 'info',
+						text : 'Course ' + document.getElementById('up_course_code').value + ' has been updated'
+					});
+		    		
+		    		document.getElementById("updateCourseForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateCourseModal').modal('hide');
+			   	}
+			}
+		});
+	};
+   
+  	var deleteCourse= function(id, course_code) {
+ 		$.ajax({type:"DELETE", 
+  			url : "api/course/"+id,
+  			data : null,
+  			cache : false,
+  			success : function(data){
+     			if (data.success === "true") {
+    				$.pnotify({
+						title : 'Course :' + course_code,
+						type : 'info',
+						text : 'Course has been deleted'
+					});
+    			location.reload();
+  				}
+  	 		 }
+ 		});
+	};	  	   
+
+	var updateForm=function(up_course_id, up_course_code, up_course_name, up_crossover_input, up_reference_input){
+		$("#up_course_id").val(up_course_id);
+		$("#up_course_code").val(up_course_code);
+		$("#up_course_name").val(up_course_name);
+		$("#up_crossover_input").val(up_crossover_input);
+		$("#up_reference_input").val(up_reference_input);
+	};											
+
 </script>
-        <div class="wrapper">
-            <div class="breadcrumb-container" style="width: 100%">
-    <ul class="xbreadcrumbs">
-        <li>
-            <a href="dashboard.html">
-                <i class="icon-photon home"></i>
-            </a>
-        </li>
-        <li>
-            <a href="#">Admin Panel</a>
-        </li>
-		<li class="current">
-			<a href="Anil_ManageCourseSections.html">Manage Course Sections</a>
-		</li>
-    </ul>
-</div>            <header>
-                <i class="icon-big-notepad"></i>
-                <h2><small>Manage Course Sections</small></h2>
-                <h3><small>Assign the number of sections a course may have</small></h3>
-            </header>
-            <form class="form-horizontal">
-                <div class="container-fluid">
-			<!-- START OF NEW CONTENT -->
-				<!-- input field for course, semester and year -->
-				
-					<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-						<div class="span1">
-							<label class="control-label" for="sectionNo">Course Code</label>
-						</div>
-						<div class="span1">
-							<div class="controls">
-								<input id="sectionNo" type="text" 
-								placeholder="Course code will be autoloaded if this page was loaded from course. Empty otherwise. Textbox will autocomplete."
-								name="compHours" />
-							</div>
-						</div>
-					</div>
-					
-					<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-						<div class="span1">
-							<label class="control-label" for="sectionNo"># of Section(s)</label>
-						</div>
-						<div class="span1">
-							<div class="controls">
-								<input id="sectionNo" type="text" 
-								placeholder="Previous number of sections for this course, if any."
-								name="compHours" />
-							</div>
-						</div>
-					</div>
-					
-					
-					 <!--Simple Select Box begin-->
-					<div id="Simple_Select_Box" class="control-group row-fluid">
-						<div class="span1">
-							<label class="control-label" for="simpleSelectBox">Semester</label>
-						</div>
+	<div class="wrapper">
+		<div class="breadcrumb-container" style="width: 100%">
+			<ul class="xbreadcrumbs">
+				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
+				</a></li>
+				<li><a href="viewCourse">Manage Course</a></li>
+			</ul>
+		</div>
+		<header>
+			<i class="icon-big-notepad"></i>
+			<h2>
+				<small>Manage Cousre</small>
+			</h2>
+			<h3>
+				<small>Add, Update and Delete a course</small>
+			</h3>
+		</header>
+		<form method="post" action="api/course" id="addCourseForm"
+			onsubmit="return validateAddCourse();" class="form-horizontal">
+			<div class="container-fluid">
+				<!-- START OF NEW CONTENT -->
 
-						<div class="span2">
-							<div class="controls">
-								<select name="simpleSelectBox" id="simpleSelectBox">
-									<option selected="" value="">Previously selected semester, if any.</option>
-									<option value="Winter">Winter</option>
-									<option value="Summer">Summer</option>
-									<option value="Fall">Fall</option>
-								</select>
-							</div>
-						</div>
+				<!-- http://getbootstrap.com/components/ -->
 
-						<script>
+				<!--Sortable Non-responsive Table begin-->
 
-							$().ready(function(){
+				<style type="text/css">
+td.align {
+	text-align: right;
+}
 
-								$("#simpleSelectBox").select2({
+td {
+	vertical-align: middle;
+}
+</style>
 
-									dropdownCssClass: 'noSearch'
-
-								});
-
-							});
-
-						</script>
-					</div>
-					<!--Simple Select Box end-->
-					
-					<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-						<div class="span1">
-							<label class="control-label" for="year">Year</label>
-						</div>
-						<div class="span1">
-							<div class="controls">
-								<input id="sectionNo" type="text" 
-								placeholder="2014"
-								name="year" />
-							</div>
-						</div>
-					</div>
-					
-					<div id="Input_Field_with_Placeholder" class="control-group row-fluid">
-						<div class="span1">
-							<label class="control-label" for="year">Condensed</label>
-						</div>
-						<div class="span3" style="height: 25px; margin-top: 15px;">
-							<input type="checkbox" />&nbsp; Yes
-						</div>
-					</div>
-					
-					<br/>
 				<div class="row-fluid">
-                    <div class="span2 offset4">
-                        <button type="button" class="btn btn-large btn-block btn-info">Save</button>
-                    </div>
-                    <div class="span2">
-                        <button type="button" class="btn btn-large btn-block">Cancel</button>
-                    </div>
-                </div>
-					
-			<!-- END OF NEW CONTENT-->
-                </div><!-- end container -->
+					<div class="span12">
+						<table class="table table-striped" id="tableSortable">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>User(s)</th>
+									<th width="25%" style="text-align: right">Operation(s)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${allCourses }" var="course">
+									<tr>
 
-            </form>
-        </div>
-        </body>
+										<td>${course.getCourseCode() }</td>
+										
+										<td>${course.getCourseName() }</td>
+
+										<td class="align">
+											<a
+												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
+													'${course.getCourseName() }','${course.getCrossover_course() }', 
+													'${course.getOld_course() }')"
+												data-toggle="modal" data-target="#updateCourseModal">Update |
+											</a>
+											
+											 <a
+												onclick="deleteCourse('${course.getCourseId() }', ' ${course.getCourseCode() } ')">
+												Delete
+											</a>
+										</td>
+									</tr>
+
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!--Sortable Non-responsive Table end-->
+
+				<script>
+
+					   $(document).ready(function() {
+
+						   $('#tableSortable, #tableSortableRes, #tableSortableResMed').dataTable( {
+
+							   "sPaginationType": "bootstrap",
+
+							   "fnInitComplete": function(){
+
+								   $(".dataTables_wrapper select").select2({
+
+									   dropdownCssClass: 'noSearch'
+
+								   });
+
+							   }
+
+						   });
+
+						   //                            $("#simpleSelectBox").select2({
+
+						   //                                dropdownCssClass: 'noSearch'
+
+						   //                            }); 
+
+					   });
+
+					</script>
+
+
+
+				<!-- END OF NEW CONTENT-->
+			</div>
+			<!-- end container -->
+		</form>
+		 <!-- Button trigger modal -->
+		<button class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#addCourseModal">Add Course</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add Course</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="addCourseForm" class="form-horizonatal">
+							<div class="input-group">
+								<span class="input-group-addon">Course Code</span><br /> <input
+									type="text" class="form-control" name="course_code" id="course_code"
+									placeholder="Course Code" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Subject Name</span><br /> <input
+									type="text" class="form-control" name="course_name" id="course_name"
+									placeholder="Subject Name" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Crossover Course</span><br /> <input
+									type="text" class="form-control" name="crossover_input" id="crossover_input"
+									placeholder="Course" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Reference to old course</span><br /> <input
+									type="text" class="form-control" name="reference_input" id="reference_input"
+									placeholder="Reference" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" onclick="addCourse();"
+								class="btn btn-primary">Save changes</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<!--  END OF ADD MODAL -->
+
+			<!-- Modal -->
+		<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Update Course</h4>
+					</div>
+					<div class="modal-body">
+						<!--  FORM ADD -->
+						<form role="form" id="updateCourseForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_course_id" id="up_course_id" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Course Code</span><br /> <input
+									type="text" class="form-control" name="up_course_code" id="up_course_code"
+									placeholder="Course Code" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Subject Name</span><br /> <input
+									type="text" class="form-control" name="up_course_name" id="up_course_name"
+									placeholder="Subject Name" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Crossover Course</span><br /> <input
+									type="text" class="form-control" name="up_crossover_input" id="up_crossover_input"
+									placeholder="Course" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Reference to old course</span><br /> <input
+									type="text" class="form-control" name="up_reference_input" id="up_reference_input"
+									placeholder="Reference" />
+							</div>
+							
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" onclick="updateCourse();"
+								class="btn btn-primary">Save changes</button>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<!--  END OF UPDATE MODAL -->
+
+	</div>
+</body>
 </html>

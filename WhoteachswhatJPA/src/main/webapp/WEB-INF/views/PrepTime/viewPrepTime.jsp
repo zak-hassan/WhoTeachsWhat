@@ -219,23 +219,24 @@
 		});
 	};
 
-	   var deletePreptime= function(id,preptime) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/preptime/"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
+   var deletePreptime= function(id,preptime) {
+	   	$.ajax({
+	   		type:"DELETE", 
+		   	url : "api/preptime/"+id,
+		   	data : null,
+		   	cache : false,
+		   	success : function(data){
+	       		if (data.success === "true") {
 	       			$.pnotify({
 						title : 'Prep time :' + preptime,
 						type : 'info',
 						text : 'Prep time has been deleted'
 					});
 	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
+		   		}
+ 			}
+	   	});
+   };	   
 
 	var updateForm=function(up_preptimeId, up_preptimeName, up_preptimeFactor){
 		$("#up_preptimeId").val(up_preptimeId);

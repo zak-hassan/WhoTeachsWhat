@@ -26,8 +26,11 @@ public class ResponsibilityService {
 		return responsibilityDao.create(r);
 		
 	}
-	public void update(Integer id) {
+	public void update(Integer id, String R_code, String R_name) {
 		Responsibility r = responsibilityDao.getById(id);
+		r.setResponsibilityCode(R_code);
+		r.setResponsibilityName(R_name);
+		
 		responsibilityDao.update(r);
 	}
 	

@@ -80,7 +80,7 @@
 <script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
 
 <script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript" src="static/js/bootrestful.js"></script>
+<script type="text/javascript" src="static/js/bootRestful/bootrestful.js"></script>
     </head>
 
     <body class="body-inner">
@@ -272,8 +272,9 @@
 											class="bootstrap-tooltip" data-original-title="Update"
 											onclick="updateForm('${respon.getResponsibilityId() }', 
 												'${respon.getResponsibilityCode() }', 
-												'${respon.getResponsibilityName()}')">
-												<i class="icon-edit"></i>
+												'${respon.getResponsibilityName()}')"
+											data-toggle="modal" data-target="#updateResponsibilityModal">
+											<i class="icon-edit"></i>
 										</a> 
 										<a 
 											class="bootstrap-tooltip" data-original-title="Delete" 
@@ -406,7 +407,7 @@
 			</div>
 		</div>
 
-		<!--  END OF ADD MODAL -->
+		<!--  END OF UPDATE MODAL -->
             
             
         </div>

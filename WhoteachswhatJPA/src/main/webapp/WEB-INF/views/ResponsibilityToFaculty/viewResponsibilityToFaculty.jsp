@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Faculty - Faculty Responsibilities</title>
+<title>Manage Faculty - Responsibilities</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -164,84 +164,97 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding, updating and deleting a responsibility to and from a faculty member
      
    */
-   
-   var validateAddResponsibilityToFaculty= function() {
-   	$.post("api/ResponsibilityToFaculty",{ facultyId: document.getElementById("facultyId").selectedIndex +1,
-   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
-   		year: document.getElementById("year").value,
-   		semesterId: document.getElementById("semester").selectedIndex +1,
-   		hoursperweek: document.getElementById("hoursperweek").value
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addResponsibilityToFaculty").modal('hide');
-       			$.pnotify({
-					title : 'New Faculty Responsibility Added',
-					type : 'info',
-					text : 'Added new faculty responsibility !'
-				});
-       		}
-   		});
-	return	false;
-   };
-
-   var validateUpdateResponsibilityToFaculty= function() {
-	   	$.put("api/ResponsibilityToFaculty"+id,{ facultyId: document.getElementById("facultyId").selectedIndex +1,
-	   		responsibilityId: document.getElementById("accessLevel").selectedIndex +1,
-	   		year: document.getElementById("year").value,
-	   		semesterId: document.getElementById("semester").selectedIndex +1,
-	   		hoursperweek: document.getElementById("hoursperweek").value
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#updateResponsibilityToFaculty").modal('hide');
-	       			$.pnotify({
-						title : 'Faculty Responsibility Updated',
+    
+   var addRepToFac=function() {
+    	//var facultyId = encodeURI($_GET['id']);
+    	var facultyId = 6;
+    	
+		$.ajax({
+			type: "POST",
+			url: "api/ResponsibilityToFaculty",
+			data: { 
+				facultyId: facultyId,
+		   		responsibilityId: document.getElementById("responsibility").selectedIndex +1,
+		   		year: document.getElementById("year").value,
+		   		semesterId: document.getElementById("semester").selectedIndex +1,
+		   		hoursperweek: document.getElementById("hoursperweek").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Responsibility Added to Faculty',
 						type : 'info',
-						text : 'faculty responsibility updated !'
+						text : 'Responsibility added to faculty' 
 					});
-	       		}
-	   		});
-		return	false;
-	   };
-
-	   var deleteResponsibilityToFaculty= function(id,uname) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/ResponsibilityToFaculty"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
+		    		
+		    		document.getElementById("addRepToFacForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addRepToFacModal').modal('hide');
+			   	}
+			}
+		});
+	};
+	
+	var updateRepToFac=function() {
+		var facultyId = encodeURI($_GET['id']);
+		
+		$.ajax({
+			type: "POST",
+			url: "api/ResponsibilityToFaculty/"+document.getElementById("up_repToFacId").value,
+			data: { 
+				facultyId: facultyId,
+		   		responsibilityId: document.getElementById("up_responsibility").selectedIndex +1,
+		   		year: document.getElementById("up_year").value,
+		   		semesterId: document.getElementById("up_semester").selectedIndex +1,
+		   		hoursperweek: document.getElementById("up_hoursperweek").value
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Responsibility Updated',
+						type : 'info',
+						text : 'Responsibility has been updated for faculty' 
+					});
+		    		
+		    		document.getElementById("updateRepToFacForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateRepToFacModal').modal('hide');
+			   	}
+			}
+		});
+	};
+  
+	var deleteResponsibilityToFaculty= function(id,uname) {
+	   	$.ajax({
+	   		type:"DELETE", 
+		   	url : "api/ResponsibilityToFaculty/"+id,
+		   	data : null,
+		   	cache : false,
+		   	success : function(data){
+	       		if (data.success === "true") {
 	       			$.pnotify({
 						title : 'Responsibility has been removed from faculty',
 						type : 'info',
 						text : 'Responsibility has been removed from faculty'
 					});
-	       			location.reload();
-			   	}
-  		   	  }
-		   	});
-	   };	   
+      				location.reload();
+		   		}
+			}
+	   	});
+  	};	 
 
-	var updateForm=function(uname,ac_level){
-			$("#up_username").val(uname);
-			$("#up_accessLevel").val(ac_level);
-		};											
+	var updateForm=function(up_repToFacId, up_responsibility, up_year, up_semester, up_hoursperweek){
+		$("#up_responsibility").val(up_responsibility);
+		$("#up_year").val(up_year);
+		$("#up_semester").val(up_semester);
+		$("#up_hoursperweek").val(up_hoursperweek);
+	};											
 
-		var setViewSummary=function(uname, role){
-			$("#userSummary").html("<b>Username:</b> "+uname+" <br /> <b>Role:</b> "+role);
-			$("#viewUser").modal('show');
-			
-		}
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -250,20 +263,20 @@
 				</a></li>
 				<li><a href="#">Admin Panel</a></li>
 				<li class="current"><a href="viewResponsibilityToFaculty">Manage
-						Faculty Responsibilities</a></li>
+						Responsibility To Faculty</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Faculty Responsibilities</small>
+				<small>Manage Responsibility To Faculty</small>
 			</h2>
 			<h3>
-				<small>Add, Update and Delete a faculty member's responsibilities</small>
+				<small>Add, Update and Delete faculty responsibilities</small>
 			</h3>
 		</header>
-		<form method="post" action="api/ResponsibilityToFaculty" id="ManageResponsibilityToFacultyForm"
-			onsubmit="return validateAddResponsibilityToFaculty();" class="form-horizontal">
+		<form method="post" action="api/preptime" id="AddPreptimeForm"
+			onsubmit="return validateNewUser();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -286,30 +299,35 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
-									<th>#</th>
-									<th>User(s)</th>
+									<th>Year</th>
+									<th>Faculty</th>
+									<th>Responsibility</th>
+									<th>Semester</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allUsers }" var="users">
+								<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
 									<tr>
+										<td>${repToFac.getId().getYear()  }</td>
 
-										<td>${users.getUserId() }</td>
-
-										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
-										<td class="align"><a
-											onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend</a>
-											| <a
-											onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete</a>
-											| <a
-											onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-											data-toggle="modal" data-target="#updateUser">Permissions</a>
+										<td>${repToFac.getFaculty().getFacultyFirstName() } ${repToFac.getFaculty().getFacultyLastName() }</td>
+										<td>${repToFac.getResponsibility().getResponsibilityName() }</td>
+										<td>${repToFac.getSemester().getSemesterName() }
+										<td class="align">
+											<a
+												onclick="updateForm('${repToFac.getResponsibility().getResponsibilityId()}', 
+													'${repToFac.getSemester().getSemesterId() }',
+													'${repToFac.getId().getYear()}',
+													'${repToFac.getHoursPerWeek() }' )"
+												data-toggle="modal" data-target="#updateRepToFacModal">Update</a>
+											
+											<a
+												onclick="deletePreptime('${pt.getPrepId()}', '${pt.getPrepName()}')">
+												Delete
+											</a>
 										</td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>
@@ -356,65 +374,52 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addResponsibilityToFaculty">Add Faculty Responsibilities</button>
+			data-target="#addRepToFacModal">Add Responsibility to Faculty</button>
+
 		<!-- Modal -->
-		<div class="modal fade" id="addResponsibilityToFaculty" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addRepToFacModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add Faculty Responsibilities</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Responsibility to Faculty</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addResponsibilityToFacultyForm" class="form-horizonatal">
+						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Faculty:</span> <br /> <select
-									class="form-control" id="facultyId">
-									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
-									<option value="${repToFac.getFaculty().getFacultyId() }">
-										${repToFac.getFaculty().getFacultyFirstName() } 
-										${repToFac.getFaculty().getFacultyLastName() } </option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Responsibility:</span> <br /> <select
-									class="form-control" id="responsibilityId">
-									<c:forEach items="${allResponsibility }" var="responsibility">
-									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
-										${responsibility.getResponsibility().getResponsibilityName() }
-									</option>
-									</c:forEach>
+								<span class="input-group-addon">Responsibility:</span> <br /> 
+									<select class="form-control" id="responsibility">
+										<c:forEach items="${allResponsibility }" var="rep">
+											<option value="${rep.getResponsibilityId() }">
+												${rep.getResponsibilityName() }
+											</option>
+										</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year: </span><br /> <input
-									type="text" class="form-control" name="year"
-									id="up_year" placeholder="2014" />
+									type="text" class="form-control" name="year" id="year" />
 							</div>
-							
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> <select
 									class="form-control" id="semester">
-									<c:forEach items="${allResponsibility }" var="responsibility">
-									<option value="${responsibility.getSemester().getSemesterId() }">
-										${responsibility.getSemester().getSemesterName() }
-									</option>
+									<c:forEach items="${allSemesters }" var="semester">
+										<option value="${semester.getSemesterId() }">
+											${semester.getSemesterName() }
+										</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Hours per week: </span><br /> <input
-									type="text" class="form-control" name="hoursperweek"
-									id="up_hoursperweek" placeholder="20" />
+									type="text" class="form-control" name="hoursperweek" id="hoursperweek" />
 							</div>
-							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddResponsibilityToFaculty();"
+							<button type="button" onclick="addRepToFac();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -423,67 +428,52 @@ td {
 			</div>
 		</div>
 
-
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateResponsibilityToFaculty" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateRepToFacModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Update Faculty Responsibilities</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Responsibility to Faculty</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="updateResponsibilityToFacultyForm" class="form-horizonatal">
+						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Faculty:</span> <br /> <select
-									class="form-control" id="facultyId">
-									<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
-									<option value="${repToFac.getFaculty().getFacultyId() }">
-										${repToFac.getFaculty().getFacultyFirstName() } 
-										${repToFac.getFaculty().getFacultyLastName() } </option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Responsibility:</span> <br /> <select
-									class="form-control" id="responsibilityId">
-									<c:forEach items="${allResponsibility }" var="responsibility">
-									<option value="${responsibility.getResponsibility().getResponsibilityId() }">
-										${responsibility.getResponsibility().getResponsibilityName() }
-									</option>
-									</c:forEach>
+								<span class="input-group-addon">Responsibility:</span> <br /> 
+									<select class="form-control" id="up_responsibility">
+										<c:forEach items="${allResponsibility }" var="rep">
+											<option value="${rep.getResponsibilityId() }">
+												${rep.getResponsibilityName() }
+											</option>
+										</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year: </span><br /> <input
-									type="text" class="form-control" name="year"
-									id="up_year" placeholder="2014" />
+									type="text" class="form-control" name="up_year" id="up_year" />
 							</div>
-							
 							<div class="input-group">
-								<span class="input-group-addon">Semester:</span> <br /> <select
-									class="form-control" id="semester">
-									<c:forEach items="${allResponsibility }" var="responsibility">
-									<option value="${responsibility.getSemester().getSemesterId() }">
-										${responsibility.getSemester().getSemesterName() }
-									</option>
-									</c:forEach>
+								<span class="input-group-addon">Semester:</span> <br /> 
+									<select class="form-control" id="up_semester">
+										<c:forEach items="${allSemesters }" var="semester">
+											<option value="${semester.getSemesterId() }">
+												${semester.getSemesterName() }
+											</option>
+										</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Hours per week: </span><br /> <input
-									type="text" class="form-control" name="hoursperweek"
-									id="up_hoursperweek" placeholder="20" />
+									type="text" class="form-control" name="up_hoursperweek" id="up_hoursperweek" />
 							</div>
-							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateResponsibilityToFaculty();"
+							<button type="button" onclick="updateRepToFac();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

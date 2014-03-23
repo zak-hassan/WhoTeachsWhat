@@ -136,11 +136,14 @@ public class ResponsibilityController {
 	 * @return A list containing the success of the operation
 	 */
 
-	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateJSON(@PathVariable("id") Integer id) {
+	Map<String, String> listUpdateJSON(
+			@PathVariable("id") Integer id,
+			@RequestParam(value = "respon_code", required = true) String respon_code,
+			@RequestParam(value = "respon_name", required = true) String respon_name) {
 
-		responsibilityService.update(id);
+		responsibilityService.update(id, respon_code, respon_name);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 

@@ -156,7 +156,7 @@ public class CourseController {
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
 			@RequestParam(value = "reference_input", required = false) String oldCourse) {
 
-		courseService.update(id, courseName, courseCode, crossoverCourse,
+		courseService.update(id, courseCode, courseName, crossoverCourse,
 				oldCourse);
 		
 		Map<String, String> list = new HashMap<String, String>();

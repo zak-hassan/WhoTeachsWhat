@@ -47,7 +47,6 @@ public class UserController {
 		model.addAttribute("allUsers",accountService.getAll());
 		model.addAttribute("allRoles",accessLevelService.getAll()); 
 		
-		
 		return "Anil_ManageUsers";
 	}
 	

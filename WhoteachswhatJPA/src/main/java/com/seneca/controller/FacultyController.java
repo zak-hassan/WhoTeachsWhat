@@ -24,7 +24,7 @@ import com.seneca.service.TeachingTypeService;
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
  *         <Anil.D.Santokhi@gmail.com>
- * @lastmodified February 15, 2014
+ * @lastmodified March 22, 2014
  * @version 0.0.1
  */
 
@@ -68,9 +68,6 @@ public class FacultyController {
 		return "Faculty/addFaculty";
 	}
 
-
-	
-	
 	// REST API ENDPOINTS:
 	
 
@@ -183,9 +180,13 @@ public class FacultyController {
 
 	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listUpdateFacultyJSON(@PathVariable("id") Integer id) {
+	Map<String, String> listUpdateFacultyJSON(
+			@PathVariable("id") Integer id,
+			@RequestParam(value = "faculty_first_name", required = true) String faculty_first_name,
+			@RequestParam(value = "faculty_last_name", required = true) String faculty_last_name,
+			@RequestParam(value = "faculty_status", required = true) Integer status) {
 
-		facultyService.update(id);
+		facultyService.update(id, faculty_first_name, faculty_last_name, status);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
