@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.FacultyToCourseInSemesterYear;
+import com.seneca.service.CourseService;
+import com.seneca.service.FacultyService;
 import com.seneca.service.FacultyToCourseInSemesterYearService;
+import com.seneca.service.PrepTimeService;
+import com.seneca.service.SemesterService;
 
 @Controller
 public class FacultyToCourseInSemesterYearController {
@@ -32,12 +36,29 @@ public class FacultyToCourseInSemesterYearController {
 
 	@Autowired
 	private FacultyToCourseInSemesterYearService facultyToCourseInSemesterYearService;
+	
+	@Autowired
+	private FacultyService facultyService;
+	
+	@Autowired
+	private SemesterService semesterService;
+	
+	@Autowired
+	private CourseService courseService;
+	
+	@Autowired
+	private PrepTimeService prepTimeService;
 
 	@RequestMapping(value = "/viewFacultyToCourseInSemesterYear", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allFacultyToCourseInSemesterYear",
 				facultyToCourseInSemesterYearService.getAll());
-
+		
+		model.addAttribute("allFaculty", facultyService.getAllFaculty());
+		model.addAttribute("allSemesters", semesterService.getAll());
+		model.addAttribute("allCourses", courseService.getAll());
+		model.addAttribute("allPrepTime", prepTimeService.getAll());
+		
 		return "FacultyToCourseInSemesterYear/viewFacultyToCourseInSemesterYear";
 	}
 

@@ -164,86 +164,120 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
-     
+    @Purpose: AJAX posting and validation for adding, updating and deleting a faculty to a course in a particular 
+    		  semester during a certain year
    */
+   
+	// Get faculty id from query string
+	var facultyId = window.location.search.slice(4); // Removes ?id=
+	facultyId = encodeURI(facultyId); // Escape string  	
     
-   var validateAddCourseInSemesterYear= function() {
-   	$.post("api/FacultyToCourseInSemesterYear",{ additionAttribute: document.getElementById("additionAttribute").value, 
-   		comphourAllowance: document.getElementById("comphourAllowance").value,
-   		comphourAssigned: document.getElementById("comphourAssigned").value,
-   		sectionNumber: document.getElementById("sectionNumber").value,
-   		year: document.getElementById("year").value,
-   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
-   		courseId: document.getElementById("courseId").selectedIndex + 1,
-   		facultyId: document.getElementById("facultyId").selectedIndex + 1,
-   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1
-   	   	})
-   		.done(function(data) {
-       		console.log("AJAX RETURNED"+JSON.stringify(data));
-       		
-       		if (data.success === "true") {
-       			// Success message
-       			$("#addCourseInSemesterYear").modal('hide');
-       			$.pnotify({
-					title : 'New Course In Semester Year Added to Faculty',
-					type : 'info',
-					text : 'New Course in Semester Year added to faculty !'
-				});
-       		}
-   		});
-	return	false;
-   };
-
-
-   var validateUpdateCourseInSemesterYear= function() {
-	   	$.put("api/FacultyToCourseInSemesterYear"+id,{ additionAttribute: document.getElementById("additionAttribute").value, 
-	   		comphourAllowance: document.getElementById("comphourAllowance").value,
-	   		comphourAssigned: document.getElementById("comphourAssigned").value,
-	   		sectionNumber: document.getElementById("sectionNumber").value,
-	   		year: document.getElementById("year").value,
-	   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
-	   		courseId: document.getElementById("courseId").selectedIndex + 1,
-	   		facultyId: document.getElementById("facultyId").selectedIndex + 1,
-	   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1
-	   	   	})
-	   		.done(function(data) {
-	       		console.log("AJAX RETURNED"+JSON.stringify(data));
-	       		
-	       		if (data.success === "true") {
-	       			// Success message
-	       			$("#updateCourseInSemesterYear").modal('hide');
-	       			$.pnotify({
-						title : 'Course In Semester Year updated',
+   var addFacToCourseSem=function() {
+	   if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
+			facultyId = document.getElementById("facultyId").value;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "api/facultyToCourseInSemesterYear",
+			data: { 
+				additionAttribute: document.getElementById("additionAttribute").value, 
+		   		comphourAllowance: document.getElementById("comphourAllowance").value,
+		   		comphourAssigned: document.getElementById("comphourAssigned").value,
+		   		sectionNumber: document.getElementById("sectionNumber").value,
+		   		semesterId: document.getElementById("semesterId").value,
+		   		year: document.getElementById("year").value,
+		   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
+		   		courseId: document.getElementById("courseId").selectedIndex + 1,
+		   		facultyId: facultyId,
+		   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1  
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'New Course Added to Faculty',
 						type : 'info',
-						text : 'Course in Semester Year updated !'
+						text : 'Course has been assigned to faculty'
 					});
-	       		}
-	   		});
-		return	false;
-	   };
-
-	   var deleteCourseInSemesterYear= function(id,course, faculty) {
-		   	$.ajax({type:"DELETE", 
-			   	url : "api/FacultyToCourseInSemesterYear"+id,
-			   	data : null,
-			   	cache : false,
-			   	success : function(data){
-		       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Course :' + course + 'has been removed from' + faculty,
-						type : 'info',
-						text : 'Course has been removed'
-					});
-	       			location.reload();
+		    		
+		    		document.getElementById("addFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#addFacToCourseSemModal').modal('hide');
 			   	}
-  		   	  }
-		   	});
-	   };	   
+			}
+		});
+	};
+   
+	var updateFacToCourseSem=function() {
+		if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
+			facultyId = document.getElementById("up_facultyId").value;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "api/facultyToCourseInSemesterYear/"+document.getElementById("up_cisId").value,
+			data: { 
+				additionAttribute: document.getElementById("up_additionAttribute").value, 
+		   		comphourAllowance: document.getElementById("up_comphourAllowance").value,
+		   		comphourAssigned: document.getElementById("up_comphourAssigned").value,
+		   		sectionNumber: document.getElementById("up_sectionNumber").value,
+		   		semesterId: document.getElementById("up_semesterId").value,
+		   		year: document.getElementById("up_year").value,
+		   		comphourId: document.getElementById("up_comphourId").selectedIndex + 1,
+		   		courseId: document.getElementById("up_courseId").selectedIndex + 1,
+		   		facultyId: facultyId,
+		   		prepTypeId: document.getElementById("up_prepTypeId").selectedIndex + 1  
+		   	},
+			dataType: "json",
+			cache: false,
+			success : function(data){
+		    	if (data.success === "true") {
+		    		$.pnotify({
+						title : 'Updated Course Added to Faculty',
+						type : 'info',
+						text : 'Course has been updated for faculty'
+					});
+		    		
+		    		document.getElementById("updateFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
+		    		$('#updateFacToCourseSemModal').modal('hide');
+			   	}
+			}
+		});
+	};
 
-	var updateForm=function(uname,ac_level){
-		$("#up_username").val(uname);
-		$("#up_accessLevel").val(ac_level);
+	var deleteFacToCourseSem= function(id, course, facultyFirstName, faultyLastName) {
+	 	$.ajax({
+	 		type:"DELETE", 
+		  	url : "api/facultyToCourseInSemesterYear/"+id,
+		  	data : null,
+		  	cache : false,
+		  	success : function(data){
+	     		if (data.success === "true") {
+	    			$.pnotify({
+						title : 'Course :' + course + 'has been removed from faculty',
+						type : 'info',
+						text : 'Course has been removed from ' + facultyFirstName + ' ' + facultyLastName
+					});
+	    			location.reload();
+	  			}
+	   	  	}
+	 	});
+	};	   
+
+	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId, year,
+		comphourId, courseId, prepTypeId){
+		$("#up_cisId").val(cisId);
+		$("#facultyId").val(facId);
+		$("#up_additionAttribute").val(additionAttribute); 
+   		$("#up_comphourAllowance").val(comphourAllowance);
+   		$("#up_comphourAssigned").val(comphourAssigned);
+   		$("#up_sectionNumber").val(sectionNumber);
+   		$("#up_semesterId").val(semesterId);
+   		$("up_year").val(year);
+   		$("#up_comphourId").val(comphourId);
+   		$("#up_courseId").val(courseId);
+   		$("#up_prepTypeId").val(prepTypeId); 
 	};											
 
 </script>
@@ -291,31 +325,66 @@ td {
 						<table class="table table-striped" id="tableSortable">
 							<thead>
 								<tr>
-								<tr>
-									<th>#</th>
-									<th>User(s)</th>
+									<th>Faculty</th>
+									<th>Course Section</th>
+									<th>Semester Year</th>
+									<th>Comp Hour</th>
+									<th>Hours</th>
+									<th>Prep Time</th>
+									<th>Addition</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
-								</tr>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${allUsers }" var="users">
+								<%-- 
+								<c:set var="facultyId">
+								    <c:out value = "${param.id}" />
+								</c:set>
+								
+								<c:forEach items="${allFacultyToCourseInSemesterYear}" var="facToCourse">
+									<c:if test="${facToCourse.getFaculty().getFacultyId() == facultyId || empty facultyId}">
 									<tr>
-
-										<td>${users.getUserId() }</td>
-
-										<td><label><a onclick=setViewSummary('${users.getUsername() }',$("#accessLevel").children()['${users.accessLevel.getAccessId()}'].innerText)>${users.getUsername() }</a></label></td>
-										<td class="align"><a
-											onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend</a>
-											| <a
-											onclick="deleteUser('${users.getUserId() }', ' ${users.getUsername() } ')">Delete</a>
-											| <a
-											onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()+1} )"
-											data-toggle="modal" data-target="#updateUser">Permissions</a>
+										<td>
+											${facToCourse.getFaculty().getFacultyFirstName() } 
+											${facToCourse.getFaculty().getFacultyLastName() }
+										</td>
+										<td>${facToCourse.getCourse().getCourseCode() } x ${facToCourse.getSectionNumber() }</td>
+										<td>${facToCourse.getSemesterId() } ${facToCourse.getYear() }</td>
+										<td>${facToCourse.getCompHour().getCompHour_name()}</td>
+										<td>${facToCourse.getCompHour_assigned() }</td>
+										<td>
+											${facToCourse.getPrepTime().getPrepName() } 
+											${facToCourse.getPrepTime()getPrepFactor()}
+										</td>
+										<td>${facToCourse.getAdditionAttribute() }</td>
+										
+										<td class="align">
+											 <a
+												onclick="updateForm('${facToCourse.getCisyId() }',
+													'${facToCourse.getFaculty().getFacultyId()}',
+													'${facToCourse.getAdditionAttribute()}',
+													'${facToCourse.getCompHour_allowance() }',
+													'${facToCourse.getCompHour_assigned() }',
+													'${facToCourse.getSectionNumber() }',
+													'${facToCourse.getSemesterId() }',
+													'${facToCourse.getYear() }',
+													'${facToCourse.getCompHour().getCompHour_id() }',
+													'${facToCourse.getCourse().getCourseId() }',
+													'${facToCourse.getPrepTime().getPrepId() }',)"
+												data-toggle="modal" data-target="#updateFacToCourseSemModal">Update
+											</a>
+											|
+											<a
+												onclick="deleteFacToCourseSem('${facToCourse.getCisyId() }',
+													'${facToCourse.getCourse().getCourseCode() }',
+													'${facToCourse.getFaculty().getFacultyFirstName()}',
+													'${facToCourse.getFaculty().getFacultyLastName()}' )">Delete
+											</a>
 										</td>
 									</tr>
-
+									</c:if>
 								</c:forEach>
+								--%>
 							</tbody>
 						</table>
 					</div>
@@ -353,18 +422,18 @@ td {
 
 					</script>
 
-
-
 				<!-- END OF NEW CONTENT-->
 			</div>
 			<!-- end container -->
 		</form>
+
+		
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCourseToSemester">Add Faculty to Course</button>
+			data-target="#addFacToCourseSemModal">Add Faculty to Course</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addCourseToSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addFacToCourseSemModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -375,7 +444,19 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCourseToSemesterForm" class="form-horizonatal">
+						<form role="form" id="addFacToCourseSemForm" class="form-horizonatal">
+							<c:if test="${ empty facultyId }">
+								<div class="input-group">
+									<span class="input-group-addon">Faculty:</span> <br /> 
+										<select class="form-control" id="facultyId">
+											<c:forEach items="${allFaculty }" var="fac">
+												<option value="${fac.getFacultyId() }">
+													${fac.getFacultyFirstName() } ${fac.getFacultyLastName() }
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Addition: </span><br /> <input
 									type="text" class="form-control" name="additionAttribute" id="additionAttribute"
@@ -399,8 +480,8 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> <select
 									class="form-control" id="semesterId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getSemesterId() }">${fc.getSemesterName() }</option>
+									<c:forEach items="${allSemesters }" var="semester">
+									<option value="${semester.getSemesterId() }">${semester.getSemesterName() }</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -412,18 +493,9 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Course:</span> <br /> <select
 									class="form-control" id="courseId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getCourse().getCourseId() }">
-										${fc.getCourse().getCourseCode() }
-									</option>
-									</c:forEach>
-								</select>
-							</div><div class="input-group">
-								<span class="input-group-addon">Faculty:</span> <br /> <select
-									class="form-control" id="facultyId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getFaculty().getFacultyId() }">
-										${fc.getFaculty().getFacultyFirstName() } ${fc.getFaculty().getFacultyLastName() } 
+									<c:forEach items="${allCourses }" var="course">
+									<option value="${course.getCourse().getCourseId() }">
+										${course.getCourse().getCourseCode() }
 									</option>
 									</c:forEach>
 								</select>
@@ -431,16 +503,16 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
 									class="form-control" id="preptimeId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getPrepTime().getPrepId() }">
-										${fc.getPrepTime().getPrepName() }
+									<c:forEach items="${allPrepTime}" var="pt">
+									<option value="${pt.getPrepTime().getPrepId() }">
+										${pt.getPrepTime().getPrepName() }
 									</option>
 									</c:forEach>
 								</select>
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateAddCourseInSemesterYear();"
+							<button type="button" onclick="addFacToCourseSem();"
 								class="btn btn-primary">Save changes</button>
 
 						</form>
@@ -454,7 +526,7 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateCourseToSemester" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateFacToCourseSemModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -465,72 +537,69 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="updateCourseToSemesterForm" class="form-horizonatal">
+						<form role="form" id="updateFacToCourseSemForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_facultyId" id="up_facultyId" />
+							</div>
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_cisId" id="up_cisId" />
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Addition: </span><br /> <input
-									type="text" class="form-control" name="additionAttribute" id="additionAttribute"
+									type="text" class="form-control" name="up_additionAttribute" id="up_additionAttribute"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
-									type="text" class="form-control" name="comphourAllowance" id="comphourAllowance"
+									type="text" class="form-control" name="up_comphourAllowance" id="up_comphourAllowance"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number: </span><br /> <input
-									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
+									type="text" class="form-control" name="up_sectionNumber" id="up_sectionNumber"
 									placeholder="5" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hours Assigned: </span><br /> <input
-									type="text" class="form-control" name="comphourAssigned" id="comphourAssigned"
+									type="text" class="form-control" name="up_comphourAssigned" id="up_comphourAssigned"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> <select
-									class="form-control" id="semesterId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getSemesterId() }">${fc.getSemesterName() }</option>
+									class="form-control" id="up_semesterId">
+									<c:forEach items="${allSemesters }" var="semester">
+									<option value="${semester.getSemesterId() }">${semester.getSemesterName() }</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year: </span><br /> <input
-									type="text" class="form-control" name="year" id="year"
+									type="text" class="form-control" name="up_year" id="up_year"
 									placeholder="2014" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Course:</span> <br /> <select
-									class="form-control" id="courseId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getCourse().getCourseId() }">
-										${fc.getCourse().getCourseCode() }
-									</option>
-									</c:forEach>
-								</select>
-							</div><div class="input-group">
-								<span class="input-group-addon">Faculty:</span> <br /> <select
-									class="form-control" id="facultyId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getFaculty().getFacultyId() }">
-										${fc.getFaculty().getFacultyFirstName() } ${fc.getFaculty().getFacultyLastName() } 
+									class="form-control" id="up_courseId">
+									<c:forEach items="${allCourses }" var="course">
+									<option value="${course.getCourse().getCourseId() }">
+										${course.getCourse().getCourseCode() }
 									</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
-									class="form-control" id="preptimeId">
-									<c:forEach items="${allFacultyToCourseInSemesterYear }" var="fc">
-									<option value="${fc.getPrepTime().getPrepId() }">
-										${fc.getPrepTime().getPrepName() }
+									class="form-control" id="up_preptimeId">
+									<c:forEach items="${allPrepTime}" var="pt">
+									<option value="${pt.getPrepTime().getPrepId() }">
+										${pt.getPrepTime().getPrepName() }
 									</option>
 									</c:forEach>
 								</select>
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" onclick="validateUpdateCourseInSemesterYear();"
+							<button type="button" onclick="updateFacToCourseSem();"
 								class="btn btn-primary">Save changes</button>
 
 						</form>

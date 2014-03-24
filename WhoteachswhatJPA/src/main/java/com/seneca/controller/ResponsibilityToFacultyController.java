@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.ResponsibilityToFaculty;
+import com.seneca.service.FacultyService;
 import com.seneca.service.ResponsibilityService;
 import com.seneca.service.ResponsibilityToFacultyService;
 import com.seneca.service.SemesterService;
@@ -39,6 +40,9 @@ public class ResponsibilityToFacultyController {
 	private ResponsibilityService responsibilityService;
 	
 	@Autowired
+	private FacultyService facultyService;
+	
+	@Autowired
 	private SemesterService semesterService;
 
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
@@ -46,6 +50,7 @@ public class ResponsibilityToFacultyController {
 		model.addAttribute("allResponsibilityToFaculty",
 				responsibilityToFacultyService.getAll()); // Once issue with id is resolved, change to getOne(id);
 		model.addAttribute("allResponsibility", responsibilityService.getAll());
+		model.addAttribute("allFaculty", facultyService.getAllFaculty());
 		model.addAttribute("allSemesters", semesterService.getAll());
 
 		return "ResponsibilityToFaculty/viewResponsibilityToFaculty";

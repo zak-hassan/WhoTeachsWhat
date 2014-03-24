@@ -241,17 +241,13 @@
 											<c:set var="facultyId" value = "${ faculty.getFacultyId() }"></c:set>
 											
 											<td class="align">
-												<a class="bootstrap-tooltip" data-original-title="Complimentary Hours"
-													 data-placement="top" href="Anil_ManageFacultyCompHours.html"> 
-													<i class="icon-time"></i> 
-												</a> 
-												
 												<a class="bootstrap-tooltip" data-original-title="Responsibility" 
 													href="viewResponsibilityToFaculty?id=${facultyId }">
 													<i class="icon-list-alt"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Courses" 
-													href="Anil_ManageFacultyCourses.html"> <i class="icon-book"></i>
+													href="viewFacultyToCourseInSemesterYear?id=${facultyId }">
+													<i class="icon-book"></i>
 												</a>
 												<a class="bootstrap-tooltip" data-original-title="Update" 
 													onclick="updateForm('${faculty.getFacultyId()}', 

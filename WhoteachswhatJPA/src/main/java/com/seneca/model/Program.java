@@ -25,7 +25,7 @@ public class Program implements Serializable {
 	@Column(name="program_name")
 	private String programName;
 
-	@Column(name="sectionNumber")
+	@Column(name="total_semester")
 	private int totalSemester;
 
 	//bi-directional many-to-one association to CourseInProgramCurSem

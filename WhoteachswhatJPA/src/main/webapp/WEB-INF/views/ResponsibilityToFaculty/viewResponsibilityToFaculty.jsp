@@ -168,10 +168,15 @@
      
    */
     
+   // Get faculty id from query string
 	var facultyId = window.location.search.slice(4); // Removes ?id=
-	facultyId = encodeURI(facultyId);  	
+	facultyId = encodeURI(facultyId); // Escape string
 	
 	var addRepToFac=function() {
+		if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
+			facultyId = document.getElementById("facultyId").value;
+		}
+		
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty",
@@ -199,7 +204,13 @@
 		});
 	};
 	
-	var updateRepToFac=function() {	
+	var updateRepToFac=function() {
+		if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
+			facultyId = document.getElementById("up_facultyId").value;
+		}
+		
+		alert("fac id is:" + facultyId);
+		
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty/"+document.getElementById("up_repToFacId").value,
@@ -246,7 +257,8 @@
 	   	});
   	};	 
 
-	var updateForm=function(up_responsibility, up_semester, up_year, up_hoursperweek){
+	var updateForm=function(up_facultyId, up_responsibility, up_semester, up_year, up_hoursperweek){
+		$("#up_facultyId").val(up_facultyId);
 		$("#up_responsibility").val(up_responsibility);
 		$("#up_semester").val(up_semester);
 		$("#up_year").val(up_year);
@@ -309,7 +321,7 @@ td {
 								    <c:out value = "${param.id}" />
 								</c:set>
 								<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
-									<c:if test="${repToFac.getFaculty().getFacultyId() == facultyId }">
+									<c:if test="${repToFac.getFaculty().getFacultyId() == facultyId || empty facultyId}">
 									<tr>
 										<td>${repToFac.getId().getYear()  }</td>
 
@@ -318,7 +330,8 @@ td {
 										<td>${repToFac.getSemester().getSemesterName() }
 										<td class="align">
 											<a
-												onclick="updateForm('${repToFac.getResponsibility().getResponsibilityId()}', 
+												onclick="updateForm('${repToFac.getFaculty().getFacultyId()}',
+													'${repToFac.getResponsibility().getResponsibilityId()}', 
 													'${repToFac.getSemester().getSemesterId() }',
 													'${repToFac.getId().getYear()}',
 													'${repToFac.getHoursPerWeek() }' )"
@@ -390,6 +403,18 @@ td {
 					<div class="modal-body">
 						<!--  FORM ADD -->
 						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
+							<c:if test="${ empty facultyId }">
+								<div class="input-group">
+									<span class="input-group-addon">Faculty:</span> <br /> 
+										<select class="form-control" id="facultyId">
+											<c:forEach items="${allFaculty }" var="fac">
+												<option value="${fac.getFacultyId() }">
+													${fac.getFacultyFirstName() } ${fac.getFacultyLastName() }
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility:</span> <br /> 
 									<select class="form-control" id="responsibility">
@@ -444,6 +469,9 @@ td {
 					<div class="modal-body">
 						<!--  FORM ADD -->
 						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
+							<div class="input-group">
+								<input type="hidden" class="form-control" name="up_facultyId" id="up_facultyId" />
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility:</span> <br /> 
 									<select class="form-control" id="up_responsibility">

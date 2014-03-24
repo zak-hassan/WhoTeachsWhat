@@ -40,6 +40,9 @@
 					<li>
 						<a href="viewFacultyToCourseInSemesterYear">Manage Faculty To Course In Semester Year</a>
 					</li>
+					<li>
+						<a href="viewResponsibilityToFaculty">Manage Faculty Responsibilities</a>
+					</li>
 				</ul>
 			</div>
 		</li>
