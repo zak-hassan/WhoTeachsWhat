@@ -29,6 +29,9 @@
 						<a href="viewEvalFactor">Manage Evaluation Factor</a>
 					</li>
 					<li>
+						<a href="manageTeachingType">Manage Teaching Type</a>
+					</li>
+					<li>
 						<a href="viewSemester">Manage Semester</a>
 					</li>
 					<li>

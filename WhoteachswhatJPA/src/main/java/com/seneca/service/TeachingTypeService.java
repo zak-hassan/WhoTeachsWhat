@@ -26,10 +26,14 @@ public class TeachingTypeService {
 	 */
 	
 	//TODO: Faculty should accept 'TeachingType_id'
-	public void add(String name) {
+	// Faculty should not accept TeachingType_id because objects don't deal with other object's ids.
+	// Faculty should have a reference to a teaching type object.
+	public TeachingType add(String name) {
 		TeachingType teachingType = new TeachingType();
 		teachingType.setTeachingType_name(name);
 		teachingTypeDao.create(teachingType);
+		
+		return teachingType;
 	}
 
 	public void update(Integer id, String name) {

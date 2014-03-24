@@ -286,23 +286,21 @@
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
-				<li><a href="#">Admin Panel</a></li>
-				<li class="current">
-					<a href="viewFacultyToCourseInSemesterYear">Manage Faculty To Course In Semester Year</a>
-				</li>
+				<li><a href="#">Manage Faculty</a></li>
+				<li><a href="viewFacultyToCourseInSemesterYear">Manage Course to Semester Year</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Faculty to Course in Semester Year</small>
+				<small>Manage Faculty Courses in a Semester Year</small>
 			</h2>
 			<h3>
-				<small>Add, Update and Delete courses associated with a faculty member in a semester year</small>
+				<small>Add, Update and Delete a faculty member's courses per semester year</small>
 			</h3>
 		</header>
-		<form method="post" action="api/FacultyToCourseInSemesterYear" id="CourseInSemesterForm"
-			onsubmit="return validateNewUser();" class="form-horizontal">
+		<form method="post" action="api/course" id="addCourseForm"
+			onsubmit="return validateAddCourse();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -336,13 +334,14 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<%-- 
+								
 								<c:set var="facultyId">
 								    <c:out value = "${param.id}" />
 								</c:set>
 								
+								
 								<c:forEach items="${allFacultyToCourseInSemesterYear}" var="facToCourse">
-									<c:if test="${facToCourse.getFaculty().getFacultyId() == facultyId || empty facultyId}">
+									<c:if test="${facToCourse.getFaculty().getFacultyId() == facultyId || empty facultyId}"> 
 									<tr>
 										<td>
 											${facToCourse.getFaculty().getFacultyFirstName() } 
@@ -354,7 +353,7 @@ td {
 										<td>${facToCourse.getCompHour_assigned() }</td>
 										<td>
 											${facToCourse.getPrepTime().getPrepName() } 
-											${facToCourse.getPrepTime()getPrepFactor()}
+											${facToCourse.getPrepTime().getPrepFactor()}
 										</td>
 										<td>${facToCourse.getAdditionAttribute() }</td>
 										
@@ -384,7 +383,6 @@ td {
 									</tr>
 									</c:if>
 								</c:forEach>
-								--%>
 							</tbody>
 						</table>
 					</div>
@@ -426,8 +424,6 @@ td {
 			</div>
 			<!-- end container -->
 		</form>
-
-		
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
 			data-target="#addFacToCourseSemModal">Add Faculty to Course</button>
@@ -494,8 +490,8 @@ td {
 								<span class="input-group-addon">Course:</span> <br /> <select
 									class="form-control" id="courseId">
 									<c:forEach items="${allCourses }" var="course">
-									<option value="${course.getCourse().getCourseId() }">
-										${course.getCourse().getCourseCode() }
+									<option value="${course.getCourseId() }">
+										${course.getCourseCode() }
 									</option>
 									</c:forEach>
 								</select>
@@ -504,8 +500,8 @@ td {
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
 									class="form-control" id="preptimeId">
 									<c:forEach items="${allPrepTime}" var="pt">
-									<option value="${pt.getPrepTime().getPrepId() }">
-										${pt.getPrepTime().getPrepName() }
+									<option value="${pt.getPrepId() }">
+										${pt.getPrepName() }
 									</option>
 									</c:forEach>
 								</select>
@@ -522,10 +518,9 @@ td {
 			</div>
 		</div>
 
-
 		<!--  END OF ADD MODAL -->
 
-		<!-- Modal -->
+			<!-- Modal -->
 		<div class="modal fade" id="updateFacToCourseSemModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -581,8 +576,8 @@ td {
 								<span class="input-group-addon">Course:</span> <br /> <select
 									class="form-control" id="up_courseId">
 									<c:forEach items="${allCourses }" var="course">
-									<option value="${course.getCourse().getCourseId() }">
-										${course.getCourse().getCourseCode() }
+									<option value="${course.getCourseId() }">
+										${course.getCourseCode() }
 									</option>
 									</c:forEach>
 								</select>
@@ -591,8 +586,8 @@ td {
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
 									class="form-control" id="up_preptimeId">
 									<c:forEach items="${allPrepTime}" var="pt">
-									<option value="${pt.getPrepTime().getPrepId() }">
-										${pt.getPrepTime().getPrepName() }
+									<option value="${pt.getPrepId() }">
+										${pt.getPrepName() }
 									</option>
 									</c:forEach>
 								</select>
@@ -610,6 +605,7 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
 	</div>
 </body>
 </html>
