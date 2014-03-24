@@ -12,11 +12,11 @@ echo "BUILD COMPLETE"
 
 #RENAME WAR TO ROOT.war
 mv ./target/WhoteachswhatJPA.war  ./target/ROOT.war
+url='/home/student/JBOSSAS7/jboss-as-7.1.1.Final/standalone/deployments'
 echo "BUILD RENAMING TO ROOT.war to display on ROOT context"
-
-#UPLOADING WAR FILE TO SERVER
-rsync -av --progress --inplace --rsh='ssh -p9134' target/ROOT.war student@zenit.senecac.on.ca:/home/student/jboss-as-7.1.1.Final/standalone/deployments/
-echo "UPLOAD COMPLETE";
+#PLOADING WAR FILE TO SERVER
+rsync -av --progress --inplace --rsh='ssh -p9134' target/ROOT.war student@zenit.senecac.on.ca:$url
+echo "UPLOAD COMPLETE : $url";
 if [ "$?" != 0 ]; then
   echo "YOUR NOT CONNECTED TO THE INTERNET!!";
 fi

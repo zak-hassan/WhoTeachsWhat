@@ -21,6 +21,7 @@ public class AccountService {
 	AccessLevelDao accessLevelDao;
 	
 	
+
 	private Account getAccount(String uname, String pass) {
 			Account account= new Account();
 			account.setUsername(uname);
@@ -29,11 +30,20 @@ public class AccountService {
 	}
 
 	public Account login(String uname, String pass) throws AuthenticationException {
- 		 if ( "zak.hassan1010@gmail.com".contentEquals(uname) &&  "a12345".contentEquals(pass) ) {
-			 return this.getAccount(uname, pass);
-		 } else {
+		Account account = new Account();
+		account.setUsername(uname);
+		account.setPassword(pass);
+		List<Account> a = accountDao.checkPassword(account);
+		if (a.size() != 0) {
 			throw new AuthenticationException("Invalid username or password");
-		 }
+		}
+		// if ( "zak.hassan1010@gmail.com".contentEquals(uname) &&
+		// "a12345".contentEquals(pass) ) {
+		// return this.getAccount(uname, pass);
+		// } else {
+		// throw new AuthenticationException("Invalid username or password");
+		// }
+		return a.get(0);
 	}
 
 	public List<Account> getAll() {

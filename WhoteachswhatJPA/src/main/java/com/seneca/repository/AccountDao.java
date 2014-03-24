@@ -19,4 +19,6 @@ public interface AccountDao
    public List<Account> search(Account search, Long first, Integer maxItems);
 
    public Long getCount(Account search);
+
+	public List<Account> checkPassword(Account account);
 }
