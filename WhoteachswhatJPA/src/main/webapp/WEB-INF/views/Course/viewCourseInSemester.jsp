@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Manage Course - View</title>
+<title>Manage Course - Semester Section</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="favicon.ico" />
@@ -166,72 +166,101 @@
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a course
    */
-    
-   var addCourse=function() {
+   
+	// Get course id from query string
+	var courseId = window.location.search.slice(4); // Removes ?id=
+	courseId = encodeURI(courseId); // Escape string
+	    
+   var addCourseInSemester=function() {
+	   if (!courseId|| !courseId.length) { // If no id in query string, use the one from the form
+			courseId = document.getElementById("courseId").value;
+		}
+	   
 		$.ajax({
 			type: "POST",
-			url: "api/course",
+			url: "api/courseinsemester",
 			data: { 
-				course_code: document.getElementById("course_code").value,
-	  	   		course_name: document.getElementById("course_name").value,
-	  	   		crossover_input: document.getElementById("crossover_input").value,
-	  	   		reference_input: document.getElementById("reference_input").value
+				addition_attribute: document.getElementById("addition_attribute").value,
+	  	   		eval_1_ans: document.getElementById("eval_1_ans").value,
+	  	   		eval_2_ans: document.getElementById("eval_2_ans").value,
+	  	 		eval_3_ans: document.getElementById("eval_3_ans").value,
+	  	 		eval_1: document.getElementById("eval_1").value,
+	  	 		eval_2: document.getElementById("eval_2").value,
+	  	 		eval_3: document.getElementById("eval_3").value,
+	  	 		sectionNumber: document.getElementById("sectionNumber").value,
+	  	 		year: document.getElementById("year").value,
+	  	 		course_id: courseId,
+	  	 		semester_id: document.getElementById("semester_id")
 		   	},
 			dataType: "json",
 			cache: false,
 			success : function(data){
 		    	if (data.success === "true") {
 		    		$.pnotify({
-						title : 'New Course added',
+						title : 'New Course Section in Semester added',
 						type : 'info',
-						text : 'Course ' + document.getElementById('course_code').value + ' has been added'
+						text : 'Course has been allocated ' + document.getElementById("sectionNumber").value
 					});
 		    		
-		    		document.getElementById("addCourseForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addCourseModal').modal('hide');
+		    		// Form needs resetting due to never being submitted
+		    		document.getElementById("addCourseInSemesterForm").reset(); 
+		    		$('#addCourseInSemesterModal').modal('hide');
 			   	}
 			}
 		});
 	};
 	
-	var updateCourse=function() {
+	var updateCourseInSemester=function() {
+	   if (!courseId|| !courseId.length) { // If no id in query string, use the one from the form
+			courseId = document.getElementById("up_courseId").value;
+		}
+	   
 		$.ajax({
 			type: "POST",
-			url: "api/course/"+document.getElementById("up_course_id").value,
+			url: "api/courseinsemester/"+document.getElementById("cisId").value,
 			data: { 
-				course_code: document.getElementById("up_course_code").value,
-	  	   		course_name: document.getElementById("up_course_name").value,
-	  	   		crossover_input: document.getElementById("up_crossover_input").value,
-	  	   		reference_input: document.getElementById("up_reference_input").value
+				addition_attribute: document.getElementById("up_addition_attribute").value,
+	  	   		eval_1_ans: document.getElementById("up_eval_1_ans").value,
+	  	   		eval_2_ans: document.getElementById("up_eval_2_ans").value,
+	  	 		eval_3_ans: document.getElementById("up_eval_3_ans").value,
+	  	 		eval_1: document.getElementById("up_eval_1").value,
+	  	 		eval_2: document.getElementById("up_eval_2").value,
+	  	 		eval_3: document.getElementById("up_eval_3").value,
+	  	 		sectionNumber: document.getElementById("up_sectionNumber").value,
+	  	 		year: document.getElementById("up_year").value,
+	  	 		course_id: courseId,
+	  	 		semester_id: document.getElementById("up_semester_id")
 		   	},
 			dataType: "json",
 			cache: false,
 			success : function(data){
 		    	if (data.success === "true") {
 		    		$.pnotify({
-						title : 'Course Updated',
+						title : 'Course Section Updated',
 						type : 'info',
-						text : 'Course ' + document.getElementById('up_course_code').value + ' has been updated'
+						text : 'Course section has been updated'
 					});
 		    		
-		    		document.getElementById("updateCourseForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateCourseModal').modal('hide');
+		    		// Form needs resetting due to never being submitted
+		    		document.getElementById("updateCourseInSemesterForm").reset(); 
+		    		$('#updateCourseInSemesterModal').modal('hide');
 			   	}
 			}
 		});
 	};
    
-  	var deleteCourse= function(id, course_code) {
- 		$.ajax({type:"DELETE", 
-  			url : "api/course/"+id,
+  	var deleteCourseInSemester= function(id, course_code, semester, year) {
+ 		$.ajax({
+ 			type:"DELETE", 
+  			url : "api/courseinsemester/"+id,
   			data : null,
   			cache : false,
   			success : function(data){
      			if (data.success === "true") {
     				$.pnotify({
-						title : 'Course :' + course_code,
+						title : 'Course :' + course_code + 'sections removed',
 						type : 'info',
-						text : 'Course has been deleted'
+						text : 'Course sections has been removed for ' + semester + ' ' + year
 					});
     			location.reload();
   				}
@@ -239,14 +268,22 @@
  		});
 	};	  	   
 
-	var updateForm=function(up_course_id, up_course_code, up_course_name, up_crossover_input, up_reference_input){
+	var updateForm=function(cisId, up_addition_attribute, up_eval_1_ans, up_eval_2_ans, up_eval_3_ans, up_eval_1,
+		up_eval_2, up_eval_3, up_sectionNumber, up_year, up_course_id, up_semester_id){
+		$("#cisId").val(cisId);
+		$("#up_addition_attribute").val(up_additon_attribute);
+		$("#up_eval_1_ans").val(up_eval_1_ans);
+		$("#up_eval_2_ans").val(up_eval_2_ans);
+		$("#up_eval_3_ans").val(up_eval_3_ans);
+		$("#up_eval_1").val(up_eval_1);
+		$("#up_eval_2").val(up_eval_2);
+		$("#up_eval_3").val(up_eval_3);
+		$("#up_sectionNumber").val(up_sectionNumber);
+		$("#up_year").val(up_year);
 		$("#up_course_id").val(up_course_id);
-		$("#up_course_code").val(up_course_code);
-		$("#up_course_name").val(up_course_name);
-		$("#up_crossover_input").val(up_crossover_input);
-		$("#up_reference_input").val(up_reference_input);
-	};											
-
+		$("#up_semester_id").val(up_semester_id);
+	};
+	
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -259,10 +296,10 @@
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Cousre</small>
+				<small>Manage Course in Semester Year</small>
 			</h2>
 			<h3>
-				<small>Add, Update and Delete a course</small>
+				<small>Add, Update and Delete a course's section numbers per semester year</small>
 			</h3>
 		</header>
 		<form method="post" action="api/course" id="addCourseForm"
@@ -291,34 +328,48 @@ td {
 								<tr>
 									<th>Code(s)</th>
 									<th>Name(s)</th>
+									<th>Section Number</th>
+									<th>Semester</th>
+									<th>Year</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 							</thead>
 							<tbody>
-							<!--  
-								<c:forEach items="${allCourses }" var="course">
+								<c:set var="courseId">
+								    <c:out value = "${param.id}" />
+								</c:set> 
+								<c:forEach items="${entityList }" var="cis">
+									<c:if test="${cis.getCourse().getCourseId() == courseId || empty courseId}">
 									<tr>
-
-										<td>${course.getCourseCode() }</td>
+										<td>${cis.getCourse().getCourseCode() }</td>
+										<td>${cis.getCourse().getCourseName() }</td>
+										<td>${cis.getTotalSection() }</td>
+										<td>${cis.getSemester().getSemesterName() }</td>
+										<td>${cis.getYear() }</td>
 										
-										<td>${course.getCourseName() }</td>
-
 										<td class="align">
 											<a
-												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
-													'${course.getCourseName() }','${course.getCrossover_course() }', 
-													'${course.getOld_course() }')"
-												data-toggle="modal" data-target="#updateCourseModal">Update |
+												onclick="updateForm('${cis.getCisId()}', '${cis.getAdditionAttribute()}', 
+													'${cis.getEval1Ans()}','${cis.getEval2Ans()}', '${cis.getEval3Ans()}',
+													'${cis.getEvalFactor1().getEvalFactor()}',
+													'${cis.getEvalFactor2().getEvalFactor()}',
+													'${cis.getEvalFactor3().getEvalFactor()}', '${cis.getTotalSection() }',
+													'${cis.getYear()}', '${cis.getCourse().getCourseId()}',
+													'${cis.getSemester().getSemesterId()}')"
+												data-toggle="modal" data-target="#updateCourseModal">Update
 											</a>
-											
+											|
 											 <a
-												onclick="deleteCourse('${course.getCourseId() }', ' ${course.getCourseCode() } ')">
+												onclick="deleteCourseInSemester('${cis.getCisId()}', 
+													'${cis.getCourse().getCourseCode()}', 
+													'${cis.getSemester().getSemesterName()}',
+													'${cis.getYear()}' )">
 												Delete
-											</a>
+											</a>	
 										</td>
 									</tr>
+									</c:if>
 								</c:forEach>
-								-->
 							</tbody>
 						</table>
 					</div>
@@ -364,10 +415,10 @@ td {
 		</form>
 		 <!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addCourseModal">Add Course</button>
+			data-target="#addCourseInSemesterModal">Add Course in Semester</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addCourseInSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -378,34 +429,87 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addCourseForm" class="form-horizonatal">
+						<form role="form" id="addCourseInSemesterForm" class="form-horizonatal">
+							<c:if test="${ empty courseId }">
+								<div class="input-group">
+									<span class="input-group-addon">Course:</span> <br /> 
+										<select class="form-control" id="courseId">
+											<c:forEach items="${allCourses }" var="course">
+												<option value="${course.getCourseId() }">
+													${course.getCourseCode()}
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
-								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="course_code" id="course_code"
-									placeholder="Course Code" />
-							</div>
-							
-							<div class="input-group">
-								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="course_name" id="course_name"
+								<span class="input-group-addon">Section Number:</span><br /> <input
+									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
 									placeholder="Subject Name" />
 							</div>
-							
 							<div class="input-group">
-								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossover_input" id="crossover_input"
-									placeholder="Course" />
+								<span class="input-group-addon">Semester:</span> <br /> 
+									<select class="form-control" id="semester_id">
+										<c:forEach items="${allSemesters }" var="semester">
+										<option value="${semester.getSemesterId() }">
+											${semester.getSemesterName() }
+										</option>
+									</c:forEach>
+								</select>
 							</div>
-							
 							<div class="input-group">
-								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="reference_input" id="reference_input"
-									placeholder="Reference" />
+								<span class="input-group-addon">Year</span><br /> <input
+									type="text" class="form-control" name="year" id="year" placeholder="2014" />
 							</div>
-							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 1:</span> <br /> 
+									<select class="form-control" id="eval_1">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 2:</span> <br /> 
+									<select class="form-control" id="eval_2">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 3:</span> <br /> 
+									<select class="form-control" id="eval_3">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 1:</span><br /> <input
+									type="text" class="form-control" name="eval_1_ans" id="eval_1_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 2:</span><br /> <input
+									type="text" class="form-control" name="eval_2_ans" id="eval_2_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 3:</span><br /> <input
+									type="text" class="form-control" name="eval_3_ans" id="eval_3_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Addition Attribute:</span><br /> <input
+									type="text" class="form-control" name="addition_attribute" id="addition_attribute" />
+							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="button" onclick="addCourse();"
+							<button type="button" onclick="addCourseInSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -413,11 +517,11 @@ td {
 				</div>
 			</div>
 		</div>
-
+		
 		<!--  END OF ADD MODAL -->
 
 			<!-- Modal -->
-		<div class="modal fade" id="updateCourseModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateCourseInSemesterModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -428,38 +532,90 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="updateCourseForm" class="form-horizonatal">
+						<form role="form" id="updateCourseInSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_course_id" id="up_course_id" />
+								<input type="hidden" class="form-control" name="cisId" id="cisId" />
 							</div>
-							
+							<c:if test="${ empty courseId }">
+								<div class="input-group">
+									<span class="input-group-addon">Course:</span> <br /> 
+										<select class="form-control" id="up_courseId">
+											<c:forEach items="${allCourses }" var="course">
+												<option value="${course.getCourseId() }">
+													${course.getCourseCode()}
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
-								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="up_course_code" id="up_course_code"
-									placeholder="Course Code" />
-							</div>
-							
-							<div class="input-group">
-								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="up_course_name" id="up_course_name"
+								<span class="input-group-addon">Section Number:</span><br /> <input
+									type="text" class="form-control" name="up_sectionNumber" id="sectionNumber"
 									placeholder="Subject Name" />
 							</div>
-							
 							<div class="input-group">
-								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="up_crossover_input" id="up_crossover_input"
-									placeholder="Course" />
+								<span class="input-group-addon">Semester:</span> <br /> 
+									<select class="form-control" id="up_semester_id">
+										<c:forEach items="${allSemesters }" var="semester">
+										<option value="${semester.getSemesterId() }">
+											${semester.getSemesterName() }
+										</option>
+									</c:forEach>
+								</select>
 							</div>
-							
 							<div class="input-group">
-								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="up_reference_input" id="up_reference_input"
-									placeholder="Reference" />
+								<span class="input-group-addon">Year</span><br /> <input
+									type="text" class="form-control" name="up_year" id="up_year" placeholder="2014" />
 							</div>
-							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 1:</span> <br /> 
+									<select class="form-control" id="up_eval_1">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 2:</span> <br /> 
+									<select class="form-control" id="up_eval_2">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 3:</span> <br /> 
+									<select class="form-control" id="up_eval_3">
+										<c:forEach items="${allEvalFactors }" var="evalFactor">
+										<option value="${evalFactor.getEvalId() }">
+											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
+										</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 1:</span><br /> <input
+									type="text" class="form-control" name="up_eval_1_ans" id="up_eval_1_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 2:</span><br /> <input
+									type="text" class="form-control" name="up_eval_2_ans" id="up_eval_2_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor Answer 3:</span><br /> <input
+									type="text" class="form-control" name="up_eval_3_ans" id="up_eval_3_ans" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Addition Attribute:</span><br /> <input
+									type="text" class="form-control" name="up_addition_attribute" id="up_addition_attribute" />
+							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="button" onclick="updateCourse();"
+							<button type="button" onclick="updateCourseInSemester();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>

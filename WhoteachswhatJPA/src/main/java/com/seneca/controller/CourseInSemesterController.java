@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.CoursesInSemester;
 import com.seneca.service.CourseInSemesterService;
+import com.seneca.service.CourseService;
+import com.seneca.service.EvalFactorService;
+import com.seneca.service.SemesterService;
 
 /**
  * This class is the controller which regulates all faculty operations.
@@ -33,9 +36,22 @@ public class CourseInSemesterController {
 	@Autowired
 	private CourseInSemesterService courseInSemesterService;
 	
+	@Autowired
+	private SemesterService semesterService;
+	
+	@Autowired
+	private EvalFactorService evalFactorService;
+	
+	@Autowired
+	private CourseService courseService;
+	
 	@RequestMapping(value = "/viewCourseInSemester", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("entityList", courseInSemesterService.getAll());
+		
+		model.addAttribute("allSemesters", semesterService.getAll());
+		model.addAttribute("allEvalFactors", evalFactorService.getAll());
+		model.addAttribute("allCourses", courseService.getAll());
 
 		return "Course/viewCourseInSemester";
 	}
@@ -154,7 +170,7 @@ public class CourseInSemesterController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/courseinsemester/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/courseinsemester/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

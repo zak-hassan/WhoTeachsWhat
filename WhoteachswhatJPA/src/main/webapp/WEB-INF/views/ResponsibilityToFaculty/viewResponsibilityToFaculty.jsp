@@ -238,7 +238,7 @@
 		});
 	};
   
-	var deleteResponsibilityToFaculty= function(id,uname) {
+	var deleteRepToFac= function(id,uname) {
 	   	$.ajax({
 	   		type:"DELETE", 
 		   	url : "api/ResponsibilityToFaculty/"+id,
@@ -338,7 +338,7 @@ td {
 												data-toggle="modal" data-target="#updateRepToFacModal">Update</a>
 											
 											<a
-												onclick="deletePreptime('${pt.getPrepId()}', '${pt.getPrepName()}')">
+												onclick="deleteRepToFac()">
 												Delete
 											</a>
 										</td>
@@ -402,7 +402,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
+						<form role="form" id="addRepToFacForm" class="form-horizonatal">
 							<c:if test="${ empty facultyId }">
 								<div class="input-group">
 									<span class="input-group-addon">Faculty:</span> <br /> 
@@ -468,7 +468,7 @@ td {
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
+						<form role="form" id="updateRepToFacForm" class="form-horizonatal">
 							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_facultyId" id="up_facultyId" />
 							</div>

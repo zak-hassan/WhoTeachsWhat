@@ -259,7 +259,7 @@
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Manage Cousre</small>
+				<small>Manage Course</small>
 			</h2>
 			<h3>
 				<small>Add, Update and Delete a course</small>
@@ -301,15 +301,19 @@ td {
 										<td>${course.getCourseCode() }</td>
 										
 										<td>${course.getCourseName() }</td>
+										
+										<c:set var="courseId" value = "${ course.getCourseId() }"></c:set>
 
 										<td class="align">
+											<a href="viewCourseInSemester?id=${courseId}">Allocate Section(s)</a>
+											|
 											<a
 												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
 													'${course.getCourseName() }','${course.getCrossover_course() }', 
 													'${course.getOld_course() }')"
-												data-toggle="modal" data-target="#updateCourseModal">Update |
+												data-toggle="modal" data-target="#updateCourseModal">Update
 											</a>
-											
+											|
 											 <a
 												onclick="deleteCourse('${course.getCourseId() }', ' ${course.getCourseCode() } ')">
 												Delete
