@@ -164,7 +164,7 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a course
+    @Purpose: AJAX posting and validation for adding, updating and deleting a course in a semester
    */
    
 	// Get course id from query string
@@ -190,7 +190,7 @@
 	  	 		sectionNumber: document.getElementById("sectionNumber").value,
 	  	 		year: document.getElementById("year").value,
 	  	 		course_id: courseId,
-	  	 		semester_id: document.getElementById("semester_id")
+	  	 		semester_id: document.getElementById("semester_id").value
 		   	},
 			dataType: "json",
 			cache: false,
@@ -199,7 +199,8 @@
 		    		$.pnotify({
 						title : 'New Course Section in Semester added',
 						type : 'info',
-						text : 'Course has been allocated ' + document.getElementById("sectionNumber").value
+						text : 'Course has been allocated ' + document.getElementById("sectionNumber").value 
+							+ 'number of sections'
 					});
 		    		
 		    		// Form needs resetting due to never being submitted
@@ -268,8 +269,13 @@
  		});
 	};	  	   
 
-	var updateForm=function(cisId, up_addition_attribute, up_eval_1_ans, up_eval_2_ans, up_eval_3_ans, up_eval_1,
-		up_eval_2, up_eval_3, up_sectionNumber, up_year, up_course_id, up_semester_id){
+	var updateForm=function(cisId, up_addition_attribute, up_eval_1_ans, up_eval_2_ans, up_eval_3_ans, up_sectionNumber,
+			up_year, up_course_id, up_eval_1, up_eval_2, up_eval_3, up_semester_id){
+		
+		alert(cisId + " " +  up_addition_attribute+ " " + up_eval_1_ans+ " " + up_eval_2_ans+ " " 
+				+ up_eval_3_ans+ " " + up_eval_1+ " " + up_eval_2 + " " +up_eval_3+ " " + up_sectionNumber+ " " 
+				+ up_year + " " +up_course_id + " " + up_semester_id);
+		
 		$("#cisId").val(cisId);
 		$("#up_addition_attribute").val(up_additon_attribute);
 		$("#up_eval_1_ans").val(up_eval_1_ans);
@@ -282,6 +288,14 @@
 		$("#up_year").val(up_year);
 		$("#up_course_id").val(up_course_id);
 		$("#up_semester_id").val(up_semester_id);
+		
+		<!-- 
+		$("#up_facultyId").val(up_facultyId);
+		$("#up_responsibility").val(up_responsibility);
+		$("#up_semester").val(up_semester);
+		$("#up_year").val(up_year);
+		$("#up_hoursperweek").val(up_hoursperweek);
+		-->
 	};
 	
 </script>
@@ -351,12 +365,12 @@ td {
 											<a
 												onclick="updateForm('${cis.getCisId()}', '${cis.getAdditionAttribute()}', 
 													'${cis.getEval1Ans()}','${cis.getEval2Ans()}', '${cis.getEval3Ans()}',
-													'${cis.getEvalFactor1().getEvalFactor()}',
-													'${cis.getEvalFactor2().getEvalFactor()}',
-													'${cis.getEvalFactor3().getEvalFactor()}', '${cis.getTotalSection() }',
+													'${cis.getEvalFactor1().getEvalId()}',
+													'${cis.getEvalFactor2().getEvalId()}',
+													'${cis.getEvalFactor3().getEvalId()}', '${cis.getTotalSection() }',
 													'${cis.getYear()}', '${cis.getCourse().getCourseId()}',
 													'${cis.getSemester().getSemesterId()}')"
-												data-toggle="modal" data-target="#updateCourseModal">Update
+												data-toggle="modal" data-target="#updateCourseInSemesterModal">Update
 											</a>
 											|
 											 <a
@@ -425,7 +439,7 @@ td {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add Course</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Course in Semester</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
@@ -444,8 +458,7 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
-									placeholder="Subject Name" />
+									type="text" class="form-control" name="sectionNumber" id="sectionNumber" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> 
@@ -528,7 +541,7 @@ td {
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Update Course</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Course in Semester</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
@@ -539,7 +552,7 @@ td {
 							<c:if test="${ empty courseId }">
 								<div class="input-group">
 									<span class="input-group-addon">Course:</span> <br /> 
-										<select class="form-control" id="up_courseId">
+										<select class="form-control" id="up_course_id">
 											<c:forEach items="${allCourses }" var="course">
 												<option value="${course.getCourseId() }">
 													${course.getCourseCode()}
@@ -550,7 +563,7 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="up_sectionNumber" id="sectionNumber"
+									type="text" class="form-control" name="up_sectionNumber" id="up_sectionNumber"
 									placeholder="Subject Name" />
 							</div>
 							<div class="input-group">

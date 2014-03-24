@@ -209,8 +209,6 @@
 			facultyId = document.getElementById("up_facultyId").value;
 		}
 		
-		alert("fac id is:" + facultyId);
-		
 		$.ajax({
 			type: "POST",
 			url: "api/ResponsibilityToFaculty/"+document.getElementById("up_repToFacId").value,

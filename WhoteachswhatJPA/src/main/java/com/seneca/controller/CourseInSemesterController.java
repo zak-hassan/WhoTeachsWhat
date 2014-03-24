@@ -145,7 +145,7 @@ public class CourseInSemesterController {
 		courseInSemesterService.add(addition_attribute, e1_ans, e2_ans, e3_ans,
 				eval_1, eval_2, eval_3, sectionNumbers, year, course_id,
 				semester_id);
-
+		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 

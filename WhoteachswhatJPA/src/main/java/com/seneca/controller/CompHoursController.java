@@ -32,11 +32,6 @@ public class CompHoursController {
 	@Autowired
 	private CompHoursService compHoursService;
 
-	@RequestMapping(value = "/updateCompHourType", method = RequestMethod.GET)
-	public String update() {
-		return "Anil_UpdateCompHourType";
-	}
-
 	@RequestMapping(value = "/manageCompHours", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		
@@ -138,7 +133,7 @@ public class CompHoursController {
 	 * @return A list containing the success of the operation
 	 */
 
-	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,

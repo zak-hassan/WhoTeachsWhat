@@ -163,7 +163,7 @@
 	};
 
 	   
-	var updateCompHour=function() {
+	var updateCompHour=function() {	
 		$.ajax({
 			type: "POST",
 			url: "api/comphour/"+document.getElementById("up_comp_hour_id").value,
@@ -257,8 +257,8 @@
 							   <thead>
 								   <tr>
 										<th>#</th>
-										<th>Complimentary Hour Name</th>
 										<th>Complimentary Hour Code</th>
+										<th>Complimentary Hour Name</th>
 						
 										<th width="25%" style="text-align: right">Operation(s)</th>
 									</tr>
@@ -267,8 +267,8 @@
 									<c:forEach items="${allComphours }" var="comphours">
 									<tr>
 										<td>${comphours.getCompHour_id() }</td>
-										<td><label>${comphours.getCompHour_name() }</label></td>
 										<td><label>${comphours.getCompHour_code() }</label></td>
+										<td><label>${comphours.getCompHour_name() }</label></td>
 										<td class="align">
 											<a 
 												class="bootstrap-tooltip" data-original-title="Update" 
