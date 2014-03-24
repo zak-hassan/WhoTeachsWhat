@@ -21,7 +21,7 @@ import com.seneca.service.PermissionService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Anil Santokhi <Anil.D.Santokhi@gmail.com>
+ * @author Anil Santokhi <Anil.D.Santokhi@gmail.com>, Zak Hassan <zak.hassan1010@gmail.>
  * @lastmodified Feb 26, 2014
  * @version 0.0.1
  */
@@ -32,68 +32,12 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 
-	@RequestMapping(value = "/managePermission", method = RequestMethod.GET)
+	@RequestMapping(value = "/manageAccessLevel", method = RequestMethod.GET)
 	public String ViewPermission(ModelMap model) {
 		model.addAttribute("entityList", permissionService.getAll());
-		return "Admin/manage_permission";
+		return "manageAccessLevel";
 	}
 	
-	@RequestMapping(value = "/updatePermission", method = RequestMethod.GET)
-	public String UpdatePermission() {
-		return "update_permission";
-	}
-	
-	/**
-	 * This method accepts data posted from the AddPermissionForm and adds a permission using the appropriate
-	 * service method
-	 * 
-	 * @see 						com.seneca.service.PermissionService
-	 * 
-	 * @param permissionId			The name of the permission. Must be unique
-	 * 
-	 * @return						A String containing the name of the view to render
-	 */
-	
-	@RequestMapping(value = "/ajaxAddPermission", method = RequestMethod.POST)
-	public String ajaxAddPermission (
-			@RequestParam(value = "permissionId", required = true) String permissionId) {
-		
-		try {
-			permissionService.add(permissionId);
-		}
-		catch (Exception e) {
-			
-		}
-		
-		return "Admin/manage_permission?id="+permissionId;
-	}
-	
-	/**
-	 * This method accepts data posted from the UpdatePermissionForm and updates a permission using the appropriate
-	 * service method
-	 * 
-	 * @see 						com.seneca.service.PermissionService
-	 * 
-	 * @param permissionId			The name of the permission to be updated
-	 * 
-	 * @return						A String containing the name of the view to render
-	 */
-	
-	@RequestMapping(value = "/ajaxUpdatePermission", method = RequestMethod.POST)
-	public String ajaxUpdatePermission(
-			@RequestParam(value = "permissionId", required = true) Integer permissionId,
-			@RequestParam(value = "permissionName", required = true) String permissionName) {
-		
-		try {
-			permissionService.update(permissionId, permissionName);
-		}
-		catch (Exception e) {
-			
-		}
-		
-		return "update_permission";
-	}
-
 	// REST API ENDPOINTS:
 
 	/**
@@ -155,7 +99,7 @@ public class PermissionController {
 	 * @return A list containing the success of the operation
 	 */
 
-	@RequestMapping(value = "/api/Permission", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/permission", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "permission_name", required = true) String pname) {
@@ -185,7 +129,7 @@ public class PermissionController {
 	 * @return A list containing the success of the operation
 	 */
 
-	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer pid,

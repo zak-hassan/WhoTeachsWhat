@@ -166,7 +166,7 @@
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a semester
    */
-    
+   
 	var addSemester=function() {
 		$.ajax({
 			type: "POST",

@@ -20,6 +20,9 @@
 						<a href="manageUsers">Manage Users</a>
 					</li>
 					<li>
+						<a href="manageAccessLevel">Manage Access Level</a>
+					</li>
+					<li>
 						<a href="viewCourseInSemester">Manage Course Sections</a>
 					</li>
 					<li>
