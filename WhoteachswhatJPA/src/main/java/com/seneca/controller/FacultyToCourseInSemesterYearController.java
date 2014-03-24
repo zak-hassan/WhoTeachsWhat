@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.model.FacultyToCourseInSemesterYear;
+import com.seneca.service.CompHoursService;
 import com.seneca.service.CourseService;
 import com.seneca.service.FacultyService;
 import com.seneca.service.FacultyToCourseInSemesterYearService;
@@ -48,6 +49,9 @@ public class FacultyToCourseInSemesterYearController {
 	
 	@Autowired
 	private PrepTimeService prepTimeService;
+	
+	@Autowired
+	private CompHoursService compHoursService;
 
 	@RequestMapping(value = "/viewFacultyToCourseInSemesterYear", method = RequestMethod.GET)
 	public String view(ModelMap model) {
@@ -58,6 +62,7 @@ public class FacultyToCourseInSemesterYearController {
 		model.addAttribute("allSemesters", semesterService.getAll());
 		model.addAttribute("allCourses", courseService.getAll());
 		model.addAttribute("allPrepTime", prepTimeService.getAll());
+		model.addAttribute("allCompHours", compHoursService.getAll());
 		
 		return "FacultyToCourseInSemesterYear/viewFacultyToCourseInSemesterYear";
 	}
@@ -126,12 +131,12 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
-			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
-
+			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id) {
+		
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
-	 FacultyToCourseInSemesterYear fcsyear=	facultyToCourseInSemesterYearService.add(faculty_id, prepType_id,
+	 FacultyToCourseInSemesterYear fcsyear=	facultyToCourseInSemesterYearService.add(faculty_id, prepTime_id,
 				course_id, compHour_id, year, semester_id, section_number,
 				comphoursAllowance, additionAttribute, comphourAssigned);
 		Map<String, String> list = new HashMap<String, String>();
@@ -172,13 +177,13 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
-			@RequestParam(value = "prepTypeId", required = true) Integer prepType_id) {
+			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id) {
 
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
 		facultyToCourseInSemesterYearService.update(id, faculty_id,
-				prepType_id, course_id, compHour_id, year, semester_id,
+				prepTime_id, course_id, compHour_id, year, semester_id,
 				section_number, comphoursAllowance, additionAttribute,
 				comphourAssigned);
 

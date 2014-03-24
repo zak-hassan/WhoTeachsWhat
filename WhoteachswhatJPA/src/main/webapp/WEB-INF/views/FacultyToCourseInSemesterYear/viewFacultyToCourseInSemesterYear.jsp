@@ -187,10 +187,10 @@
 		   		sectionNumber: document.getElementById("sectionNumber").value,
 		   		semesterId: document.getElementById("semesterId").value,
 		   		year: document.getElementById("year").value,
-		   		comphourId: document.getElementById("comphourId").selectedIndex + 1,
-		   		courseId: document.getElementById("courseId").selectedIndex + 1,
+		   		comphourId: document.getElementById("comphourId").value,
+		   		courseId: document.getElementById("courseId").value,
 		   		facultyId: facultyId,
-		   		prepTypeId: document.getElementById("prepTypeId").selectedIndex + 1  
+		   		prepTimeId: document.getElementById("prepTimeId").value
 		   	},
 			dataType: "json",
 			cache: false,
@@ -224,10 +224,10 @@
 		   		sectionNumber: document.getElementById("up_sectionNumber").value,
 		   		semesterId: document.getElementById("up_semesterId").value,
 		   		year: document.getElementById("up_year").value,
-		   		comphourId: document.getElementById("up_comphourId").selectedIndex + 1,
-		   		courseId: document.getElementById("up_courseId").selectedIndex + 1,
+		   		comphourId: document.getElementById("up_comphourId").value,
+		   		courseId: document.getElementById("up_courseId").value,
 		   		facultyId: facultyId,
-		   		prepTypeId: document.getElementById("up_prepTypeId").selectedIndex + 1  
+		   		prepTimeId: document.getElementById("up_prepTimeId").value, 
 		   	},
 			dataType: "json",
 			cache: false,
@@ -277,7 +277,7 @@
    		$("up_year").val(year);
    		$("#up_comphourId").val(comphourId);
    		$("#up_courseId").val(courseId);
-   		$("#up_prepTypeId").val(prepTypeId); 
+   		$("#up_prepTimeId").val(prepTimeId); 
 	};											
 
 </script>
@@ -459,6 +459,14 @@ td {
 									placeholder="" />
 							</div>
 							<div class="input-group">
+								<span class="input-group-addon">Comp Hour Type:</span> <br /> <select
+									class="form-control" id="comphourId">
+									<c:forEach items="${allCompHours }" var="ch">
+									<option value="${ch.getCompHour_id() }">${ch.getCompHour_name() }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
 									type="text" class="form-control" name="comphourAllowance" id="comphourAllowance"
 									placeholder="" />
@@ -498,7 +506,7 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
-									class="form-control" id="preptimeId">
+									class="form-control" id="prepTimeId">
 									<c:forEach items="${allPrepTime}" var="pt">
 									<option value="${pt.getPrepId() }">
 										${pt.getPrepName() }
@@ -545,6 +553,14 @@ td {
 									placeholder="" />
 							</div>
 							<div class="input-group">
+								<span class="input-group-addon">Comp Hour Type:</span> <br /> <select
+									class="form-control" id="up_comphourId">
+									<c:forEach items="${allCompHours }" var="ch">
+									<option value="${ch.getCompHour_id() }">${ch.getCompHour_name() }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
 									type="text" class="form-control" name="up_comphourAllowance" id="up_comphourAllowance"
 									placeholder="" />
@@ -584,7 +600,7 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
-									class="form-control" id="up_preptimeId">
+									class="form-control" id="up_prepTimeId">
 									<c:forEach items="${allPrepTime}" var="pt">
 									<option value="${pt.getPrepId() }">
 										${pt.getPrepName() }

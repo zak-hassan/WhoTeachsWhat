@@ -133,8 +133,7 @@
     
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a comp hour type
-     
+    @Purpose: AJAX posting and validation for adding, updating and deleting a teaching type
    */
    
 	var addTeachingType=function() {
