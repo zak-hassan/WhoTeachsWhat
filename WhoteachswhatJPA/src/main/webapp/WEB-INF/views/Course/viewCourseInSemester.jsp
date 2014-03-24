@@ -215,6 +215,8 @@
 	   if (!courseId|| !courseId.length) { // If no id in query string, use the one from the form
 			courseId = document.getElementById("up_courseId").value;
 		}
+	   	   
+	   
 	   
 		$.ajax({
 			type: "POST",
@@ -230,7 +232,7 @@
 	  	 		sectionNumber: document.getElementById("up_sectionNumber").value,
 	  	 		year: document.getElementById("up_year").value,
 	  	 		course_id: courseId,
-	  	 		semester_id: document.getElementById("up_semester_id")
+	  	 		semester_id: document.getElementById("up_semester_id").value
 		   	},
 			dataType: "json",
 			cache: false,
@@ -270,11 +272,7 @@
 	};	  	   
 
 	var updateForm=function(cisId, up_addition_attribute, up_eval_1_ans, up_eval_2_ans, up_eval_3_ans, up_sectionNumber,
-			up_year, up_course_id, up_eval_1, up_eval_2, up_eval_3, up_semester_id){
-		
-		alert(cisId + " " +  up_addition_attribute+ " " + up_eval_1_ans+ " " + up_eval_2_ans+ " " 
-				+ up_eval_3_ans+ " " + up_eval_1+ " " + up_eval_2 + " " +up_eval_3+ " " + up_sectionNumber+ " " 
-				+ up_year + " " +up_course_id + " " + up_semester_id);
+		up_year, up_course_id, up_eval_1, up_eval_2, up_eval_3, up_semester_id){
 		
 		$("#cisId").val(cisId);
 		$("#up_addition_attribute").val(up_addition_attribute);
@@ -286,9 +284,8 @@
 		$("#up_eval_3").val(up_eval_3);
 		$("#up_sectionNumber").val(up_sectionNumber);
 		$("#up_year").val(up_year);
-		$("#up_course_id").val(up_course_id);
+		$("#up_courseId").val(up_course_id);
 		$("#up_semester_id").val(up_semester_id);
-		
 	};
 	
 </script>
@@ -358,10 +355,11 @@ td {
 											<a
 												onclick="updateForm('${cis.getCisId()}', '${cis.getAdditionAttribute()}', 
 													'${cis.getEval1Ans()}','${cis.getEval2Ans()}', '${cis.getEval3Ans()}',
+													'${cis.getTotalSection() }', '${cis.getYear()}', 
+													'${cis.getCourse().getCourseId()}',
 													'${cis.getEvalFactor1().getEvalId()}',
 													'${cis.getEvalFactor2().getEvalId()}',
-													'${cis.getEvalFactor3().getEvalId()}', '${cis.getTotalSection() }',
-													'${cis.getYear()}', '${cis.getCourse().getCourseId()}',
+													'${cis.getEvalFactor3().getEvalId()}',
 													'${cis.getSemester().getSemesterId()}')"
 												data-toggle="modal" data-target="#updateCourseInSemesterModal">Update
 											</a>
@@ -545,9 +543,9 @@ td {
 							<c:if test="${ empty courseId }">
 								<div class="input-group">
 									<span class="input-group-addon">Course:</span> <br /> 
-										<select class="form-control" id="up_course_id">
+										<select class="form-control" id="up_courseId">
 											<c:forEach items="${allCourses }" var="course">
-												<option value="${course.getCourseId() }">
+												<option value="${course.getCourseId()}">
 													${course.getCourseCode()}
 												</option>
 											</c:forEach>
