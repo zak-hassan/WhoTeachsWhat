@@ -246,7 +246,7 @@
 		});
 	};
 
-	var deleteFacToCourseSem= function(id, course, facultyFirstName, faultyLastName) {
+	var deleteFacToCourseSem= function(id, course, facultyFirstName, facultyLastName) {
 	 	$.ajax({
 	 		type:"DELETE", 
 		  	url : "api/facultyToCourseInSemesterYear/"+id,
@@ -265,8 +265,8 @@
 	 	});
 	};	   
 
-	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId, year,
-		comphourId, courseId, prepTypeId){
+	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId,
+		year,comphourId, courseId, prepTimeId){
 		$("#up_cisId").val(cisId);
 		$("#up_facultyId").val(facId);
 		$("#up_additionAttribute").val(additionAttribute); 
@@ -274,7 +274,7 @@
    		$("#up_comphourAssigned").val(comphourAssigned);
    		$("#up_sectionNumber").val(sectionNumber);
    		$("#up_semesterId").val(semesterId);
-   		$("up_year").val(year);
+   		$("#up_year").val(year);
    		$("#up_comphourId").val(comphourId);
    		$("#up_courseId").val(courseId);
    		$("#up_prepTimeId").val(prepTimeId); 
@@ -369,7 +369,7 @@ td {
 													'${facToCourse.getYear() }',
 													'${facToCourse.getCompHour().getCompHour_id() }',
 													'${facToCourse.getCourse().getCourseId() }',
-													'${facToCourse.getPrepTime().getPrepId() }',)"
+													'${facToCourse.getPrepTime().getPrepId() }')"
 												data-toggle="modal" data-target="#updateFacToCourseSemModal">Update
 											</a>
 											|

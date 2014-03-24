@@ -277,7 +277,7 @@
 				+ up_year + " " +up_course_id + " " + up_semester_id);
 		
 		$("#cisId").val(cisId);
-		$("#up_addition_attribute").val(up_additon_attribute);
+		$("#up_addition_attribute").val(up_addition_attribute);
 		$("#up_eval_1_ans").val(up_eval_1_ans);
 		$("#up_eval_2_ans").val(up_eval_2_ans);
 		$("#up_eval_3_ans").val(up_eval_3_ans);
@@ -289,13 +289,6 @@
 		$("#up_course_id").val(up_course_id);
 		$("#up_semester_id").val(up_semester_id);
 		
-		<!-- 
-		$("#up_facultyId").val(up_facultyId);
-		$("#up_responsibility").val(up_responsibility);
-		$("#up_semester").val(up_semester);
-		$("#up_year").val(up_year);
-		$("#up_hoursperweek").val(up_hoursperweek);
-		-->
 	};
 	
 </script>
