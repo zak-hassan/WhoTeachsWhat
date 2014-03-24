@@ -177,7 +177,7 @@
 			url: "api/account",
 			data: { 
 				username: document.getElementById("username").value, 
-		   		accesslevel: document.getElementById("accessLevel").selectedIndex +1
+		   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
 		   	},
 			dataType: "json",
 			cache: false,
@@ -202,7 +202,7 @@
 			url: "api/account/"+document.getElementById("up_userId").value,
 			data: { 
 				username: document.getElementById("up_username").value, 
-		   		accesslevel: document.getElementById("up_accessLevel").selectedIndex+1
+		   		accessLevel: document.getElementById("up_accessLevel").selectedIndex+1
 		   	},
 			dataType: "json",
 			cache: false,
@@ -211,7 +211,7 @@
 		    		$.pnotify({
 						title : 'New User added',
 						type : 'info',
-						text : 'User ' + document.getElementById('user').value + ' has been added'
+						text : 'User ' + document.getElementById('up_username').value + ' has been added'
 					});
 		    		
 		    		document.getElementById("updateUserForm").reset(); // Form needs resetting due to never being submitted
@@ -225,10 +225,10 @@
 		$.ajax({
 			type: "POST",
 			url: "api/account/"+id,
-			data: JSON.stringify({ 
-				username: document.getElementById("up_username").value, 
-		   		accesslevel: 0 // Zero denotes no access 
-		   	}),
+			data: { 
+				username: username,
+		   		accessLevel: 1 // One denotes no access 
+		   	},
 			dataType: "json",
 			cache: false,
 			success : function(data){
@@ -261,7 +261,8 @@
  		});
 	};	   
 
-	var updateForm=function(uname,ac_level){
+	var updateForm=function(userId, uname,ac_level){
+		$("#up_userId").val(userId);
 		$("#up_username").val(uname);
 		$("#up_accessLevel").val(ac_level);
 	};											
@@ -283,7 +284,7 @@
 				<small>Manage Users</small>
 			</h2>
 			<h3>
-				<small>Add, Upate, Delete and Suspend users</small>
+				<small>Add, Update, Delete and Suspend users</small>
 			</h3>
 		</header>
 		<form method="post" action="ajaxAddUser" id="ManageUsersForm"
@@ -328,7 +329,8 @@ td {
 										
 										<td class="align">
 											 <a
-												onclick="updateForm('${users.getUsername() }',${users.accessLevel.getAccessId()} )"
+												onclick="updateForm('${users.getUserId() }', '${users.getUsername() }',
+													'${users.accessLevel.getAccessId()}' )"
 												data-toggle="modal" data-target="#updateUserModal">Update
 											</a>
 											|

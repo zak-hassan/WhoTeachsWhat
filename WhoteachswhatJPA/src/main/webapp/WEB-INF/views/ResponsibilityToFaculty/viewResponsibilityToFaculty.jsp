@@ -182,9 +182,9 @@
 			url: "api/ResponsibilityToFaculty",
 			data: { 
 				facultyId: facultyId,
-		   		responsibilityId: document.getElementById("responsibility").selectedIndex +1,
+		   		responsibilityId: document.getElementById("responsibility").value,
 		   		year: document.getElementById("year").value,
-		   		semesterId: document.getElementById("semester").selectedIndex +1,
+		   		semesterId: document.getElementById("semester").value,
 		   		hoursperweek: document.getElementById("hoursperweek").value
 		   	},
 			dataType: "json",
