@@ -188,6 +188,7 @@
 		    		
 		    		document.getElementById("addPrepTimeForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addPrepTimeModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -214,6 +215,7 @@
 		    		
 		    		document.getElementById("updatePrepTimeForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updatePrepTimeModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

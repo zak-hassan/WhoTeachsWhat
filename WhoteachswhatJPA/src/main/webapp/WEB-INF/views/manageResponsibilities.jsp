@@ -157,6 +157,7 @@
 		    		
 		    		document.getElementById("addResponsibilityForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addResponsibilityModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -182,6 +183,7 @@
 			    		
 			    		document.getElementById("updateResponsibilityForm").reset(); // Form needs resetting due to never being submitted
 			    		$('#updateResponsibilityModal').modal('hide');
+			    		location.reload();
 				   	}
 				}
 			});

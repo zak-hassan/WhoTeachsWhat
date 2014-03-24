@@ -155,6 +155,7 @@
 		    		
 		    		document.getElementById("addPermissionForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addPermissionModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -181,6 +182,7 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("updatePermissionForm").reset(); 
 		    		$('#updatePermissionModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

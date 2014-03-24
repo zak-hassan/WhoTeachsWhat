@@ -93,6 +93,7 @@
 		    		
 		    		document.getElementById("addFacultyForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addFacultyModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -120,6 +121,7 @@
 		    		
 		    		document.getElementById("updateFacultyForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateFacultyModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

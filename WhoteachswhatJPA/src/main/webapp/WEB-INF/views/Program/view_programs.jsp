@@ -188,6 +188,7 @@
  					});
  		    		document.getElementById("addProgramForm").reset(); // Form needs resetting due to never being submitted
  		    		$('#addProgramModal').modal('hide');
+		    		location.reload();
  			   	}
  			}
  		});
@@ -213,6 +214,7 @@
  					});
  		    		document.getElementById("updateProgramForm").reset(); // Form needs resetting due to never being submitted
  		    		$('#updateProgramModal').modal('hide');
+		    		location.reload();
  			   	}
  			}
  		});

@@ -117,14 +117,13 @@ public class SemesterController {
 
 	@RequestMapping(value = "/api/semester/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Map<String, String>> listGETOneJSON(@PathVariable("id") Integer id) {
+	Map<String, String> listGETOneJSON(@PathVariable("id") Integer id) {
 
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Map<String, String> list = new HashMap<String, String>();
 		Semester c = semesterService.getOne(id);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", c.getSemesterName() + "");
-		map.put("id", c.getSemesterId() + "");
-		list.add(map);
+		
+		list.put("name", c.getSemesterName());
+		list.put("id", Integer.toString(c.getSemesterId()));
 
 		return list;
 	}

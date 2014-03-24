@@ -188,6 +188,7 @@
 		    		
 		    		document.getElementById("addEvalFactorForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addEvalFactorModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -214,6 +215,7 @@
 		    		
 		    		document.getElementById("updateEvalFactorForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateEvalFactorModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

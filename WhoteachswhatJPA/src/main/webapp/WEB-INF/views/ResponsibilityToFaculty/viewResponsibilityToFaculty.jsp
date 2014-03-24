@@ -199,6 +199,7 @@
 		    		
 		    		document.getElementById("addRepToFacForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addRepToFacModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -231,6 +232,7 @@
 		    		
 		    		document.getElementById("updateRepToFacForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateRepToFacModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

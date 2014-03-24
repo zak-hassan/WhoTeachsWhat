@@ -155,6 +155,7 @@
 		    		
 		    		document.getElementById("addTeachingTypeForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addTeachingTypeModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -181,6 +182,7 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("updateTeachingTypeForm").reset(); 
 		    		$('#updateTeachingTypeModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

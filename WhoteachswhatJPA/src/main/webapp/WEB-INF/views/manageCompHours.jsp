@@ -157,6 +157,7 @@
 		    		
 		    		document.getElementById("addCompHourForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addCompHourModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -183,6 +184,7 @@
 		    		
 		    		document.getElementById("updateCompHourForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateCompHourModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

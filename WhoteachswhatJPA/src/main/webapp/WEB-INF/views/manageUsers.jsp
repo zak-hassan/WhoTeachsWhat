@@ -191,6 +191,7 @@
 		    		
 		    		document.getElementById("addUserForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addUserModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -216,6 +217,7 @@
 		    		
 		    		document.getElementById("updateUserForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateUserModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -239,6 +241,7 @@
 						text : 'User ' + username + ' has been suspended'
 					});
 			   	}
+	    		location.reload();
 			}
 		});
 	};

@@ -204,6 +204,7 @@
 		    		
 		    		document.getElementById("addFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addFacToCourseSemModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -241,6 +242,7 @@
 		    		
 		    		document.getElementById("updateFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateFacToCourseSemModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

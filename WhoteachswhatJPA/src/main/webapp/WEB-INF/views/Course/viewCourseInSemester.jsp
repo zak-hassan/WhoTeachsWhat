@@ -206,6 +206,7 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("addCourseInSemesterForm").reset(); 
 		    		$('#addCourseInSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -216,8 +217,6 @@
 			courseId = document.getElementById("up_courseId").value;
 		}
 	   	   
-	   
-	   
 		$.ajax({
 			type: "POST",
 			url: "api/courseinsemester/"+document.getElementById("cisId").value,
@@ -247,6 +246,7 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("updateCourseInSemesterForm").reset(); 
 		    		$('#updateCourseInSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

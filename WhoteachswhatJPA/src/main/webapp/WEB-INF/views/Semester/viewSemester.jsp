@@ -114,6 +114,7 @@
 <script type="text/javascript" src="static/js/common.js"></script>
 <script type="text/javascript"
 	src="static/js/bootRestful/bootrestful.js"></script>
+<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -182,8 +183,43 @@
 						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
 					});
 		    		
+		    		$.ajax({
+		    			type: "GET",
+		    			url: "api/semester/"+data.id,
+		    			data: null,
+		    			dataType: "json",
+		    			cache: false,
+		    			success : function(semester){
+		    				<%--
+		    				var createA1 = document.createElement('a');
+		    				var createA2 = document.createElement('a');
+
+		    				var createA1Text = document.createTextNode("Update");
+		    				var createA2Text = document.createTextNode("Delete");
+		    				
+		    				tempSemester = adsantokhi_quote_string(semester.name);
+		    				
+		    				createA1.setAttribute('onclick', 'updateForm(' + semester.id + ', ' + tempSemester + ')');
+		    				createA1.setAttribute('data-toggle', 'modal');
+		    				createA1.setAttribute('data-target', '#updateSemesterModal');
+
+		    				createA2.setAttribute('onclick', semester.id);
+		    				 
+		    				createA1.appendChild(createA1Text);
+		    				createA2.appendChild(createA2Text);
+		    				
+		    				var update = document.createElement("div");
+		    				update.appendChild(createA1);
+		    				
+		    				$('#tableSortable').dataTable()
+		    					.fnAddData( [semester.id, semester.name, update.innerHTML] );
+		    				--%>
+		    			}
+		    		});
+		    		
 		    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -205,6 +241,7 @@
 					});
 		    		document.getElementById("updateSemesterForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});

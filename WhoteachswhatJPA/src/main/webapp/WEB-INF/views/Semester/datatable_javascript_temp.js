@@ -35,3 +35,20 @@ tr.appendChild(td2);
 tr.appendChild(td3);
 
 table.appendChild(tr);
+
+<!--
+$("#tableSortable tbody").append(
+	"<tr>" +
+	"<td>" + data.id + "</td>" +
+	"<td>" + document.getElementById('semesterName').value + "</td>" +
+	"<td class='align'>" +
+	"<a onclick='updateForm(" + data.id + ", " + document.getElementById('semesterName').value 
+		+ ")' data-toggle='modal' data-target='#updateSemesterModal'>Update" +
+	"</a> |" +
+	"<a onclick='deleteSemester(" + data.id + ", " +  document.getElementById('semesterName').value
+		+ ")'>Delete" +
+	"</a>" +
+"</td>" +
+"</tr>"
+);
+-->

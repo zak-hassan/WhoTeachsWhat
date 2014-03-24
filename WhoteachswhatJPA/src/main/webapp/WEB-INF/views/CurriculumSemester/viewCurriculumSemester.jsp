@@ -185,6 +185,7 @@
 		    		
 		    		document.getElementById("addCurriculumSemesterForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addCurriculumSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
@@ -208,6 +209,7 @@
 		    		
 		    		document.getElementById("updateCurriculumSemesterForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#updateCurriculumSemesterModal').modal('hide');
+		    		location.reload();
 			   	}
 			}
 		});
