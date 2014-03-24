@@ -32,6 +32,20 @@ public class AccountDaoImpl implements AccountDao
       return entities;
    }
 
+	@SuppressWarnings("unchecked")
+	public List<Account> checkPassword(Account account) {
+		Query query = entityManager
+				.createQuery(
+						"SELECT e FROM Account e WHERE e.username = :username AND e.password = :password",
+						Account.class)
+				.setParameter("username", account.getUsername())
+				.setParameter("password", account.getPassword());
+		List<Account> entities = query.getResultList();
+
+		return entities;
+
+	}
+
    public Account getById(Integer id)
    {
       return entityManager.find(Account.class, id);
@@ -58,9 +72,7 @@ public class AccountDaoImpl implements AccountDao
    public List<Account> search(Account search, Long first, Integer maxItems)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
-
       // Create and populate a query for the search
-
       CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
       Root<Account> root = criteria.from(Account.class);
       TypedQuery<Account> query = this.entityManager.createQuery(criteria.select(root).where(getSearchPredicates(root, search)));
@@ -69,7 +81,7 @@ public class AccountDaoImpl implements AccountDao
       return query.getResultList();
    }
 
-   public Long getCount(Account search)
+	public Long getCount(Account search)
    {
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
