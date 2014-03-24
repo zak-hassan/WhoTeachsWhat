@@ -35,13 +35,7 @@
 						<a href="viewSemester">Manage Semester</a>
 					</li>
 					<li>
-						<a href="viewCourseInSemester">Manage Course in Semester</a>
-					</li>
-					<li>
 						<a href="viewCurriculumSemester">Manage Curriculum Semester</a>
-					</li>
-					<li>
-						<a href="viewResponsibilityToFaculty">Manage Responsibility To Faculty</a>
 					</li>
 					<li>
 						<a href="viewResponsibilityToFaculty">Manage Faculty Responsibilities</a>

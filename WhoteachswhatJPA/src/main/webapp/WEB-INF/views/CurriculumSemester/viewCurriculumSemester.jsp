@@ -207,7 +207,7 @@
 					});
 		    		
 		    		document.getElementById("updateCurriculumSemesterForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateCurriculumSemesterrModal').modal('hide');
+		    		$('#updateCurriculumSemesterModal').modal('hide');
 			   	}
 			}
 		});

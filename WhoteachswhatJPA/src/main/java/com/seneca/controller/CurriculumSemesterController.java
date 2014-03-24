@@ -35,7 +35,7 @@ public class CurriculumSemesterController {
 
 	@RequestMapping(value = "/viewCurriculumSemester", method = RequestMethod.GET)
 	public String viewCurriculum(ModelMap model) {
-		model.addAttribute("AllCurSem", curriculumSemesterService.getAll());
+		model.addAttribute("allCurSem", curriculumSemesterService.getAll());
 		return "CurriculumSemester/viewCurriculumSemester";
 	}
 
@@ -143,7 +143,7 @@ public class CurriculumSemesterController {
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
-			@RequestParam(value = "CurriculumSemesterName", required = true) String CurriculumSemesterName) {
+			@RequestParam(value = "curriculumSemesterName", required = true) String CurriculumSemesterName) {
 
 		curriculumSemesterService.update(id, CurriculumSemesterName);
 

@@ -268,7 +268,7 @@
 	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId, year,
 		comphourId, courseId, prepTypeId){
 		$("#up_cisId").val(cisId);
-		$("#facultyId").val(facId);
+		$("#up_facultyId").val(facId);
 		$("#up_additionAttribute").val(additionAttribute); 
    		$("#up_comphourAllowance").val(comphourAllowance);
    		$("#up_comphourAssigned").val(comphourAssigned);
