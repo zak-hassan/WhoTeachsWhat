@@ -71,6 +71,19 @@ public class TeachingTypeController {
 		return list;
 	}
 
+	@RequestMapping(value = "/api/teachingType/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
+		
+		Map<String, String> list = new HashMap<String, String>();
+		TeachingType t = teachingTypeService.getOne(id); // Seems to be null
+		if (t != null) {
+			list.put("teachingType_name", t.getTeachingType_name());
+			list.put("id", t.getTeachingType_id() + "");
+		} 
+		return list;
+	}
+	
 	/**
 	 * This method accepts data posted from the UpdateCourseForm and updates a
 	 * course using the appropriate service method

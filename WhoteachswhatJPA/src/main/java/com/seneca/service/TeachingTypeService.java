@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seneca.model.Faculty;
 import com.seneca.model.TeachingType;
 import com.seneca.repository.TeachingTypeDao;
 
@@ -48,6 +47,10 @@ public class TeachingTypeService {
 
 	public  List<TeachingType>  getAll() {
 		return teachingTypeDao.getAll();
+	}
+	
+	public TeachingType getOne(Integer id) {
+		return teachingTypeDao.getById(id);
 	}
 
 
