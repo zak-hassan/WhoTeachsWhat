@@ -197,7 +197,7 @@
 		    				
 		    				var newRow = $('#tableSortable').dataTable()
 		    					.fnAddData( [data.id, comphour.code, comphour.name,
-		    						updateLink.innerHTML + " | " + deleteLink.innerHTML] );
+		    						updateLink.innerHTML + " " + deleteLink.innerHTML] );
 		    				
 		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
 		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;

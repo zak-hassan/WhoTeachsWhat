@@ -81,6 +81,7 @@
 
 <script type="text/javascript" src="static/js/common.js"></script>
 <script type="text/javascript" src="static/js/bootRestful/bootrestful.js"></script>
+<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
     </head>
 
     <body class="body-inner">
@@ -155,9 +156,58 @@
 						text : 'Responsibility ' + document.getElementById('respon_name').value + ' has been added'
 					});
 		    		
+		    		$.ajax({
+		    			type: "GET",
+		    			url: "api/responsibility/"+data.id,
+		    			data: null,
+		    			dataType: "json",
+		    			cache: false,
+		    			success : function(rep){
+		    			
+		    				var createA1 = document.createElement('a');
+		    				var createA2 = document.createElement('a');
+		    				var createUpdateIcon = document.createElement('i');
+		    				var createDeleteIcon = document.createElement('i');
+		    				
+		    				tempRepCode = adsantokhi_quote_string(rep.r_code);
+		    				tempRepName = adsantokhi_quote_string(rep.r_name);
+		    				
+		    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempRepCode + ', '
+		    					+ tempRepName + ')');
+		    				createA1.setAttribute('data-toggle', 'modal');
+		    				createA1.setAttribute('data-target', '#updateResponsibilityModal');
+		    				createA1.setAttribute('class', 'bootstrap-tooltip');
+		    				createA1.setAttribute('data-original-title', 'Update');
+
+		    				createA2.setAttribute('onclick', 'deleteResponsibility(' + data.id + ', ' + tempRepName + ')');
+		    				createA2.setAttribute('class', 'bootstrap-tooltip');
+		    				createA2.setAttribute('data-original-title', 'Delete');
+		    				
+		    				createUpdateIcon.setAttribute('class', 'icon-edit');
+		    				createDeleteIcon.setAttribute('class', 'icon-trash');
+		    					    				 
+		    				createA1.appendChild(createUpdateIcon);
+		    				createA2.appendChild(createDeleteIcon);
+		    						    				 
+		    				var updateLink = document.createElement("div");
+		    				updateLink.appendChild(createA1);
+		    				
+		    				var deleteLink = document.createElement("div");
+		    				deleteLink.appendChild(createA2);
+		    				
+		    				
+		    				var newRow = $('#tableSortable').dataTable()
+		    					.fnAddData( [data.id, rep.r_code, rep.r_name,
+		    						updateLink.innerHTML + " "  + deleteLink.innerHTML] );
+		    				
+		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
+		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
+		    				$('td', nTr)[3].setAttribute( 'class', 'align' );
+		    			}
+		    		});
+		    		
 		    		document.getElementById("addResponsibilityForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addResponsibilityModal').modal('hide');
-		    		location.reload();
 			   	}
 			}
 		});
@@ -189,7 +239,7 @@
 			});
 		};
 		   
-	var deleteResponsibilityType= function(id, responsibilityType) {
+	var deleteResponsibility= function(id, responsibilityType) {
 	 	$.ajax({
 	 		type:"DELETE", 
 	  		url : "api/responsibility/"+id,
@@ -259,7 +309,8 @@
 							   <thead>
  									   <tr>
 											<th>#</th>
-											<th>Responsibilities</th>
+											<th>Code</th>
+											<th>Name</th>
 											<th width="20%" style="text-align: right">Operation(s)</th>
 										</tr>
  							   </thead>
@@ -267,8 +318,8 @@
 							  <c:forEach items="${allRespon }" var="respon">
 								 <tr>
 						  			<td>${respon.getResponsibilityId() }</td>
-										<td><label>${respon.getResponsibilityName() }</label></td>
-										<td><label>${respon.getResponsibilityCode() }</label></td>
+										<td>${respon.getResponsibilityCode() }</td>
+										<td>${respon.getResponsibilityName() }</td>
 									<td class="align">
 										<a 
 											class="bootstrap-tooltip" data-original-title="Update"
@@ -280,7 +331,7 @@
 										</a> 
 										<a 
 											class="bootstrap-tooltip" data-original-title="Delete" 
-											onclick="deleteResponsibilityType('${respon.getResponsibilityId() }', 
+											onclick="deleteResponsibility('${respon.getResponsibilityId() }', 
 											'${respon.getResponsibilityName() }')">
 											<i class="icon-trash"></i></a> 
 									</td>

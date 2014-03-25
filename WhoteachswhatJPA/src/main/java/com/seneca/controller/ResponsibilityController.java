@@ -82,19 +82,15 @@ public class ResponsibilityController {
 
 	@RequestMapping(value = "/api/responsibility/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
-		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
+		Map<String, String> list = new HashMap<String, String>();
 		Responsibility c = responsibilityService.getOne(id);
 		if (c != null) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("r_name", c.getResponsibilityName() + "");
-			map.put("r_code", c.getResponsibilityCode() + "");
-			map.put("r_id", c.getResponsibilityId() + "");
-			items.add(map);
-			return items;
-		} else {
-			return items;
-		}
+			list.put("r_name", c.getResponsibilityName() + "");
+			list.put("r_code", c.getResponsibilityCode() + "");
+			list.put("r_id", c.getResponsibilityId() + "");
+		} 
+		return list;
 	}
 
 	/**
