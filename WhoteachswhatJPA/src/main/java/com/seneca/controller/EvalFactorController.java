@@ -77,15 +77,15 @@ public class EvalFactorController {
 
 	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
-		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
+		Map<String, String> list = new HashMap<String, String>();
 		EvalFactor c = evalFactorService.getOne(id);
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("efName", c.getEvalName() + "");
-			map.put("efId", c.getEvalId() + "");
-			map.put("efFactor", c.getEvalFactor() + "");
-			items.add(map);
-		return items;
+		
+		list.put("efName", c.getEvalName() + "");
+		list.put("efId", c.getEvalId() + "");
+		list.put("efFactor", c.getEvalFactor() + "");
+		
+		return list;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class EvalFactorController {
 	 * @return A String containing the name of the view to render
 	 */
 
-	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
