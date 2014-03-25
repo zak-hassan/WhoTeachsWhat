@@ -77,15 +77,15 @@ public class CompHoursController {
 
 	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
+	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
 
-		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+		Map<String, String> list = new HashMap<String, String>();
 		CompHour compHour = compHoursService.getOne(id);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", compHour.getCompHour_name());
-		map.put("code", compHour.getCompHour_code());
-		items.add(map);
-		return items;
+		
+		list.put("name", compHour.getCompHour_name());
+		list.put("code", compHour.getCompHour_code());
+
+		return list;
 	}
 
 	/**

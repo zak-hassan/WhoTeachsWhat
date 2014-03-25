@@ -82,6 +82,7 @@
 
 <script type="text/javascript" src="static/js/common.js"></script>
 <script type="text/javascript" src="static/js/bootRestful/bootrestful.js"></script>
+<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
     </head>
 
     <body class="body-inner">
@@ -155,9 +156,57 @@
 						text : 'Complimentary Hour ' + document.getElementById('comp_hour_name').value + ' has been added'
 					});
 		    		
+		    		$.ajax({
+		    			type: "GET",
+		    			url: "api/comphour/"+data.id,
+		    			data: null,
+		    			dataType: "json",
+		    			cache: false,
+		    			success : function(comphour){
+		    			
+		    				var createA1 = document.createElement('a');
+		    				var createA2 = document.createElement('a');
+		    				var createUpdateIcon = document.createElement('i');
+		    				var createDeleteIcon = document.createElement('i');
+
+		    				tempCompHourName = adsantokhi_quote_string(comphour.name);
+		    				tempCompHourCode = adsantokhi_quote_string(comphour.code);
+		    				
+		    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempCompHourCode + ', '
+		    					+ tempCompHourName +')');
+		    				createA1.setAttribute('data-toggle', 'modal');
+		    				createA1.setAttribute('data-target', '#updateCompHourModal');
+		    				createA1.setAttribute('class', 'bootstrap-tooltip');
+		    				createA1.setAttribute('data-original-title', 'Update');
+
+		    				createA2.setAttribute('onclick', 'deleteCompHour(' + data.id + ', ' + tempCompHourName + ')');
+		    				createA2.setAttribute('class', 'bootstrap-tooltip');
+		    				createA2.setAttribute('data-original-title', 'Delete');
+		    				
+		    				createUpdateIcon.setAttribute('class', 'icon-edit');
+		    				createDeleteIcon.setAttribute('class', 'icon-trash');
+		    					    				 
+		    				createA1.appendChild(createUpdateIcon);
+		    				createA2.appendChild(createDeleteIcon);
+		    				
+		    				var updateLink = document.createElement("div");
+		    				updateLink.appendChild(createA1);
+		    				
+		    				var deleteLink = document.createElement("div");
+		    				deleteLink.appendChild(createA2);
+		    				
+		    				var newRow = $('#tableSortable').dataTable()
+		    					.fnAddData( [data.id, comphour.code, comphour.name,
+		    						updateLink.innerHTML + " | " + deleteLink.innerHTML] );
+		    				
+		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
+		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
+		    				$('td', nTr)[3].setAttribute( 'class', 'align' );
+		    			}
+		    		});
+		    		
 		    		document.getElementById("addCompHourForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addCompHourModal').modal('hide');
-		    		location.reload();
 			   	}
 			}
 		});
@@ -190,7 +239,7 @@
 		});
 	};
 
-	var deleteCompHourType= function(id, compHourType) {
+	var deleteCompHour= function(id, compHourType) {
 	 	$.ajax({
 	 		type:"DELETE", 
 		  	url : "api/comphours/"+id,
@@ -278,9 +327,10 @@
 														'${comphours.getCompHour_code() }', '${comphours.getCompHour_name() }')"
 													data-toggle="modal" data-target="#updateCompHourModal">
 													<i class="icon-edit"></i>
-											</a> 
+											</a>
+											| 
 											<a class="bootstrap-tooltip" data-original-title="Delete" 
-												onclick="deleteCompHourType('${comphours.getCompHour_id() }', 
+												onclick="deleteCompHour('${comphours.getCompHour_id() }', 
 													'${comphours.getCompHour_name() }')">
 												<i class="icon-trash"></i>
 											</a> 
