@@ -114,6 +114,7 @@
 <script type="text/javascript" src="static/js/common.js"></script>
 <script type="text/javascript"
 	src="static/js/bootRestful/bootrestful.js"></script>
+<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -164,14 +165,11 @@
         
     /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding a user
+    @Purpose: AJAX posting and validation for adding, updating, suspending and deleting a user
      
    */
-    
-   // document.getElementById("accessLevel").selectedIndex +1
    
    var addUser=function() {
-    	alert("username: " + document.getElementById("username").value + "accessLevel " + document.getElementById("accessLevel").selectedIndex +1)
 		$.ajax({
 			type: "POST",
 			url: "api/account",
@@ -189,9 +187,58 @@
 						text : 'User ' + document.getElementById('username').value + ' has been added'
 					});
 		    		
+		    		$.ajax({
+		    			type: "GET",
+		    			url: "api/account/"+data.id,
+		    			data: null,
+		    			dataType: "json",
+		    			cache: false,
+		    			success : function(user){
+		    			
+		    				var createA1 = document.createElement('a');
+		    				var createA2 = document.createElement('a');
+		    				var createA3 = document.createElement('a');
+
+		    				var createA1Text = document.createTextNode("Update");
+		    				var createA2Text = document.createTextNode("Delete");
+		    				var createA3Text = document.createTextNode("Suspend");
+		    				
+		    				tempUsername = adsantokhi_quote_string(user.username);
+		    				
+		    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempUsername + ', '
+		    					+ user.accessLevelID +')');
+		    				createA1.setAttribute('data-toggle', 'modal');
+		    				createA1.setAttribute('data-target', '#updateUserModal');
+
+		    				createA2.setAttribute('onclick', 'deleteUser(' + data.id + ', ' + tempUsername + ')');
+		    				
+		    				createA3.setAttribute('onclick', 'suspendUser(' + data.id + ', ' + tempUsername + ')');
+		    				 
+		    				createA1.appendChild(createA1Text);
+		    				createA2.appendChild(createA2Text);
+		    				createA3.appendChild(createA3Text);
+		    				
+		    				var updateLink = document.createElement("div");
+		    				updateLink.appendChild(createA1);
+		    				
+		    				var deleteLink = document.createElement("div");
+		    				deleteLink.appendChild(createA2);
+		    				
+		    				var suspendLink = document.createElement("div");
+		    				suspendLink.appendChild(createA3);
+		    				
+		    				var newRow = $('#tableSortable').dataTable()
+		    					.fnAddData( [data.id, user.username, user.accessLevel,
+		    						updateLink.innerHTML + " | " + suspendLink.innerHTML + " | " + deleteLink.innerHTML] );
+		    				
+		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
+		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
+		    				$('td', nTr)[3].setAttribute( 'class', 'align' );
+		    			}
+		    		});
+		    		
 		    		document.getElementById("addUserForm").reset(); // Form needs resetting due to never being submitted
 		    		$('#addUserModal').modal('hide');
-		    		location.reload();
 			   	}
 			}
 		});

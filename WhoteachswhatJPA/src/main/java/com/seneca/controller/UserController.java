@@ -52,7 +52,6 @@ public class UserController {
 	
 	// REST API ENDPOINTS:
 	
-	
 	/**
 	 * This method accepts no parameters and returns all course in in the
 	 * database.
@@ -95,19 +94,16 @@ public class UserController {
 
 		@RequestMapping(value = "/api/account/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 		public @ResponseBody
-	List<Map<String, String>> listGetJSON(@PathVariable("id") Integer id) {
+		Map<String, String> listGetJSON(@PathVariable("id") Integer id) {
 
 			Account account = accountService.getOne(id);
-			List<Map<String, String>> items = new ArrayList<Map<String, String>>();
+			Map<String, String> list = new HashMap<String, String>();
 
-				Map<String, String> mapAccount = new HashMap<String, String>();
-				mapAccount.put("username", account.getUsername());
-				mapAccount.put("accessLevel", account.getAccessLevel()
-						.getAccessName());
-				mapAccount.put("accessLevelID", account.getAccessLevel()
-						.getAccessId() + "");
-				items.add(mapAccount);
-			return items;
+			list.put("username", account.getUsername());
+			list.put("accessLevel", account.getAccessLevel().getAccessName());
+			list.put("accessLevelID", account.getAccessLevel().getAccessId() + "");
+
+			return list;
 		}
 
 		/**
