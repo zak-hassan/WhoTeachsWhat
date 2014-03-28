@@ -110,11 +110,15 @@ public class LoginController {
 
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String showWelcome() {
-		// logger.info("WTWNavigator: \t /welcome ");
 		return "welcome";
 	}
 
-	// TODO: Logout logic needed here
+	
+	@RequestMapping(value = "/error", method=RequestMethod.GET)
+	public String showError(){
+		return "error";		
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {
 		return "redirect:/";
