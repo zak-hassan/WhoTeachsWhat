@@ -1,6 +1,7 @@
 package com.seneca.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -13,34 +14,29 @@ import javax.persistence.*;
 public class CourseInProgramCurSem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CourseInProgramCurSemPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="cinProgram_id")
+	private int id;
 
 	//bi-directional many-to-one association to Course
 	@ManyToOne
-	@JoinColumn(name="course_id",insertable=false, updatable=false) 
+	@JoinColumn(name="course_id") 
 	private Course course;
 
 	//bi-directional many-to-one association to Program
 	@ManyToOne
-	@JoinColumn(name="program_id",insertable=false, updatable=false) 
+	@JoinColumn(name="program_id") 
 	private Program program;
 
 	//bi-directional many-to-one association to CurriculumSemester
 	@ManyToOne
-	@JoinColumn(name="cs_id",insertable=false, updatable=false) 
+	@JoinColumn(name="cs_id") 
 	private CurriculumSemester curriculumSemester;
 
 	public CourseInProgramCurSem() {
 	}
 
-	public CourseInProgramCurSemPK getId() {
-		return this.id;
-	}
-
-	public void setId(CourseInProgramCurSemPK id) {
-		this.id = id;
-	}
 
 	public Course getCourse() {
 		return this.course;
@@ -75,7 +71,7 @@ public class CourseInProgramCurSem implements Serializable {
 				* result
 				+ ((curriculumSemester == null) ? 0 : curriculumSemester
 						.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((program == null) ? 0 : program.hashCode());
 		return result;
 	}
@@ -99,10 +95,7 @@ public class CourseInProgramCurSem implements Serializable {
 				return false;
 		} else if (!curriculumSemester.equals(other.curriculumSemester))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		if (program == null) {
 			if (other.program != null)
@@ -110,6 +103,10 @@ public class CourseInProgramCurSem implements Serializable {
 		} else if (!program.equals(other.program))
 			return false;
 		return true;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
