@@ -323,7 +323,7 @@ td {
 								<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
 									<c:if test="${repToFac.getFaculty().getFacultyId() == facultyId || empty facultyId}">
 									<tr>
-										<td>${repToFac.getId().getYear()  }</td>
+										<td>${repToFac.getYear()  }</td>
 
 										<td>${repToFac.getFaculty().getFacultyFirstName() } ${repToFac.getFaculty().getFacultyLastName() }</td>
 										<td>${repToFac.getResponsibility().getResponsibilityName() }</td>
@@ -333,7 +333,7 @@ td {
 												onclick="updateForm('${repToFac.getFaculty().getFacultyId()}',
 													'${repToFac.getResponsibility().getResponsibilityId()}', 
 													'${repToFac.getSemester().getSemesterId() }',
-													'${repToFac.getId().getYear()}',
+													'${repToFac.getYear()}',
 													'${repToFac.getHoursPerWeek() }' )"
 												data-toggle="modal" data-target="#updateRepToFacModal">Update</a>
 											

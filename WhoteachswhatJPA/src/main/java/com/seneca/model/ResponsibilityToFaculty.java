@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -19,38 +22,43 @@ import javax.persistence.NamedQuery;
 public class ResponsibilityToFaculty implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private ResponsibilityToFacultyPK id;
-// insert="false" update="false"
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int repToFac_id;
+
 	@Column(name="hours_per_week")
 	private float hoursPerWeek;
+
+	private int year;
+
+
+	public int getRepToFac_id() {
+		return this.repToFac_id;
+	}
+
+	public void setRepToFac_id(int repToFac_id) {
+		this.repToFac_id = repToFac_id;
+	}
 
 
 	//bi-directional many-to-one association to Responsibility
 	@ManyToOne
-	@JoinColumn(name="responsibility_id",insertable=false, updatable=false)
+	@JoinColumn(name="responsibility_id")
 	private Responsibility responsibility;
 
 	//bi-directional many-to-one association to Faculty
 	@ManyToOne
-	@JoinColumn(name="faculty_id",insertable=false, updatable=false)
+	@JoinColumn(name="faculty_id")
 	private Faculty faculty;
 
 	//bi-directional many-to-one association to Semester
 	@ManyToOne
-	@JoinColumn(name="semester_id",insertable=false, updatable=false)
+	@JoinColumn(name="semester_id")
 	private Semester semester;
 
 	public ResponsibilityToFaculty() {
 	}
 
-	public ResponsibilityToFacultyPK getId() {
-		return this.id;
-	}
-
-	public void setId(ResponsibilityToFacultyPK id) {
-		this.id = id;
-	}
 
 	public float getHoursPerWeek() {
 		return this.hoursPerWeek;
@@ -90,11 +98,12 @@ public class ResponsibilityToFaculty implements Serializable {
 		int result = 1;
 		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
 		result = prime * result + Float.floatToIntBits(hoursPerWeek);
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + repToFac_id;
 		result = prime * result
 				+ ((responsibility == null) ? 0 : responsibility.hashCode());
 		result = prime * result
 				+ ((semester == null) ? 0 : semester.hashCode());
+		result = prime * result + year;
 		return result;
 	}
 
@@ -115,10 +124,7 @@ public class ResponsibilityToFaculty implements Serializable {
 		if (Float.floatToIntBits(hoursPerWeek) != Float
 				.floatToIntBits(other.hoursPerWeek))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (repToFac_id != other.repToFac_id)
 			return false;
 		if (responsibility == null) {
 			if (other.responsibility != null)
@@ -130,7 +136,17 @@ public class ResponsibilityToFaculty implements Serializable {
 				return false;
 		} else if (!semester.equals(other.semester))
 			return false;
+		if (year != other.year)
+			return false;
 		return true;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
 

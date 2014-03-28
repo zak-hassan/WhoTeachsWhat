@@ -90,7 +90,7 @@ public class ResponsibilityToFacultyController {
 			map.put("facultyId", c.getFaculty().getFacultyId() + "");
 			map.put("responsibilityId", c.getResponsibility()
 					.getResponsibilityId() + "");
-			map.put("id", c.getId().getResponsibilityId() + "");
+			map.put("id", c.getRepToFac_id() + "");
 			// map.put("year", c.getYear() + "");
 			map.put("semesterId", c.getSemester().getSemesterId() + "");
 			map.put("hoursperweek", c.getHoursPerWeek() + "");
@@ -134,7 +134,7 @@ public class ResponsibilityToFacultyController {
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		// TODO: MUST RETURN THE ID
-		list.put("id", rToFaculty.getId().getResponsibilityId() + "");
+		list.put("id", rToFaculty.getRepToFac_id() + "");
 		return list;
 	}
 
