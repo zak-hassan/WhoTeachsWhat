@@ -190,6 +190,17 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Factor`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS mydb.Factor (
+	`factor_id` INT NOT NULL ,
+	`factor_name` VARCHAR(25) NOT NULL ,
+	`factor_val` FLOAT NOT NULL ,
+	PRIMARY KEY (`factor_id`) )
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `mydb`.`ResponsibilityToFaculty`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`ResponsibilityToFaculty` ;
@@ -287,6 +298,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`FacultyToCourseInSemesterYear` (
   `eval_1_ans` FLOAT NOT NULL ,
   `eval_2_ans` FLOAT NOT NULL ,
   `eval_3_ans` FLOAT NOT NULL ,
+  `factor_id` INT NOT NULL ,
   PRIMARY KEY (`cisy_id`) ,
   CONSTRAINT `fk_wtw_FacultyToCourseInSemesterYear_wtw_Faculty1`
     FOREIGN KEY (`faculty_id` )
@@ -321,6 +333,11 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`FacultyToCourseInSemesterYear` (
   CONSTRAINT `fk_wtw_CoursesInSemester_wtw_EvalFactor3`
     FOREIGN KEY (`eval_3` )
     REFERENCES `mydb`.`EvalFactor` (`eval_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_wtw_CoursesInSemester_wtw_Factor`
+    FOREIGN KEY (`factor_id` )
+    REFERENCES `mydb`.`Factor` (`factor_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_wtw_FacultyToCourseInSemesterYear_wtw_Semester1`
@@ -378,12 +395,7 @@ ENGINE = InnoDB;
 
 SHOW WARNINGS;
 
-CREATE TABLE IF NOT EXISTS mydb.Factor (
-	`factor_id` INT NOT NULL ,
-	`factor_name` VARCHAR(25) NOT NULL ,
-	`factor_val` FLOAT NOT NULL ,
-	PRIMARY KEY (`factor_id`) )
-ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
