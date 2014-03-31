@@ -544,11 +544,20 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateFacToCourseSemForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_facultyId" id="up_facultyId" />
-							</div>
-							<div class="input-group">
 								<input type="hidden" class="form-control" name="up_cisId" id="up_cisId" />
 							</div>
+							<c:if test="${ empty facultyId }">
+								<div class="input-group">
+									<span class="input-group-addon">Faculty:</span> <br /> 
+										<select class="form-control" id="up_facultyId">
+											<c:forEach items="${allFaculty }" var="fac">
+												<option value="${fac.getFacultyId() }">
+													${fac.getFacultyFirstName() } ${fac.getFacultyLastName() }
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Addition: </span><br /> <input
 									type="text" class="form-control" name="up_additionAttribute" id="up_additionAttribute"
