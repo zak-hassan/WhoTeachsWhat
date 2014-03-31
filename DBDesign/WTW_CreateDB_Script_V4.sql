@@ -379,9 +379,11 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 CREATE TABLE IF NOT EXISTS mydb.Factor (
-factor_id INT NOT NULL ,
-factor_name VARCHAR(25) NOT NULL ,
-factor_val FLOAT NOT NULL ,
+	`factor_id` INT NOT NULL ,
+	`factor_name` VARCHAR(25) NOT NULL ,
+	`factor_val` FLOAT NOT NULL ,
+	PRIMARY KEY (`factor_id`) )
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
