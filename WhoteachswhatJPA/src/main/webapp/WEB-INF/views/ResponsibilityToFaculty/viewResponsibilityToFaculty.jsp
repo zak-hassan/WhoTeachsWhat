@@ -182,7 +182,7 @@
 			url: "api/ResponsibilityToFaculty",
 			data: { 
 				facultyId: facultyId,
-		   		responsibilityId: document.getElementById("responsibility").value,
+				responsibilityId: document.getElementById("responsibility").value,
 		   		year: document.getElementById("year").value,
 		   		semesterId: document.getElementById("semester").value,
 		   		hoursperweek: document.getElementById("hoursperweek").value
@@ -238,7 +238,7 @@
 		});
 	};
   
-	var deleteRepToFac= function(id,uname) {
+	var deleteRepToFac= function(id) {
 	   	$.ajax({
 	   		type:"DELETE", 
 		   	url : "api/ResponsibilityToFaculty/"+id,
@@ -257,7 +257,9 @@
 	   	});
   	};	 
 
-	var updateForm=function(up_facultyId, up_responsibility, up_semester, up_year, up_hoursperweek){
+	var updateForm=function(up_repToFacId, up_facultyId, up_responsibility, up_semester, up_year, up_hoursperweek){
+		alert("up_repToFacId is: " + up_repToFacId);
+		$("#up_repToFacId").val(up_repToFacId);
 		$("#up_facultyId").val(up_facultyId);
 		$("#up_responsibility").val(up_responsibility);
 		$("#up_semester").val(up_semester);
@@ -310,35 +312,39 @@ td {
 							<thead>
 								<tr>
 									<th>Year</th>
+									<th>Semester</th>
 									<th>Faculty</th>
 									<th>Responsibility</th>
-									<th>Semester</th>
+									<th>Hours per Week</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 							</thead>
 							<tbody>
+							 
 								<c:set var="facultyId">
 								    <c:out value = "${param.id}" />
 								</c:set>
+								
 								<c:forEach items="${allResponsibilityToFaculty }" var="repToFac">
 									<c:if test="${repToFac.getFaculty().getFacultyId() == facultyId || empty facultyId}">
 									<tr>
-										<td>${repToFac.getYear()  }</td>
-
+										<td>${repToFac.getYear() }</td>
+										<td>${repToFac.getSemester().getSemesterName() }</td>
 										<td>${repToFac.getFaculty().getFacultyFirstName() } ${repToFac.getFaculty().getFacultyLastName() }</td>
 										<td>${repToFac.getResponsibility().getResponsibilityName() }</td>
-										<td>${repToFac.getSemester().getSemesterName() }
+										<td>${repToFac.getHoursPerWeek() }</td>
 										<td class="align">
 											<a
-												onclick="updateForm('${repToFac.getFaculty().getFacultyId()}',
+												onclick="updateForm('${repToFac.getRepToFac_id()}',
+													'${repToFac.getFaculty().getFacultyId()}',
 													'${repToFac.getResponsibility().getResponsibilityId()}', 
 													'${repToFac.getSemester().getSemesterId() }',
 													'${repToFac.getYear()}',
-													'${repToFac.getHoursPerWeek() }' )"
+													'${repToFac.getHoursPerWeek()}' )"
 												data-toggle="modal" data-target="#updateRepToFacModal">Update</a>
 											
 											<a
-												onclick="deleteRepToFac()">
+												onclick="deleteRepToFac('${repToFac.getRepToFac_id()}' )">
 												Delete
 											</a>
 										</td>
@@ -470,8 +476,20 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateRepToFacForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_facultyId" id="up_facultyId" />
+								<input type="hidden" class="form-control" name="up_repToFacId" id="up_repToFacId" />
 							</div>
+							<c:if test="${ empty facultyId }">
+								<div class="input-group">
+									<span class="input-group-addon">Faculty:</span> <br /> 
+										<select class="form-control" id="up_facultyId">
+											<c:forEach items="${allFaculty }" var="fac">
+												<option value="${fac.getFacultyId() }">
+													${fac.getFacultyFirstName() } ${fac.getFacultyLastName() }
+												</option>
+											</c:forEach>
+									</select>
+								</div>
+							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Responsibility:</span> <br /> 
 									<select class="form-control" id="up_responsibility">

@@ -48,7 +48,7 @@ public class ResponsibilityToFacultyController {
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allResponsibilityToFaculty",
-				responsibilityToFacultyService.getAll()); // Once issue with id is resolved, change to getOne(id);
+				responsibilityToFacultyService.getAll());
 		model.addAttribute("allResponsibility", responsibilityService.getAll());
 		model.addAttribute("allFaculty", facultyService.getAllFaculty());
 		model.addAttribute("allSemesters", semesterService.getAll());
@@ -56,18 +56,6 @@ public class ResponsibilityToFacultyController {
 		return "ResponsibilityToFaculty/viewResponsibilityToFaculty";
 	}
 	
-	@RequestMapping(value = "viewResponsibilityToFaculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String viewOne(@PathVariable("id") Integer id, ModelMap model) {
-		model.addAttribute("oneResponsibilityToFaculty",
-				responsibilityToFacultyService.getOne(id)); // Once issue with id is resolved, change to getOne(id);
-		
-		model.addAttribute("allResponsibility", responsibilityService.getAll());
-		model.addAttribute("allSemesters", semesterService.getAll());
-
-		return "ResponsibilityToFaculty/viewResponsibilityToFaculty/"+id;
-	}
-	
-
 	// REST API ENDPOINTS:
 
 	/**
