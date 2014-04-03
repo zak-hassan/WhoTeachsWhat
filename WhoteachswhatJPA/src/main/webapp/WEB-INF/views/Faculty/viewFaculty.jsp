@@ -7,6 +7,7 @@
     <head>
 	<title> Faculty - View </title>
 	    <jsp:include page="../includes/static_includes.jsp" />
+	    <script type="text/javascript" src="views_ajax_requests/viewFacultyAJAX.js"></script>
     </head>
 
     <body class="body-inner">
@@ -56,102 +57,6 @@
 
 
     });
-
-    /**
-    @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a faculty member
-     
-   */
-    
-	function deleteDialog(){
-		bootbox.dialog('<h3>Confirming</h3><br /> Are you sure you would like to delete this faculty member? <br /> <br /> <br /><button class="btn btn-danger btn-small"  onclick=\'deleteJob();\'><i class="icon-white icon-download-alt"></i> Confirm Delete </button><button class="btn btn-primary btn-small" onclick="closeAll();"><i class="icon-white icon-download-alt"></i> Cancel</button>');
-	};
-
-	function closeAll(){
-		bootbox.hideAll();
-	}
-
-	 var addFaculty=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/faculty",
-			data: { 
-				faculty_first_name : document.getElementById("fname").value, 
-				faculty_last_name : document.getElementById("lname").value,
-				faculty_status : document.getElementById("status").selectedIndex+1  
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'New Faculty added',
-						type : 'info',
-						text : 'Faculty member ' + document.getElementById('fname').value + 
-						' ' + document.getElementById("lname").value + ' has been added'
-					});
-		    		
-		    		document.getElementById("addFacultyForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addFacultyModal').modal('hide');
-		    		location.reload();
-			   	}
-			}
-		});
-	};
-	
-	 var updateFaculty=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/faculty/"+document.getElementById("up_facId").value,
-			data: { 
-				faculty_first_name : document.getElementById("up_fname").value, 
-				faculty_last_name : document.getElementById("up_lname").value,
-				faculty_status : document.getElementById("up_accessLevel").selectedIndex+1  
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Faculty updated',
-						type : 'info',
-						text : 'Faculty member ' + document.getElementById('up_fname').value + 
-						' ' + document.getElementById("up_lname").value + ' has been updated'
-					});
-		    		
-		    		document.getElementById("updateFacultyForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateFacultyModal').modal('hide');
-		    		location.reload();
-			   	}
-			}
-		});
-	};
- 
-		
-	var deleteFaculty= function(id, fname, lname) {
-	   	$.ajax({type:"DELETE", 
-		   	url : "api/faculty/"+id,
-		   	data : null,
-		   	cache : false,
-		   	success : function(data){
-	       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Faculty :' + fname + ' ' + lname,
-						type : 'info',
-						text : 'Faculty has been deleted'
-					});
-       				location.reload();
-		   		}
-	   		 }
-	   	});
-   };
-   
-   var updateForm=function(up_facId, up_fname, up_lname, up_status){
-		$("#up_facId").val(up_facId);
-		$("#up_fname").val(up_fname);
-		$("#up_lname").val(up_lname);
-		$("#up_accessLevel").val(up_status);
-	};	
 	
 </script>
 	<div class="wrapper">
@@ -255,7 +160,7 @@
 													onclick="updateForm('${faculty.getFacultyId()}', 
 														'${faculty.getFacultyFirstName()}', 
 														'${faculty.getFacultyLastName()}',
-														'${faculty.getTeachingType().getTeachingType_name() }' )"
+														'${faculty.getTeachingType().getTeachingType_id() }' )"
 													data-toggle="modal" data-target="#updateFacultyModal">
 													<i class="icon-edit"></i>
 												</a> 

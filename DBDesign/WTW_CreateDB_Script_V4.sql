@@ -193,7 +193,7 @@ SHOW WARNINGS;
 -- Table `mydb`.`Factor`
 -- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS mydb.Factor (
+CREATE TABLE IF NOT EXISTS `mydb`.`Factor` (
 	`factor_id` INT NOT NULL ,
 	`factor_name` VARCHAR(25) NOT NULL ,
 	`factor_val` FLOAT NOT NULL ,

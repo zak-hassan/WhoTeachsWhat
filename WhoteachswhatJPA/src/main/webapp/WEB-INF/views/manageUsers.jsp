@@ -115,6 +115,7 @@
 <script type="text/javascript"
 	src="static/js/bootRestful/bootrestful.js"></script>
 <script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
+<script type="text/javascript" src="views_ajax_requests/manageUsersAJAX.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">

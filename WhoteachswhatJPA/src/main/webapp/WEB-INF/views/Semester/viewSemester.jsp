@@ -115,6 +115,7 @@
 <script type="text/javascript"
 	src="static/js/bootRestful/bootrestful.js"></script>
 <script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
+<script type="text/javascript" src="views_ajax_requests/viewSemesterAJAX.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -162,119 +163,7 @@
             }
         });
     });
-        
-    /**
-    @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a semester
-   */
-   
-	var addSemester=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/semester",
-			data: { semesterName: document.getElementById('semesterName').value },
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'New Semester added',
-						type : 'info',
-						text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
-					});
-		    		
-		    		$.ajax({
-		    			type: "GET",
-		    			url: "api/semester/"+data.id,
-		    			data: null,
-		    			dataType: "json",
-		    			cache: false,
-		    			success : function(semester){
-		    			
-		    				var createA1 = document.createElement('a');
-		    				var createA2 = document.createElement('a');
 
-		    				var createA1Text = document.createTextNode("Update");
-		    				var createA2Text = document.createTextNode("Delete");
-		    				
-		    				tempSemester = adsantokhi_quote_string(semester.name);
-		    				
-		    				createA1.setAttribute('onclick', 'updateForm(' + semester.id + ', ' + tempSemester + ')');
-		    				createA1.setAttribute('data-toggle', 'modal');
-		    				createA1.setAttribute('data-target', '#updateSemesterModal');
-
-		    				createA2.setAttribute('onclick', 'deleteSemester(' + semester.id + ', ' + tempSemester + ')');
-		    				 
-		    				createA1.appendChild(createA1Text);
-		    				createA2.appendChild(createA2Text);
-		    				
-		    				var updateLink = document.createElement("div");
-		    				updateLink.appendChild(createA1);
-		    				
-		    				var deleteLink = document.createElement("div");
-		    				deleteLink.appendChild(createA2);
-		    				
-		    				var newRow = $('#tableSortable').dataTable()
-		    					.fnAddData( [semester.id, semester.name, updateLink.innerHTML + " " + deleteLink.innerHTML] );
-		    				
-		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
-		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
-		    				$('td', nTr)[2].setAttribute( 'class', 'align' );
-		    			}
-		    		});
-		    		
-		    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addSemesterModal').modal('hide');
-			   	}
-			}
-		});
-	};
-	
-	var updateSemester=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/semester/"+document.getElementById('up_semesterId').value,
-			data: { semesterName: document.getElementById('up_semesterName').value },
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Semester updated',
-						type : 'info',
-						text : 'Semester ' + document.getElementById('up_semesterName').value + ' has been updated'
-					});
-		    		document.getElementById("updateSemesterForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateSemesterModal').modal('hide');
-		    		location.reload();
-			   	}
-			}
-		});
-	};
-	   
-	var deleteSemester= function(id,semesterName) {
-		$.ajax({
-			type:"DELETE", 
-			url : "api/semester/"+id,
-			data : null,
-			cache : false,
-			success : function(data){
-		    	if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Semester :' + semesterName,
-						type : 'info',
-						text : 'Semester has been deleted'
-					});
-	       			location.reload();
-			   	}
-			}
-		});
-	};	   
-	
-	var updateForm=function(semesterId, semesterName){
-		$("#up_semesterId").val(semesterId);
-		$("#up_semesterName").val(semesterName);
-	};											
 
 </script>
 	<div class="wrapper">
@@ -335,7 +224,8 @@ td {
 												data-toggle="modal" data-target="#updateSemesterModal">Update
 											</a>
 											<a 
-												onclick="deleteSemester('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')">Delete
+												onclick="deleteForm('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')"
+												data-toggle="modal" data-target="#deleteModal">Delete
 											</a>
 										</td>
 									</tr>
@@ -416,7 +306,6 @@ td {
 			</div>
 		</div>
 
-
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
@@ -454,6 +343,27 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_semesterId" name="del_semesterId" />
+			<input type="hidden" id="del_semesterName" name="del_semesterName" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deleteSemester()">Yes</a>
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
 	</div>
 </body>
