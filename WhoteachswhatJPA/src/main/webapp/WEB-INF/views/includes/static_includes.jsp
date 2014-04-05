@@ -22,6 +22,8 @@
         <script type="text/javascript" src="static/js/plugins/fixFontIcons.js"></script>
 <![endif]-->
    
+   	<script type="text/javascript" src="client_side_validation/client_side_validation.js"></script>
+   	<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
 

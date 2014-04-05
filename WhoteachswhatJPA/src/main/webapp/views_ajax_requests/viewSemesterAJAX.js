@@ -1,27 +1,27 @@
         
-    /**
+/**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a semester
-   */
-   
-   function validate_empty(param) {
-    	var success = false;
-    	
-    	if (param|| param.length) { // If param is empty
-    		success = true;
-		}
-    	return success;
-    }
-   
+    @Requires: client_side_validation/client_side_validation.js
+*/   
+	var semesterNameLength = 20;
+	
 	var addSemester=function() {
 		var valid = true;
 		var addForm = document.getElementById("addSemesterForm");
+		var errors = new Array();
+		var elementsId = new Array();
 		
-		for (var i = 0; i < addForm.length - 2 && valid; ++i) {
-			valid = validate_empty(addForm.elements[i].value);
+		for (var i = 0, j = 0; i < addForm.length - 2 && valid; ++i) {
+			if (!validate_length(addForm.elements[i].value, 10)) {
+				valid = false;
+				errors[j] = addForm.elements[i].getAttribute("name") + " is required and must be " +
+					"under " + semesterNameLength + " characters long";
+				elementsId[j++] = addForm.elements[i].getAttribute("id");
+			}
 		}
 		
-		if (valid){
+		if (valid) {
 			$.ajax({
 				type: "POST",
 				url: "api/semester",
@@ -77,40 +77,79 @@
 			    		});
 			    		
 			    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
+			    		
+			    		for (i = 0; i < elementsId.length; ++i) { // Remove red border on form elements
+			    			document.getElementById(elementsId[i]).style.border = "none";
+			    		}
+			    		
 			    		$('#addSemesterModal').modal('hide');
 				   	}
 				}
 			});
 		}
 		else {
-			$.pnotify({
-				title : 'Error',
-				type : 'info',
-				text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
-			});
+			for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
+			}
 		}
 	};
 	
 	var updateSemester=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/semester/"+document.getElementById('up_semesterId').value,
-			data: { semesterName: document.getElementById('up_semesterName').value },
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Semester updated',
-						type : 'info',
-						text : 'Semester ' + document.getElementById('up_semesterName').value + ' has been updated'
-					});
-		    		document.getElementById("updateSemesterForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateSemesterModal').modal('hide');
-		    		location.reload();
-			   	}
+		var valid = true;
+		var updateForm = document.getElementById("updateSemesterForm");
+		var errors = new Array();
+		var elementsId = new Array();
+		
+		for (var i = 0, j = 0; i < updateForm.length - 2 && valid; ++i) {
+			if (!validate_length(updateForm.elements[i].value, 10)) {
+				valid = false;
+				errors[j] = updateForm.elements[i].getAttribute("name") + " is required and must be " +
+					"under " + semesterNameLength + " characters long";
+				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
-		});
+		}
+		
+		if (valid) {
+			$.ajax({
+				type: "POST",
+				url: "api/semester/"+document.getElementById('up_semesterId').value,
+				data: { semesterName: document.getElementById('up_semesterName').value },
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'Semester updated',
+							type : 'info',
+							text : 'Semester ' + document.getElementById('up_semesterName').value + ' has been updated'
+						});
+			    		// Form needs resetting due to never being submitted
+			    		document.getElementById("updateSemesterForm").reset();
+			    		
+			    		for (i = 0; i < elementsId.length; ++i) { // Remove red border on form elements
+			    			document.getElementById(elementsId[i]).style.border = "none";
+			    		}
+			    		
+			    		$('#updateSemesterModal').modal('hide');
+				   	}
+				}
+			});
+		}
+		else {
+			for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
+			}
+		}
 	};
 	   
 	var deleteSemester= function() {

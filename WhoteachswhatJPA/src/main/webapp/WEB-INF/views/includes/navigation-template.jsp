@@ -38,9 +38,6 @@
 						<a href="viewSemester">Manage Semester</a>
 					</li>
 					<li>
-						<a href="viewCurriculumSemester">Manage Curriculum Semester</a>
-					</li>
-					<li>
 						<a href="viewResponsibilityToFaculty">Manage Faculty Responsibilities</a>
 					</li>
 					<li>
@@ -63,14 +60,6 @@
 				<i class="icon-menu-arrow"></i>   
 			</a>
 		</li>
-		<li>
-			<a href="viewProgram">
-				<i class="icon-photon book"></i>
-				<span class="nav-selection">Manage Program</span>
-				<i class="icon-menu-arrow"></i>   
-			</a>
-		</li>
-
 		<li>
 			<a href="manageCompHours">
 				<i class="icon-photon clock"></i>
