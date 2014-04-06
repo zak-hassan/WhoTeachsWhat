@@ -129,7 +129,6 @@
 	   }
 	};
 
-
 	var updatePrepTime=function() {
 		var valid = true;
 	   var updateForm = document.getElementById("updatePrepTimeForm");
