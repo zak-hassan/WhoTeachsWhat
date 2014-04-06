@@ -54,8 +54,6 @@
                 });
             }
         });
-
-
     });
 	
 </script>
@@ -78,12 +76,14 @@
 					<a href="javascript:;" class="span1">View</a>
 				</li>
 			</ul>
+			<!--  
 			<div style="position:absolute;right:0px;">					
 				<span><i class="icon-photon user"></i> Mary-Lynn Manton </span> 
 				<span>
 					<i class="icon-photon key_stroke"></i>
 				</span>
 			</div>
+			-->
 		</div> 
 			<!-- BREADCRUMB ENDS HERE -->
 				      
@@ -165,8 +165,9 @@
 													<i class="icon-edit"></i>
 												</a> 
 												<a class="bootstrap-tooltip" data-original-title="Delete" 
-													onclick="deleteFaculty('${faculty.getFacultyId() }', 
-														'${faculty.getFacultyFirstName()}', '${faculty.getFacultyLastName() }')">
+													onclick="deleteForm('${faculty.getFacultyId() }', 
+														'${faculty.getFacultyFirstName()}', '${faculty.getFacultyLastName() }')"
+													data-toggle="modal" data-target="#deleteModal">
 													<i class="icon-trash"></i>
 												</a> 
 											</td>
@@ -233,17 +234,17 @@
 						<form role="form" id="addFacultyForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">First Name: </span><br /> <input
-									type="text" class="form-control" name="fname" id="fname"
+									type="text" class="form-control" name="First name" id="fname"
 									placeholder="First name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Last Name: </span><br /> <input
-									type="text" class="form-control" name="lname" id="lname"
+									type="text" class="form-control" name="Last name" id="lname"
 									placeholder="Last Name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Status:</span> <br /> <select
-									class="form-control" id="status">
+									class="form-control" id="status" name="Status">
 									<c:forEach items="${allStatus }" var="status">
 										<option value="${status.getTeachingType_id() }">${status.getTeachingType_name() }</option>
 									</c:forEach>
@@ -276,19 +277,19 @@
 						<!--  FORM ADD -->
 						<form role="form" id="updateFacultyForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_facId" id="up_facId" />
+								<input type="hidden" class="form-control" name="Faculty id" id="up_facId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">First Name: </span><br /> <input
-									type="text" class="form-control" name="up_fname" id="up_fname" />
+									type="text" class="form-control" name="First name" id="up_fname" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Last Name: </span><br /> <input
-									type="text" class="form-control" name="up_lname" id="up_lname" />
+									type="text" class="form-control" name="Last name" id="up_lname" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Access Level:</span> <br /> 
-									<select class="form-control" id="up_accessLevel">
+									<select class="form-control" id="up_status" name="Status">
 										<c:forEach items="${allStatus }" var="status">
 										<option value="${status.getTeachingType_id() }">${status.getTeachingType_name() }</option>
 									</c:forEach>
@@ -308,6 +309,28 @@
 
 
 		<!--  END OF UPDATE MODAL -->
+
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_facId" name="Faculty Id" />
+			<input type="hidden" id="del_fname" />
+			<input type="hidden" id="del_lname" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deleteFaculty()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
         </div>
         </body>
