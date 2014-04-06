@@ -235,16 +235,17 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateUserForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="Username" id="up_userId" />
+								<input type="hidden" class="form-control" id="up_userId" name="User id" />
+
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">User Name: </span><br /> <input
-									type="text" class="form-control" name="Access Level" id="up_username" />
+									type="text" class="form-control" name="Username" id="up_username" />
 							</div>
 
 							<div class="input-group">
 								<span class="input-group-addon">Access Level:</span> <br /> <select
-									class="form-control" id="up_accessLevel">
+									class="form-control" id="up_accessLevel" name="Access Level">
 							<c:forEach items="${allRoles }" var="roles">
 									<option value="${roles.getAccessId() }">${roles.getAccessName() }</option>
 									</c:forEach>
@@ -267,8 +268,8 @@ td {
 		<!--  BEGIN DELETE MODAL -->
 		
 		<div id="deleteModal" class="modal hide fade">
-			<input type="hidden" id="del_userId" name="del_userId" />
-			<input type="hidden" id="del_username" name="del_username" />
+			<input type="hidden" id="del_userId" name="User id" />
+			<input type="hidden" id="del_username" />
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>Delete Confirmation</h3>

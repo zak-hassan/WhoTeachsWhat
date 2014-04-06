@@ -26,7 +26,4 @@ public class AdminController {
 		//logger.info("WTWNavigator: \t /manageCourseSection");
 		return "Anil_ManageCourseSections";
 	}
-	
-	
-	
 }

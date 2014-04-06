@@ -223,7 +223,7 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updatePrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_preptimeId" id="up_preptimeId" />
+								<input type="hidden" class="form-control" name="Prep Time id" id="up_preptimeId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
@@ -251,8 +251,8 @@ td {
 		<!--  BEGIN DELETE MODAL -->
 		
 		<div id="deleteModal" class="modal hide fade">
-			<input type="hidden" id="del_prepId" name="del_prepId" />
-			<input type="hidden" id="del_preptimeName" name="del_preptimeName" />
+			<input type="hidden" id="del_prepId" name="Prep id" />
+			<input type="hidden" id="del_preptimeName" />
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>Delete Confirmation</h3>

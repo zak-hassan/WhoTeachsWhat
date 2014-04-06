@@ -1,8 +1,7 @@
 /**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating, suspending and deleting a user
-    @Requires: client_side_validation/client_side_validation.js, jQuery
-     
+    @Requires: client_side_validation/client_side_validation.js, jQuery   
 */
    
 	var maxLength = 50;
@@ -21,6 +20,8 @@
 	   var errors = new Array();
 	   var elementsId = new Array();
 	   
+	   var accessLevel = document.getElementById("accessLevel");
+	   
 	   for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
 			if (!validate_empty(addForm.elements[i].value)) {
 				valid = false;
@@ -36,6 +37,11 @@
 			}
 	   }
 	   
+	   if (!validate_integer(accessLevel.value)) {
+		   valid = false;
+		   	errors[j] = accessLevel.getAttribute("name") + " must be a number";
+		   	elementsId[j++] = accessLevel.getAttribute("id");
+	   }
 	   
 	   if (valid) {
 			$.ajax({
@@ -43,7 +49,7 @@
 				url: "api/account",
 				data: { 
 					username: document.getElementById("username").value, 
-			   		accessLevel: document.getElementById("accessLevel").selectedIndex +1
+			   		accessLevel: accessLevel.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -133,6 +139,9 @@
 	    var updateForm = document.getElementById("updateUserForm");
 	    var errors = new Array();
 	    var elementsId = new Array();
+	    
+	    var accessLevel = document.getElementById("up_accessLevel");
+	    var userId = document.getElementById("up_userId");
 	   
 	    for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
 	    	if (!validate_empty(updateForm.elements[i].value)) {
@@ -148,14 +157,26 @@
 				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
 	    }
+	    	    
+	    if (!validate_integer(accessLevel.value)) {
+	    	valid = false;
+	    	errors[j] = accessLevel.getAttribute("name") + " must be a number";
+	    	elementsId[j++] = accessLevel.getAttribute("id");
+		}
+	    
+	    if (!validate_integer(userId.value)) {
+	    	valid = false;
+	    	errors[j] = userId.getAttribute("name") + " must be a number";
+	    	elementsId[j++] = userId.getAttribute("id");
+		}
 	    
 	    if (valid) {
 			$.ajax({
 				type: "POST",
-				url: "api/account/"+document.getElementById("up_userId").value,
+				url: "api/account/"+userId.value,
 				data: { 
 					username: document.getElementById("up_username").value, 
-			   		accessLevel: document.getElementById("up_accessLevel").selectedIndex+1
+			   		accessLevel: accessLevel.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -192,43 +213,78 @@
 	};
 	
 	var suspendUser=function(id, username) {
-		$.ajax({
-			type: "POST",
-			url: "api/account/"+id,
-			data: { 
-				username: username,
-		   		accessLevel: 1 // One denotes no access 
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'User Suspended',
-						type : 'info',
-						text : 'User ' + username + ' has been suspended'
-					});
-			   	}
-	    		location.reload();
-			}
-		});
+		var valid = true;
+		var errors = "";
+		
+		if (!validate_integer(id)) {
+			valid = false;
+	    	errors = "User id must be a number";
+		}
+		
+		if (valid) {
+			$.ajax({
+				type: "POST",
+				url: "api/account/"+id,
+				data: { 
+					username: username,
+			   		accessLevel: 1 // One denotes no access 
+			   	},
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'User Suspended',
+							type : 'info',
+							text : 'User ' + username + ' has been suspended'
+						});
+				   	}
+				}
+			});
+		}
+		else { // Handle HTML Inspect errors
+			$.pnotify({
+				title : 'Error',
+				type : 'info',
+				text : errors
+			});
+		}
 	};
 
-	var deleteUser= function(id,uname) {
-	 	$.ajax({type:"DELETE", 
-		  	url : "api/account/"+document.getElementById("del_userId").value,
-		  	data : null,
-		  	cache : false,
-		  	success : function(data){
-	     		if (data.success === "true") {
-	    			$.pnotify({
-						title : 'User :' + document.getElementById("del_username").value,
-						type : 'info',
-						text : 'User has been deleted'
-					});
-  				}
-   	  		}
- 		});
+	var deleteUser= function() {
+		var valid = true;
+		var errors = "";
+		
+		var userId = document.getElementById('del_userId');
+		
+		if (!validate_integer(userId.value)) {
+			valid = false;
+			errors = userId.getAttribute("name") + "  must be a number";
+		}
+		
+		if (valid) {
+		 	$.ajax({type:"DELETE", 
+			  	url : "api/account/"+userId.value,
+			  	data : null,
+			  	cache : false,
+			  	success : function(data){
+		     		if (data.success === "true") {
+		    			$.pnotify({
+							title : 'User :' + document.getElementById("del_username").value,
+							type : 'info',
+							text : 'User has been deleted'
+						});
+	  				}
+	   	  		}
+	 		});
+		}
+		else { // Handle HTML inspect errors
+			$.pnotify({
+				title : 'Error',
+				type : 'info',
+				text : errors
+			});
+		}
 	};	   
 
 	var updateForm=function(userId, uname,ac_level){

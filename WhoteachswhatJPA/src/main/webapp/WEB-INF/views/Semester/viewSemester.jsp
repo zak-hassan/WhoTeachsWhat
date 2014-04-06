@@ -213,7 +213,7 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_semesterId"
+								<input type="hidden" class="form-control" name="Semester id"
 									id="up_semesterId" />
 							</div>
 							<div class="input-group">
@@ -238,8 +238,8 @@ td {
 		<!--  BEGIN DELETE MODAL -->
 		
 		<div id="deleteModal" class="modal hide fade">
-			<input type="hidden" id="del_semesterId" name="del_semesterId" />
-			<input type="hidden" id="del_semesterName" name="del_semesterName" />
+			<input type="hidden" id="del_semesterId" name="Semester id" />
+			<input type="hidden" id="del_semesterName" />
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>Delete Confirmation</h3>

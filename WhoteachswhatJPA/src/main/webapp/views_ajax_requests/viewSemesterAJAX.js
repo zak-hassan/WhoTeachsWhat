@@ -26,7 +26,7 @@
 			
 			if (!validate_length(addForm.elements[i].value, semesterNameLength)) {
 				valid = false;
-				errors[j] = addForm.elements[i].getAttribute("name") + " is must be " +
+				errors[j] = addForm.elements[i].getAttribute("name") + " must be " +
 					"under " + semesterNameLength + " characters long";
 				elementsId[j++] = addForm.elements[i].getAttribute("id");
 			}
@@ -116,6 +116,8 @@
 		var errors = new Array();
 		var elementsId = new Array();
 		
+		var semesterId = document.getElementById('up_semesterId');
+		
 		for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
 			if (!validate_empty(updateForm.elements[i].value)) {
 				valid = false;
@@ -125,16 +127,22 @@
 			
 			if (!validate_length(updateForm.elements[i].value, semesterNameLength)) {
 				valid = false;
-				errors[j] = updateForm.elements[i].getAttribute("name") + " is required and must be " +
+				errors[j] = updateForm.elements[i].getAttribute("name") + "  must be " +
 					"under " + semesterNameLength + " characters long";
 				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
 		}
 		
+		if (!validate_integer(semesterId.value)) {
+			valid = false;
+			errors[j] = semesterId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = semesterId.getAttribute("id");
+		}
+		
 		if (valid) {
 			$.ajax({
 				type: "POST",
-				url: "api/semester/"+document.getElementById('up_semesterId').value,
+				url: "api/semester/"+semesterId.value,
 				data: { semesterName: document.getElementById('up_semesterName').value },
 				dataType: "json",
 				cache: false,
@@ -170,21 +178,40 @@
 	};
 	   
 	var deleteSemester= function() {
-		$.ajax({
-			type:"DELETE", 
-			url : "api/semester/"+document.getElementById('del_semesterId').value,
-			data : null,
-			cache : false,
-			success : function(data){
-		    	if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Semester :' + document.getElementById('del_semesterName').value,
-						type : 'info',
-						text : 'Semester has been deleted'
-					});
-			   	}
-			}
-		});
+		var valid = true;
+		var errors = "";
+		
+		var semesterId = document.getElementById('del_semesterId');
+		
+		if (!validate_integer(semesterId.value)) {
+			valid = false;
+			errors = semesterId.getAttribute("name") + "  must be a number";
+		}
+		
+		if (valid) {
+			$.ajax({
+				type:"DELETE", 
+				url : "api/semester/"+document.getElementById('del_semesterId').value,
+				data : null,
+				cache : false,
+				success : function(data){
+			    	if (data.success === "true") {
+		       			$.pnotify({
+							title : 'Semester :' + document.getElementById('del_semesterName').value,
+							type : 'info',
+							text : 'Semester has been deleted'
+						});
+				   	}
+				}
+			});
+		}
+		else { // Handle HTML inspect errors
+			$.pnotify({
+				title : 'Error',
+				type : 'info',
+				text : errors
+			});
+		}
 	};	   
 	
 	var updateForm=function(semesterId, semesterName){

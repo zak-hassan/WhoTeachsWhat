@@ -19,7 +19,12 @@ function validate_length(param, length) {
 	return (param.length <= length) ? true : false;
 }
 
-/* This function checks if the passed argument is a float */
+/* This function checks if the passed argument is a float and is the passed length long or less*/
 function validate_float(param, length) {
 	return (!isNaN(param) && param.length <= length) ? true : false;
+}
+
+/* This function checks if the passed argument is an integer */
+function validate_integer(param) {
+	return (!isNaN(param)) ? true : false;
 }

@@ -41,7 +41,7 @@
 	   
 	   if (!validate_float(preptimeFactor.value, prepFactorLength)) {
 		   valid = false;
-		   	errors[j] = preptimeFactor.getAttribute("name") + " is must be " +
+		   	errors[j] = preptimeFactor.getAttribute("name") + " must be " +
 		   		"a number less than " + prepFactorLength + " digits long";
 		   	elementsId[j++] = preptimeFactor.getAttribute("id");
 	   }
@@ -136,6 +136,7 @@
 	   var errors = new Array();
 	   var elementsId = new Array();
 	   
+	   var prepId = document.getElementById("up_preptimeId");
 	   var preptimeName = document.getElementById("up_preptimeName");
 	   var preptimeFactor = document.getElementById("up_preptimeFactor");
 	   
@@ -160,11 +161,17 @@
 		   		"a number less than " + prepFactorLength + " digits long";
 		   	elementsId[j++] = preptimeFactor.getAttribute("id");
 	   }
+	   
+	   if (!validate_integer(prepId.value)) {
+			valid = false;
+			errors[j] = prepId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = prepId.getAttribute("id");
+		}
 		
 		if (valid) {
 			$.ajax({
 				type: "POST",
-				url: "api/preptime/"+document.getElementById("up_preptimeId").value,
+				url: "api/preptime/"+prepId.value,
 				data: { 
 					preptimeName: document.getElementById("up_preptimeName").value, 
 			   		preptimeFactor: document.getElementById("up_preptimeFactor").value 
@@ -204,21 +211,40 @@
 	};
 
    var deletePrepTime= function() {
-	   	$.ajax({
-	   		type:"DELETE", 
-		   	url : "api/preptime/"+document.getElementById("del_prepId").value,
-		   	data : null,
-		   	cache : false,
-		   	success : function(data){
-	       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Prep time: ' + document.getElementById("del_preptimeName").value,
-						type : 'info',
-						text : 'Prep time has been deleted'
-					});
-		   		}
- 			}
-	   	});
+	   var valid = true;
+		var errors = "";
+		
+		var prepId = document.getElementById('del_prepId');
+		
+		if (!validate_integer(prepId.value)) {
+			valid = false;
+			errors = prepId.getAttribute("name") + "  must be a number";
+		}
+		
+		if (valid) {
+		   	$.ajax({
+		   		type:"DELETE", 
+			   	url : "api/preptime/"+prepId.value,
+			   	data : null,
+			   	cache : false,
+			   	success : function(data){
+		       		if (data.success === "true") {
+		       			$.pnotify({
+							title : 'Prep time: ' + document.getElementById("del_preptimeName").value,
+							type : 'info',
+							text : 'Prep time has been deleted'
+						});
+			   		}
+	 			}
+		   	});
+		}
+		else { // Handle HTML inspect errors
+			$.pnotify({
+				title : 'Error',
+				type : 'info',
+				text : errors
+			});
+		}
    };	   
 
 	var updateForm=function(up_preptimeId, up_preptimeName, up_preptimeFactor){
