@@ -23,13 +23,14 @@ public class FactorController {
 	public String view(ModelMap model) {
 		model.addAttribute("allFactors", null);
 
-		return "EvalFactor/viewFactor";
+		return "Factor/viewFactor";
 	}
 	
 	@RequestMapping(value = "/api/factor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
-			@RequestParam(value = "factorName", required = true) String factorName) {
+			@RequestParam(value = "factorName", required = true) String factorName,
+			@RequestParam(value = "factorValue", required = true) String factorValue) {
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		list.put("id", null);
@@ -40,7 +41,8 @@ public class FactorController {
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
-			@RequestParam(value = "factorName", required = true) String factorName) {
+			@RequestParam(value = "factorName", required = true) String factorName,
+			@RequestParam(value = "factorValue", required = true) String factorValue) {
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		return list;
