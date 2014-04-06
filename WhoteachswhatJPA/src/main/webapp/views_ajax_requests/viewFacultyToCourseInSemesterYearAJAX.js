@@ -1,12 +1,19 @@
-  /**
-    @Author: Anil Santokhi
+/**
+	@Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a faculty to a course in a particular 
     		  semester during a certain year
-   */
+	@Requires: client_side_validation/client_side_validation.js, jQuery
+*/
    
 	// Get faculty id from query string
 	var facultyId = window.location.search.slice(4); // Removes ?id=
-	facultyId = encodeURI(facultyId); // Escape string  	
+	facultyId = encodeURI(facultyId); // Escape string
+	
+	var evalFactorLength = 10;
+
+	$(document).ready(function () {
+		// $("#preptimeName").attr('maxlength', prepTimeLength);
+	});
     
    var addFacToCourseSem=function() {
 	   if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
@@ -84,23 +91,42 @@
 		});
 	};
 
-	var deleteFacToCourseSem= function(id, course, facultyFirstName, facultyLastName) {
+	var deleteFacToCourseSem= function() {
+		var valid = true;
+		var errors = "";
+		
+		var cisId = document.getElementById('del_cisId');
+		
+		if (!validate_integer(cisId.value)) {
+			valid = false;
+			errors = cisId.getAttribute("name") + "  must be a number";
+		}
+		if (valid) {
 	 	$.ajax({
 	 		type:"DELETE", 
-		  	url : "api/facultyToCourseInSemesterYear/"+id,
+		  	url : "api/facultyToCourseInSemesterYear/"+cisId.value,
 		  	data : null,
 		  	cache : false,
 		  	success : function(data){
 	     		if (data.success === "true") {
 	    			$.pnotify({
-						title : 'Course :' + course + 'has been removed from faculty',
+						title : 'Course :' + document.getElementById("del_course_name").value 
+							+ 'has been removed from faculty',
 						type : 'info',
-						text : 'Course has been removed from ' + facultyFirstName + ' ' + facultyLastName
+						text : 'Course has been removed from ' + document.getElementById("del_fname").value
+							+ ' ' + document.getElementById("del_lname").value
 					});
-	    			location.reload();
 	  			}
 	   	  	}
 	 	});
+		}
+		else { // Handle HTML inspect errors
+			$.pnotify({
+				title : 'Error',
+				type : 'info',
+				text : errors
+			});
+		}
 	};	   
 
 	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId,
@@ -116,4 +142,11 @@
    		$("#up_comphourId").val(comphourId);
    		$("#up_courseId").val(courseId);
    		$("#up_prepTimeId").val(prepTimeId); 
-	};											
+	};
+	
+	var deleteForm=function(cisId, courseName, fname, lname) {
+		$("#del_cisId").val(cisId);
+		$("#del_course_name").val(courseName);
+		$("#del_fname").val(fname);
+		$("#del_lname").val(lname);
+	};

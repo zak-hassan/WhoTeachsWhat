@@ -1,7 +1,7 @@
  /**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a prep time
-    @Requires: client_side_validation/client_side_validation.js, jQuery 
+    @Requires: client_side_validation/client_side_validation.js, jQuery
 */
 
 	var prepTimeLength = 2;
@@ -209,8 +209,8 @@
 		}
 	};
 
-   var deletePrepTime= function() {
-	   var valid = true;
+	var deletePrepTime= function() {
+		var valid = true;
 		var errors = "";
 		
 		var prepId = document.getElementById('del_prepId');
