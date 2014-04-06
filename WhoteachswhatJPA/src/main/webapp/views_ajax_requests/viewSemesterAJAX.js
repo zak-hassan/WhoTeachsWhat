@@ -98,7 +98,7 @@
 				}
 			});
 		}
-		else {
+		else { // Handle form errors
 			for (i = 0; i < errors.length; ++i) {
 				$.pnotify({
 					title : 'Error',
@@ -157,7 +157,7 @@
 				}
 			});
 		}
-		else {
+		else { // Handle form errors
 			for (i = 0; i < errors.length; ++i) {
 				$.pnotify({
 					title : 'Error',
