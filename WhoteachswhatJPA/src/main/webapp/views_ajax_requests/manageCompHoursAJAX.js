@@ -24,7 +24,7 @@
 		var compHourName = document.getElementById("comp_hour_name");
 		   
 		for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
-			if (!validate_empty(addForm.elements[i].value)) {
+			if (validate_empty(addForm.elements[i].value)) {
 				valid = false;
 				errors[j] = addForm.elements[i].getAttribute("name") + " is required";
 				elementsId[j++] = addForm.elements[i].getAttribute("id");
@@ -147,7 +147,7 @@
 		var compHourName = document.getElementById("up_comp_hour_name");
 		   
 		for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
-			if (!validate_empty(updateForm.elements[i].value)) {
+			if (validate_empty(updateForm.elements[i].value)) {
 				valid = false;
 				errors[j] = updateForm.elements[i].getAttribute("name") + " is required";
 				elementsId[j++] = updateForm.elements[i].getAttribute("id");

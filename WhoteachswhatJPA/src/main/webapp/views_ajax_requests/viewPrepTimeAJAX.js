@@ -16,37 +16,37 @@
 	});
 
 	var addPrepTime=function() {
-	   var valid = true;
-	   var addForm = document.getElementById("addPrepTimeForm");
-	   var errors = new Array();
-	   var elementsId = new Array();
+		var valid = true;
+		var addForm = document.getElementById("addPrepTimeForm");
+		var errors = new Array();
+		var elementsId = new Array();
 	   
-	   var preptimeName = document.getElementById("preptimeName");
-	   var preptimeFactor = document.getElementById("preptimeFactor");
+		var preptimeName = document.getElementById("preptimeName");
+		var preptimeFactor = document.getElementById("preptimeFactor");
 	   
-	   for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
-			if (!validate_empty(addForm.elements[i].value)) {
+		for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
+			if (validate_empty(addForm.elements[i].value)) {
 				valid = false;
 				errors[j] = addForm.elements[i].getAttribute("name") + " is required";
 				elementsId[j++] = addForm.elements[i].getAttribute("id");
 			}
 		}
 	   
-	   if (!validate_length(preptimeName.value, prepTimeLength)) {
-		   valid = false;
-		   errors[j] = preptimeName.getAttribute("name") + " must be " +
+		if (!validate_length(preptimeName.value, prepTimeLength)) {
+			valid = false;
+			errors[j] = preptimeName.getAttribute("name") + " must be " +
 				"equal to or under " + prepTimeLength + " characters long";
-		   elementsId[j++] = preptimeName.getAttribute("id");
-	   }
+			elementsId[j++] = preptimeName.getAttribute("id");
+		}
 	   
-	   if (!validate_float(preptimeFactor.value, prepFactorLength)) {
-		   valid = false;
+		if (!validate_float(preptimeFactor.value, prepFactorLength)) {
+			valid = false;
 		   	errors[j] = preptimeFactor.getAttribute("name") + " must be " +
 		   		"a number less than " + prepFactorLength + " digits long";
 		   	elementsId[j++] = preptimeFactor.getAttribute("id");
-	   }
+		}
 	   
-	   if (valid) {
+		if (valid) {
 			$.ajax({
 				type: "POST",
 				url: "api/preptime",
@@ -131,41 +131,41 @@
 
 	var updatePrepTime=function() {
 		var valid = true;
-	   var updateForm = document.getElementById("updatePrepTimeForm");
-	   var errors = new Array();
-	   var elementsId = new Array();
+		var updateForm = document.getElementById("updatePrepTimeForm");
+		var errors = new Array();
+		var elementsId = new Array();
 	   
-	   var prepId = document.getElementById("up_preptimeId");
-	   var preptimeName = document.getElementById("up_preptimeName");
-	   var preptimeFactor = document.getElementById("up_preptimeFactor");
+		var prepId = document.getElementById("up_preptimeId");
+		var preptimeName = document.getElementById("up_preptimeName");
+		var preptimeFactor = document.getElementById("up_preptimeFactor");
 	   
-	   for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
-			if (!validate_empty(updateForm.elements[i].value)) {
+		for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
+			if (validate_empty(updateForm.elements[i].value)) {
 				valid = false;
 				errors[j] = updateForm.elements[i].getAttribute("name") + " is required";
 				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
 		}
 	   
-	   if (!validate_length(preptimeName.value, prepTimeLength)) {
-		   valid = false;
-		   errors[j] = preptimeName.getAttribute("name") + " must be " +
+		if (!validate_length(preptimeName.value, prepTimeLength)) {
+			valid = false;
+			errors[j] = preptimeName.getAttribute("name") + " must be " +
 				"equal to or under " + prepTimeLength + " characters long";
-		   elementsId[j++] = preptimeName.getAttribute("id");
-	   }
+			elementsId[j++] = preptimeName.getAttribute("id");
+		}
 	   
 	   if (!validate_float(preptimeFactor.value, prepFactorLength)) {
-		   valid = false;
+		   	valid = false;
 		   	errors[j] = preptimeFactor.getAttribute("name") + " is must be " +
 		   		"a number less than " + prepFactorLength + " digits long";
 		   	elementsId[j++] = preptimeFactor.getAttribute("id");
-	   }
+	   	}
 	   
-	   if (!validate_integer(prepId.value)) {
-			valid = false;
-			errors[j] = prepId.getAttribute("name") + "  must be a number";
-			elementsId[j++] = prepId.getAttribute("id");
-		}
+	   	if (!validate_integer(prepId.value)) {
+	   		valid = false;
+	   		errors[j] = prepId.getAttribute("name") + "  must be a number";
+	   		elementsId[j++] = prepId.getAttribute("id");
+	   	}
 		
 		if (valid) {
 			$.ajax({

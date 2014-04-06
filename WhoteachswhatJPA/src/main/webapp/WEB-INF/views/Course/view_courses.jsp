@@ -6,114 +6,7 @@
 <head>
 <meta charset="utf-8">
 <title>Manage Course - View</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" href="iosicon.png" />
-<!--    DEVELOPMENT LESS -->
-<!--          <link rel="stylesheet/less" href="static/css/photon.less" media="all" />
-        <link rel="stylesheet/less" href="static/css/photon-responsive.less" media="all" /> -->
-<!--    PRODUCTION CSS -->
-<link rel="stylesheet" href="static/css/css/photon.css" media="all" />
-<link rel="stylesheet" href="static/css/css/photon-pt2.css" media="all" />
-
-<link rel="stylesheet" href="static/css/css/photon-responsive.css"
-	media="all" />
-
-<!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie-only-min.css" />
-        
-
-<![endif]-->
-
-<!--[if lt IE 9]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie8-only-min.css" />
-        <script type="text/javascript" src="static/js/plugins/excanvas.js"></script>
-        <script type="text/javascript" src="static/js/plugins/html5shiv.js"></script>
-        <script type="text/javascript" src="static/js/plugins/respond.min.js"></script>
-        <script type="text/javascript" src="static/js/plugins/fixFontIcons.js"></script>
-<![endif]-->
-
-
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-
-<script type="text/javascript"
-	src="static/js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/modernizr.custom.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.pnotify.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/less-1.3.1.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/xbreadcrumbs.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.maskedinput-1.3.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.autotab-1.1b.js"></script>
-<script type="text/javascript" src="static/js/plugins/charCount.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.textareaCounter.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.en.js"></script>
-<script type="text/javascript" src="static/js/plugins/select2.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery-picklist.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/additional-methods.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.form.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.metadata.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.mockjax.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.uniform.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.tagsinput.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.rating.pack.js"></script>
-<script type="text/javascript" src="static/js/plugins/farbtastic.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.timeentry.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jstree.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/dataTables.bootstrap.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.flot.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.stack.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.pie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.resize.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/raphael.2.1.0.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/justgage.1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.clock.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.countdown.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jqtweet.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.cookie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrap-fileupload.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/prettify/prettify.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrapSwitch.js"></script>
-<script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
-<script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript"
-	src="static/js/bootRestful/bootrestful.js"></script>
+<jsp:include page="../includes/static_includes.jsp" />
 <script type="text/javascript" src="views_ajax_requests/view_coursesAJAX.js"></script>
 </head>
 <body class="body-inner">
@@ -163,8 +56,6 @@
         });
     });
         
-    											
-
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -233,12 +124,12 @@ td {
 											</a>
 											|
 											 <a
-												onclick="deleteCourse('${course.getCourseId() }', ' ${course.getCourseCode() } ')">
+												onclick="deleteForm('${course.getCourseId() }', ' ${course.getCourseCode() } ')"
+												data-toggle="modal" data-target="#deleteModal">
 												Delete
 											</a>
 										</td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>
@@ -277,8 +168,6 @@ td {
 
 					</script>
 
-
-
 				<!-- END OF NEW CONTENT-->
 			</div>
 			<!-- end container -->
@@ -302,26 +191,41 @@ td {
 						<form role="form" id="addCourseForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="course_code" id="course_code"
+									type="text" class="form-control" name="Course code" id="course_code"
 									placeholder="Course Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="course_name" id="course_name"
+									type="text" class="form-control" name="Course name" id="course_name"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="crossover_input" id="crossover_input"
+									type="text" class="form-control" name="Crossover course" id="crossover_input"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="reference_input" id="reference_input"
+									type="text" class="form-control" name="Reference" id="reference_input"
 									placeholder="Reference" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 1</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 1" id="evalFactor1" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 2</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 2" id="evalFactor2" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 3</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 3" id="evalFactor3" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
@@ -351,31 +255,46 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateCourseForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_course_id" id="up_course_id" />
+								<input type="hidden" class="form-control" name="Course id" id="up_course_id" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Course Code</span><br /> <input
-									type="text" class="form-control" name="up_course_code" id="up_course_code"
+									type="text" class="form-control" name="Course code" id="up_course_code"
 									placeholder="Course Code" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Subject Name</span><br /> <input
-									type="text" class="form-control" name="up_course_name" id="up_course_name"
+									type="text" class="form-control" name="Course name" id="up_course_name"
 									placeholder="Subject Name" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Crossover Course</span><br /> <input
-									type="text" class="form-control" name="up_crossover_input" id="up_crossover_input"
+									type="text" class="form-control" name="Crossover course" id="up_crossover_input"
 									placeholder="Course" />
 							</div>
 							
 							<div class="input-group">
 								<span class="input-group-addon">Reference to old course</span><br /> <input
-									type="text" class="form-control" name="up_reference_input" id="up_reference_input"
+									type="text" class="form-control" name="Reference" id="up_reference_input"
 									placeholder="Reference" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 1</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 1" id="up_evalFactor1" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 2</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 2" id="up_evalFactor2" />
+							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation Factor 3</span><br /> <input
+									type="text" class="form-control" name="Evaluation factor 3" id="up_evalFactor3" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
@@ -390,6 +309,27 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_course_id" name="Course id" />
+			<input type="hidden" id="del_course_code" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deleteCourse()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
 	</div>
 </body>

@@ -62,6 +62,8 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Course` (
   `course_id` INT NOT NULL DEFAULT 0 ,
   `course_code` VARCHAR(8) NOT NULL ,
   `course_name` VARCHAR(50) NOT NULL ,
+  `crossover_course` varchar(255) DEFAULT NULL,
+  `old_course` varchar(255) DEFAULT NULL,
   `eval_1_ans` FLOAT NOT NULL ,
   `eval_2_ans` FLOAT NOT NULL ,
   `eval_3_ans` FLOAT NOT NULL ,
