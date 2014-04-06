@@ -1,6 +1,6 @@
  /**
     @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a prep time
+    @Purpose: AJAX posting and validation for adding, updating and deleting a factor
     @Requires: client_side_validation/client_side_validation.js, jQuery
 */
 

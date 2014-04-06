@@ -187,7 +187,7 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Factor Name:</span> <br /> <input
 									type="text" class="form-control" name="Factor name" id="factorName"
-									placeholder="Semester Name" />
+									placeholder="Factor name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Factor Value:</span> <br /> <input

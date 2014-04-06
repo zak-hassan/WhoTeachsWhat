@@ -294,9 +294,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`FacultyToCourseInSemesterYear` (
   `section_number` INT NOT NULL ,
   `year` INT NOT NULL ,
   `semester_id` INT NOT NULL ,
-  `eval_1` INT NOT NULL ,
-  `eval_2` INT NOT NULL ,
-  `eval_3` INT NOT NULL ,
   `eval_1_ans` FLOAT NOT NULL ,
   `eval_2_ans` FLOAT NOT NULL ,
   `eval_3_ans` FLOAT NOT NULL ,
@@ -320,21 +317,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`FacultyToCourseInSemesterYear` (
   CONSTRAINT `fk_wtw_FacultyToCourseInSemesterYear_wtw_CompHour1`
     FOREIGN KEY (`compHour_id` )
     REFERENCES `mydb`.`CompHour` (`compHour_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-	CONSTRAINT `fk_wtw_CoursesInSemester_wtw_EvalFactor1`
-    FOREIGN KEY (`eval_1` )
-    REFERENCES `mydb`.`EvalFactor` (`eval_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_wtw_CoursesInSemester_wtw_EvalFactor2`
-    FOREIGN KEY (`eval_2` )
-    REFERENCES `mydb`.`EvalFactor` (`eval_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_wtw_CoursesInSemester_wtw_EvalFactor3`
-    FOREIGN KEY (`eval_3` )
-    REFERENCES `mydb`.`EvalFactor` (`eval_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_wtw_CoursesInSemester_wtw_Factor`
