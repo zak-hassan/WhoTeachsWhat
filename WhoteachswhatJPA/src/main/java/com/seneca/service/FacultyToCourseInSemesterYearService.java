@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seneca.bireports.Swift;
 import com.seneca.model.FacultyToCourseInSemesterYear;
 import com.seneca.repository.CompHourDao;
 import com.seneca.repository.CourseDao;
@@ -96,6 +97,29 @@ public class FacultyToCourseInSemesterYearService {
 
 	public List<FacultyToCourseInSemesterYear> getAll() {
 		return facultyToCourseInSemesterYearDao.getAll();
+	}
+
+	public Swift getAllSwifts(Integer id) {
+		Swift s= new Swift();
+		s.setAdditional_attr_hours(2.00);
+		s.setAttr_hours(1.20);
+		s.setClass_size(32);
+		s.setComp_hours_allowed(0);
+		s.setAttr_hours(0);
+		s.setComp_hours_assigned(0);
+		s.setCourse_code("PRJ666");
+		s.setEval_e_percent(10);
+		s.setEval_p_percent(20);
+		s.setEval_r_percent(70);
+		s.setLang('E');
+		s.setTeaching_hours(0);
+		s.setEval_factor(1.20);
+		s.setRef('Y');
+		s.setPrep_type("DA");
+		s.setPrep_additional_hours(0);
+		s.setPrep_attributed_hours(0);
+		s.setPrep_factor(0);
+		return s;
 	}
 
 }
