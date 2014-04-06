@@ -109,12 +109,11 @@ td {
 									<tr>
 
 										<td>${evalFactor.getEvalName() }</td>
-
-										<td>${evalFactor.getEvalFactor() }</td>
+										<td>${evalFactor.getFactorVal() }</td>
 										<td class="align">
 											<a
 												onclick="updateForm('${evalFactor.getEvalId() }', '${evalFactor.getEvalName() }',
-													'${evalFactor.getEvalFactor()}' )"
+													'${evalFactor.getFactorVal()}' )"
 												data-toggle="modal" data-target="#updateEvalFactorModal">Update |
 											</a>
 											
