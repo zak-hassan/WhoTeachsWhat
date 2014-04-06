@@ -6,115 +6,8 @@
 <head>
 <meta charset="utf-8">
 <title>Manage Evaluation Factor - View</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" href="iosicon.png" />
-<!--    DEVELOPMENT LESS -->
-<!--          <link rel="stylesheet/less" href="static/css/photon.less" media="all" />
-        <link rel="stylesheet/less" href="static/css/photon-responsive.less" media="all" /> -->
-<!--    PRODUCTION CSS -->
-<link rel="stylesheet" href="static/css/css/photon.css" media="all" />
-<link rel="stylesheet" href="static/css/css/photon-pt2.css" media="all" />
-
-<link rel="stylesheet" href="static/css/css/photon-responsive.css"
-	media="all" />
-
-<!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie-only-min.css" />
-        
-
-<![endif]-->
-
-<!--[if lt IE 9]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie8-only-min.css" />
-        <script type="text/javascript" src="static/js/plugins/excanvas.js"></script>
-        <script type="text/javascript" src="static/js/plugins/html5shiv.js"></script>
-        <script type="text/javascript" src="static/js/plugins/respond.min.js"></script>
-        <script type="text/javascript" src="static/js/plugins/fixFontIcons.js"></script>
-<![endif]-->
-
-
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-
-<script type="text/javascript"
-	src="static/js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/modernizr.custom.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.pnotify.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/less-1.3.1.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/xbreadcrumbs.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.maskedinput-1.3.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.autotab-1.1b.js"></script>
-<script type="text/javascript" src="static/js/plugins/charCount.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.textareaCounter.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.en.js"></script>
-<script type="text/javascript" src="static/js/plugins/select2.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery-picklist.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/additional-methods.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.form.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.metadata.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.mockjax.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.uniform.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.tagsinput.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.rating.pack.js"></script>
-<script type="text/javascript" src="static/js/plugins/farbtastic.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.timeentry.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jstree.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/dataTables.bootstrap.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.flot.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.stack.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.pie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.resize.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/raphael.2.1.0.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/justgage.1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.clock.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.countdown.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jqtweet.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.cookie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrap-fileupload.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/prettify/prettify.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrapSwitch.js"></script>
-<script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
-<script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript"
-	src="static/js/bootRestful/bootrestful.js"></script>
-<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
+<jsp:include page="../includes/static_includes.jsp" />
+<script type="text/javascript" src="views_ajax_requests/viewEvalFactorAJAX.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -162,134 +55,7 @@
             }
         });
     });
-        
-    /**
-    @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting an Evaluation Factor
-     
-   */
-    
-   var addEvalFactor=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/evalfactor",
-			data: { 
-				evalName: document.getElementById("evalName").value, 
-		   		evalFactor: document.getElementById("evalFactor").value
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'New Evaluation Factor added',
-						type : 'info',
-						text : 'Evaluation Factor ' + document.getElementById('evalName').value + ' has been added'
-					});
-		    		
-		    		$.ajax({
-		    			type: "GET",
-		    			url: "api/evalfactor/"+data.id,
-		    			data: null,
-		    			dataType: "json",
-		    			cache: false,
-		    			success : function(evalfactor){
-		    			
-		    				var createA1 = document.createElement('a');
-		    				var createA2 = document.createElement('a');
-
-		    				var createA1Text = document.createTextNode("Update");
-		    				var createA2Text = document.createTextNode("Delete");
-		    				
-		    				tempEvalName = adsantokhi_quote_string(evalfactor.efName);
-		    				
-		    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempEvalName + ', '
-		    					+ evalfactor.efFactor + ')');
-		    				createA1.setAttribute('data-toggle', 'modal');
-		    				createA1.setAttribute('data-target', '#updateEvalFactorModal');
-
-		    				createA2.setAttribute('onclick', 'deleteEvalFactor(' + data.id + ', ' + tempEvalName + ')');
-		    				 
-		    				createA1.appendChild(createA1Text);
-		    				createA2.appendChild(createA2Text);
-		    				
-		    				var updateLink = document.createElement("div");
-		    				updateLink.appendChild(createA1);
-		    				
-		    				var deleteLink = document.createElement("div");
-		    				deleteLink.appendChild(createA2);
-		    				
-		    				
-		    				var newRow = $('#tableSortable').dataTable()
-		    					.fnAddData( [evalfactor.efName, evalfactor.efFactor,
-		    						updateLink.innerHTML + " | "  + deleteLink.innerHTML] );
-		    				
-		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
-		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
-		    				$('td', nTr)[2].setAttribute( 'class', 'align' );
-		    			}
-		    		});
-		    		
-		    		document.getElementById("addEvalFactorForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addEvalFactorModal').modal('hide');
-			   	}
-			}
-		});
-	};
-   
-
-	var updateEvalFactor=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/evalfactor/"+document.getElementById("up_evalId").value,
-			data: { 
-				evalName: document.getElementById("up_evalName").value, 
-		   		evalFactor: document.getElementById("up_evalFactor").value
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Evaluation Factor updated',
-						type : 'info',
-						text : 'Evaluation Factor ' + document.getElementById('up_evalName').value + ' has been updated'
-					});
-		    		
-		    		document.getElementById("updateEvalFactorForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateEvalFactorModal').modal('hide');
-		    		location.reload();
-			   	}
-			}
-		});
-	};
-
-	var deleteEvalFactor= function(id,evalName) {
-	 	$.ajax({
-	 		type:"DELETE", 
-	  		url : "api/evalfactor/"+id,
-	  		data : null,
-	  		cache : false,
-	  		success : function(data){
-	     		if (data.success === "true") {
-	    			$.pnotify({
-						title : 'Evaluation Factor :' + evalName,
-						type : 'info',
-						text : 'Evaluation factor has been deleted'
-					});
-	    			location.reload();
-	  			}
-	   	 	}
-	 	});
-	};	   
-
-	var updateForm=function(up_evalId, evalName, evalFactor){
-		$("#up_evalId").val(up_evalId);
-		$("#up_evalName").val(evalName);
-		$("#up_evalFactor").val(evalFactor);
-	};											
-
-		
+        		
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -309,7 +75,7 @@
 				<small>Add, Update and delete evaluation factors</small>
 			</h3>
 		</header>
-		<form method="post" action="api/evalfactor" id="addEvalFactorForm"
+		<form method="post" action="api/evalfactor" id="manageEvalFactorForm"
 			onsubmit="return validateAddEvalFactor();" class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
@@ -353,7 +119,8 @@ td {
 											</a>
 											
 											 <a
-												onclick="deleteEvalFactor('${evalFactor.getEvalId() }', ' ${evalFactor.getEvalName() } ')">
+												onclick="deleteForm('${evalFactor.getEvalId() }', ' ${evalFactor.getEvalName() } ')"
+												data-toggle="modal" data-target="#deleteModal">
 												Delete
 											</a>
 										</td>
@@ -422,13 +189,8 @@ td {
 						<form role="form" id="addEvalFactorForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Evaluation Name: </span><br /> <input
-									type="text" class="form-control" name="evalName" id="evalName"
+									type="text" class="form-control" name="Evaluation name" id="evalName"
 									placeholder="Name" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor: </span><br /> <input
-									type="text" class="form-control" name="evalFactor" id="evalFactor"
-									placeholder="Factor" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -457,15 +219,11 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateEvalFactorForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_evalId" id="up_evalId" />
+								<input type="hidden" class="form-control" name="Evaluation id" id="up_evalId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Evaluation Name: </span><br /> <input
-									type="text" class="form-control" name="up_evalName" id="up_evalName" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor: </span><br /> <input
-									type="text" class="form-control" name="up_evalFactor" id="up_evalFactor" />
+									type="text" class="form-control" name="Evaluation name" id="up_evalName" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -479,6 +237,27 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_evalId" name="Evaluation id" />
+			<input type="hidden" id="del_evalName" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deleteEvalFactor()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
 	</div>
 </body>

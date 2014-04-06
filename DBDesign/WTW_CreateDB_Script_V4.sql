@@ -63,6 +63,8 @@ CREATE  TABLE IF NOT EXISTS `test`.`Course` (
   `course_id` INT NOT NULL DEFAULT 0 ,
   `course_code` VARCHAR(8) NOT NULL ,
   `course_name` VARCHAR(50) NOT NULL ,
+  `crossover_course` varchar(255) DEFAULT NULL,
+  `old_course` varchar(255) DEFAULT NULL,
   `eval_1_ans` FLOAT NOT NULL ,
   `eval_2_ans` FLOAT NOT NULL ,
   `eval_3_ans` FLOAT NOT NULL ,
@@ -194,8 +196,8 @@ SHOW WARNINGS;
 -- Table `test`.`Factor`
 -- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS test.Factor (
-	`factor_id` INT NOT NULL ,
+CREATE TABLE IF NOT EXISTS `test`.`Factor` (
+    `factor_id` INT NOT NULL ,
 	`factor_name` VARCHAR(25) NOT NULL ,
 	`factor_val` FLOAT NOT NULL ,
 	PRIMARY KEY (`factor_id`) )
@@ -293,9 +295,6 @@ CREATE  TABLE IF NOT EXISTS `test`.`FacultyToCourseInSemesterYear` (
   `section_number` INT NOT NULL ,
   `year` INT NOT NULL ,
   `semester_id` INT NOT NULL ,
-  `eval_1` INT NOT NULL ,
-  `eval_2` INT NOT NULL ,
-  `eval_3` INT NOT NULL ,
   `eval_1_ans` FLOAT NOT NULL ,
   `eval_2_ans` FLOAT NOT NULL ,
   `eval_3_ans` FLOAT NOT NULL ,

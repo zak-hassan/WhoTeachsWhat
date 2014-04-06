@@ -6,115 +6,9 @@
 <head>
 <meta charset="utf-8">
 <title>Manage Prep Time - View</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" href="iosicon.png" />
-<!--    DEVELOPMENT LESS -->
-<!--          <link rel="stylesheet/less" href="static/css/photon.less" media="all" />
-        <link rel="stylesheet/less" href="static/css/photon-responsive.less" media="all" /> -->
-<!--    PRODUCTION CSS -->
-<link rel="stylesheet" href="static/css/css/photon.css" media="all" />
-<link rel="stylesheet" href="static/css/css/photon-pt2.css" media="all" />
+<jsp:include page="../includes/static_includes.jsp" />
+<script type="text/javascript" src="views_ajax_requests/viewPrepTimeAJAX.js"></script>
 
-<link rel="stylesheet" href="static/css/css/photon-responsive.css"
-	media="all" />
-
-<!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie-only-min.css" />
-        
-
-<![endif]-->
-
-<!--[if lt IE 9]>
-        <link rel="stylesheet" type="text/css" href="static/css/css_compiled/ie8-only-min.css" />
-        <script type="text/javascript" src="static/js/plugins/excanvas.js"></script>
-        <script type="text/javascript" src="static/js/plugins/html5shiv.js"></script>
-        <script type="text/javascript" src="static/js/plugins/respond.min.js"></script>
-        <script type="text/javascript" src="static/js/plugins/fixFontIcons.js"></script>
-<![endif]-->
-
-
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-
-<script type="text/javascript"
-	src="static/js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/modernizr.custom.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.pnotify.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/less-1.3.1.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/xbreadcrumbs.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.maskedinput-1.3.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.autotab-1.1b.js"></script>
-<script type="text/javascript" src="static/js/plugins/charCount.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.textareaCounter.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/elrte.en.js"></script>
-<script type="text/javascript" src="static/js/plugins/select2.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery-picklist.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/additional-methods.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.form.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.metadata.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.mockjax.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.uniform.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.tagsinput.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.rating.pack.js"></script>
-<script type="text/javascript" src="static/js/plugins/farbtastic.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.timeentry.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jstree.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/dataTables.bootstrap.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.flot.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.stack.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.pie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.flot.resize.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/raphael.2.1.0.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/justgage.1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.clock.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/jquery.countdown.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.jqtweet.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.cookie.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrap-fileupload.min.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/prettify/prettify.js"></script>
-<script type="text/javascript"
-	src="static/js/plugins/bootstrapSwitch.js"></script>
-<script type="text/javascript" src="static/js/plugins/mfupload.js"></script>
-<script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript"
-	src="static/js/bootRestful/bootrestful.js"></script>
-<script type="text/javascript" src="resources/adsantokhi_quote_string.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -163,131 +57,7 @@
         });
     });
         
-    /**
-    @Author: Anil Santokhi
-    @Purpose: AJAX posting and validation for adding, updating and deleting a prep time
-     
-   */
-    
-   var addPrepTime=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/preptime",
-			data: { 
-				preptimeName: document.getElementById("preptimeName").value, 
-		   		preptimeFactor: document.getElementById("preptimeFactor").value 
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'New Prep Time added',
-						type : 'info',
-						text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been added'
-					});
-		    		
-		    		$.ajax({
-		    			type: "GET",
-		    			url: "api/preptime/"+data.id,
-		    			data: null,
-		    			dataType: "json",
-		    			cache: false,
-		    			success : function(preptime){
-		    			
-		    				var createA1 = document.createElement('a');
-		    				var createA2 = document.createElement('a');
-
-		    				var createA1Text = document.createTextNode("Update");
-		    				var createA2Text = document.createTextNode("Delete");
-		    				
-		    				tempPreptimeName = adsantokhi_quote_string(preptime.preptimeName);
-		    				
-		    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempPreptimeName + ', '
-		    					+ preptime.preptimeFactor +')');
-		    				createA1.setAttribute('data-toggle', 'modal');
-		    				createA1.setAttribute('data-target', '#updatePrepTimeModal');
-
-		    				createA2.setAttribute('onclick', 'deletePrepTime(' + data.id + ', ' + tempPreptimeName + ')');
-		    				 
-		    				createA1.appendChild(createA1Text);
-		    				createA2.appendChild(createA2Text);
-		    				
-		    				var updateLink = document.createElement("div");
-		    				updateLink.appendChild(createA1);
-		    				
-		    				var deleteLink = document.createElement("div");
-		    				deleteLink.appendChild(createA2);
-		    				
-		    				var newRow = $('#tableSortable').dataTable()
-		    					.fnAddData( [preptime.preptimeName, preptime.preptimeFactor,
-		    						updateLink.innerHTML + " " + deleteLink.innerHTML] );
-		    				
-		    				var oSettings = $('#tableSortable').dataTable().fnSettings();
-		    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
-		    				$('td', nTr)[2].setAttribute( 'class', 'align' );
-		    			}
-		    		});
-		    		
-		    		document.getElementById("addPrepTimeForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addPrepTimeModal').modal('hide');
-			   	}
-			}
-		});
-	};
-
-
-	var updatePrepTime=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/preptime/"+document.getElementById("up_preptimeId").value,
-			data: { 
-				preptimeName: document.getElementById("up_preptimeName").value, 
-		   		preptimeFactor: document.getElementById("up_preptimeFactor").value 
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Prep Time Updated',
-						type : 'info',
-						text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been updated'
-					});
-		    		
-		    		document.getElementById("updatePrepTimeForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updatePrepTimeModal').modal('hide');
-		    		location.reload();
-			   	}
-			}
-		});
-	};
-
-   var deletePrepTime= function(id,preptime) {
-	   	$.ajax({
-	   		type:"DELETE", 
-		   	url : "api/preptime/"+id,
-		   	data : null,
-		   	cache : false,
-		   	success : function(data){
-	       		if (data.success === "true") {
-	       			$.pnotify({
-						title : 'Prep time :' + preptime,
-						type : 'info',
-						text : 'Prep time has been deleted'
-					});
-	       			location.reload();
-		   		}
- 			}
-	   	});
-   };	   
-
-	var updateForm=function(up_preptimeId, up_preptimeName, up_preptimeFactor){
-		$("#up_preptimeId").val(up_preptimeId);
-		$("#up_preptimeName").val(up_preptimeName);
-		$("#up_preptimeFactor").val(up_preptimeFactor);
-	};											
-
+   
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -350,7 +120,8 @@ td {
 												data-toggle="modal" data-target="#updatePrepTimeModal">Update</a>
 											
 											<a
-												onclick="deletePrepTime('${pt.getPrepId()}', '${pt.getPrepName()}')">
+												onclick="deleteForm('${pt.getPrepId()}', '${pt.getPrepName()}')"
+												data-toggle="modal" data-target="#deleteModal">
 												Delete
 											</a>
 										</td>
@@ -418,13 +189,12 @@ td {
 						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
-									type="text" class="form-control" name="preptimeName" id="preptimeName"
+									type="text" class="form-control" name="Prep Time Name" id="preptimeName"
 									placeholder="Prep Time Name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
-									type="text" class="form-control" name="preptimeFactor" id="preptimeFactor"
-									placeholder="Prep Time Name" />
+									type="text" class="form-control" name="Prep Time Factor" id="preptimeFactor" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -453,15 +223,15 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updatePrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_preptimeId" id="up_preptimeId" />
+								<input type="hidden" class="form-control" name="Prep Time id" id="up_preptimeId" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
-									type="text" class="form-control" name="up_preptimeName" id="up_preptimeName" />
+									type="text" class="form-control" name="Prep Time Name" id="up_preptimeName" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
-									type="text" class="form-control" name="up_preptimeFactor" id="up_preptimeFactor" />
+									type="text" class="form-control" name="Prep Time Factor" id="up_preptimeFactor" />
 							</div>
 
 							<button type="button" class="btn btn-default"
@@ -477,6 +247,27 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_prepId" name="Prep id" />
+			<input type="hidden" id="del_preptimeName" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deletePrepTime()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
 	</div>
 </body>

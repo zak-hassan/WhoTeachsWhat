@@ -5,9 +5,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Semester - View</title>
+<title>Factor - View</title>
 <jsp:include page="../includes/static_includes.jsp" />
-<script type="text/javascript" src="views_ajax_requests/viewSemesterAJAX.js"></script>
+<script type="text/javascript" src="views_ajax_requests/viewFactorAJAX.js"></script>
 </head>
 <body class="body-inner">
 	<div class="btn-toolbar btn-mobile-menus">
@@ -62,16 +62,16 @@
 			<ul class="xbreadcrumbs">
 				<li><a href="dashboard.html"> <i class="icon-photon home"></i>
 				</a></li>
-				<li><a href="viewSemester">Manage Semester</a></li>
+				<li><a href="viewFactor">Manage Factor</a></li>
 			</ul>
 		</div>
 		<header>
 			<i class="icon-big-notepad"></i>
 			<h2>
-				<small>Semester - View</small>
+				<small>Factor - View</small>
 			</h2>
 			<h3>
-				<small>Add, Update and Delete semester names</small>
+				<small>Add, Update and Delete teaching factors</small>
 			</h3>
 		</header>
 		<form method="post" action="api/semester" id="manageSemesterForm" class="form-horizontal">
@@ -98,11 +98,13 @@ td {
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Semester(s)</th>
+									<th>Factor(s)</th>
+									<th>Factor Values</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 							</thead>
 							<tbody>
+								<%-- 
 								<c:forEach items="${allSemesters }" var="semester">
 									<tr>
 
@@ -121,6 +123,7 @@ td {
 										</td>
 									</tr>
 								</c:forEach>
+								--%>
 							</tbody>
 						</table>
 					</div>
@@ -166,29 +169,33 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addSemesterModal">Add semester</button>
+			data-target="#addFactorModal">Add factor</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addSemesterModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="addFactorModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Add Semester</h4>
+						<h4 class="modal-title" id="myModalLabel">Add Factor</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="addSemesterForm" class="form-horizonatal">
+						<form role="form" id="addFactorForm" class="form-horizonatal">
 							<div class="input-group">
-								<span class="input-group-addon">Semester Name:</span> <br /> <input
-									type="text" class="form-control" name="Semester name" id="semesterName"
-									placeholder="Semester Name" />
+								<span class="input-group-addon">Factor Name:</span> <br /> <input
+									type="text" class="form-control" name="Factor name" id="factorName"
+									placeholder="Factor name" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Factor Value:</span> <br /> <input
+									type="text" class="form-control" name="Factor value" id="factorValue" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="button" onclick="addSemester();"
+							<button type="button" onclick="addFactor();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -200,30 +207,34 @@ td {
 		<!--  END OF ADD MODAL -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="updateSemesterModal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="updateFactorModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Update Semester</h4>
+						<h4 class="modal-title" id="myModalLabel">Update Factor</h4>
 					</div>
 					<div class="modal-body">
 						<!--  FORM ADD -->
-						<form role="form" id="updateSemesterForm" class="form-horizonatal">
+						<form role="form" id="updateFactorForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="Semester id"
-									id="up_semesterId" />
+								<input type="hidden" class="form-control" name="Factor id"
+									id="up_factorId" />
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Semester Name: </span><br /> <input
-									type="text" class="form-control" name="Semester name"
-									id="up_semesterName" placeholder="Semester Name" />
+								<span class="input-group-addon">Factor Name: </span><br /> <input
+									type="text" class="form-control" name="Factor name"
+									id="up_factorName" placeholder="Factor Name" />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Factor Value: </span><br /> <input
+									type="text" class="form-control" name="Factor value" id="up_factorValue" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="button" onclick="updateSemester();"
+							<button type="button" onclick="updateFactor();"
 								class="btn btn-primary">Save changes</button>
 						</form>
 					</div>
@@ -238,8 +249,8 @@ td {
 		<!--  BEGIN DELETE MODAL -->
 		
 		<div id="deleteModal" class="modal hide fade">
-			<input type="hidden" id="del_semesterId" name="Semester id" />
-			<input type="hidden" id="del_semesterName" />
+			<input type="hidden" id="del_factorId" name="Factor id" />
+			<input type="hidden" id="del_factorName" />
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>Delete Confirmation</h3>
@@ -250,7 +261,7 @@ td {
             <div class="modal-footer">
                 <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
                 <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
-                	onclick="deleteSemester()">Yes</a>
+                	onclick="deleteFactor()">Yes</a>
             </div>
         </div>
 		
