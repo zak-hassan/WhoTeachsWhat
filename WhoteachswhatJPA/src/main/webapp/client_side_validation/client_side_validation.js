@@ -16,5 +16,20 @@ function validate_course_code(course_code) {
 
 /* This function checks if the parameter matches the length provided */
 function validate_length(param, length) {
-	return (validate_empty(param) && param.length <= length) ? true : false;
+	return (param.length <= length) ? true : false;
+}
+
+/* This function checks if the passed argument is an integer */
+function validate_integer(param) {
+	return true;
+}
+
+/* This function checks if the passed argument is a float */
+function validate_float(param, length) {
+	return (!isNaN(param) && param.length <= length) ? true : false;
+}
+
+/* This function checks if the passed argument is a valid prep type */
+function validate_prep_type(param) {
+	return (validate_empty(param) && param.length <= 2) ? true : false;
 }

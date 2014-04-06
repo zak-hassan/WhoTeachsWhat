@@ -120,7 +120,8 @@ td {
 												data-toggle="modal" data-target="#updatePrepTimeModal">Update</a>
 											
 											<a
-												onclick="deletePrepTime('${pt.getPrepId()}', '${pt.getPrepName()}')">
+												onclick="deleteForm('${pt.getPrepId()}', '${pt.getPrepName()}')"
+												data-toggle="modal" data-target="#deleteModal">
 												Delete
 											</a>
 										</td>
@@ -188,13 +189,12 @@ td {
 						<form role="form" id="addPrepTimeForm" class="form-horizonatal">
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
-									type="text" class="form-control" name="preptimeName" id="preptimeName"
+									type="text" class="form-control" name="Prep Time Name" id="preptimeName"
 									placeholder="Prep Time Name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
-									type="text" class="form-control" name="preptimeFactor" id="preptimeFactor"
-									placeholder="Prep Time Name" />
+									type="text" class="form-control" name="Prep Time Factor" id="preptimeFactor" />
 							</div>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -227,11 +227,11 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Name: </span><br /> <input
-									type="text" class="form-control" name="up_preptimeName" id="up_preptimeName" />
+									type="text" class="form-control" name="Prep Time Name" id="up_preptimeName" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time Factor: </span><br /> <input
-									type="text" class="form-control" name="up_preptimeFactor" id="up_preptimeFactor" />
+									type="text" class="form-control" name="Prep Time Factor" id="up_preptimeFactor" />
 							</div>
 
 							<button type="button" class="btn btn-default"
@@ -247,6 +247,27 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_prepId" name="del_prepId" />
+			<input type="hidden" id="del_preptimeName" name="del_preptimeName" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deletePrepTime()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 
 	</div>
 </body>

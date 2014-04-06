@@ -1,10 +1,15 @@
-        
 /**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a semester
-    @Requires: client_side_validation/client_side_validation.js
+    @Requires: client_side_validation/client_side_validation.js, jQuery
 */   
 	var semesterNameLength = 20;
+	
+	$(document).ready(function () {
+		$("#semesterName").attr('maxlength', semesterNameLength);
+		$("#up_semesterName").attr('maxlength', semesterNameLength);
+	});
+	
 	
 	var addSemester=function() {
 		var valid = true;
@@ -12,10 +17,16 @@
 		var errors = new Array();
 		var elementsId = new Array();
 		
-		for (var i = 0, j = 0; i < addForm.length - 2 && valid; ++i) {
-			if (!validate_length(addForm.elements[i].value, 10)) {
+		for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
+			if (!validate_empty(addForm.elements[i].value)) {
 				valid = false;
-				errors[j] = addForm.elements[i].getAttribute("name") + " is required and must be " +
+				errors[j] = addForm.elements[i].getAttribute("name") + " is required ";
+				elementsId[j++] = addForm.elements[i].getAttribute("id");
+			}
+			
+			if (!validate_length(addForm.elements[i].value, semesterNameLength)) {
+				valid = false;
+				errors[j] = addForm.elements[i].getAttribute("name") + " is must be " +
 					"under " + semesterNameLength + " characters long";
 				elementsId[j++] = addForm.elements[i].getAttribute("id");
 			}
@@ -56,7 +67,7 @@
 			    				createA1.setAttribute('data-toggle', 'modal');
 			    				createA1.setAttribute('data-target', '#updateSemesterModal');
 	
-			    				createA2.setAttribute('onclick', 'deleteSemester(' + semester.id + ', ' + tempSemester + ')');
+			    				createA2.setAttribute('onclick', 'deleteSemester()');
 			    				 
 			    				createA1.appendChild(createA1Text);
 			    				createA2.appendChild(createA2Text);
@@ -78,8 +89,8 @@
 			    		
 			    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
 			    		
-			    		for (i = 0; i < elementsId.length; ++i) { // Remove red border on form elements
-			    			document.getElementById(elementsId[i]).style.border = "none";
+			    		for (i = 0; i < addForm.length - 2; ++i) { // Remove red border on form elements
+			    			addForm.elements[i].style.border = "solid 1px #D1D7DF";
 			    		}
 			    		
 			    		$('#addSemesterModal').modal('hide');
@@ -105,8 +116,14 @@
 		var errors = new Array();
 		var elementsId = new Array();
 		
-		for (var i = 0, j = 0; i < updateForm.length - 2 && valid; ++i) {
-			if (!validate_length(updateForm.elements[i].value, 10)) {
+		for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
+			if (!validate_empty(updateForm.elements[i].value)) {
+				valid = false;
+				errors[j] = updateForm.elements[i].getAttribute("name") + " is required ";
+				elementsId[j++] = updateForm.elements[i].getAttribute("id");
+			}
+			
+			if (!validate_length(updateForm.elements[i].value, semesterNameLength)) {
 				valid = false;
 				errors[j] = updateForm.elements[i].getAttribute("name") + " is required and must be " +
 					"under " + semesterNameLength + " characters long";
@@ -131,8 +148,8 @@
 			    		// Form needs resetting due to never being submitted
 			    		document.getElementById("updateSemesterForm").reset();
 			    		
-			    		for (i = 0; i < elementsId.length; ++i) { // Remove red border on form elements
-			    			document.getElementById(elementsId[i]).style.border = "none";
+			    		for (i = 0; i < updateForm.length - 2; ++i) { // Remove red border on form elements
+			    			updateForm.elements[i].style.border = "solid 1px #D1D7DF";
 			    		}
 			    		
 			    		$('#updateSemesterModal').modal('hide');

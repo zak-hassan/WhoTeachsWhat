@@ -56,7 +56,6 @@
         });
     });
 
-
 </script>
 	<div class="wrapper">
 		<div class="breadcrumb-container" style="width: 100%">
@@ -249,9 +248,9 @@ td {
 				Are you sure you want to delete?
             </div>
             <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
                 <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
                 	onclick="deleteSemester()">Yes</a>
-                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
             </div>
         </div>
 		

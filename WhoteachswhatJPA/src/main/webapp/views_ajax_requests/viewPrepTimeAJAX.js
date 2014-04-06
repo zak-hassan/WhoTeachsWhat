@@ -1,19 +1,58 @@
  /**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a prep time
-     
-   */
-    
-   var addPrepTime=function() {
+    @Requires: client_side_validation/client_side_validation.js, jQuery 
+*/
+
+	var prepTimeLength = 2;
+	var prepFactorLength = 10;
+
+	$(document).ready(function () {
+		$("#preptimeName").attr('maxlength', prepTimeLength);
+		$("#up_preptimeName").attr('maxlength', prepTimeLength);
+		
+		$("#up_preptimeFactor").attr('maxlength', prepFactorLength);
+		$("#up_preptimeFactor").attr('maxlength', prepFactorLength);
+	});
+
+	var addPrepTime=function() {
 	   var valid = true;
+	   var addForm = document.getElementById("addPrepTimeForm");
+	   var errors = new Array();
+	   var elementsId = new Array();
+	   
+	   var preptimeName = document.getElementById("preptimeName");
+	   var preptimeFactor = document.getElementById("preptimeFactor");
+	   
+	   for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
+			if (!validate_empty(addForm.elements[i].value)) {
+				valid = false;
+				errors[j] = addForm.elements[i].getAttribute("name") + " is required";
+				elementsId[j++] = addForm.elements[i].getAttribute("id");
+			}
+		}
+	   
+	   if (!validate_length(preptimeName.value, prepTimeLength)) {
+		   valid = false;
+		   errors[j] = preptimeName.getAttribute("name") + " must be " +
+				"equal to or under " + prepTimeLength + " characters long";
+		   elementsId[j++] = preptimeName.getAttribute("id");
+	   }
+	   
+	   if (!validate_float(preptimeFactor.value, prepFactorLength)) {
+		   valid = false;
+		   	errors[j] = preptimeFactor.getAttribute("name") + " is must be " +
+		   		"a number less than " + prepFactorLength + " digits long";
+		   	elementsId[j++] = preptimeFactor.getAttribute("id");
+	   }
 	   
 	   if (valid) {
 			$.ajax({
 				type: "POST",
 				url: "api/preptime",
 				data: { 
-					preptimeName: document.getElementById("preptimeName").value, 
-			   		preptimeFactor: document.getElementById("preptimeFactor").value 
+					preptimeName: preptimeName.value, 
+			   		preptimeFactor: preptimeFactor.value 
 			   	},
 				dataType: "json",
 				cache: false,
@@ -22,7 +61,7 @@
 			    		$.pnotify({
 							title : 'New Prep Time added',
 							type : 'info',
-							text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been added'
+							text : 'Prep Time ' + preptimeName.value + ' has been added'
 						});
 			    		
 			    		$.ajax({
@@ -66,59 +105,117 @@
 			    				$('td', nTr)[2].setAttribute( 'class', 'align' );
 			    			}
 			    		});
+			    		// Form needs resetting due to never being submitted
+			    		document.getElementById("addPrepTimeForm").reset(); 
 			    		
-			    		document.getElementById("addPrepTimeForm").reset(); // Form needs resetting due to never being submitted
+			    		for (i = 0; i < addForm.length - 2; ++i) { // Remove red border on form elements
+			    			addForm.elements[i].style.border = "solid 1px #D1D7DF";
+			    		}
+			    		
 			    		$('#addPrepTimeModal').modal('hide');
 				   	}
 				}
 			});
 	   }
 	   else {
-		   // Handle errors
+		   for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
+			}
 	   }
 	};
 
 
 	var updatePrepTime=function() {
-		$.ajax({
-			type: "POST",
-			url: "api/preptime/"+document.getElementById("up_preptimeId").value,
-			data: { 
-				preptimeName: document.getElementById("up_preptimeName").value, 
-		   		preptimeFactor: document.getElementById("up_preptimeFactor").value 
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Prep Time Updated',
-						type : 'info',
-						text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been updated'
-					});
-		    		
-		    		document.getElementById("updatePrepTimeForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updatePrepTimeModal').modal('hide');
-		    		location.reload();
-			   	}
+		var valid = true;
+	   var updateForm = document.getElementById("updatePrepTimeForm");
+	   var errors = new Array();
+	   var elementsId = new Array();
+	   
+	   var preptimeName = document.getElementById("up_preptimeName");
+	   var preptimeFactor = document.getElementById("up_preptimeFactor");
+	   
+	   for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
+			if (!validate_empty(updateForm.elements[i].value)) {
+				valid = false;
+				errors[j] = updateForm.elements[i].getAttribute("name") + " is required";
+				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
-		});
+		}
+	   
+	   if (!validate_length(preptimeName.value, prepTimeLength)) {
+		   valid = false;
+		   errors[j] = preptimeName.getAttribute("name") + " must be " +
+				"equal to or under " + prepTimeLength + " characters long";
+		   elementsId[j++] = preptimeName.getAttribute("id");
+	   }
+	   
+	   if (!validate_float(preptimeFactor.value, prepFactorLength)) {
+		   valid = false;
+		   	errors[j] = preptimeFactor.getAttribute("name") + " is must be " +
+		   		"a number less than " + prepFactorLength + " digits long";
+		   	elementsId[j++] = preptimeFactor.getAttribute("id");
+	   }
+		
+		if (valid) {
+			$.ajax({
+				type: "POST",
+				url: "api/preptime/"+document.getElementById("up_preptimeId").value,
+				data: { 
+					preptimeName: document.getElementById("up_preptimeName").value, 
+			   		preptimeFactor: document.getElementById("up_preptimeFactor").value 
+			   	},
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'Prep Time Updated',
+							type : 'info',
+							text : 'Prep Time ' + document.getElementById('preptimeName').value + ' has been updated'
+						});
+			    		
+			    		// Form needs resetting due to never being submitted
+			    		document.getElementById("updatePrepTimeForm").reset(); 
+			    		
+			    		for (i = 0; i < updateForm.length - 2; ++i) { // Remove red border on form elements
+			    			updateForm.elements[i].style.border = "solid 1px #D1D7DF";
+			    		}
+			    		
+			    		$('#updatePrepTimeModal').modal('hide');
+				   	}
+				}
+			});
+		}
+		else {
+			for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
+			}
+		}
 	};
 
-   var deletePrepTime= function(id,preptime) {
+   var deletePrepTime= function() {
 	   	$.ajax({
 	   		type:"DELETE", 
-		   	url : "api/preptime/"+id,
+		   	url : "api/preptime/"+document.getElementById("del_prepId").value,
 		   	data : null,
 		   	cache : false,
 		   	success : function(data){
 	       		if (data.success === "true") {
 	       			$.pnotify({
-						title : 'Prep time :' + preptime,
+						title : 'Prep time: ' + document.getElementById("del_preptimeName").value,
 						type : 'info',
 						text : 'Prep time has been deleted'
 					});
-	       			location.reload();
 		   		}
  			}
 	   	});
@@ -128,4 +225,9 @@
 		$("#up_preptimeId").val(up_preptimeId);
 		$("#up_preptimeName").val(up_preptimeName);
 		$("#up_preptimeFactor").val(up_preptimeFactor);
-	};											
+	};
+	
+	var deleteForm=function(prepId, prepName) {
+		$("#del_prepId").val(prepId);
+		$("#del_preptimeName").val(prepName);
+	};
