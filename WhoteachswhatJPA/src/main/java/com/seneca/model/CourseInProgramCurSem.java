@@ -1,7 +1,6 @@
 package com.seneca.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 
@@ -16,27 +15,33 @@ public class CourseInProgramCurSem implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="cinProgram_id")
-	private int id;
+	private int cProgCurSem_id;
 
 	//bi-directional many-to-one association to Course
 	@ManyToOne
-	@JoinColumn(name="course_id") 
+	@JoinColumn(name="course_id")
 	private Course course;
-
-	//bi-directional many-to-one association to Program
-	@ManyToOne
-	@JoinColumn(name="program_id") 
-	private Program program;
 
 	//bi-directional many-to-one association to CurriculumSemester
 	@ManyToOne
-	@JoinColumn(name="cs_id") 
+	@JoinColumn(name="curriculumSemester_id")
 	private CurriculumSemester curriculumSemester;
+
+	//bi-directional many-to-one association to Program
+	@ManyToOne
+	@JoinColumn(name="program_id")
+	private Program program;
 
 	public CourseInProgramCurSem() {
 	}
 
+	public int getCProgCurSem_id() {
+		return this.cProgCurSem_id;
+	}
+
+	public void setCProgCurSem_id(int cProgCurSem_id) {
+		this.cProgCurSem_id = cProgCurSem_id;
+	}
 
 	public Course getCourse() {
 		return this.course;
@@ -44,14 +49,6 @@ public class CourseInProgramCurSem implements Serializable {
 
 	public void setCourse(Course course) {
 		this.course = course;
-	}
-
-	public Program getProgram() {
-		return this.program;
-	}
-
-	public void setProgram(Program program) {
-		this.program = program;
 	}
 
 	public CurriculumSemester getCurriculumSemester() {
@@ -62,51 +59,12 @@ public class CourseInProgramCurSem implements Serializable {
 		this.curriculumSemester = curriculumSemester;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((course == null) ? 0 : course.hashCode());
-		result = prime
-				* result
-				+ ((curriculumSemester == null) ? 0 : curriculumSemester
-						.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((program == null) ? 0 : program.hashCode());
-		return result;
+	public Program getProgram() {
+		return this.program;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CourseInProgramCurSem other = (CourseInProgramCurSem) obj;
-		if (course == null) {
-			if (other.course != null)
-				return false;
-		} else if (!course.equals(other.course))
-			return false;
-		if (curriculumSemester == null) {
-			if (other.curriculumSemester != null)
-				return false;
-		} else if (!curriculumSemester.equals(other.curriculumSemester))
-			return false;
-		if (id != other.id)
-			return false;
-		if (program == null) {
-			if (other.program != null)
-				return false;
-		} else if (!program.equals(other.program))
-			return false;
-		return true;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setProgram(Program program) {
+		this.program = program;
 	}
 
 }

@@ -29,12 +29,12 @@ public class Program implements Serializable {
 	private int totalSemester;
 
 	//bi-directional many-to-one association to CourseInProgramCurSem
-	@OneToMany(mappedBy="program", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="program")
 	private List<CourseInProgramCurSem> courseInProgramCurSems;
 
-	//bi-directional many-to-many association to Course
-	@ManyToMany(mappedBy="programs", fetch=FetchType.LAZY)
-	private List<Course> courses;
+	//bi-directional one-to-one association to CourseToProgram
+	@OneToOne(mappedBy="program")
+	private CourseToProgram courseToProgram;
 
 	public Program() {
 	}
@@ -93,66 +93,12 @@ public class Program implements Serializable {
 		return courseInProgramCurSem;
 	}
 
-	public List<Course> getCourses() {
-		return this.courses;
+	public CourseToProgram getCourseToProgram() {
+		return this.courseToProgram;
 	}
 
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((courseInProgramCurSems == null) ? 0
-						: courseInProgramCurSems.hashCode());
-		result = prime * result + ((courses == null) ? 0 : courses.hashCode());
-		result = prime * result
-				+ ((programCode == null) ? 0 : programCode.hashCode());
-		result = prime * result + programId;
-		result = prime * result
-				+ ((programName == null) ? 0 : programName.hashCode());
-		result = prime * result + totalSemester;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Program other = (Program) obj;
-		if (courseInProgramCurSems == null) {
-			if (other.courseInProgramCurSems != null)
-				return false;
-		} else if (!courseInProgramCurSems.equals(other.courseInProgramCurSems))
-			return false;
-		if (courses == null) {
-			if (other.courses != null)
-				return false;
-		} else if (!courses.equals(other.courses))
-			return false;
-		if (programCode == null) {
-			if (other.programCode != null)
-				return false;
-		} else if (!programCode.equals(other.programCode))
-			return false;
-		if (programId != other.programId)
-			return false;
-		if (programName == null) {
-			if (other.programName != null)
-				return false;
-		} else if (!programName.equals(other.programName))
-			return false;
-		if (totalSemester != other.totalSemester)
-			return false;
-		return true;
+	public void setCourseToProgram(CourseToProgram courseToProgram) {
+		this.courseToProgram = courseToProgram;
 	}
 
 }

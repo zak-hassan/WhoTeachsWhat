@@ -1,19 +1,8 @@
 package com.seneca.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 
 /**
@@ -273,9 +262,9 @@ public class Course implements Serializable {
 	public String getOld_course() {
 		return old_course;
 	}
-
+	
 	public void setOld_course(String old_course) {
 		this.old_course = old_course;
 	}
-
+	
 }

@@ -59,7 +59,7 @@ public class EvalFactorController {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("efName", c.getEvalName() + "");
 			map.put("efId", c.getEvalId() + "");
-			map.put("efFactor", c.getEvalFactor() + "");
+			map.put("efFactor", c.getFactorVal() + "");
 			items.add(map);
 		}
 		return items;
@@ -83,7 +83,7 @@ public class EvalFactorController {
 		
 		list.put("efName", c.getEvalName() + "");
 		list.put("efId", c.getEvalId() + "");
-		list.put("efFactor", c.getEvalFactor() + "");
+		list.put("efFactor", c.getFactorVal() + "");
 		
 		return list;
 	}

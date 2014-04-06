@@ -86,7 +86,7 @@ public class CourseInSemesterDaoImpl implements CourseInSemesterDao
 
    private Predicate[] getSearchPredicates(Root<CoursesInSemester> root, CoursesInSemester search)
    {
-      CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+/*      CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
       List<Predicate> predicatesList = new ArrayList<Predicate>();
 
       int addition_attribute = search.getAdditionAttribute();
@@ -120,6 +120,7 @@ public class CourseInSemesterDaoImpl implements CourseInSemesterDao
          predicatesList.add(builder.equal(root.get("year"), year));
       }
 
-      return predicatesList.toArray(new Predicate[predicatesList.size()]);
+      return predicatesList.toArray(new Predicate[predicatesList.size()]);*/
+	   return null;
    }
 }

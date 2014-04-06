@@ -23,11 +23,15 @@ public class Semester implements Serializable {
 	private String semesterName;
 
 	//bi-directional many-to-one association to CoursesInSemester
-	@OneToMany(mappedBy="semester", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="semester")
 	private List<CoursesInSemester> coursesInSemesters;
 
+	//bi-directional many-to-one association to FacultyToCourseInSemesterYear
+	@OneToMany(mappedBy="semester")
+	private List<FacultyToCourseInSemesterYear> facultyToCourseInSemesterYears;
+
 	//bi-directional many-to-one association to ResponsibilityToFaculty
-	@OneToMany(mappedBy="semester", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="semester")
 	private List<ResponsibilityToFaculty> responsibilityToFaculties;
 
 	public Semester() {
@@ -71,6 +75,28 @@ public class Semester implements Serializable {
 		return coursesInSemester;
 	}
 
+	public List<FacultyToCourseInSemesterYear> getFacultyToCourseInSemesterYears() {
+		return this.facultyToCourseInSemesterYears;
+	}
+
+	public void setFacultyToCourseInSemesterYears(List<FacultyToCourseInSemesterYear> facultyToCourseInSemesterYears) {
+		this.facultyToCourseInSemesterYears = facultyToCourseInSemesterYears;
+	}
+
+	public FacultyToCourseInSemesterYear addFacultyToCourseInSemesterYear(FacultyToCourseInSemesterYear facultyToCourseInSemesterYear) {
+		getFacultyToCourseInSemesterYears().add(facultyToCourseInSemesterYear);
+		facultyToCourseInSemesterYear.setSemester(this);
+
+		return facultyToCourseInSemesterYear;
+	}
+
+	public FacultyToCourseInSemesterYear removeFacultyToCourseInSemesterYear(FacultyToCourseInSemesterYear facultyToCourseInSemesterYear) {
+		getFacultyToCourseInSemesterYears().remove(facultyToCourseInSemesterYear);
+		facultyToCourseInSemesterYear.setSemester(null);
+
+		return facultyToCourseInSemesterYear;
+	}
+
 	public List<ResponsibilityToFaculty> getResponsibilityToFaculties() {
 		return this.responsibilityToFaculties;
 	}
@@ -91,54 +117,6 @@ public class Semester implements Serializable {
 		responsibilityToFaculty.setSemester(null);
 
 		return responsibilityToFaculty;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((coursesInSemesters == null) ? 0 : coursesInSemesters
-						.hashCode());
-		result = prime
-				* result
-				+ ((responsibilityToFaculties == null) ? 0
-						: responsibilityToFaculties.hashCode());
-		result = prime * result + semesterId;
-		result = prime * result
-				+ ((semesterName == null) ? 0 : semesterName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Semester other = (Semester) obj;
-		if (coursesInSemesters == null) {
-			if (other.coursesInSemesters != null)
-				return false;
-		} else if (!coursesInSemesters.equals(other.coursesInSemesters))
-			return false;
-		if (responsibilityToFaculties == null) {
-			if (other.responsibilityToFaculties != null)
-				return false;
-		} else if (!responsibilityToFaculties
-				.equals(other.responsibilityToFaculties))
-			return false;
-		if (semesterId != other.semesterId)
-			return false;
-		if (semesterName == null) {
-			if (other.semesterName != null)
-				return false;
-		} else if (!semesterName.equals(other.semesterName))
-			return false;
-		return true;
 	}
 
 }

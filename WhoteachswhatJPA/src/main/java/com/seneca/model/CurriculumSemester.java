@@ -22,7 +22,7 @@ public class CurriculumSemester implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to CourseInProgramCurSem
-	@OneToMany(mappedBy="curriculumSemester", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="curriculumSemester")
 	private List<CourseInProgramCurSem> courseInProgramCurSems;
 
 	public CurriculumSemester() {
@@ -64,43 +64,6 @@ public class CurriculumSemester implements Serializable {
 		courseInProgramCurSem.setCurriculumSemester(null);
 
 		return courseInProgramCurSem;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((courseInProgramCurSems == null) ? 0
-						: courseInProgramCurSems.hashCode());
-		result = prime * result + curriculumId;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CurriculumSemester other = (CurriculumSemester) obj;
-		if (courseInProgramCurSems == null) {
-			if (other.courseInProgramCurSems != null)
-				return false;
-		} else if (!courseInProgramCurSems.equals(other.courseInProgramCurSems))
-			return false;
-		if (curriculumId != other.curriculumId)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
 	}
 
 }

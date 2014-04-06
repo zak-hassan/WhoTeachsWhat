@@ -21,7 +21,7 @@ public class TeachingType implements Serializable {
 	private String teachingType_name;
 
 	//bi-directional many-to-one association to Faculty
-	@OneToMany(mappedBy="teachingType", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="teachingType")
 	private List<Faculty> faculties;
 
 	public TeachingType() {
@@ -63,44 +63,6 @@ public class TeachingType implements Serializable {
 		faculty.setTeachingType(null);
 
 		return faculty;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((faculties == null) ? 0 : faculties.hashCode());
-		result = prime * result + teachingType_id;
-		result = prime
-				* result
-				+ ((teachingType_name == null) ? 0 : teachingType_name
-						.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TeachingType other = (TeachingType) obj;
-		if (faculties == null) {
-			if (other.faculties != null)
-				return false;
-		} else if (!faculties.equals(other.faculties))
-			return false;
-		if (teachingType_id != other.teachingType_id)
-			return false;
-		if (teachingType_name == null) {
-			if (other.teachingType_name != null)
-				return false;
-		} else if (!teachingType_name.equals(other.teachingType_name))
-			return false;
-		return true;
 	}
 
 }

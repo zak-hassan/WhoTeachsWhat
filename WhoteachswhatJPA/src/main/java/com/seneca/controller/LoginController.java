@@ -6,12 +6,14 @@ import java.util.Map;
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seneca.model.Account;
@@ -29,6 +31,9 @@ public class LoginController {
 	// @Autowired
 	public AccountService aService = new AccountService();
 
+	
+	
+	
 	// REST
 	@RequestMapping(value = "/ajaxLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
@@ -116,7 +121,8 @@ public class LoginController {
 	
 	@RequestMapping(value = "/error", method=RequestMethod.GET)
 	public String showError(){
-		return "error";		
+		return "error";
+		//throw new ResourceNotFoundException();		
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

@@ -1,16 +1,13 @@
 package com.seneca.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 
+/**
+ * The persistent class for the Account database table.
+ * 
+ */
 @Entity
 @NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
 public class Account implements Serializable {
@@ -20,11 +17,11 @@ public class Account implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id")
 	private int UserId;
-	
+
 
 	private String username;
 	private String password;
-	
+
 	//bi-directional many-to-one association to AccessLevel
 	@ManyToOne
 	@JoinColumn(name="access_id")
@@ -34,7 +31,7 @@ public class Account implements Serializable {
 		super();
 	}
 
-	
+
 	public String getUsername() {
 		return username;
 	}

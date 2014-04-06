@@ -71,8 +71,8 @@ public class CourseController {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("name", c.getCourseName());
 			map.put("code", c.getCourseCode());
-			map.put("crossOver", c.getCrossover_course());
-			map.put("oldname", c.getOld_course());
+	//		map.put("crossOver", c.get.getCrossover_course());
+	//		map.put("oldname", c.getOld_course());
 			items.add(map);
 		}
 		return items;
@@ -96,8 +96,6 @@ public class CourseController {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("name", c.getCourseName());
 			map.put("code", c.getCourseCode());
-			map.put("crossOver", c.getCrossover_course());
-			map.put("oldname", c.getOld_course());
 			items.add(map);
 		return items;
 	}

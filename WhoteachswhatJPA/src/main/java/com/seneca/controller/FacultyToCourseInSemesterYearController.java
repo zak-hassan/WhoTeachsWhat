@@ -90,8 +90,9 @@ public class FacultyToCourseInSemesterYearController {
 			map.put("comphourAllowance", c.getCompHour_allowance() + "");
 			map.put("comphourAssigned", c.getCompHour_assigned() + "");
 			map.put("sectionNumber", c.getSectionNumber() + "");
-			map.put("semesterId", c.getSemesterId() + "");
+			map.put("semesterId", c.getSemester().getSemesterId() + "");
 			map.put("year", c.getYear() + "");
+			map.put("class_size", c.getClass_size() + "");
 			map.put("comphourId", c.getCompHour().getCompHour_id() + "");
 			map.put("courseId", c.getCourse().getCourseId() + "");
 			map.put("facultyId", c.getFaculty().getFacultyId() + "");
@@ -131,14 +132,15 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
-			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id) {
+			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id,
+			@RequestParam(value = "class_size", required = true) Integer class_size) {
 		
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
 	 FacultyToCourseInSemesterYear fcsyear=	facultyToCourseInSemesterYearService.add(faculty_id, prepTime_id,
 				course_id, compHour_id, year, semester_id, section_number,
-				comphoursAllowance, additionAttribute, comphourAssigned);
+				comphoursAllowance, additionAttribute, comphourAssigned, class_size);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		list.put("id", fcsyear.getCisyId() + "");
@@ -177,7 +179,8 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "comphourId", required = true) Integer compHour_id,
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
-			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id) {
+			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id,
+			@RequestParam(value = "class_size", required = true) Integer class_size) {
 
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
@@ -185,7 +188,7 @@ public class FacultyToCourseInSemesterYearController {
 		facultyToCourseInSemesterYearService.update(id, faculty_id,
 				prepTime_id, course_id, compHour_id, year, semester_id,
 				section_number, comphoursAllowance, additionAttribute,
-				comphourAssigned);
+				comphourAssigned, class_size);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");

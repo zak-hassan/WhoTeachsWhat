@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.seneca.model.Course;
 import com.seneca.model.CoursesInSemester;
 import com.seneca.service.CourseInSemesterService;
 import com.seneca.service.CourseService;
@@ -86,12 +87,6 @@ public class CourseInSemesterController {
 		List<Map<String, String>> items = new ArrayList<Map<String, String>>();
 		for (CoursesInSemester c : courseInSemesterService.getAll()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("eval_1_ans", c.getEval1Ans() + "");
-			map.put("eval_2_ans", c.getEval2Ans() + "");
-			map.put("eval_3_ans", c.getEval3Ans() + "");
-			map.put("eval_1_id", c.getEvalFactor1().getEvalId() + "");
-			map.put("eval_2_id", c.getEvalFactor2().getEvalId() + "");
-			map.put("eval_3_id", c.getEvalFactor3().getEvalId() + "");
 			map.put("sectionNumber", c.getTotalSection() + "");
 			map.put("year", c.getYear() + "");
 			map.put("course_id", c.getCisId() + "");
@@ -185,19 +180,15 @@ public class CourseInSemesterController {
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "course_id", required = true) Integer course_id,
 			@RequestParam(value = "semester_id", required = true) Integer semester_id) {
-
 		// TODO: Convert all `string` to `float` ...
 		float e1_ans = Float.valueOf(eval_1_ans);
 		float e2_ans = Float.valueOf(eval_2_ans);
 		float e3_ans = Float.valueOf(eval_3_ans);
-
 		courseInSemesterService.update(id, addition_attribute, e1_ans, e2_ans,
 				e3_ans, eval_1, eval_2, eval_3, sectionNumbers, year,
 				course_id, semester_id);
-		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-
 		return list;
 	}
 
@@ -222,12 +213,9 @@ public class CourseInSemesterController {
 	@RequestMapping(value = "/api/courseinsemester/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
-
 		courseInSemesterService.delete(id);
-
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		return list;
 	}
-	
 }

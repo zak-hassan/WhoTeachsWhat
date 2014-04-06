@@ -26,7 +26,7 @@ public class Responsibility implements Serializable {
 	private String responsibilityName;
 
 	//bi-directional many-to-one association to ResponsibilityToFaculty
-	@OneToMany(mappedBy="responsibility", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="responsibility")
 	private List<ResponsibilityToFaculty> responsibilityToFaculties;
 
 	public Responsibility() {
@@ -76,56 +76,6 @@ public class Responsibility implements Serializable {
 		responsibilityToFaculty.setResponsibility(null);
 
 		return responsibilityToFaculty;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((responsibilityCode == null) ? 0 : responsibilityCode
-						.hashCode());
-		result = prime * result + responsibilityId;
-		result = prime
-				* result
-				+ ((responsibilityName == null) ? 0 : responsibilityName
-						.hashCode());
-		result = prime
-				* result
-				+ ((responsibilityToFaculties == null) ? 0
-						: responsibilityToFaculties.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Responsibility other = (Responsibility) obj;
-		if (responsibilityCode == null) {
-			if (other.responsibilityCode != null)
-				return false;
-		} else if (!responsibilityCode.equals(other.responsibilityCode))
-			return false;
-		if (responsibilityId != other.responsibilityId)
-			return false;
-		if (responsibilityName == null) {
-			if (other.responsibilityName != null)
-				return false;
-		} else if (!responsibilityName.equals(other.responsibilityName))
-			return false;
-		if (responsibilityToFaculties == null) {
-			if (other.responsibilityToFaculties != null)
-				return false;
-		} else if (!responsibilityToFaculties
-				.equals(other.responsibilityToFaculties))
-			return false;
-		return true;
 	}
 
 }

@@ -13,6 +13,7 @@ import com.seneca.repository.CourseDao;
 import com.seneca.repository.FacultyDao;
 import com.seneca.repository.FacultyToCourseInSemesterYearDao;
 import com.seneca.repository.PrepTimeDao;
+import com.seneca.repository.SemesterDao;
 
 @Service("facultyToCourseInSemesterYearService")
 public class FacultyToCourseInSemesterYearService {
@@ -34,26 +35,30 @@ public class FacultyToCourseInSemesterYearService {
 
 	@Autowired
 	PrepTimeDao prepTimeDao;
+	
+	@Autowired
+	SemesterDao semesterDao;
 
 	// CRUD OPERATIONS:
 	public FacultyToCourseInSemesterYear add(Integer faculty_id,
 			Integer prepType_id, Integer course_id, Integer compHour_id,
 			Integer year, Integer semester_id, Integer section_number,
 			float comphoursAllowance, float additionAttribute,
-			float comphourAssigned) {
-		FacultyToCourseInSemesterYear rToFaculty = new FacultyToCourseInSemesterYear();
+			float comphourAssigned, Integer class_size) {
 
-		rToFaculty.setCourse(courseDao.getById(course_id));
-		rToFaculty.setFaculty(facultyDao.getById(faculty_id));
-		rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
-		rToFaculty.setCompHour(compHourDao.getById(compHour_id));
-		rToFaculty.setYear(year);
-		// TODO: You need to map the semester to a semester id
-		rToFaculty.setSectionNumber(section_number);
-		rToFaculty.setSemesterId(semester_id);
-		rToFaculty.setCompHour_allowance(comphoursAllowance);
-		rToFaculty.setAdditionAttribute(additionAttribute);
-		rToFaculty.setCompHour_assigned(comphourAssigned);
+			// TODO: You need to map the semester to a semester id
+			FacultyToCourseInSemesterYear rToFaculty = new FacultyToCourseInSemesterYear();
+			rToFaculty.setCourse(courseDao.getById(course_id));
+			rToFaculty.setFaculty(facultyDao.getById(faculty_id));
+			rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
+			rToFaculty.setCompHour(compHourDao.getById(compHour_id));
+			rToFaculty.setYear(year);
+			rToFaculty.setClass_size(class_size);
+			rToFaculty.setSectionNumber(section_number);
+			rToFaculty.setSemester(semesterDao.getById(semester_id));
+			rToFaculty.setCompHour_allowance(comphoursAllowance);
+			rToFaculty.setAdditionAttribute(additionAttribute);
+			rToFaculty.setCompHour_assigned(comphourAssigned);
 		return facultyToCourseInSemesterYearDao.create(rToFaculty);
 	}
 
@@ -61,7 +66,7 @@ public class FacultyToCourseInSemesterYearService {
 			Integer prepType_id, Integer course_id, Integer compHour_id,
 			Integer year, Integer semester_id, Integer section_number,
 			float comphoursAllowance, float additionAttribute,
-			float comphourAssigned) {
+			float comphourAssigned, Integer class_size) {
 
 		FacultyToCourseInSemesterYear rToFaculty = facultyToCourseInSemesterYearDao
 				.getById(id);
@@ -73,9 +78,10 @@ public class FacultyToCourseInSemesterYearService {
 		rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
 		rToFaculty.setCompHour(compHourDao.getById(compHour_id));
 		rToFaculty.setYear(year);
+		rToFaculty.setClass_size(class_size);
 		rToFaculty.setSectionNumber(section_number);
 		// TODO: You need to map the semester to a semester id
-		rToFaculty.setSemesterId(semester_id);
+		rToFaculty.setSemester(semesterDao.getById(semester_id));
 		rToFaculty.setCompHour_allowance(comphoursAllowance);
 		rToFaculty.setAdditionAttribute(additionAttribute);
 		rToFaculty.setCompHour_assigned(comphourAssigned);

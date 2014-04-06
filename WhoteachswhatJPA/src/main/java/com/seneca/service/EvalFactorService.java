@@ -31,27 +31,29 @@ public class EvalFactorService {
 	public EvalFactor add(String evalName, Float evalFactor){
 			EvalFactor eval= new EvalFactor();
 			eval.setEvalName(evalName);
-			eval.setEvalFactor(evalFactor);
+			eval.setFactorVal(evalFactor);
 			logger.info("Entering courseDao.create : ");
-		return evalFactorDao.create(eval);
-
+			return evalFactorDao.create(eval);
 	}
+	
 	public EvalFactor update(Integer id, String evalName, Float evalFactor){
 		EvalFactor eval= evalFactorDao.getById(id);
 		eval.setEvalName(evalName);
-		eval.setEvalFactor(evalFactor);
+		eval.setFactorVal(evalFactor);
 		evalFactorDao.update(eval);
 		return eval;
 	}
+	
 	public void delete(Integer id) {
 		evalFactorDao.delete(id);
 	}
+	
 	public List<EvalFactor> getAll() {
 		return evalFactorDao.getAll();
 	}
+	
 	public EvalFactor getOne(Integer id) {
 		return evalFactorDao.getById(id);
 	}
-	
 	
 }
