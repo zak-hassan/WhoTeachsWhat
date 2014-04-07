@@ -167,6 +167,8 @@
 			    		}
 			    		
 			    		$('#addCourseModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -328,6 +330,8 @@
 			    		}
 			    		
 			    		$('#updateCourseModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -368,6 +372,7 @@
 							text : 'Course has been deleted'
 						});
 	  				}
+	     			location.reload(); // Refresh page..
 	  	 		 }
 	 		});
 		}

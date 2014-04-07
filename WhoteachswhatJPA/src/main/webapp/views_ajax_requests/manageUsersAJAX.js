@@ -119,6 +119,8 @@
 			    		}
 			    		
 			    		$('#addUserModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -197,7 +199,8 @@
 			    		}
 			    		
 			    		$('#updateUserModal').modal('hide');
-			    		location.reload();
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -277,6 +280,7 @@
 							text : 'User has been deleted'
 						});
 	  				}
+		     		location.reload(); // Refresh page..
 	   	  		}
 	 		});
 		}

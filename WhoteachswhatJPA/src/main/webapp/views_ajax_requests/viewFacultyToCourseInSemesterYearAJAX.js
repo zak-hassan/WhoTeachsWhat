@@ -117,6 +117,8 @@
 			    		}
 			    		
 			    		$('#addFacToCourseSemModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -237,6 +239,8 @@
 			    		}
 			    		
 			    		$('#updateFacToCourseSemModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -279,6 +283,7 @@
 							+ ' ' + document.getElementById("del_lname").value
 					});
 	  			}
+	     		location.reload(); // Refresh page..
 	   	  	}
 	 	});
 		}

@@ -42,7 +42,8 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("addCourseInSemesterForm").reset(); 
 		    		$('#addCourseInSemesterModal').modal('hide');
-		    		location.reload();
+		    		
+		    		location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -82,7 +83,8 @@
 		    		// Form needs resetting due to never being submitted
 		    		document.getElementById("updateCourseInSemesterForm").reset(); 
 		    		$('#updateCourseInSemesterModal').modal('hide');
-		    		location.reload();
+		    		
+		    		location.reload(); // Refresh page..
 			   	}
 			}
 		});

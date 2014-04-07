@@ -73,6 +73,8 @@
 			    		}
 			    		
 			    		$('#addEvalFactorModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -146,6 +148,8 @@
 		    		}
 		    		
 		    		$('#updateEvalFactorModal').modal('hide');
+		    		
+		    		location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -187,6 +191,7 @@
 							text : 'Evaluation factor has been deleted'
 						});
 		  			}
+		     		location.reload(); // Refresh page..
 		   	 	}
 		 	});
 		}

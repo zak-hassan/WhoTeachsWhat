@@ -106,6 +106,8 @@
 			    		}
 			    		
 			    		$('#addTeachingTypeModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -178,6 +180,8 @@
 			    		}
 			    		
 			    		$('#updateTeachingTypeModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});

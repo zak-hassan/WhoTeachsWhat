@@ -99,6 +99,8 @@
 		    		}
 		    		
 		    		$('#addRepToFacModal').modal('hide');
+		    		
+		    		location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -203,6 +205,8 @@
 			    		}
 			    		
 			    		$('#updateRepToFacModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -245,6 +249,7 @@
 							text : 'Responsibility has been removed from faculty'
 						});
 			   		}
+		       		location.reload(); // Refresh page..
 				}
 		   	});
 		}

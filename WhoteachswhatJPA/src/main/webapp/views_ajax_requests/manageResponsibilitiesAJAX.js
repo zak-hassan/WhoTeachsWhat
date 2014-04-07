@@ -120,6 +120,8 @@
 		    		}
 		    		
 		    		$('#addResponsibilityModal').modal('hide');
+		    		
+		    		location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -199,6 +201,8 @@
 			    		}
 			    		
 			    		$('#updateResponsibilityModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});

@@ -119,6 +119,8 @@
 			    		}
 			    		
 			    		$('#addCompHourModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -199,6 +201,8 @@
 			    		}
 			    		
 			    		$('#updateCompHourModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -240,6 +244,7 @@
 							text : 'Comp hour has been deleted'
 						});
 		  			}
+		     		location.reload(); // Refresh page..
 		 	  	}
 		 	});
 		}

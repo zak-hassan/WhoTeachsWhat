@@ -95,6 +95,8 @@
 			    		}
 			    		
 			    		$('#addSemesterModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -163,6 +165,8 @@
 			    		}
 			    		
 			    		$('#updateSemesterModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -204,6 +208,7 @@
 							text : 'Semester has been deleted'
 						});
 				   	}
+			    	location.reload(); // Refresh page..
 				}
 			});
 		}

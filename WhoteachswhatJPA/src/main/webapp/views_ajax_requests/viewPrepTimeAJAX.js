@@ -113,6 +113,8 @@
 			    		}
 			    		
 			    		$('#addPrepTimeModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -193,6 +195,8 @@
 			    		}
 			    		
 			    		$('#updatePrepTimeModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -234,6 +238,7 @@
 							text : 'Prep time has been deleted'
 						});
 			   		}
+		       		location.reload(); // Refresh page..
 	 			}
 		   	});
 		}
