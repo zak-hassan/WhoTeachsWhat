@@ -9,86 +9,252 @@
 	var facultyId = window.location.search.slice(4); // Removes ?id=
 	facultyId = encodeURI(facultyId); // Escape string
 	
-	var evalFactorLength = 10;
+	var floatLength = 10;
 
 	$(document).ready(function () {
 		// $("#preptimeName").attr('maxlength', prepTimeLength);
 	});
     
-   var addFacToCourseSem=function() {
+	var addFacToCourseSem=function() {
+	   var valid = true;
+	   var addForm = document.getElementById("addFacToCourseSemForm");
+	   var errors = new Array();
+	   var elementsId = new Array();
+	   
+	   var idPattern = new RegExp("[A-Za-z]+Id");
+	   
+	   var additionAttribute = document.getElementById("additionAttribute");
+	   var comphourAllowance = document.getElementById("comphourAllowance");
+	   var comphourAssigned = document.getElementById("comphourAssigned");
+	   var sectionNumber = document.getElementById("sectionNumber");
+	   var semesterId = document.getElementById("semesterId");
+	   var year = document.getElementById("year");
+	   var comphourId = document.getElementById("comphourId");
+	   var courseId = document.getElementById("courseId");
+	   var prepTimeId = document.getElementById("prepTimeId");
+	   var classSize = document.getElementById("classSize");
+	   
+	   var evalFactor1 = document.getElementById("evalFactor1");
+	   var evalFactor2 = document.getElementById("evalFactor2");
+	   var evalFactor3 = document.getElementById("evalFactor3");
+	   
 	   if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
 			facultyId = document.getElementById("facultyId").value;
+	   }
+		
+	   	for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
+			if (validate_empty(addForm.elements[i].value)) {
+				valid = false;
+				errors[j] = addForm.elements[i].getAttribute("name") + " is required";
+				elementsId[j++] = addForm.elements[i].getAttribute("id");
+			}
+			else {
+				if (!idPattern.test(addForm.elements[i].getAttribute("id")) 
+						&& !validate_float(addForm.elements[i].value, floatLength)) {
+					valid = false;
+				   	errors[j] = addForm.elements[i].getAttribute("name") + " must be " +
+				   		"a number less than " + floatLength + " digits long";
+				   	elementsId[j++] = addForm.elements[i].getAttribute("id");
+				}
+			}
+	   	}
+	   
+		if (!validate_integer(semesterId.value)) {
+			valid = false;
+			errors[j] = semesterId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = semesterId.getAttribute("id");
 		}
 		
-		$.ajax({
-			type: "POST",
-			url: "api/facultyToCourseInSemesterYear",
-			data: { 
-				additionAttribute: document.getElementById("additionAttribute").value, 
-		   		comphourAllowance: document.getElementById("comphourAllowance").value,
-		   		comphourAssigned: document.getElementById("comphourAssigned").value,
-		   		sectionNumber: document.getElementById("sectionNumber").value,
-		   		semesterId: document.getElementById("semesterId").value,
-		   		year: document.getElementById("year").value,
-		   		comphourId: document.getElementById("comphourId").value,
-		   		courseId: document.getElementById("courseId").value,
-		   		facultyId: facultyId,
-		   		prepTimeId: document.getElementById("prepTimeId").value
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'New Course Added to Faculty',
-						type : 'info',
-						text : 'Course has been assigned to faculty'
-					});
-		    		
-		    		document.getElementById("addFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#addFacToCourseSemModal').modal('hide');
-		    		location.reload();
-			   	}
+		if (!validate_integer(comphourId.value)) {
+			valid = false;
+			errors[j] = comphourId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = semesterId.getAttribute("id");
+		}
+		
+		if (!validate_integer(courseId.value)) {
+			valid = false;
+			errors[j] = courseId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = courseId.getAttribute("id");
+		}
+		
+		if (!validate_integer(prepTimeId.value)) {
+			valid = false;
+			errors[j] = prepTimeId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = prepTimeId.getAttribute("id");
+		}
+	   
+	   if (valid) {
+			$.ajax({
+				type: "POST",
+				url: "api/facultyToCourseInSemesterYear",
+				data: { 
+					additionAttribute: additionAttribute.value, 
+			   		comphourAllowance: comphourAllowance.value,
+			   		comphourAssigned: comphourAssigned.value,
+			   		sectionNumber: sectionNumber.value,
+			   		semesterId: semesterId.value,
+			   		year: year.value,
+			   		comphourId: comphourId.value,
+			   		courseId: courseId.value,
+			   		facultyId: facultyId,
+			   		prepTimeId: prepTimeId.value,
+			   		class_size: classSize.value
+			   	},
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'New Course Added to Faculty',
+							type : 'info',
+							text : 'Course has been assigned to faculty'
+						});
+			    		// Form needs resetting due to never being submitted
+			    		document.getElementById("addFacToCourseSemForm").reset();
+			    		
+			    		for (i = 0; i < addForm.length - 2; ++i) { // Remove red border on form elements
+			    			addForm.elements[i].style.border = "solid 1px #D1D7DF";
+			    		}
+			    		
+			    		$('#addFacToCourseSemModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
+				   	}
+				}
+			});
+	   }
+	   else { // Handle form errors
+		   for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
 			}
-		});
+	   }
 	};
    
 	var updateFacToCourseSem=function() {
+		var valid = true;
+		var updateForm = document.getElementById("updateFacToCourseSemForm");
+		var errors = new Array();
+		var elementsId = new Array();
+	   
+		var idPattern = new RegExp("[A-Za-z]+Id");
+	   
+		var additionAttribute = document.getElementById("up_additionAttribute");
+		var comphourAllowance = document.getElementById("up_comphourAllowance");
+		var comphourAssigned = document.getElementById("up_comphourAssigned");
+		var sectionNumber = document.getElementById("up_sectionNumber");
+		var semesterId = document.getElementById("up_semesterId");
+		var year = document.getElementById("up_year");
+		var comphourId = document.getElementById("up_comphourId");
+		var courseId = document.getElementById("up_courseId");
+		var prepTimeId = document.getElementById("up_prepTimeId");
+		var classSize = document.getElementById("up_classSize");
+	   
+		var evalFactor1 = document.getElementById("up_evalFactor1");
+		var evalFactor2 = document.getElementById("up_evalFactor2");
+		var evalFactor3 = document.getElementById("up_evalFactor3");
+		
+		var cisId = document.getElementById("up_cisId");
+	   
 		if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
 			facultyId = document.getElementById("up_facultyId").value;
 		}
 		
-		$.ajax({
-			type: "POST",
-			url: "api/facultyToCourseInSemesterYear/"+document.getElementById("up_cisId").value,
-			data: { 
-				additionAttribute: document.getElementById("up_additionAttribute").value, 
-		   		comphourAllowance: document.getElementById("up_comphourAllowance").value,
-		   		comphourAssigned: document.getElementById("up_comphourAssigned").value,
-		   		sectionNumber: document.getElementById("up_sectionNumber").value,
-		   		semesterId: document.getElementById("up_semesterId").value,
-		   		year: document.getElementById("up_year").value,
-		   		comphourId: document.getElementById("up_comphourId").value,
-		   		courseId: document.getElementById("up_courseId").value,
-		   		facultyId: facultyId,
-		   		prepTimeId: document.getElementById("up_prepTimeId").value, 
-		   	},
-			dataType: "json",
-			cache: false,
-			success : function(data){
-		    	if (data.success === "true") {
-		    		$.pnotify({
-						title : 'Updated Course Added to Faculty',
-						type : 'info',
-						text : 'Course has been updated for faculty'
-					});
-		    		
-		    		document.getElementById("updateFacToCourseSemForm").reset(); // Form needs resetting due to never being submitted
-		    		$('#updateFacToCourseSemModal').modal('hide');
-		    		location.reload();
-			   	}
+		for (var i = 0, j = 0; i < updateForm.length - 2; ++i) {
+			if (validate_empty(updateForm.elements[i].value)) {
+				valid = false;
+				errors[j] = updateForm.elements[i].getAttribute("name") + " is required";
+				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
-		});
+			else {
+				if (!idPattern.test(updateForm.elements[i].getAttribute("id")) 
+						&& !validate_float(updateForm.elements[i].value, floatLength)) {
+					valid = false;
+				   	errors[j] = updateForm.elements[i].getAttribute("name") + " must be " +
+				   		"a number less than " + floatLength + " digits long";
+				   	elementsId[j++] = updateForm.elements[i].getAttribute("id");
+				}
+			}
+		}
+		
+		if (!validate_integer(semesterId.value)) {
+			valid = false;
+			errors[j] = semesterId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = semesterId.getAttribute("id");
+		}
+		
+		if (!validate_integer(comphourId.value)) {
+			valid = false;
+			errors[j] = comphourId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = semesterId.getAttribute("id");
+		}
+		
+		if (!validate_integer(courseId.value)) {
+			valid = false;
+			errors[j] = courseId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = courseId.getAttribute("id");
+		}
+		
+		if (!validate_integer(prepTimeId.value)) {
+			valid = false;
+			errors[j] = prepTimeId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = prepTimeId.getAttribute("id");
+		}
+	   
+		if (valid) {
+			$.ajax({
+				type: "POST",
+				url: "api/facultyToCourseInSemesterYear/"+cisId.value,
+				data: { 
+					additionAttribute: additionAttribute.value, 
+			   		comphourAllowance: comphourAllowance.value,
+			   		comphourAssigned: comphourAssigned.value,
+			   		sectionNumber: sectionNumber.value,
+			   		semesterId: semesterId.value,
+			   		year: year.value,
+			   		comphourId: comphourId.value,
+			   		courseId: courseId.value,
+			   		facultyId: facultyId,
+			   		prepTimeId: prepTimeId.value,
+			   		class_size: classSize.value
+			   	},
+				dataType: "json",
+				cache: false,
+				success : function(data){
+			    	if (data.success === "true") {
+			    		$.pnotify({
+							title : 'Updated Course Added to Faculty',
+							type : 'info',
+							text : 'Course has been updated for faculty'
+						});
+			    		// Form needs resetting due to never being submitted
+			    		document.getElementById("updateFacToCourseSemForm").reset(); 
+			    		
+			    		for (i = 0; i < updateForm.length - 2; ++i) { // Remove red border on form elements
+			    			updateForm.elements[i].style.border = "solid 1px #D1D7DF";
+			    		}
+			    		
+			    		$('#updateFacToCourseSemModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
+				   	}
+				}
+			});
+		}
+		else { // Handle form errors
+			for (i = 0; i < errors.length; ++i) {
+				$.pnotify({
+					title : 'Error',
+					type : 'info',
+					text : errors[i]
+				});
+				document.getElementById(elementsId[i]).style.border = "solid 1px red";
+			}
+		}
 	};
 
 	var deleteFacToCourseSem= function() {
@@ -117,6 +283,7 @@
 							+ ' ' + document.getElementById("del_lname").value
 					});
 	  			}
+	     		location.reload(); // Refresh page..
 	   	  	}
 	 	});
 		}
@@ -149,4 +316,19 @@
 		$("#del_course_name").val(courseName);
 		$("#del_fname").val(fname);
 		$("#del_lname").val(lname);
+	};
+	
+	var changeEvalFactorStatus=function(override) {
+		// Enable or disable evalFactor fields
+				
+		if (override.checked) {
+			document.getElementById("evalFactor1").disabled = false;
+			document.getElementById("evalFactor2").disabled = false;
+			document.getElementById("evalFactor3").disabled = false;
+		}
+		else {
+			document.getElementById("evalFactor1").disabled = true;
+			document.getElementById("evalFactor2").disabled = true;
+			document.getElementById("evalFactor3").disabled = true;
+		}
 	};

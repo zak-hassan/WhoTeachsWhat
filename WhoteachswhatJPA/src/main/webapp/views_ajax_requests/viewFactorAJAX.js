@@ -72,6 +72,8 @@
 			    		}
 			    		
 			    		$('#addFactorModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -152,6 +154,8 @@
 			    		}
 			    		
 			    		$('#updateFactorModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -193,6 +197,7 @@
 							text : 'Factor has been deleted'
 						});
 			   		}
+		       		location.reload(); // Refresh page..
 	 			}
 		   	});
 		}

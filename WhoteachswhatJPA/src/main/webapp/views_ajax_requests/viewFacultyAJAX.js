@@ -82,6 +82,8 @@
 			    		}
 			    		
 			    		$('#addFacultyModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -170,6 +172,8 @@
 			    		}
 			    		
 			    		$('#updateFacultyModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -212,6 +216,7 @@
 							text : 'Faculty has been deleted'
 						});
 			   		}
+		       		location.reload(); // Refresh page..
 		   		 }
 		   	});
 		}

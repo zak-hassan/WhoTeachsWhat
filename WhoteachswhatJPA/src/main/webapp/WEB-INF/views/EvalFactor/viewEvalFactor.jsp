@@ -124,7 +124,6 @@ td {
 											</a>
 										</td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>

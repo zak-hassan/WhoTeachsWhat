@@ -104,6 +104,8 @@
 			    		}
 			    		
 			    		$('#addPermissionModal').modal('hide');
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -176,7 +178,8 @@
 			    		}
 			    		
 			    		$('#updatePermissionModal').modal('hide');
-			    		location.reload();
+			    		
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -218,6 +221,7 @@
 							text : 'Permission has been deleted'
 						});
 		  			}
+		     		location.reload(); // Refresh page..
 		 	  	}
 		 	});
 		}

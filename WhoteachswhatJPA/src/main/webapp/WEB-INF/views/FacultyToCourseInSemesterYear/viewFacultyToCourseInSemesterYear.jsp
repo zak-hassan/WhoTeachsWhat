@@ -110,7 +110,6 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								
 								<c:set var="facultyId">
 								    <c:out value = "${param.id}" />
 								</c:set>
@@ -232,12 +231,12 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Addition: </span><br /> <input
-									type="text" class="form-control" name="additionAttribute" id="additionAttribute"
+									type="text" class="form-control" name="Addition attribute" id="additionAttribute"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Type:</span> <br /> <select
-									class="form-control" id="comphourId">
+									class="form-control" id="comphourId" name="Complimentary hour id">
 									<c:forEach items="${allCompHours }" var="ch">
 									<option value="${ch.getCompHour_id() }">${ch.getCompHour_name() }</option>
 									</c:forEach>
@@ -245,22 +244,22 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
-									type="text" class="form-control" name="comphourAllowance" id="comphourAllowance"
+									type="text" class="form-control" name="Complimentary hour allowance" id="comphourAllowance"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number: </span><br /> <input
-									type="text" class="form-control" name="sectionNumber" id="sectionNumber"
+									type="text" class="form-control" name="Section number" id="sectionNumber"
 									placeholder="5" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hours Assigned: </span><br /> <input
-									type="text" class="form-control" name="comphourAssigned" id="comphourAssigned"
+									type="text" class="form-control" name="Complimentary hour assigned" id="comphourAssigned"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> <select
-									class="form-control" id="semesterId">
+									class="form-control" id="semesterId" name="Semester id">
 									<c:forEach items="${allSemesters }" var="semester">
 									<option value="${semester.getSemesterId() }">${semester.getSemesterName() }</option>
 									</c:forEach>
@@ -268,12 +267,12 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year: </span><br /> <input
-									type="text" class="form-control" name="year" id="year"
+									type="text" class="form-control" name="Year" id="year"
 									placeholder="2014" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Course:</span> <br /> <select
-									class="form-control" id="courseId">
+									class="form-control" id="courseId" name="Course id">
 									<c:forEach items="${allCourses }" var="course">
 									<option value="${course.getCourseId() }">
 										${course.getCourseCode() }
@@ -282,8 +281,46 @@ td {
 								</select>
 							</div>
 							<div class="input-group">
+								<span class="input-group-addon">Class size: </span><br /> <input
+									type="text" class="form-control" name="Class size" id="classSize"
+									placeholder="30" />
+							</div>
+							
+							
+							<!--  Preload evalfactors from course when server side is finished -->
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 1: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 1" id="evalFactor1" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 2: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 2" id="evalFactor2" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 3: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 3" id="evalFactor3" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Override? </span><br /> <input
+									type="checkbox" class="form-control" name="Override" id="override" 
+									onclick="changeEvalFactorStatus(this)" value="1" />
+									<br />
+							</div>
+							
+							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
-									class="form-control" id="prepTimeId">
+									class="form-control" id="prepTimeId" name="Prep time id">
+									<c:forEach items="${allPrepTime}" var="pt">
+									<option value="${pt.getPrepId() }">
+										${pt.getPrepName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Factor:</span> <br /> <select
+									class="form-control" id="factorId" name="Factor id">
 									<c:forEach items="${allPrepTime}" var="pt">
 									<option value="${pt.getPrepId() }">
 										${pt.getPrepName() }
@@ -319,12 +356,12 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateFacToCourseSemForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="up_cisId" id="up_cisId" />
+								<input type="hidden" class="form-control" name="Faculty to course id" id="up_cisId" />
 							</div>
 							<c:if test="${ empty facultyId }">
 								<div class="input-group">
 									<span class="input-group-addon">Faculty:</span> <br /> 
-										<select class="form-control" id="up_facultyId">
+										<select class="form-control" id="up_facultyId" name="Faculty id">
 											<c:forEach items="${allFaculty }" var="fac">
 												<option value="${fac.getFacultyId() }">
 													${fac.getFacultyFirstName() } ${fac.getFacultyLastName() }
@@ -335,12 +372,12 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Addition: </span><br /> <input
-									type="text" class="form-control" name="up_additionAttribute" id="up_additionAttribute"
+									type="text" class="form-control" name="Addition attribute" id="up_additionAttribute"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Type:</span> <br /> <select
-									class="form-control" id="up_comphourId">
+									class="form-control" id="up_comphourId" name="Complimentary hour id">
 									<c:forEach items="${allCompHours }" var="ch">
 									<option value="${ch.getCompHour_id() }">${ch.getCompHour_name() }</option>
 									</c:forEach>
@@ -348,22 +385,23 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hour Allowance: </span><br /> <input
-									type="text" class="form-control" name="up_comphourAllowance" id="up_comphourAllowance"
+									type="text" class="form-control" name="Complimentary hour allowance" 
+										id="up_comphourAllowance"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number: </span><br /> <input
-									type="text" class="form-control" name="up_sectionNumber" id="up_sectionNumber"
+									type="text" class="form-control" name="Section number" id="up_sectionNumber"
 									placeholder="5" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Comp Hours Assigned: </span><br /> <input
-									type="text" class="form-control" name="up_comphourAssigned" id="up_comphourAssigned"
+									type="text" class="form-control" name="Complimentary hour assigned" id="up_comphourAssigned"
 									placeholder="" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> <select
-									class="form-control" id="up_semesterId">
+									class="form-control" id="up_semesterId" name="Semester id">
 									<c:forEach items="${allSemesters }" var="semester">
 									<option value="${semester.getSemesterId() }">${semester.getSemesterName() }</option>
 									</c:forEach>
@@ -371,12 +409,12 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year: </span><br /> <input
-									type="text" class="form-control" name="up_year" id="up_year"
+									type="text" class="form-control" name="Year" id="up_year"
 									placeholder="2014" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Course:</span> <br /> <select
-									class="form-control" id="up_courseId">
+									class="form-control" id="up_courseId" name="Course id">
 									<c:forEach items="${allCourses }" var="course">
 									<option value="${course.getCourseId() }">
 										${course.getCourseCode() }
@@ -384,9 +422,38 @@ td {
 									</c:forEach>
 								</select>
 							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Class size: </span><br /> <input
+									type="text" class="form-control" name="Class size" id="up_classSize"
+									placeholder="30" />
+							</div>
+							
+							
+							<!--  Preload evalfactors from course when server side is finished -->
+							
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 1: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 1" id="up_evalFactor1" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 2: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 2" id="up_evalFactor2" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Evaluation 3: </span><br /> <input
+									type="text" class="form-control" name="Evaluation 3" id="up_evalFactor3" disabled />
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Override? </span><br /> <input
+									type="checkbox" class="form-control" name="Override" id="up_override" 
+									onclick="changeEvalFactorStatus(this)" value="1" />
+									<br />
+							</div>
+							
 							<div class="input-group">
 								<span class="input-group-addon">Prep Time:</span> <br /> <select
-									class="form-control" id="up_prepTimeId">
+									class="form-control" id="up_prepTimeId" name="Prep time id">
 									<c:forEach items="${allPrepTime}" var="pt">
 									<option value="${pt.getPrepId() }">
 										${pt.getPrepName() }
@@ -394,6 +461,18 @@ td {
 									</c:forEach>
 								</select>
 							</div>
+							
+							<div class="input-group">
+								<span class="input-group-addon">Factor:</span> <br /> <select
+									class="form-control" id="up_factorId" name="Factor id">
+									<c:forEach items="${allPrepTime}" var="pt">
+									<option value="${pt.getPrepId() }">
+										${pt.getPrepName() }
+									</option>
+									</c:forEach>
+								</select>
+							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="button" onclick="updateFacToCourseSem();"
