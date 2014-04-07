@@ -320,15 +320,23 @@
 	
 	var changeEvalFactorStatus=function(override) {
 		// Enable or disable evalFactor fields
-				
+		
+		var upPattern = new RegExp("up_");
+		var i = 1;
+		var id = "evalFactor";
+		
+		if (upPattern.test(override.getAttribute("id"))) {
+			id = "up_" + id;
+		}
+		
 		if (override.checked) {
-			document.getElementById("evalFactor1").disabled = false;
-			document.getElementById("evalFactor2").disabled = false;
-			document.getElementById("evalFactor3").disabled = false;
+			document.getElementById(id + i++).disabled = false;
+			document.getElementById(id + i++).disabled = false;
+			document.getElementById(id + i++).disabled = false;
 		}
 		else {
-			document.getElementById("evalFactor1").disabled = true;
-			document.getElementById("evalFactor2").disabled = true;
-			document.getElementById("evalFactor3").disabled = true;
-		}
+			document.getElementById(id + i++).disabled = true;
+			document.getElementById(id + i++).disabled = true;
+			document.getElementById(id + i++).disabled = true;
+		}	
 	};
