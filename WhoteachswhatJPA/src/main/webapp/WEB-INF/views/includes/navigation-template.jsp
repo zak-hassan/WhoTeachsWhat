@@ -29,6 +29,9 @@
 						<a href="viewPrepTime">Manage Prep Time</a>
 					</li>
 					<li>
+						<a href="viewFactor">Manage Factor</a>
+					</li>
+					<li>
 						<a href="viewEvalFactor">Manage Evaluation Factor</a>
 					</li>
 					<li>
