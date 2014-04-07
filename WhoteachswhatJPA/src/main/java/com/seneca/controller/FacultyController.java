@@ -35,10 +35,10 @@ public class FacultyController {
 	// DISPLAY UI PAGES:
 	
 	@Autowired
-	FacultyService facultyService;
+	private FacultyService facultyService;
 
 	@Autowired 
-	TeachingTypeService teachingTypeService;
+	private TeachingTypeService teachingTypeService;
 
 	/**
 	 * This method accepts no parameters and maps the URL '/viewFaculty' to a view page

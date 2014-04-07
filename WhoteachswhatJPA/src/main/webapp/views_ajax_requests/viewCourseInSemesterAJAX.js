@@ -1,6 +1,7 @@
  /**
     @Author: Anil Santokhi
     @Purpose: AJAX posting and validation for adding, updating and deleting a course in a semester
+    @Requires: client_side_validation/client_side_validation.js, jQuery 
    */
    
 	// Get course id from query string

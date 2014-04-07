@@ -112,6 +112,7 @@ td {
 								<c:set var="courseId">
 								    <c:out value = "${param.id}" />
 								</c:set> 
+								<%-- 
 								<c:forEach items="${entityList }" var="cis">
 									<c:if test="${cis.getCourse().getCourseId() == courseId || empty courseId}">
 									<tr>
@@ -145,6 +146,7 @@ td {
 									</tr>
 									</c:if>
 								</c:forEach>
+								--%>
 							</tbody>
 						</table>
 					</div>

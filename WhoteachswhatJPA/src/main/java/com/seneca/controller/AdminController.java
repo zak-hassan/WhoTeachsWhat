@@ -1,6 +1,5 @@
 package com.seneca.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,19 +7,21 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.seneca.bireports.Swift;
-import com.seneca.model.CompHour;
+import com.seneca.service.FacultyService;
 import com.seneca.service.FacultyToCourseInSemesterYearService;
+import com.seneca.service.SemesterService;
 
 /**
  * This class is the controller which regulates administrative reporting
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
  * @lastmodified April 7, 2014
  * @version 1.0
  */
@@ -31,7 +32,13 @@ public class AdminController {
 	//		.getLogger(AdminController.class);
 
 	@Autowired
-	FacultyToCourseInSemesterYearService facultyToCourseInSemesterYearService;
+	private FacultyToCourseInSemesterYearService facultyToCourseInSemesterYearService;
+	
+	@Autowired
+	private SemesterService semesterService;
+	
+	@Autowired
+	private FacultyService facultyService;
 	
 	
 	/**
@@ -43,7 +50,10 @@ public class AdminController {
 	 * 		The view page to be rendered
 	 */
 	@RequestMapping(value = "/facultyswiftreport", method = RequestMethod.GET)
-	public String swiftFaculty(){
+	public String swiftFaculty(ModelMap model){
+		model.addAttribute("allFaculty", facultyService.getAllFaculty());
+		model.addAttribute("allSemesters", semesterService.getAll());
+		
 		return "Reports/swiftreport";
 	}
 	

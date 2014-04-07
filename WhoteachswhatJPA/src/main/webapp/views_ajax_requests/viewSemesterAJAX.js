@@ -47,47 +47,7 @@
 							type : 'info',
 							text : 'Semester ' + document.getElementById('semesterName').value + ' has been added'
 						});
-			    		
-			    		$.ajax({
-			    			type: "GET",
-			    			url: "api/semester/"+data.id,
-			    			data: null,
-			    			dataType: "json",
-			    			cache: false,
-			    			success : function(semester){
-			    			
-			    				var createA1 = document.createElement('a');
-			    				var createA2 = document.createElement('a');
-	
-			    				var createA1Text = document.createTextNode("Update");
-			    				var createA2Text = document.createTextNode("Delete");
-			    				
-			    				tempSemester = adsantokhi_quote_string(semester.name);
-			    				
-			    				createA1.setAttribute('onclick', 'updateForm(' + semester.id + ', ' + tempSemester + ')');
-			    				createA1.setAttribute('data-toggle', 'modal');
-			    				createA1.setAttribute('data-target', '#updateSemesterModal');
-	
-			    				createA2.setAttribute('onclick', 'deleteSemester()');
-			    				 
-			    				createA1.appendChild(createA1Text);
-			    				createA2.appendChild(createA2Text);
-			    				
-			    				var updateLink = document.createElement("div");
-			    				updateLink.appendChild(createA1);
-			    				
-			    				var deleteLink = document.createElement("div");
-			    				deleteLink.appendChild(createA2);
-			    				
-			    				var newRow = $('#tableSortable').dataTable()
-			    					.fnAddData( [semester.id, semester.name, updateLink.innerHTML + " " + deleteLink.innerHTML] );
-			    				
-			    				var oSettings = $('#tableSortable').dataTable().fnSettings();
-			    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
-			    				$('td', nTr)[2].setAttribute( 'class', 'align' );
-			    			}
-			    		});
-			    		
+			    		 		
 			    		document.getElementById("addSemesterForm").reset(); // Form needs resetting due to never being submitted
 			    		
 			    		for (i = 0; i < addForm.length - 2; ++i) { // Remove red border on form elements
