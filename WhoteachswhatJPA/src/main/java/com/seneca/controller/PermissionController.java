@@ -19,11 +19,11 @@ import com.seneca.model.AccessLevel;
 import com.seneca.service.PermissionService;
 
 /**
- * This class is the controller which regulates all faculty operations.
+ * This class is the controller which regulates all CRUD operations for access level
  * 
  * @author Anil Santokhi <Anil.D.Santokhi@gmail.com>, Zak Hassan <zak.hassan1010@gmail.>
- * @lastmodified Feb 26, 2014
- * @version 0.0.1
+ * @lastmodified April 7, 2014
+ * @version 1.0
  */
 
 @Controller

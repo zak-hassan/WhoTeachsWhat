@@ -23,18 +23,16 @@ import com.seneca.service.FacultyToCourseInSemesterYearService;
 import com.seneca.service.PrepTimeService;
 import com.seneca.service.SemesterService;
 
+/**
+ * This class is the controller which regulates all CRUD operations for faculty to a course in a semester year
+ * 
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified April 7, 2014
+ * @version 1.0
+ */
+
 @Controller
 public class FacultyToCourseInSemesterYearController {
-
-	/**
-	 * This class is the controller which regulates all evalfactor operations.
-	 * 
-	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
-	 *         <anil.d.santokhI@gmail.com>
-	 * @lastmodified March 10, 2014
-	 * @version 0.0.1
-	 */
-
 	@Autowired
 	private FacultyToCourseInSemesterYearService facultyToCourseInSemesterYearService;
 	
@@ -53,6 +51,14 @@ public class FacultyToCourseInSemesterYearController {
 	@Autowired
 	private CompHoursService compHoursService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/viewFacultyToCourseInSemesterYear' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.FacultyToCourseInSemesterYear
+	 * @return
+	 * 		The view page to be rendered, along with a List of all FacultyToCourseInSemesterYear through the ModelMap
+	 */
 	@RequestMapping(value = "/viewFacultyToCourseInSemesterYear", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allFacultyToCourseInSemesterYear",
@@ -70,15 +76,13 @@ public class FacultyToCourseInSemesterYearController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all FacultyToCourseInSemesterYear types in the database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.FacultyToCourseInSemesterYearService
+	 * @return 
+	 * 		HashMap containing the FacultyToCourseInSemesterYear data in JSON
 	 */
-
 	@RequestMapping(value = "/api/facultyToCourseInSemesterYear", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -103,23 +107,36 @@ public class FacultyToCourseInSemesterYearController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a FacultyToCourseInSemesterYear
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is syncronomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.FacultyToCourseInSemesterYearService
+	 * @param addition_attribute
+	 * 		Additional attributed hours to be assigned
+	 * @param compHour_allowance
+	 * 		To be deleted
+	 * @param compHour_assigned
+	 * 		The amount of complimentary hours this course is worth
+	 * @param section_number
+	 * 		The number of sections the course has
+	 * @param semester_id
+	 * 		Uniquely identifies a Semester object
+	 * @param year
+	 * 		The year where the course took place
+	 * @param compHour_id
+	 * 		Uniquely identifies a CompHour object
+	 * @param course_id
+	 * 		Uniquely identifies a Course object
+	 * @param faculty_id
+	 * 		Uniquely identifies a Faculty object
+	 * @param prepTime_id
+	 * 		Uniquely identifies a PrepTime object
+	 * @param class_size
+	 * 		The size of the class
+	 * @return
+	 * 		A HashMap containing the FacultyToCourseInSemesterYear id and a message containing
+	 * 		the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/facultyToCourseInSemesterYear", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -149,23 +166,38 @@ public class FacultyToCourseInSemesterYearController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of a FacultyToCourseInSemesterYear
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.FacultyToCourseInSemesterYearService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param addition_attribute
+	 * 		Additional attributed hours to be assigned
+	 * @param compHour_allowance
+	 * 		To be deleted
+	 * @param compHour_assigned
+	 * 		The amount of complimentary hours this course is worth
+	 * @param section_number
+	 * 		The number of sections the course has
+	 * @param semester_id
+	 * 		Uniquely identifies a Semester object
+	 * @param year
+	 * 		The year where the course took place
+	 * @param compHour_id
+	 * 		Uniquely identifies a CompHour object
+	 * @param course_id
+	 * 		Uniquely identifies a Course object
+	 * @param faculty_id
+	 * 		Uniquely identifies a Faculty object
+	 * @param prepTime_id
+	 * 		Uniquely identifies a PrepTime object
+	 * @param class_size
+	 * 		The size of the class
+	 * @return
+	 * 		A HashMap containing the FacultyToCourseInSemesterYear id and a message containing
+	 * 		the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -197,23 +229,14 @@ public class FacultyToCourseInSemesterYearController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a DELETE request and allows the deleting of a FacultyToCourseInSemesterYear
 	 * 
-	 * @see com.seneca.ser ourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.FacultyToCourseInSemesterYearService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/facultyToCourseInSemesterYear/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
@@ -224,5 +247,4 @@ public class FacultyToCourseInSemesterYearController {
 		list.put("success", "true");
 		return list;
 	}
-
 }

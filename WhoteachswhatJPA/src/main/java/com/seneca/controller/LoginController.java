@@ -1,5 +1,13 @@
 package com.seneca.controller;
 
+/**
+ * This class is the controller which regulates logging in and the errors it may produce
+ * 
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>
+ * @lastmodified April 7, 2014
+ * @version 1.0
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +39,6 @@ public class LoginController {
 	// @Autowired
 	public AccountService aService = new AccountService();
 
-	
-	
-	
 	// REST
 	@RequestMapping(value = "/ajaxLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody

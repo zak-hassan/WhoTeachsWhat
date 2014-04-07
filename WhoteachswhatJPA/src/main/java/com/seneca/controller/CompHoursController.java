@@ -19,11 +19,11 @@ import com.seneca.model.CompHour;
 import com.seneca.service.CompHoursService;
 
 /**
- * This class is the controller which regulates all faculty operations.
+ * This class is the controller which regulates all complimentary hour CRUD operations.
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
  * @lastmodified Feb 27, 2014
- * @version 0.0.1
+ * @version 1.0
  */
 
 @Controller
@@ -32,6 +32,14 @@ public class CompHoursController {
 	@Autowired
 	private CompHoursService compHoursService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/manageCompHours' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.CompHour
+	 * @return
+	 * 		The view page to be rendered, along with a List of all CompHours through the ModelMap
+	 */
 	@RequestMapping(value = "/manageCompHours", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		
@@ -43,14 +51,13 @@ public class CompHoursController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all comp hour types in the
-	 * database.
+	 * This method accepts no parameters and returns all comp hour types in the database.
 	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.CompHoursService
+	 * @return 
+	 * 		HashMap containing the Comphour name and code in JSON
 	 */
-
 	@RequestMapping(value = "/api/comphour", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -67,14 +74,13 @@ public class CompHoursController {
 	/**
 	 * This method accepts an identifier and returns a CompHour object with a matching id
 	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.CompHoursService
 	 * @param id
 	 * 		 Uniquely identifies the object
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @return 
+	 * 		HashMap containing the Comphour name and code in JSON
 	 */
-
 	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
@@ -89,19 +95,17 @@ public class CompHoursController {
 	}
 
 	/**
-	 * This method accepts data posted from the AddCompHourTypeForm and adds a
-	 * comp hour type using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a CompHour
 	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.CompHoursService
 	 * @param comp_hour_code
 	 * 		A code uniquely identifying the comp hour type
 	 * @param comp_hour_type
 	 * 		The name of the comp hour type
-	 * 
-	 * @return A list containing the success of the operation
+	 * @return 
+	 * 		A HashMap containing the CompHour id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/comphour", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -118,21 +122,19 @@ public class CompHoursController {
 	}
 
 	/**
-	 * This method accepts data posted from the updateCompHourTypeForm and updates a
-	 * comp hour type using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of a CompHour
 	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.CompHoursService
 	 * @param id
 	 * 		 Uniquely identifies the object
 	 * @param comp_hour_code
 	 * 		A code uniquely identifying the comp hour type
 	 * @param comp_hour_type
 	 * 		The name of the comp hour type
-	 * 
-	 * @return A list containing the success of the operation
+	 * @return
+	 * 		A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/comphour/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -148,17 +150,14 @@ public class CompHoursController {
 	}
 
 	/**
-	 * This method accepts an identifier and deletes a CompHour object with a matching id. Must be accessed through
-	 * HTTP DELETE
+	 * This method is accessed through a DELETE request and allows the deleting of a CompHour
 	 * 
-	 * @see com.seneca.service.CompHoursService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.CompHoursService
 	 * @param id
 	 * 		 Uniquely identifies the object
-	 * 
-	 * @return A list containing the success of the operation
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/comphours/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {

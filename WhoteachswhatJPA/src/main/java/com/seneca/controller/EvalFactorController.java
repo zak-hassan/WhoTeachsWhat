@@ -18,20 +18,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.seneca.model.EvalFactor;
 import com.seneca.service.EvalFactorService;
 
+
+/**
+ * This class is the controller which regulates all CRUD operations for an evaluation factor
+ *
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified April, 7 2014
+ * @version 1.0
+ */
+
 @Controller
 public class EvalFactorController {
-	/**
-	 * This class is the controller which regulates all evalfactor operations.
-	 *
-	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
-	 *         <anil.d.santokhI@gmail.com>
-	 * @lastmodified March 10, 2014
-	 * @version 0.0.1
-	 */
-
 	@Autowired
 	private EvalFactorService evalFactorService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/viewEvalFactor' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.EvalFactor
+	 * @return
+	 * 		The view page to be rendered, along with a List of all EvalFactors through the ModelMap
+	 */
 	@RequestMapping(value = "/viewEvalFactor", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allEvalFactors", evalFactorService.getAll());
@@ -42,15 +50,13 @@ public class EvalFactorController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
-	 *
-	 * @see com.seneca.service.CourseService
-	 *
-	 *
-	 * @return JSON object with a list of course to display in datatable
+	 * This method accepts no parameters and returns all EvalFactors in the database.
+	 * 
+	 * @see
+	 * 		com.seneca.service.EvalFactorService
+	 * @return 
+	 * 		HashMap containing the EvalFactor name and id in JSON
 	 */
-
 	@RequestMapping(value = "/api/evalfactor", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -66,15 +72,15 @@ public class EvalFactorController {
 	}
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all EvalFactors in the database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @see
+	 * 		com.seneca.service.EvalFactorService
+	 * @return 
+	 * 		HashMap containing the EvalFactor name and id in JSON
 	 */
-
 	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
@@ -89,23 +95,17 @@ public class EvalFactorController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of an EvalFactor
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is syncronomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.EvalFactorService
+	 * @param evalName
+	 * 		The name of the evaluation
+	 * @param evalFactor
+	 * 		To be deleted
+	 * @return
+	 * 		A HashMap containing the EvalFactor id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/evalfactor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -120,23 +120,19 @@ public class EvalFactorController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
-	 *
-	 * @see com.seneca.service.CourseService
-	 *
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 *
-	 * @return A String containing the name of the view to render
+	 * This method is accessed through a POST request and allows the updating of an EvalFactor
+	 * 
+	 * @see
+	 * 		com.seneca.service.EvalFactorService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param evalName
+	 * 		The name of the evaluation
+	 * @param evalFactor
+	 * 		To be deleted
+	 * @return
+	 * 		A HashMap containing the containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -151,23 +147,14 @@ public class EvalFactorController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
-	 *
-	 * @see com.seneca.service.CourseService
-	 *
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 *
-	 * @return A String containing the name of the view to render
+	 * This method is accessed through a DELETE request and allows the deleting of a EvalFactor
+	 * 
+	 * @see 
+	 * 		com.seneca.service.EvalFactorService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
@@ -178,5 +165,4 @@ public class EvalFactorController {
 		list.put("success", "true");
 		return list;
 	}
-
 }

@@ -23,17 +23,16 @@ import com.seneca.service.EvalFactorService;
 import com.seneca.service.SemesterService;
 
 /**
- * This class is the controller which regulates all faculty operations.
+ * This class is the controller which regulates all CRUD operations for a course instance in a semester year.
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
- * @lastmodified March 10, 2014
- * @version 0.0.1
+ * @lastmodified April 7, 2014
+ * @version 1.0
  */
 
 @Controller
 public class CourseInSemesterController {
 
-	
 	@Autowired
 	private CourseInSemesterService courseInSemesterService;
 	
@@ -46,6 +45,14 @@ public class CourseInSemesterController {
 	@Autowired
 	private CourseService courseService;
 	
+	/**
+	 * This method accepts no parameters and maps the URL '/viewCourseInSemester' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.CourseInSemester
+	 * @return
+	 * 		The view page to be rendered, along with a List of all CourseInSemesters through the ModelMap
+	 */
 	@RequestMapping(value = "/viewCourseInSemester", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("entityList", courseInSemesterService.getAll());
@@ -57,30 +64,16 @@ public class CourseInSemesterController {
 		return "Course/viewCourseInSemester";
 	}
 
-	@RequestMapping(value = "/updateCourseInSemester", method = RequestMethod.GET)
-	public String update() {
-		return "Course/update_course";
-	}
-
-	@RequestMapping(value = "/addCourseInSemester", method = RequestMethod.GET)
-	public String add() {
-		return "Course/add_course";
-	}
-	
-
 	// REST API ENDPOINTS:
 	
-	
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all CourseInSemesters in the database.
 	 * 
-	 * @see com.seneca.service.CourseInSemesterService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.CourseInSemesterService
+	 * @return 
+	 * 		A List of CourseInSemester maps in JSON
 	 */
-
 	@RequestMapping(value = "/api/courseinsemester", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -98,25 +91,36 @@ public class CourseInSemesterController {
 		return items;
 	}
 	
-	
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a CourseInSemester
 	 * 
-	 * @see com.seneca.service.CourseInSemesterService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is syncronomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.CourseInSemesterService
+	 * @param addition_attribute
+	 * 		An additional attribution of hours
+	 * @param eval_1_ans
+	 * 		To be deleted
+	 * @param eval_2_ans
+	 * 		To be deleted
+	 * @param eval_3_ans
+	 * 		To be deleted
+	 * @param eval_1
+	 * 		To be deleted
+	 * @param eval_2
+	 * 		To be deleted
+	 * @param eval_3
+	 * 		To be deleted
+	 * @param sectionNumbers
+	 * 		The number of sections a course has
+	 * @param year
+	 * 		The year this course occurs in
+	 * @param course_id
+	 * 		Uniquely identifies a Course object
+	 * @param semester_id
+	 * 		Uniquely identifies a Semester object
+	 * @return
+	 * 		A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/courseinsemester", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -148,23 +152,37 @@ public class CourseInSemesterController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a CourseInSemester
 	 * 
-	 * @see com.seneca.service.CourseInSemesterService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.CourseInSemesterService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param addition_attribute
+	 * 		An additional attribution of hours
+	 * @param eval_1_ans
+	 * 		To be deleted
+	 * @param eval_2_ans
+	 * 		To be deleted
+	 * @param eval_3_ans
+	 * 		To be deleted
+	 * @param eval_1
+	 * 		To be deleted
+	 * @param eval_2
+	 * 		To be deleted
+	 * @param eval_3
+	 * 		To be deleted
+	 * @param sectionNumbers
+	 * 		The number of sections a course has
+	 * @param year
+	 * 		The year this course occurs in
+	 * @param course_id
+	 * 		Uniquely identifies a Course object
+	 * @param semester_id
+	 * 		Uniquely identifies a Semester object
+	 * @return
+	 * 		A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/courseinsemester/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -193,23 +211,14 @@ public class CourseInSemesterController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a DELETE request and allows the deleting of a CourseInSemester
 	 * 
-	 * @see com.seneca.service.CourseInSemesterService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.CourseInSemesterService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/courseinsemester/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {

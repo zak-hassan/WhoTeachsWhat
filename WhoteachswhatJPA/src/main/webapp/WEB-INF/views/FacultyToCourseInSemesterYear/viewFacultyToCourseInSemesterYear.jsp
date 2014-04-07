@@ -123,7 +123,7 @@ td {
 											${facToCourse.getFaculty().getFacultyLastName() }
 										</td>
 										<td>${facToCourse.getCourse().getCourseCode() } x ${facToCourse.getSectionNumber() }</td>
-										<td>${facToCourse.getSemesterId() } ${facToCourse.getYear() }</td>
+										<td>${facToCourse.getSemester().getSemesterName() } ${facToCourse.getYear() }</td>
 										<td>${facToCourse.getCompHour().getCompHour_name()}</td>
 										<td>${facToCourse.getCompHour_assigned() }</td>
 										<td>
@@ -140,7 +140,7 @@ td {
 													'${facToCourse.getCompHour_allowance() }',
 													'${facToCourse.getCompHour_assigned() }',
 													'${facToCourse.getSectionNumber() }',
-													'${facToCourse.getSemesterId() }',
+													'${facToCourse.getSemester().getSemesterId() }',
 													'${facToCourse.getYear() }',
 													'${facToCourse.getCompHour().getCompHour_id() }',
 													'${facToCourse.getCourse().getCourseId() }',

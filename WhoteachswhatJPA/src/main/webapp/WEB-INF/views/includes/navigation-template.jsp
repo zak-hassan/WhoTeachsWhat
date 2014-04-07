@@ -96,6 +96,9 @@
 					<li>
 						<a href="teachingHistory">Teaching History</a>
 					</li>
+					<li>
+						<a href="facultyswiftreport">Swift Report</a>
+					</li>
 				</ul>
 			</div>
 		</li>

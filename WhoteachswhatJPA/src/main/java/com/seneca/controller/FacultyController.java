@@ -22,10 +22,9 @@ import com.seneca.service.TeachingTypeService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
- *         <Anil.D.Santokhi@gmail.com>
- * @lastmodified March 22, 2014
- * @version 0.0.1
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <Anil.D.Santokhi@gmail.com>
+ * @lastmodified April 7, 2014
+ * @version 1.0
  */
 
 @Controller
@@ -41,6 +40,14 @@ public class FacultyController {
 	@Autowired 
 	TeachingTypeService teachingTypeService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/viewFaculty' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.Faculty
+	 * @return
+	 * 		The view page to be rendered, along with a List of all Faculty through the ModelMap
+	 */
 	@RequestMapping(value = "/viewFaculty", method = RequestMethod.GET)
 	public String viewFaculty(ModelMap model) {
 		// logger.info("WTWNavigator: \t /viewFaculty");
@@ -54,34 +61,18 @@ public class FacultyController {
 		return "Faculty/viewFaculty";
 	}
 
-	@RequestMapping(value = "/updateFaculty", method = RequestMethod.GET)
-	public String updateFaculty() {
-		// logger.info("INFO: NAVIGATING TO FACULTY VIEW ");
-		// logger.info("WTWNavigator: \t /updateFaculty");
-		return "Faculty/updateFaculty";
-	}
-
-	@RequestMapping(value = "/addFaculty", method = RequestMethod.GET)
-	public String processAddFaculty() {
-		// logger.info("INFO: NAVIGATING TO FACULTY VIEW ");
-		// logger.info("WTWNavigator: \t /addFaculty");
-		return "Faculty/addFaculty";
-	}
-
 	// REST API ENDPOINTS:
-	
-
-	
+		
 	/**
-	 * This method accepts no parameters and returns all faculty in in the
-	 * database.
+	 * This method accepts no parameters and returns a single Faculty in the database based on the passed id
 	 * 
-	 * @see com.seneca.service.FacultyService
-	 * 
-	 * 
-	 * @return JSON object with a list of faculty to display in datatable
+	 * @see
+	 * 		com.seneca.service.FacultyService
+	 * @param
+	 * 		Uniquely identifies the object
+	 * @return 
+	 * 		HashMap containing faculty first name, last name, id, teaching hours and teaching type in JSON
 	 */
-
 	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetOneFacultyJSON(
@@ -100,15 +91,13 @@ public class FacultyController {
 	}
 	
 	/**
-	 * This method accepts no parameters and returns all faculty in in the
-	 * database.
+	 * This method accepts no parameters and returns a single Faculty in the database based on the passed id
 	 * 
-	 * @see com.seneca.service.FacultyService
-	 * 
-	 * 
-	 * @return JSON object with a list of faculty to display in datatable
+	 * @see
+	 * 		com.seneca.service.FacultyService
+	 * @return 
+	 * 		A List containing faculty first name, last name, id, teaching hours and teaching type in JSON
 	 */
-
 	@RequestMapping(value = "/api/faculty", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetFacultyJSON() {
@@ -126,24 +115,20 @@ public class FacultyController {
 		return items;
 	}
 	
-	
 	/**
-	 * This method accepts data posted from the AddFacultyForm and adds a
-	 * faculty member using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a Faculty
 	 * 
-	 * @see com.seneca.service.FacultyService
-	 * 
+	 * @see
+	 * 		com.seneca.service.FacultyService
 	 * @param faculty_first_name
-	 *            The first name of the faculty member
+	 * 		Faculty member's first name
 	 * @param faculty_last_name
-	 *            The last name of the faculty member
-	 * @param faculty_status
-	 *            The status of a faculty member. Can either be part time or
-	 *            full time
-	 * 
-	 * @return A String containing the name of the view to render
+	 * 		Faculty member's last name
+	 * @param status
+	 * 		The current status of the faculty member
+	 * @return
+	 * 		A HashMap containing the Faculty id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/faculty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddFacultyJSON(
@@ -162,22 +147,21 @@ public class FacultyController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateFacultyForm and updates a
-	 * faculty member using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of a Faculty
 	 * 
-	 * @see com.seneca.service.FacultyService
-	 * 
+	 * @see
+	 * 		com.seneca.service.FacultyService
+	 * @param id
+	 * 		Uniquely identifies the object
 	 * @param faculty_first_name
-	 *            The first name of the faculty member
+	 * 		Faculty member's first name
 	 * @param faculty_last_name
-	 *            The last name of the faculty member
-	 * @param faculty_status
-	 *            The status of a faculty member. Can either be part time or
-	 *            full time
-	 * 
-	 * @return A String containing the name of the view to render
+	 * 		Faculty member's last name
+	 * @param status
+	 * 		The current status of the faculty member
+	 * @return
+	 * 		A HashMap containing the message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateFacultyJSON(
@@ -194,22 +178,14 @@ public class FacultyController {
 	}
 
 	/**
-	 * This method accepts data posted from the DeleteFacultyForm and delete a
-	 * faculty member using the appropriate service method
+	 * This method is accessed through a DELETE request and allows the deleting of a Faculty
 	 * 
-	 * @see com.seneca.service.FacultyService
-	 * 
-	 * @param faculty_first_name
-	 *            The first name of the faculty member
-	 * @param faculty_last_name
-	 *            The last name of the faculty member
-	 * @param faculty_status
-	 *            The status of a faculty member. Can either be part time or
-	 *            full time
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.FacultyService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/faculty/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteFacultyJSON(@PathVariable("id") Integer id) {
@@ -220,6 +196,4 @@ public class FacultyController {
 		list.put("success", "true");
 		return list;
 	}
-
-
 }

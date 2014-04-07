@@ -18,16 +18,12 @@ import com.seneca.model.CompHour;
 import com.seneca.service.FacultyToCourseInSemesterYearService;
 
 /**
- * This class is the controller which regulates all faculty operations.
+ * This class is the controller which regulates administrative reporting
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>
- * @lastmodified Dec 31, 2013
- * @version 0.0.1
+ * @lastmodified April 7, 2014
+ * @version 1.0
  */
-
-// This controller is not needed. It does nothing but call on actions that other controllers
-// should manage
-
 
 @Controller
 public class AdminController {
@@ -38,16 +34,34 @@ public class AdminController {
 	FacultyToCourseInSemesterYearService facultyToCourseInSemesterYearService;
 	
 	
-	@RequestMapping(value = "/manageCourseSection", method = RequestMethod.GET)
-	public String updateFaculty() {
-		return "Anil_ManageCourseSections";
-	}
-	
+	/**
+	 * This method accepts no parameters and maps the URL '/facultyswiftreport' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.FacultyToCourseInSemesterYear.java
+	 * @return
+	 * 		The view page to be rendered
+	 */
 	@RequestMapping(value = "/facultyswiftreport", method = RequestMethod.GET)
 	public String swiftFaculty(){
 		return "Reports/swiftreport";
 	}
 	
+	
+	/**
+	 * This method returns a faculty member's swift report for a given semester year
+	 * 
+	 * @see		
+	 * 		com.seneca.bireports.Swift.java, com.seneca.service.FacultyToCourseInSemesterYearService.java
+	 * @param id	
+	 * 		This parameter is an identifier taken from request parameter in the URL.
+	 * @param semester
+	 * 		This parameter is an identifier for a specific Semester object
+	 * @param year
+	 * 		This parameter is an Integer denoting a year
+	 * @return
+	 * 		A map of a Swift List
+	 */
 	@RequestMapping(value = "/api/facultyswiftreport", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Map<String, List<Swift>> swiftFaculty(@RequestParam(value = "id", required = true) Integer id,
 			@RequestParam(value = "semester",required=true) Integer semester,

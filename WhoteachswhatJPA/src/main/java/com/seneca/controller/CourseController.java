@@ -19,11 +19,11 @@ import com.seneca.model.Course;
 import com.seneca.service.CourseService;
 
 /**
- * This class is the controller which regulates all faculty operations.
+ * This class is the controller which regulates all course CRUD operations.
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
- * @lastmodified March 10, 2014
- * @version 0.0.1
+ * @lastmodified April 7, 2014
+ * @version 1.0
  */
 
 @Controller
@@ -32,6 +32,14 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
+	/**
+	 * This method accepts no parameters and maps the URL '/viewCourse' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.Course
+	 * @return
+	 * 		The view page to be rendered, along with a List of all Courses through the ModelMap
+	 */
 	@RequestMapping(value = "/viewCourse", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allCourses", courseService.getAll());
@@ -39,30 +47,16 @@ public class CourseController {
 		return "Course/view_courses";
 	}
 
-	@RequestMapping(value = "/updateCourse", method = RequestMethod.GET)
-	public String update() {
-		return "Course/update_course";
-	}
-
-	@RequestMapping(value = "/addCourse", method = RequestMethod.GET)
-	public String add() {
-		return "Course/add_course";
-	}
-	
-
 	// REST API ENDPOINTS:
 	
-	
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all courses in the database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.CourseService
+	 * @return 
+	 * 		A List of HashMaps containing course code and name in JSON
 	 */
-
 	@RequestMapping(value = "/api/course", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -79,15 +73,15 @@ public class CourseController {
 	}
 	
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns a single course in the database based on the passed id
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.CourseService
+	 * @param
+	 * 		Uniquely identifies the object
+	 * @return 
+	 * 		HashMap containing course code and name in JSON
 	 */
-
 	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetOneJSON(@PathVariable("id") Integer id) {
@@ -101,19 +95,21 @@ public class CourseController {
 	}
 	
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
-	 * service method
+	 * This method is accessed through a POST request and allows the creation of a Course
 	 * 
-	 * @see 						com.seneca.service.CourseService
-	 * 
-	 * @param courseCode			The six to eight digit course code
-	 * @param courseName			The name of the course
-	 * @param crossoverCourse		The course code that is syncronomous with this course code
-	 * @param oldCourse				The previous course code of the course, if any
-	 * 
-	 * @return						A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.CourseService
+	 * @param courseCode
+	 * 		The six to eight digit course code
+	 * @param courseName
+	 * 		The name of the course
+	 * @param crossoverCourse
+	 * 		The course code that is synonymous with this course code
+	 * @param oldCourse
+	 * 		The previous course code of the course, if any
+	 * @return
+	 * 		A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/course", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -132,19 +128,23 @@ public class CourseController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
-	 * service method
+	 * This method is accessed through a POST request and allows the updating of a Course
 	 * 
-	 * @see 						com.seneca.service.CourseService
-	 * 
-	 * @param courseCode			The six to eight digit course code
-	 * @param courseName			The name of the course
-	 * @param crossoverCourse		The course code that is synonomous with this course code
-	 * @param oldCourse				The previous course code of the course, if any
-	 * 
-	 * @return						A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.CourseService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param courseCode
+	 * 		The six to eight digit course code
+	 * @param courseName
+	 * 		The name of the course
+	 * @param crossoverCourse
+	 * 		The course code that is synonymous with this course code
+	 * @param oldCourse
+	 * 		The previous course code of the course, if any
+	 * @return
+	 * 		A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -164,19 +164,14 @@ public class CourseController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a course using the appropriate
-	 * service method
+	 * This method is accessed through a DELETE request and allows the deleting of a Course
 	 * 
-	 * @see 						com.seneca.service.CourseService
-	 * 
-	 * @param courseCode			The six to eight digit course code
-	 * @param courseName			The name of the course
-	 * @param crossoverCourse		The course code that is synonomous with this course code
-	 * @param oldCourse				The previous course code of the course, if any
-	 * 
-	 * @return						A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.CourseService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/course/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
