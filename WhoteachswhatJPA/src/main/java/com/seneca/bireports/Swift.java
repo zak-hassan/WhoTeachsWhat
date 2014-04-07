@@ -1,6 +1,12 @@
 package com.seneca.bireports;
 
-public class Swift {
+import java.io.Serializable;
+
+public class Swift implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String course_code;
 	private double teaching_hours;
 	private char lang='E';
@@ -124,6 +130,101 @@ public class Swift {
 	}
 	public void setRef(char ref) {
 		this.ref = ref;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(additional_attr_hours);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(attr_hours);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + class_size;
+		temp = Double.doubleToLongBits(comp_hours_allowed);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(comp_hours_assigned);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((course_code == null) ? 0 : course_code.hashCode());
+		result = prime * result + eval_e_percent;
+		temp = Double.doubleToLongBits(eval_factor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + eval_p_percent;
+		result = prime * result + eval_r_percent;
+		result = prime * result + lang;
+		temp = Double.doubleToLongBits(prep_additional_hours);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(prep_attributed_hours);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(prep_factor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((prep_type == null) ? 0 : prep_type.hashCode());
+		result = prime * result + ref;
+		temp = Double.doubleToLongBits(teaching_hours);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Swift other = (Swift) obj;
+		if (Double.doubleToLongBits(additional_attr_hours) != Double
+				.doubleToLongBits(other.additional_attr_hours))
+			return false;
+		if (Double.doubleToLongBits(attr_hours) != Double
+				.doubleToLongBits(other.attr_hours))
+			return false;
+		if (class_size != other.class_size)
+			return false;
+		if (Double.doubleToLongBits(comp_hours_allowed) != Double
+				.doubleToLongBits(other.comp_hours_allowed))
+			return false;
+		if (Double.doubleToLongBits(comp_hours_assigned) != Double
+				.doubleToLongBits(other.comp_hours_assigned))
+			return false;
+		if (course_code == null) {
+			if (other.course_code != null)
+				return false;
+		} else if (!course_code.equals(other.course_code))
+			return false;
+		if (eval_e_percent != other.eval_e_percent)
+			return false;
+		if (Double.doubleToLongBits(eval_factor) != Double
+				.doubleToLongBits(other.eval_factor))
+			return false;
+		if (eval_p_percent != other.eval_p_percent)
+			return false;
+		if (eval_r_percent != other.eval_r_percent)
+			return false;
+		if (lang != other.lang)
+			return false;
+		if (Double.doubleToLongBits(prep_additional_hours) != Double
+				.doubleToLongBits(other.prep_additional_hours))
+			return false;
+		if (Double.doubleToLongBits(prep_attributed_hours) != Double
+				.doubleToLongBits(other.prep_attributed_hours))
+			return false;
+		if (Double.doubleToLongBits(prep_factor) != Double
+				.doubleToLongBits(other.prep_factor))
+			return false;
+		if (prep_type == null) {
+			if (other.prep_type != null)
+				return false;
+		} else if (!prep_type.equals(other.prep_type))
+			return false;
+		if (ref != other.ref)
+			return false;
+		if (Double.doubleToLongBits(teaching_hours) != Double
+				.doubleToLongBits(other.teaching_hours))
+			return false;
+		return true;
 	}
 	
 	
