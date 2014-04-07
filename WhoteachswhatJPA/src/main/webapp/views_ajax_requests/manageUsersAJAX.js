@@ -244,6 +244,7 @@
 							text : 'User ' + username + ' has been suspended'
 						});
 				   	}
+			    	location.reload(); // Refresh page..
 				}
 			});
 		}
