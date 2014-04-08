@@ -75,11 +75,10 @@
 				<small>Manage Prep Time</small>
 			</h2>
 			<h3>
-				<small>Add, Update and Delete users</small>
+				<small>Add, Update and Delete preparation times</small>
 			</h3>
 		</header>
-		<form method="post" action="api/preptime" id="AddPreptimeForm"
-			onsubmit="return validateNewUser();" class="form-horizontal">
+		<form class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
