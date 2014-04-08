@@ -104,30 +104,30 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<%-- 
-								<c:forEach items="${allSemesters }" var="semester">
+								<c:forEach items="${allFactors }" var="factor">
 									<tr>
 
-										<td>${semester.getSemesterId() }</td>
+										<td>${factor.getFactorId() }</td>
 
-										<td>${semester.getSemesterName() }</td>
+										<td>${factor.getFactorName() }</td>
+										<td>${factor.getFactorVal() }</td>
 										<td class="align">
 											<a
 												class="bootstrap-tooltip" data-original-title="Update"
-												onclick="updateForm('${semester.getSemesterId() }', '${semester.getSemesterName() }')"
-												data-toggle="modal" data-target="#updateSemesterModal">
+												onclick="updateForm('${factor.getFactorId() }', '${factor.getFactorName() }',
+													'${factor.getFactorVal() }' )"
+												data-toggle="modal" data-target="#updateFactorModal">
 												<i class="icon-edit"></i>
 											</a>
 											<a 
 												class="bootstrap-tooltip" data-original-title="Delete" 
-												onclick="deleteForm('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')"
+												onclick="deleteForm('${factor.getFactorId() }', ' ${factor.getFactorName() } ')"
 												data-toggle="modal" data-target="#deleteModal">
 												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>
 								</c:forEach>
-								--%>
 							</tbody>
 						</table>
 					</div>

@@ -41,7 +41,7 @@ public class FactorController {
 	
 	@RequestMapping(value = "/viewFactor", method = RequestMethod.GET)
 	public String view(ModelMap model) {
-		model.addAttribute("allFactors", null);
+		model.addAttribute("allFactors", factorService.getAll());
 
 		return "Factor/viewFactor";
 	}

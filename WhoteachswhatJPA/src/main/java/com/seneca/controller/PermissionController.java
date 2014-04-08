@@ -49,14 +49,13 @@ public class PermissionController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all comp hour types in the
-	 * database.
+	 * This method accepts no parameters and returns all access levels in the database.
 	 * 
-	 * @see com.seneca.service.PermissionsService
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.AccessLevelService
+	 * @return 
+	 * 		HashMap containing the Access level name and id in JSON
 	 */
-
 	@RequestMapping(value = "/api/permission", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -71,17 +70,15 @@ public class PermissionController {
 	}
 
 	/**
-	 * This method accepts an identifier and returns a Permission object with a
-	 * matching id
+	 * This method accepts an identifier and returns an AccessLevel object with a matching id
 	 * 
-	 * @see com.seneca.service.PermissionsService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.AccessLevelService
 	 * @param id
-	 *            Uniquely identifies the object
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * 		 Uniquely identifies an AccessLevel object
+	 * @return 
+	 * 		HashMap containing the Access level name and id in JSON
 	 */
-
 	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
@@ -94,19 +91,15 @@ public class PermissionController {
 	}
 
 	/**
-	 * This method accepts data posted from the AddPermissionTypeForm and adds a
-	 * comp hour type using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of an AccessLevel
 	 * 
-	 * @see com.seneca.service.PermissionsService
-	 * 
-	 * @param comp_hour_code
-	 *            A code uniquely identifying the comp hour type
-	 * @param comp_hour_type
-	 *            The name of the comp hour type
-	 * 
-	 * @return A list containing the success of the operation
+	 * @see 
+	 * 		com.seneca.service.AccessLevelService
+	 * @param permission_name
+	 * 		The name of the access level (user's role)
+	 * @return 
+	 * 		A HashMap containing the Access level id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/permission", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -122,21 +115,17 @@ public class PermissionController {
 	}
 
 	/**
-	 * This method accepts data posted from the updatePermissionTypeForm and
-	 * updates a comp hour type using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of an AccessLevel
 	 * 
-	 * @see com.seneca.service.PermissionsService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.AccessLevelService
 	 * @param id
-	 *            Uniquely identifies the object
-	 * @param comp_hour_code
-	 *            A code uniquely identifying the comp hour type
-	 * @param comp_hour_type
-	 *            The name of the comp hour type
-	 * 
-	 * @return A list containing the success of the operation
+	 * 		Uniquely identifies an AccessLevel object
+	 * @param permission_name
+	 * 		The name of the access level (user's role)
+	 * @return 
+	 * 		A HashMap containing the Access level id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -151,17 +140,14 @@ public class PermissionController {
 	}
 
 	/**
-	 * This method accepts an identifier and deletes a Permission object with a
-	 * matching id. Must be accessed through HTTP DELETE
+	 * This method is accessed through a DELETE request and allows the deleting of an AccessLevel
 	 * 
-	 * @see com.seneca.service.PermissionsService
-	 * 
+	 * @see 
+	 * 		com.seneca.service.AccessLevelService
 	 * @param id
-	 *            Uniquely identifies the object
-	 * 
-	 * @return A list containing the success of the operation
+	 * 		 Uniquely identifies an AccessLevel object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/permission/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer pid) {
