@@ -104,7 +104,6 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<%-- 
 								<c:forEach items="${allSemesters }" var="semester">
 									<tr>
 
@@ -127,7 +126,6 @@ td {
 										</td>
 									</tr>
 								</c:forEach>
-								--%>
 							</tbody>
 						</table>
 					</div>
