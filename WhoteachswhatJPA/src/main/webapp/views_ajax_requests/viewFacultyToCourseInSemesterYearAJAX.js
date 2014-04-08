@@ -68,7 +68,7 @@
 		if (!validate_integer(comphourId.value)) {
 			valid = false;
 			errors[j] = comphourId.getAttribute("name") + "  must be a number";
-			elementsId[j++] = semesterId.getAttribute("id");
+			elementsId[j++] = comphourId.getAttribute("id");
 		}
 		
 		if (!validate_integer(courseId.value)) {

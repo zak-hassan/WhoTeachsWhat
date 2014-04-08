@@ -123,23 +123,19 @@ public class PrepTimeController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of a PrepTime
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.PrepTimeService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param preptimeName
+	 * 		The name of the prep time. Can only be 1-2 characters
+	 * @param preptimeFactor
+	 * 		The applied factor
+	 * @return
+	 * 		A HashMap containing a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/preptime/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -161,23 +157,14 @@ public class PrepTimeController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a DELETE request and allows the deleting of a PrepTime
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.PrepTimeService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/preptime/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {

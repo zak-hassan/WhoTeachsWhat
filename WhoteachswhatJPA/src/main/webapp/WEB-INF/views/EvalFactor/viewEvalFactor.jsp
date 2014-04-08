@@ -100,7 +100,6 @@ td {
 							<thead>
 								<tr>
 									<th>Name</th>
-									<th>Evaluation Factor(s)</th>
 									<th width="25%" style="text-align: right">Operation(s)</th>
 								</tr>
 							</thead>
@@ -109,12 +108,10 @@ td {
 									<tr>
 
 										<td>${evalFactor.getEvalName() }</td>
-										<td>${evalFactor.getFactorVal() }</td>
 										<td class="align">
 											<a
 												class="bootstrap-tooltip" data-original-title="Update"
-												onclick="updateForm('${evalFactor.getEvalId() }', '${evalFactor.getEvalName() }',
-													'${evalFactor.getFactorVal()}' )"
+												onclick="updateForm('${evalFactor.getEvalId() }', '${evalFactor.getEvalName() }' )"
 												data-toggle="modal" data-target="#updateEvalFactorModal">
 												<i class="icon-edit"></i>
 											</a>

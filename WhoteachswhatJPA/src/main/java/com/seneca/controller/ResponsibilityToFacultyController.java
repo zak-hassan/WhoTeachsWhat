@@ -21,17 +21,16 @@ import com.seneca.service.ResponsibilityService;
 import com.seneca.service.ResponsibilityToFacultyService;
 import com.seneca.service.SemesterService;
 
+/**
+ * This class is the controller which regulates all CRUD operations for adding a responsibility to a faculty member.
+ * 
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @lastmodified April 7, 2014
+ * @version 1.0
+ */
+
 @Controller
 public class ResponsibilityToFacultyController {
-
-	/**
-	 * This class is the controller which regulates all evalfactor operations.
-	 * 
-	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
-	 *         <anil.d.santokhI@gmail.com>
-	 * @lastmodified March 10, 2014
-	 * @version 0.0.1
-	 */
 
 	@Autowired
 	private ResponsibilityToFacultyService responsibilityToFacultyService;
@@ -45,6 +44,15 @@ public class ResponsibilityToFacultyController {
 	@Autowired
 	private SemesterService semesterService;
 
+	
+	/**
+	 * This method accepts no parameters and maps the URL '/viewResponsibilityToFaculty' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.ResponsibilityToFaculty
+	 * @return
+	 * 		The view page to be rendered, along with a List of all ResponsibilityToFaculty through the ModelMap
+	 */
 	@RequestMapping(value = "/viewResponsibilityToFaculty", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allResponsibilityToFaculty",
@@ -59,15 +67,13 @@ public class ResponsibilityToFacultyController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all ResponsibilityToFaculty in the database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.ResponsibilityToFacultyService
+	 * @return 
+	 * 		HashMap containing ResponsibilityToFaculty data in JSON
 	 */
-
 	@RequestMapping(value = "/api/ResponsibilityToFaculty", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -88,23 +94,23 @@ public class ResponsibilityToFacultyController {
 	}
 	
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a ResponsibilityToFaculty
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is syncronomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.ResponsibilityToFacultyService
+	 * @param facultyId
+	 * 		Uniquely identifies a Faculty object
+	 * @param responsibilityId
+	 * 		Uniquely identifies a Responsibility object
+	 * @param year
+	 * 		The year of this object's instance
+	 * @param semesterId
+	 * 		Uniquely identifies a Semester object
+	 * @param hoursperweek
+	 * 		The hours per week the faculty member is required to work
+	 * @return
+	 * 		HashMap containing the success of the operation along with the id in JSON
 	 */
-
 	@RequestMapping(value = "/api/ResponsibilityToFaculty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
@@ -127,23 +133,25 @@ public class ResponsibilityToFacultyController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the updating of a ResponsibilityToFaculty
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.ResponsibilityToFacultyService
+	 * @param id
+	 * 		Uniquely identifies the object
+	 * @param facultyId
+	 * 		Uniquely identifies a Faculty object
+	 * @param responsibilityId
+	 * 		Uniquely identifies a Responsibility object
+	 * @param year
+	 * 		The year of this object's instance
+	 * @param semesterId
+	 * 		Uniquely identifies a Semester object
+	 * @param hoursperweek
+	 * 		The hours per week the faculty member is required to work
+	 * @return
+	 * 		HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
@@ -166,23 +174,14 @@ public class ResponsibilityToFacultyController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a DELETE request and allows the deleting of a ResponsibilityToFaculty
 	 * 
-	 * @see com.seneca.ser ourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is synonomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see 
+	 * 		com.seneca.service.ResponsibilityToFacultyService
+	 * @param id
+	 * 		 Uniquely identifies the object
+	 * @return A HashMap containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/ResponsibilityToFaculty/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
@@ -193,5 +192,4 @@ public class ResponsibilityToFacultyController {
 		list.put("success", "true");
 		return list;
 	}
-
 }

@@ -69,7 +69,6 @@
       </style>
         <div class="jumbotron">
             <h1>Welcome to Who Teaches What!</h1>
-            <h4><br /><br /><br />You are currently logged in as Mary-Lynn</h4>
         </div>
         <div class="container-fluid">
             
