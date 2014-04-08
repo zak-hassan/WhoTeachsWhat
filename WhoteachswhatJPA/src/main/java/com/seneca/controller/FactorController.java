@@ -3,6 +3,7 @@ package com.seneca.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.seneca.model.Factor;
+import com.seneca.repository.FactorDao;
+import com.seneca.service.FactorService;
 
 /**
  * This class is the controller which regulates all CRUD operations for a factor
@@ -31,6 +36,9 @@ public class FactorController {
 	 * @return
 	 * 		The view page to be rendered, along with a List of all Factors through the ModelMap
 	 */
+	@Autowired
+	FactorService factorService;
+	
 	@RequestMapping(value = "/viewFactor", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allFactors", null);
@@ -56,6 +64,8 @@ public class FactorController {
 			@RequestParam(value = "factorName", required = true) String factorName,
 			@RequestParam(value = "factorValue", required = true) String factorValue) {
 		Map<String, String> list = new HashMap<String, String>();
+		float f= Float.parseFloat(factorValue);
+		factorService.add(factorName,f);
 		list.put("success", "true");
 		list.put("id", null);
 		return list;
@@ -82,7 +92,13 @@ public class FactorController {
 			@RequestParam(value = "factorName", required = true) String factorName,
 			@RequestParam(value = "factorValue", required = true) String factorValue) {
 		Map<String, String> list = new HashMap<String, String>();
+		Factor fac= factorService.getOne(id);
+		float f= Float.parseFloat(factorValue);
+		fac.setFactorName( factorName );
+		fac.setFactorVal( f );
+		factorService.add( factorName, f );
 		list.put("success", "true");
+		
 		return list;
 	}
 	
@@ -100,6 +116,7 @@ public class FactorController {
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
 
 		Map<String, String> list = new HashMap<String, String>();
+		factorService.delete(id);
 		list.put("success", "true");
 		return list;
 	}

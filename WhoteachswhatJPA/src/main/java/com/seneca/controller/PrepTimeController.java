@@ -109,14 +109,16 @@ public class PrepTimeController {
 	Map<String, String> listAddJSON(
 			@RequestParam(value = "preptimeName", required = true) String preptimeName,
 			@RequestParam(value = "preptimeFactor", required = true) String preptimeFactor) {
-
-		float preptimefact = Float.parseFloat(preptimeFactor);
-
-		PrepTime preptime = prepTimeService.add(preptimeName, preptimefact);
-
 		Map<String, String> list = new HashMap<String, String>();
-		list.put("success", "true");
-		list.put("id", preptime.getPrepId() + "");
+		if( preptimeName.length() <= 2 ) {
+			float preptimefact = Float.parseFloat(preptimeFactor);
+			PrepTime preptime = prepTimeService.add(preptimeName, preptimefact);
+			list.put("success", "true");
+			list.put("id", preptime.getPrepId() + "");
+		} else {
+			list.put("success","false");
+			list.put("error","preptype name must be less then 2 characters");
+		}
 		return list;
 	}
 
@@ -144,11 +146,17 @@ public class PrepTimeController {
 			@PathVariable("id") Integer id,
 			@RequestParam(value = "preptimeName", required = true) String preptimeName,
 			@RequestParam(value = "preptimeFactor", required = true) String preptimeFactor) {
-		float preptimefact = Float.parseFloat(preptimeFactor);
-		prepTimeService.update(id, preptimeName, preptimefact);
+		
 		Map<String, String> list = new HashMap<String, String>();
-		list.put("success", "true");
-
+		
+		if( preptimeName.length() <= 2 ) {
+			float preptimefact = Float.parseFloat(preptimeFactor);
+			prepTimeService.update(id, preptimeName, preptimefact);
+			list.put("success", "true");
+		} else {
+			list.put("success","false");
+			list.put("error","preptype name must be less then 2 characters");
+		}
 		return list;
 	}
 
