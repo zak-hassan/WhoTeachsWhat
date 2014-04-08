@@ -63,48 +63,6 @@
 							type : 'info',
 							text : 'Prep Time ' + preptimeName.value + ' has been added'
 						});
-			    		
-			    		$.ajax({
-			    			type: "GET",
-			    			url: "api/preptime/"+data.id,
-			    			data: null,
-			    			dataType: "json",
-			    			cache: false,
-			    			success : function(preptime){
-			    			
-			    				var createA1 = document.createElement('a');
-			    				var createA2 = document.createElement('a');
-	
-			    				var createA1Text = document.createTextNode("Update");
-			    				var createA2Text = document.createTextNode("Delete");
-			    				
-			    				tempPreptimeName = adsantokhi_quote_string(preptime.preptimeName);
-			    				
-			    				createA1.setAttribute('onclick', 'updateForm(' + data.id + ', ' + tempPreptimeName + ', '
-			    					+ preptime.preptimeFactor +')');
-			    				createA1.setAttribute('data-toggle', 'modal');
-			    				createA1.setAttribute('data-target', '#updatePrepTimeModal');
-	
-			    				createA2.setAttribute('onclick', 'deletePrepTime(' + data.id + ', ' + tempPreptimeName + ')');
-			    				 
-			    				createA1.appendChild(createA1Text);
-			    				createA2.appendChild(createA2Text);
-			    				
-			    				var updateLink = document.createElement("div");
-			    				updateLink.appendChild(createA1);
-			    				
-			    				var deleteLink = document.createElement("div");
-			    				deleteLink.appendChild(createA2);
-			    				
-			    				var newRow = $('#tableSortable').dataTable()
-			    					.fnAddData( [preptime.preptimeName, preptime.preptimeFactor,
-			    						updateLink.innerHTML + " " + deleteLink.innerHTML] );
-			    				
-			    				var oSettings = $('#tableSortable').dataTable().fnSettings();
-			    				var nTr = oSettings.aoData[ newRow[0] ].nTr;
-			    				$('td', nTr)[2].setAttribute( 'class', 'align' );
-			    			}
-			    		});
 			    		// Form needs resetting due to never being submitted
 			    		document.getElementById("addPrepTimeForm").reset(); 
 			    		

@@ -50,7 +50,7 @@
 
 
 <!-- SWIFT REPORT STARTS -->
-<table border="1" class="table table-striped">
+<table border="1" class="table table-striped" id="swiftTable">
     <caption class="text-left"><h3>&nbsp;Faculty Swift Report</h3></caption>
     <tr>
         <th>COURSE/ SUBJECT IDENTIFIER</th>
@@ -101,31 +101,6 @@
         <td> </td>
         <td></td>
     </tr>
-    <c:forEach items="${swift }" var="bi" >
-    <tr>
-        <td>${bi.getCourse_code() }</td>
-        <td>${bi.getTeaching_hours() }</td>
-        <td></td>        
-        <td></td>        
-        <td></td>        
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-        </c:forEach>
-
-    
 </table>
 
 <!--  SWIFT REPORT ENDS -->
@@ -136,9 +111,6 @@
    			 </div>
          </form>
             
-            
-		
-
 		<!-- Modal -->
 		<div class="modal fade" id="viewSwiftModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">

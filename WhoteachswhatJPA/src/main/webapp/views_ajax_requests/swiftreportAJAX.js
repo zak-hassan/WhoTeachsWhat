@@ -55,10 +55,7 @@
 				dataType: "json",
 				cache: false,
 				success : function(data){
-			    	if (data.success === "true") {	    		
-			    		drawTable(data);
-				   	}
-			    	
+					drawSwift(data);
 			    	document.getElementById("viewSwiftForm").reset(); // Form needs resetting due to never being submitted
 		    		
 		    		for (i = 0; i < viewForm.length - 2; ++i) { // Remove red border on form elements
@@ -81,6 +78,34 @@
 		}
 	};
 	
-	function drawTable(data) {
-		alert("Render me");
+	function drawSwift(data) {
+		var rowStart = 2;
+		var table = document.getElementById('swiftTable');
+		var oldRowsLength = document.getElementById('swiftTable').rows.length;
+		
+		for (var i = oldRowsLength - 1; i >= rowStart; --i) // Clear previous table data, if any
+			table.deleteRow(i);
+
+		var curRowsLength = data.swift.length;
+				
+		for(var i = 0; i < curRowsLength; ++i) {
+			var row = table.insertRow(rowStart+i);
+			row.insertCell(0).innerHTML = data.swift[i].course_code;
+			row.insertCell(1).innerHTML = data.swift[i].teaching_hours;
+			row.insertCell(2).innerHTML = data.swift[i].lang;
+			row.insertCell(3).innerHTML = data.swift[i].prep_type;
+			row.insertCell(4).innerHTML = data.swift[i].prep_factor;
+			row.insertCell(5).innerHTML = data.swift[i].prep_attributed_hours;
+			row.insertCell(6).innerHTML = data.swift[i].prep_additional_hours;
+			row.insertCell(7).innerHTML = data.swift[i].class_size;
+			row.insertCell(8).innerHTML = data.swift[i].eval_e_percent;
+			row.insertCell(9).innerHTML = data.swift[i].eval_r_percent;
+			row.insertCell(10).innerHTML = data.swift[i].eval_p_percent;
+			row.insertCell(11).innerHTML = data.swift[i].eval_factor;
+			row.insertCell(12).innerHTML = data.swift[i].attr_hours;
+			row.insertCell(13).innerHTML = data.swift[i].additional_attr_hours;
+			row.insertCell(14).innerHTML = data.swift[i].comp_hours_allowed;
+			row.insertCell(15).innerHTML = data.swift[i].comp_hours_assigned;
+			row.insertCell(16).innerHTML = data.swift[i].ref;			
+		}
 	};
