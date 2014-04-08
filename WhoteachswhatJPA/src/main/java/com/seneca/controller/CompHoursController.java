@@ -22,7 +22,7 @@ import com.seneca.service.CompHoursService;
  * This class is the controller which regulates all complimentary hour CRUD operations.
  * 
  * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
- * @lastmodified Feb 27, 2014
+ * @lastmodified April 7, 2014
  * @version 1.0
  */
 
