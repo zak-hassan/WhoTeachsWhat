@@ -204,7 +204,7 @@
 		}
 	};	   
 
-	var updateForm=function(up_evalId, evalName, evalFactor){
+	var updateForm=function(up_evalId, evalName){
 		$("#up_evalId").val(up_evalId);
 		$("#up_evalName").val(evalName);
 	};

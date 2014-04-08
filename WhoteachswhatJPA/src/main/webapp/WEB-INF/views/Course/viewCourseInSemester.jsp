@@ -76,8 +76,7 @@
 				<small>Add, Update and Delete a course's section numbers per semester year</small>
 			</h3>
 		</header>
-		<form method="post" action="api/course" id="addCourseForm"
-			onsubmit="return validateAddCourse();" class="form-horizontal">
+		<form class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -125,13 +124,9 @@ td {
 										<td class="align">
 											<a
 												class="bootstrap-tooltip" data-original-title="Update" 
-												onclick="updateForm('${cis.getCisId()}', '${cis.getAdditionAttribute()}', 
-													'${cis.getEval1Ans()}','${cis.getEval2Ans()}', '${cis.getEval3Ans()}',
+												onclick="updateForm('${cis.getCisId()}',
 													'${cis.getTotalSection() }', '${cis.getYear()}', 
 													'${cis.getCourse().getCourseId()}',
-													'${cis.getEvalFactor1().getEvalId()}',
-													'${cis.getEvalFactor2().getEvalId()}',
-													'${cis.getEvalFactor3().getEvalId()}',
 													'${cis.getSemester().getSemesterId()}')"
 												data-toggle="modal" data-target="#updateCourseInSemesterModal">
 												<i class="icon-edit"></i>
@@ -212,7 +207,7 @@ td {
 							<c:if test="${ empty courseId }">
 								<div class="input-group">
 									<span class="input-group-addon">Course:</span> <br /> 
-										<select class="form-control" id="courseId">
+										<select class="form-control" id="courseId" name="Course id">
 											<c:forEach items="${allCourses }" var="course">
 												<option value="${course.getCourseId() }">
 													${course.getCourseCode()}
@@ -224,11 +219,11 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="sectionNumber" id="sectionNumber" />
+									type="text" class="form-control" name="sectionNumber" id="Section number" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> 
-									<select class="form-control" id="semester_id">
+									<select class="form-control" id="semesterId" name="Semester id">
 										<c:forEach items="${allSemesters }" var="semester">
 										<option value="${semester.getSemesterId() }">
 											${semester.getSemesterName() }
@@ -239,7 +234,7 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Year</span><br /> <input
-									type="text" class="form-control" name="year" id="year" placeholder="2014" />
+									type="text" class="form-control" name="Year" id="year" placeholder="2014" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
@@ -269,12 +264,12 @@ td {
 						<!--  FORM ADD -->
 						<form role="form" id="updateCourseInSemesterForm" class="form-horizonatal">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="cisId" id="cisId" />
+								<input type="hidden" class="form-control" name="Course in semester id" id="cisId" />
 							</div>
 							<c:if test="${ empty courseId }">
 								<div class="input-group">
 									<span class="input-group-addon">Course:</span> <br /> 
-										<select class="form-control" id="up_courseId">
+										<select class="form-control" id="up_courseId" name="Course id">
 											<c:forEach items="${allCourses }" var="course">
 												<option value="${course.getCourseId()}">
 													${course.getCourseCode()}
@@ -285,12 +280,12 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="up_sectionNumber" id="up_sectionNumber"
+									type="text" class="form-control" name="Section number" id="up_sectionNumber"
 									placeholder="Subject Name" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> 
-									<select class="form-control" id="up_semester_id">
+									<select class="form-control" id="up_semesterId" name="Semester id">
 										<c:forEach items="${allSemesters }" var="semester">
 										<option value="${semester.getSemesterId() }">
 											${semester.getSemesterName() }
@@ -300,7 +295,7 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Year</span><br /> <input
-									type="text" class="form-control" name="up_year" id="up_year" placeholder="2014" />
+									type="text" class="form-control" name="Year" id="up_year" placeholder="2014" />
 							</div>
 							
 							<button type="button" class="btn btn-default"
