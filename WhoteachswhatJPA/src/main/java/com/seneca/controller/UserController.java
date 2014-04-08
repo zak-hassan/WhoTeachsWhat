@@ -71,7 +71,7 @@ public class UserController {
 		for (Account account : accounts) {
 			Map<String, String> mapAccount = new HashMap<String, String>();
 			mapAccount.put("username", account.getUsername());
-			mapAccount.put("accessLevel", account.getAccessLevel()
+			mapAccount.put("accessLevel", account.get()
 					.getAccessName());
 			mapAccount.put("accessLevelID", account.getAccessLevel()
 					.getAccessId() + "");
@@ -100,7 +100,7 @@ public class UserController {
 			Map<String, String> list = new HashMap<String, String>();
 
 			list.put("username", account.getUsername());
-			list.put("accessLevel", account.getAccessLevel().getAccessName());
+			list.put("accessLevel", account.().getAccessName());
 			list.put("accessLevelID", account.getAccessLevel().getAccessId() + "");
 
 			return list;

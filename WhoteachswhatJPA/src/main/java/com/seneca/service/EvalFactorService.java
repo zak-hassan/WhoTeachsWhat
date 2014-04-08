@@ -28,18 +28,16 @@ public class EvalFactorService {
 	private EvalFactorDao evalFactorDao;
 	
 	//CRUD OPERATIONS:
-	public EvalFactor add(String evalName, Float evalFactor){
+	public EvalFactor add(String evalName){
 			EvalFactor eval= new EvalFactor();
 			eval.setEvalName(evalName);
-			eval.setFactorVal(evalFactor);
 			logger.info("Entering courseDao.create : ");
 			return evalFactorDao.create(eval);
 	}
 	
-	public EvalFactor update(Integer id, String evalName, Float evalFactor){
+	public EvalFactor update(Integer id, String evalName){
 		EvalFactor eval= evalFactorDao.getById(id);
 		eval.setEvalName(evalName);
-		eval.setFactorVal(evalFactor);
 		evalFactorDao.update(eval);
 		return eval;
 	}

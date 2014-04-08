@@ -22,9 +22,9 @@ public class AccessLevel implements Serializable {
 	@Column(name="access_name")
 	private String accessName;
 
-	//bi-directional many-to-one association to Faculty
-	@OneToMany(mappedBy="accessLevel", fetch=FetchType.LAZY)
-	private List<Account> account;
+	//bi-directional many-to-one association to Account
+	@OneToMany(mappedBy="accessLevel")
+	private List<Account> accounts;
 
 	public AccessLevel() {
 	}
@@ -46,11 +46,11 @@ public class AccessLevel implements Serializable {
 	}
 
 	public List<Account> getAccounts() {
-		return this.account;
+		return this.accounts;
 	}
 
-	public void setAccount(List<Account> accounts) {
-		this.account = accounts;
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 	public Account addAccount(Account account) {
@@ -60,45 +60,11 @@ public class AccessLevel implements Serializable {
 		return account;
 	}
 
-	public Account removeFaculty(Account account) {
+	public Account removeAccount(Account account) {
 		getAccounts().remove(account);
 		account.setAccessLevel(null);
+
 		return account;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + accessId;
-		result = prime * result
-				+ ((accessName == null) ? 0 : accessName.hashCode());
-		result = prime * result + ((account == null) ? 0 : account.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AccessLevel other = (AccessLevel) obj;
-		if (accessId != other.accessId)
-			return false;
-		if (accessName == null) {
-			if (other.accessName != null)
-				return false;
-		} else if (!accessName.equals(other.accessName))
-			return false;
-		if (account == null) {
-			if (other.account != null)
-				return false;
-		} else if (!account.equals(other.account))
-			return false;
-		return true;
 	}
 
 }

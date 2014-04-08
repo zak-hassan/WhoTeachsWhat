@@ -1,7 +1,6 @@
 package com.seneca.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 
@@ -22,9 +21,6 @@ public class EvalFactor implements Serializable {
 	@Column(name="eval_name")
 	private String evalName;
 
-	@Column(name="factor_val")
-	private float factorVal;
-
 	public EvalFactor() {
 	}
 
@@ -42,14 +38,6 @@ public class EvalFactor implements Serializable {
 
 	public void setEvalName(String evalName) {
 		this.evalName = evalName;
-	}
-
-	public float getFactorVal() {
-		return factorVal;
-	}
-
-	public void setFactorVal(float factorVal) {
-		this.factorVal = factorVal;
 	}
 
 }

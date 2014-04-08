@@ -25,33 +25,40 @@ public class Course implements Serializable {
 	@Column(name="course_name")
 	private String courseName;
 
-	private String crossover_course;
+	@Column(name="crossover_course")
+	private String crossoverCourse;
 
-	private String old_course;
+	@Column(name="eval_factor1")
+	private float evalFactor1;
 
-	//bi-directional many-to-one association to CourseInProgramCurSem
-	@OneToMany(mappedBy="course", fetch=FetchType.LAZY)
-	private List<CourseInProgramCurSem> courseInProgramCurSems;
+	@Column(name="eval_factor2")
+	private float evalFactor2;
 
-	//bi-directional many-to-many association to Program
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-		name="CourseToProgram"
-		, joinColumns={
-			@JoinColumn(name="course_id")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="program_id")
-			}
-		)
-	private List<Program> programs;
+	@Column(name="eval_factor3")
+	private float evalFactor3;
+
+	@Column(name="old_course")
+	private String oldCourse;
 
 	//bi-directional many-to-one association to CoursesInSemester
-	@OneToMany(mappedBy="course", fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="course_in_semester", referencedColumnName="course_id")
+	private CoursesInSemester coursesInSemester;
+
+	//bi-directional many-to-one association to CourseInProgramCurSem
+	@OneToMany(mappedBy="course")
+	private List<CourseInProgramCurSem> courseInProgramCurSems;
+
+	//bi-directional many-to-one association to CourseToProgram
+	@OneToMany(mappedBy="course")
+	private List<CourseToProgram> courseToPrograms;
+
+	//bi-directional many-to-one association to CoursesInSemester
+	@OneToMany(mappedBy="course")
 	private List<CoursesInSemester> coursesInSemesters;
 
 	//bi-directional many-to-one association to FacultyToCourseInSemesterYear
-	@OneToMany(mappedBy="course", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="course")
 	private List<FacultyToCourseInSemesterYear> facultyToCourseInSemesterYears;
 
 	public Course() {
@@ -81,6 +88,54 @@ public class Course implements Serializable {
 		this.courseName = courseName;
 	}
 
+	public String getCrossoverCourse() {
+		return this.crossoverCourse;
+	}
+
+	public void setCrossoverCourse(String crossoverCourse) {
+		this.crossoverCourse = crossoverCourse;
+	}
+
+	public float getEvalFactor1() {
+		return this.evalFactor1;
+	}
+
+	public void setEvalFactor1(float evalFactor1) {
+		this.evalFactor1 = evalFactor1;
+	}
+
+	public float getEvalFactor2() {
+		return this.evalFactor2;
+	}
+
+	public void setEvalFactor2(float evalFactor2) {
+		this.evalFactor2 = evalFactor2;
+	}
+
+	public float getEvalFactor3() {
+		return this.evalFactor3;
+	}
+
+	public void setEvalFactor3(float evalFactor3) {
+		this.evalFactor3 = evalFactor3;
+	}
+
+	public String getOldCourse() {
+		return this.oldCourse;
+	}
+
+	public void setOldCourse(String oldCourse) {
+		this.oldCourse = oldCourse;
+	}
+
+	public CoursesInSemester getCoursesInSemester() {
+		return this.coursesInSemester;
+	}
+
+	public void setCoursesInSemester(CoursesInSemester coursesInSemester) {
+		this.coursesInSemester = coursesInSemester;
+	}
+
 	public List<CourseInProgramCurSem> getCourseInProgramCurSems() {
 		return this.courseInProgramCurSems;
 	}
@@ -103,12 +158,26 @@ public class Course implements Serializable {
 		return courseInProgramCurSem;
 	}
 
-	public List<Program> getPrograms() {
-		return this.programs;
+	public List<CourseToProgram> getCourseToPrograms() {
+		return this.courseToPrograms;
 	}
 
-	public void setPrograms(List<Program> programs) {
-		this.programs = programs;
+	public void setCourseToPrograms(List<CourseToProgram> courseToPrograms) {
+		this.courseToPrograms = courseToPrograms;
+	}
+
+	public CourseToProgram addCourseToProgram(CourseToProgram courseToProgram) {
+		getCourseToPrograms().add(courseToProgram);
+		courseToProgram.setCourse(this);
+
+		return courseToProgram;
+	}
+
+	public CourseToProgram removeCourseToProgram(CourseToProgram courseToProgram) {
+		getCourseToPrograms().remove(courseToProgram);
+		courseToProgram.setCourse(null);
+
+		return courseToProgram;
 	}
 
 	public List<CoursesInSemester> getCoursesInSemesters() {
@@ -155,116 +224,4 @@ public class Course implements Serializable {
 		return facultyToCourseInSemesterYear;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((courseCode == null) ? 0 : courseCode.hashCode());
-		result = prime * result + courseId;
-		result = prime
-				* result
-				+ ((courseInProgramCurSems == null) ? 0
-						: courseInProgramCurSems.hashCode());
-		result = prime * result
-				+ ((courseName == null) ? 0 : courseName.hashCode());
-		result = prime
-				* result
-				+ ((coursesInSemesters == null) ? 0 : coursesInSemesters
-						.hashCode());
-		result = prime
-				* result
-				+ ((crossover_course == null) ? 0 : crossover_course.hashCode());
-		result = prime
-				* result
-				+ ((facultyToCourseInSemesterYears == null) ? 0
-						: facultyToCourseInSemesterYears.hashCode());
-		result = prime * result
-				+ ((old_course == null) ? 0 : old_course.hashCode());
-		result = prime * result
-				+ ((programs == null) ? 0 : programs.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Course other = (Course) obj;
-		if (courseCode == null) {
-			if (other.courseCode != null)
-				return false;
-		} else if (!courseCode.equals(other.courseCode))
-			return false;
-		if (courseId != other.courseId)
-			return false;
-		if (courseInProgramCurSems == null) {
-			if (other.courseInProgramCurSems != null)
-				return false;
-		} else if (!courseInProgramCurSems.equals(other.courseInProgramCurSems))
-			return false;
-		if (courseName == null) {
-			if (other.courseName != null)
-				return false;
-		} else if (!courseName.equals(other.courseName))
-			return false;
-		if (coursesInSemesters == null) {
-			if (other.coursesInSemesters != null)
-				return false;
-		} else if (!coursesInSemesters.equals(other.coursesInSemesters))
-			return false;
-		if (crossover_course == null) {
-			if (other.crossover_course != null)
-				return false;
-		} else if (!crossover_course.equals(other.crossover_course))
-			return false;
-		if (facultyToCourseInSemesterYears == null) {
-			if (other.facultyToCourseInSemesterYears != null)
-				return false;
-		} else if (!facultyToCourseInSemesterYears
-				.equals(other.facultyToCourseInSemesterYears))
-			return false;
-		if (old_course == null) {
-			if (other.old_course != null)
-				return false;
-		} else if (!old_course.equals(other.old_course))
-			return false;
-		if (programs == null) {
-			if (other.programs != null)
-				return false;
-		} else if (!programs.equals(other.programs))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Course [courseId=" + courseId + ", courseCode=" + courseCode
-				+ ", courseName=" + courseName + ", courseInProgramCurSems="
-				+ courseInProgramCurSems + ", programs=" + programs
-				+ ", coursesInSemesters=" + coursesInSemesters
-				+ ", facultyToCourseInSemesterYears="
-				+ facultyToCourseInSemesterYears + "]";
-	}
-
-	public String getCrossover_course() {
-		return crossover_course;
-	}
-
-	public void setCrossover_course(String crossover_course) {
-		this.crossover_course = crossover_course;
-	}
-
-	public String getOld_course() {
-		return old_course;
-	}
-	
-	public void setOld_course(String old_course) {
-		this.old_course = old_course;
-	}
-	
 }

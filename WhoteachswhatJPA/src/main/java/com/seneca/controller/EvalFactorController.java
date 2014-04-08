@@ -65,7 +65,6 @@ public class EvalFactorController {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("efName", c.getEvalName() + "");
 			map.put("efId", c.getEvalId() + "");
-			map.put("efFactor", c.getFactorVal() + "");
 			items.add(map);
 		}
 		return items;
@@ -86,11 +85,8 @@ public class EvalFactorController {
 	Map<String, String> listGetOneJSON(@PathVariable("id") Integer id) {
 		Map<String, String> list = new HashMap<String, String>();
 		EvalFactor c = evalFactorService.getOne(id);
-		
 		list.put("efName", c.getEvalName() + "");
 		list.put("efId", c.getEvalId() + "");
-		list.put("efFactor", c.getFactorVal() + "");
-		
 		return list;
 	}
 
@@ -109,10 +105,9 @@ public class EvalFactorController {
 	@RequestMapping(value = "/api/evalfactor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
-			@RequestParam(value = "evalName", required = true) String evalName,
-			@RequestParam(value = "evalFactor", required = true) String evalFactor) {
-		float efact = Float.parseFloat(evalFactor);
-		EvalFactor ef = evalFactorService.add(evalName, efact);
+			@RequestParam(value = "evalName", required = true) String evalName) {
+	
+		EvalFactor ef = evalFactorService.add(evalName);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		list.put("id", ef.getEvalId() + "");
@@ -137,10 +132,8 @@ public class EvalFactorController {
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
-			@RequestParam(value = "evalName", required = true) String evalName,
-			@RequestParam(value = "evalFactor", required = true) String evalFactor) {
-		float efact = Float.parseFloat(evalFactor);
-		evalFactorService.update(id, evalName, efact);
+			@RequestParam(value = "evalName", required = true) String evalName) {
+		evalFactorService.update(id, evalName);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		return list;
@@ -158,9 +151,7 @@ public class EvalFactorController {
 	@RequestMapping(value = "/api/evalfactor/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listDeleteJSON(@PathVariable("id") Integer id) {
-
 		evalFactorService.delete(id);
-
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		return list;

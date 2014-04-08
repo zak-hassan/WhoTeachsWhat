@@ -21,8 +21,8 @@ public class Factor implements Serializable {
 	@Column(name="factor_name")
 	private String factorName;
 
-	@Column(name="factor_val")
-	private float factorVal;
+	@Column(name="factor_value")
+	private float factorValue;
 
 	public Factor() {
 	}
@@ -43,12 +43,12 @@ public class Factor implements Serializable {
 		this.factorName = factorName;
 	}
 
-	public float getFactorVal() {
-		return this.factorVal;
+	public float getFactorValue() {
+		return this.factorValue;
 	}
 
-	public void setFactorVal(float factorVal) {
-		this.factorVal = factorVal;
+	public void setFactorValue(float factorValue) {
+		this.factorValue = factorValue;
 	}
 
 }
