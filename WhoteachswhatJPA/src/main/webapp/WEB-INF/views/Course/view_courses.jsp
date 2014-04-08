@@ -74,8 +74,7 @@
 				<small>Add, Update and Delete a course</small>
 			</h3>
 		</header>
-		<form method="post" action="api/course" id="addCourseForm"
-			onsubmit="return validateAddCourse();" class="form-horizontal">
+		<form class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -106,13 +105,9 @@ td {
 							<tbody>
 								<c:forEach items="${allCourses }" var="course">
 									<tr>
-
 										<td>${course.getCourseCode() }</td>
-										
 										<td>${course.getCourseName() }</td>
-										
 										<c:set var="courseId" value = "${ course.getCourseId() }"></c:set>
-
 										<td class="align">
 											<a 
 												href="viewCourseInSemester?id=${courseId}"

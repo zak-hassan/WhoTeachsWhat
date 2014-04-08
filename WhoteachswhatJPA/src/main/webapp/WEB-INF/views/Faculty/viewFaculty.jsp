@@ -70,10 +70,10 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" class="span1">Faculty</a>
+					<a href="viewFaculty">Faculty</a>
 				</li>
 				<li class="current">
-					<a href="javascript:;" class="span1">View</a>
+					<a href="#">View</a>
 				</li>
 			</ul>
 			<!--  
@@ -94,18 +94,6 @@
 		</header>
 		<form class="form-horizontal">
 			<div class="container-fluid">
-
-			<!--START OF DOCUMENTATION -->
-				<div class="">
-					Legend: 
-					<i class="icon-list-alt"></i> =  Responsibility 
-					<i class="icon-time"></i>  = Complimentary Hours
-					<i class="icon-book"></i> = Course
-					<i class="icon-edit"></i> = Update
-					<i class="icon-trash"></i> = Delete
-			    </div>
-
-			<!--END OF DOCUMENTATION -->
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
 
@@ -134,16 +122,8 @@
 									<c:forEach items="${allFaculty }" var="faculty">
 								   		<tr>
 											<td>${ faculty.getFacultyId() }</td>
-											<td>
-												<label>
-													<a href="#">
-														${faculty.getFacultyFirstName()}  ${faculty.getFacultyLastName() }
-													</a>
-												</label>
-											</td>
-											<td>
-												${faculty.getTeachingType().getTeachingType_name() }
-											</td>
+											<td>${faculty.getFacultyFirstName()}  ${faculty.getFacultyLastName() }</td>
+											<td>${faculty.getTeachingType().getTeachingType_name() }</td>
 											
 											<c:set var="facultyId" value = "${ faculty.getFacultyId() }"></c:set>
 											

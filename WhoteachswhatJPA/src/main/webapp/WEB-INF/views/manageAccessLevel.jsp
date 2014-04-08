@@ -80,8 +80,7 @@
                 <h2><small>Manage Access Levels</small></h2>
                 <h3><small>Add Update and Remove an access level</small></h3>
             </header>
-            <form method="post" action="ajaxAddCompHourType" id="manageCompHourTypeForm"
-            	class="form-horizontal">
+            <form class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
@@ -104,7 +103,6 @@
 								   <tr>
 										<th>#</th>
 										<th>Access Level</th>
-						
 										<th width="25%" style="text-align: right">Operation(s)</th>
 									</tr>
 							   </thead>
@@ -112,7 +110,7 @@
 									<c:forEach items="${entityList }" var="el">
 									<tr>
 										<td>${el.getAccessId() }</td>
-										<td><label>${el.getAccessName() }</label></td>
+										<td>${el.getAccessName() }</td>
 										<td class="align">
 											<a 
 												class="bootstrap-tooltip" data-original-title="Update" 

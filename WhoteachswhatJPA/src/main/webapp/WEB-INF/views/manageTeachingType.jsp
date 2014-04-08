@@ -79,8 +79,7 @@
                 <h2><small>Manage Teaching Types</small></h2>
                 <h3><small>Add Update and Remove teaching types</small></h3>
             </header>
-            <form method="post" action="ajaxAddCompHourType" id="manageCompHourTypeForm"
-            	class="form-horizontal">
+            <form class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
@@ -110,7 +109,7 @@
 									<c:forEach items="${allTeachingTypes }" var="tt">
 									<tr>
 										<td>${tt.getTeachingType_id() }</td>
-										<td><label>${tt.getTeachingType_name() }</label></td>
+										<td>${tt.getTeachingType_name() }</td>
 										<td class="align">
 											<a 
 												class="bootstrap-tooltip" data-original-title="Update" 

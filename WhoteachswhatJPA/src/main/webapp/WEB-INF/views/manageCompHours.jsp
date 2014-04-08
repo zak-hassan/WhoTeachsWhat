@@ -79,8 +79,7 @@
                 <h2><small>Manage Complimentary Hour Types</small></h2>
                 <h3><small>Update and remove complimentary hour types</small></h3>
             </header>
-            <form method="post" action="ajaxAddCompHourType" id="manageCompHourTypeForm"
-            	class="form-horizontal">
+            <form class="form-horizontal">
                 <div class="container-fluid">
 			<!-- START OF NEW CONTENT -->
 				<!--Sortable Non-responsive Table begin-->
@@ -112,8 +111,8 @@
 									<c:forEach items="${allComphours }" var="comphours">
 									<tr>
 										<td>${comphours.getCompHour_id() }</td>
-										<td><label>${comphours.getCompHour_code() }</label></td>
-										<td><label>${comphours.getCompHour_name() }</label></td>
+										<td>${comphours.getCompHour_code() }</td>
+										<td>${comphours.getCompHour_name() }</td>
 										<td class="align">
 											<a 
 												class="bootstrap-tooltip" data-original-title="Update" 
@@ -122,7 +121,7 @@
 												data-toggle="modal" data-target="#updateCompHourModal">
 												<i class="icon-edit"></i>
 											</a>
-											| 
+											
 											<a class="bootstrap-tooltip" data-original-title="Delete" 
 												onclick="deleteForm('${comphours.getCompHour_id() }', 
 													'${comphours.getCompHour_name() }')"
