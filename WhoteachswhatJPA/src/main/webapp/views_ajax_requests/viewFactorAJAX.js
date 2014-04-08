@@ -73,7 +73,7 @@
 			    		
 			    		$('#addFactorModal').modal('hide');
 			    		
-			    		location.reload(); // Refresh page..
+			    		// location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -108,7 +108,7 @@
 			}
 		}
 	   
-		if (!validate_length(factorName.value, factorLength)) {
+		if (!validate_length(factorName.value, factorNameLength)) {
 			valid = false;
 			errors[j] = factorName.getAttribute("name") + " must be " +
 				"equal to or under " + factorNameLength + " characters long";
@@ -129,6 +129,7 @@
 	   	}
 		
 		if (valid) {
+			alert("factorId.value is " + factorId.value);
 			$.ajax({
 				type: "POST",
 				url: "api/factor/"+factorId.value,
@@ -155,7 +156,7 @@
 			    		
 			    		$('#updateFactorModal').modal('hide');
 			    		
-			    		location.reload(); // Refresh page..
+			    		//location.reload(); // Refresh page..
 				   	}
 				}
 			});
