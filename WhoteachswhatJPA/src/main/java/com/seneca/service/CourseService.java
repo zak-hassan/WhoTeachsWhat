@@ -39,7 +39,7 @@ public class CourseService {
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
 			course.setCrossover_course(crossover);
-			course.setOld_course(oldcourse);
+			course.setCrossoverCourse(oldcourse);
 		return courseDao.create(course);
 	}
 
@@ -50,7 +50,7 @@ public class CourseService {
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
 		course.setCrossover_course(crossover);
-		course.setOld_course(oldcourse);
+		course.setCrossoverCourse(oldcourse);
 		courseDao.update(course);
 		
 		return course;
