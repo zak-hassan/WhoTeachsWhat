@@ -3,7 +3,7 @@
     @Purpose: AJAX posting and validation for adding, updating and deleting a course in a semester
     @Requires: client_side_validation/client_side_validation.js, jQuery 
    */
-   
+
 	// Get course id from query string
 	var courseId = window.location.search.slice(4); // Removes ?id=
 	courseId = encodeURI(courseId); // Escape string
@@ -44,7 +44,7 @@
 		    		document.getElementById("addCourseInSemesterForm").reset(); 
 		    		$('#addCourseInSemesterModal').modal('hide');
 		    		
-		    		location.reload(); // Refresh page..
+		    		//location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -85,7 +85,7 @@
 		    		document.getElementById("updateCourseInSemesterForm").reset(); 
 		    		$('#updateCourseInSemesterModal').modal('hide');
 		    		
-		    		location.reload(); // Refresh page..
+		    		//location.reload(); // Refresh page..
 			   	}
 			}
 		});
@@ -104,23 +104,15 @@
 						type : 'info',
 						text : 'Course sections has been removed for ' + semester + ' ' + year
 					});
-    			location.reload();
+    		//	location.reload();
   				}
   	 		 }
  		});
 	};	  	   
 
-	var updateForm=function(cisId, up_addition_attribute, up_eval_1_ans, up_eval_2_ans, up_eval_3_ans, up_sectionNumber,
-		up_year, up_course_id, up_eval_1, up_eval_2, up_eval_3, up_semester_id){
+	var updateForm=function(cisId, up_sectionNumber, up_year, up_course_id, up_semester_id){
 		
 		$("#cisId").val(cisId);
-		$("#up_addition_attribute").val(up_addition_attribute);
-		$("#up_eval_1_ans").val(up_eval_1_ans);
-		$("#up_eval_2_ans").val(up_eval_2_ans);
-		$("#up_eval_3_ans").val(up_eval_3_ans);
-		$("#up_eval_1").val(up_eval_1);
-		$("#up_eval_2").val(up_eval_2);
-		$("#up_eval_3").val(up_eval_3);
 		$("#up_sectionNumber").val(up_sectionNumber);
 		$("#up_year").val(up_year);
 		$("#up_courseId").val(up_course_id);
