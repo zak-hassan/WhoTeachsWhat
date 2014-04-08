@@ -112,7 +112,7 @@ td {
 								<c:set var="courseId">
 								    <c:out value = "${param.id}" />
 								</c:set> 
-								<%-- 
+ 
 								<c:forEach items="${entityList }" var="cis">
 									<c:if test="${cis.getCourse().getCourseId() == courseId || empty courseId}">
 									<tr>
@@ -149,7 +149,6 @@ td {
 									</tr>
 									</c:if>
 								</c:forEach>
-								--%>
 							</tbody>
 						</table>
 					</div>
@@ -222,6 +221,7 @@ td {
 									</select>
 								</div>
 							</c:if>
+							
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
 									type="text" class="form-control" name="sectionNumber" id="sectionNumber" />
@@ -236,56 +236,12 @@ td {
 									</c:forEach>
 								</select>
 							</div>
+							
 							<div class="input-group">
 								<span class="input-group-addon">Year</span><br /> <input
 									type="text" class="form-control" name="year" id="year" placeholder="2014" />
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 1:</span> <br /> 
-									<select class="form-control" id="eval_1">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 2:</span> <br /> 
-									<select class="form-control" id="eval_2">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 3:</span> <br /> 
-									<select class="form-control" id="eval_3">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 1:</span><br /> <input
-									type="text" class="form-control" name="eval_1_ans" id="eval_1_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 2:</span><br /> <input
-									type="text" class="form-control" name="eval_2_ans" id="eval_2_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 3:</span><br /> <input
-									type="text" class="form-control" name="eval_3_ans" id="eval_3_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Addition Attribute:</span><br /> <input
-									type="text" class="form-control" name="addition_attribute" id="addition_attribute" />
-							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="button" onclick="addCourseInSemester();"
@@ -346,52 +302,7 @@ td {
 								<span class="input-group-addon">Year</span><br /> <input
 									type="text" class="form-control" name="up_year" id="up_year" placeholder="2014" />
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 1:</span> <br /> 
-									<select class="form-control" id="up_eval_1">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 2:</span> <br /> 
-									<select class="form-control" id="up_eval_2">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor 3:</span> <br /> 
-									<select class="form-control" id="up_eval_3">
-										<c:forEach items="${allEvalFactors }" var="evalFactor">
-										<option value="${evalFactor.getEvalId() }">
-											${evalFactor.getEvalName() } - ${evalFactor.getEvalFactor() }
-										</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 1:</span><br /> <input
-									type="text" class="form-control" name="up_eval_1_ans" id="up_eval_1_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 2:</span><br /> <input
-									type="text" class="form-control" name="up_eval_2_ans" id="up_eval_2_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Evaluation Factor Answer 3:</span><br /> <input
-									type="text" class="form-control" name="up_eval_3_ans" id="up_eval_3_ans" />
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Addition Attribute:</span><br /> <input
-									type="text" class="form-control" name="up_addition_attribute" id="up_addition_attribute" />
-							</div>
+							
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="button" onclick="updateCourseInSemester();"
@@ -404,7 +315,6 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
-
 	</div>
 </body>
 </html>
