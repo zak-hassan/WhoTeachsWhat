@@ -92,13 +92,10 @@ public class FactorController {
 			@RequestParam(value = "factorName", required = true) String factorName,
 			@RequestParam(value = "factorValue", required = true) String factorValue) {
 		Map<String, String> list = new HashMap<String, String>();
-		Factor fac= factorService.getOne(id);
-		float f= Float.parseFloat(factorValue);
-		fac.setFactorName( factorName );
-		fac.setFactorVal( f );
-		factorService.add( factorName, f );
-		list.put("success", "true");
-		
+			float f= Float.parseFloat(factorValue);
+			factorService.update(id, factorName,f);
+			list.put("success", "true");
+			
 		return list;
 	}
 	

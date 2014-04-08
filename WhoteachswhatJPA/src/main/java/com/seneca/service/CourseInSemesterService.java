@@ -15,64 +15,48 @@ import com.seneca.repository.EvalFactorDao;
 import com.seneca.repository.SemesterDao;
 
 /**
- * This class is the service which regulates all dialog between the course controller and course repository layer.
+ * This class is the service which regulates all dialog between the course
+ * controller and course repository layer.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
+ *         <anil.d.santokhI@gmail.com>
  * @lastmodified March 10, 2014
  * @version 0.0.1
  */
 
-
 @Service("courseInSemesterService")
 public class CourseInSemesterService {
 
-	private static final Logger logger = LoggerFactory.getLogger(CourseInSemesterService.class);
-	
-	
+	private static final Logger logger = LoggerFactory
+			.getLogger(CourseInSemesterService.class);
+
 	@Autowired
 	private CourseInSemesterDao courseInSemesterDao;
-	
+
 	@Autowired
 	private EvalFactorDao evalFactorDao;
 
 	@Autowired
 	private CourseDao courseDao;
-	
+
 	@Autowired
 	private SemesterDao semesterDao;
 
-	//CRUD OPERATIONS:
-/*
+	// CRUD OPERATIONS:
+	/*
+	 * 
+	 * Table CoursesInSemester ======================= cis_id,
+	 * addition_attribute, eval_1_ans, eval_2_ans, eval_3_ans, total_section,
+	 * year, course_id, eval_1, eval_2, eval_3, semester_id
+	 * ----------------------- cis_id int(11) PK addition_attribute int(11)
+	 * eval_1_ans float eval_2_ans float eval_3_ans float total_section int(11)
+	 * year int(11) course_id int(11) eval_1 int(11) eval_2 int(11) eval_3
+	 * int(11) semester_id int(11)
+	 */
 
-Table CoursesInSemester
-=======================
-cis_id, addition_attribute, eval_1_ans, eval_2_ans, eval_3_ans, total_section, year, course_id, eval_1, eval_2, eval_3, semester_id
------------------------
-cis_id           int(11) PK
-addition_attribute int(11)
-eval_1_ans       float
-eval_2_ans       float
-eval_3_ans       float
-total_section    int(11)
-year             int(11)
-course_id        int(11)
-eval_1           int(11)
-eval_2           int(11)
-eval_3           int(11)
-semester_id      int(11)
-
-*/
-	
-	public void add(Integer addition_attribute,
-			float e1_ans, 
-			float e2_ans,
-			float e3_ans, 
-			Integer eval_1, 
-			Integer eval_2, 
-			Integer eval_3,
-			Integer sectionNumbers, 
-			Integer year, 
-			Integer course_id,
+	public void add(Integer addition_attribute, float e1_ans, float e2_ans,
+			float e3_ans, Integer eval_1, Integer eval_2, Integer eval_3,
+			Integer sectionNumbers, Integer year, Integer course_id,
 			Integer semester_id) {
 		CoursesInSemester course = new CoursesInSemester();
 		course.setAdditionAttribute(addition_attribute);
@@ -85,7 +69,7 @@ semester_id      int(11)
 		course.setSemester(semesterDao.getById(semester_id));
 		courseInSemesterDao.create(course);
 	}
-	
+
 	public CoursesInSemester update(Integer id, Integer addition_attribute,
 			float e1_ans, float e2_ans, float e3_ans, Integer eval_1,
 			Integer eval_2, Integer eval_3, Integer sectionNumbers,
@@ -100,13 +84,10 @@ semester_id      int(11)
 		course.setYear(year);
 		course.setCourse(courseDao.getById(course_id));
 		course.setSemester(semesterDao.getById(semester_id));
-		
+
 		courseInSemesterDao.update(course);
 		return course;
 	}
-	
-	
-
 
 	public void delete(Integer id) {
 		courseInSemesterDao.delete(id);
@@ -119,7 +100,5 @@ semester_id      int(11)
 	public CoursesInSemester getOne(Integer id) {
 		return courseInSemesterDao.getById(id);
 	}
-
-
 
 }
