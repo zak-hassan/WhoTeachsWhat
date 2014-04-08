@@ -38,8 +38,6 @@ public class CourseService {
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
-			course.setCrossover_course(crossover);
-			course.setOld_course(oldcourse);
 		return courseDao.create(course);
 	}
 
@@ -49,8 +47,6 @@ public class CourseService {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
-		course.setCrossover_course(crossover);
-		course.setOld_course(oldcourse);
 		courseDao.update(course);
 		
 		return course;

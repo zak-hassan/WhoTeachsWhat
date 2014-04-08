@@ -55,7 +55,6 @@ public class FacultyToCourseInSemesterYearService {
 			rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
 			rToFaculty.setCompHour(compHourDao.getById(compHour_id));
 			rToFaculty.setYear(year);
-			rToFaculty.setClass_size(class_size);
 			rToFaculty.setSectionNumber(section_number);
 			rToFaculty.setSemester(semesterDao.getById(semester_id));
 			rToFaculty.setCompHour_allowance(comphoursAllowance);
@@ -80,7 +79,6 @@ public class FacultyToCourseInSemesterYearService {
 		rToFaculty.setPrepTime(prepTimeDao.getById(prepType_id));
 		rToFaculty.setCompHour(compHourDao.getById(compHour_id));
 		rToFaculty.setYear(year);
-		rToFaculty.setClass_size(class_size);
 		rToFaculty.setSectionNumber(section_number);
 		// TODO: You need to map the semester to a semester id
 		rToFaculty.setSemester(semesterDao.getById(semester_id));

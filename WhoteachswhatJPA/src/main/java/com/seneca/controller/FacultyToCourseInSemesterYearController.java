@@ -96,7 +96,6 @@ public class FacultyToCourseInSemesterYearController {
 			map.put("sectionNumber", c.getSectionNumber() + "");
 			map.put("semesterId", c.getSemester().getSemesterId() + "");
 			map.put("year", c.getYear() + "");
-			map.put("class_size", c.getClass_size() + "");
 			map.put("comphourId", c.getCompHour().getCompHour_id() + "");
 			map.put("courseId", c.getCourse().getCourseId() + "");
 			map.put("facultyId", c.getFaculty().getFacultyId() + "");

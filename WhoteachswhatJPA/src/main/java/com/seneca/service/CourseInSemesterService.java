@@ -59,10 +59,6 @@ public class CourseInSemesterService {
 			Integer sectionNumbers, Integer year, Integer course_id,
 			Integer semester_id) {
 		CoursesInSemester course = new CoursesInSemester();
-		course.setAdditionAttribute(addition_attribute);
-		course.setEval1Ans(e1_ans);
-		course.setEval2Ans(e2_ans);
-		course.setEval3Ans(e3_ans);
 		course.setTotalSection(sectionNumbers);
 		course.setYear(year);
 		course.setCourse(courseDao.getById(course_id));
@@ -76,10 +72,6 @@ public class CourseInSemesterService {
 			Integer year, Integer course_id, Integer semester_id) {
 
 		CoursesInSemester course = courseInSemesterDao.getById(id);
-		course.setAdditionAttribute(addition_attribute);
-		course.setEval1Ans(e1_ans);
-		course.setEval2Ans(e2_ans);
-		course.setEval3Ans(e3_ans);
 		course.setTotalSection(sectionNumbers);
 		course.setYear(year);
 		course.setCourse(courseDao.getById(course_id));
