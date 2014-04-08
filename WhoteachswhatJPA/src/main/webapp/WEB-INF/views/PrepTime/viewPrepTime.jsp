@@ -116,13 +116,17 @@ td {
 										<td>${pt.getPrepFactor() }</td>
 										<td class="align">
 											<a
+												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${pt.getPrepId()}', '${pt.getPrepName()}', '${pt.getPrepFactor()}' )"
-												data-toggle="modal" data-target="#updatePrepTimeModal">Update</a>
+												data-toggle="modal" data-target="#updatePrepTimeModal">
+												<i class="icon-edit"></i>
+											</a>
 											
 											<a
+												class="bootstrap-tooltip" data-original-title="Delete" 
 												onclick="deleteForm('${pt.getPrepId()}', '${pt.getPrepName()}')"
 												data-toggle="modal" data-target="#deleteModal">
-												Delete
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

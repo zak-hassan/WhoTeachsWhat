@@ -108,4 +108,6 @@
 			row.insertCell(15).innerHTML = data.swift[i].comp_hours_assigned;
 			row.insertCell(16).innerHTML = data.swift[i].ref;			
 		}
+		
+		// Add totals
 	};

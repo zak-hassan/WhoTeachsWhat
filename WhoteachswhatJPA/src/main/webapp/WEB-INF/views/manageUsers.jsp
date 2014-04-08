@@ -116,21 +116,26 @@ td {
 										<td>${users.getUsername() }</td>
 										
 										<td>${users.accessLevel.getAccessName() }</td>
-										
 										<td class="align">
 											 <a
+											 	class="bootstrap-tooltip" data-original-title="Update" 
 												onclick="updateForm('${users.getUserId() }', '${users.getUsername() }',
 													'${users.accessLevel.getAccessId()}' )"
-												data-toggle="modal" data-target="#updateUserModal">Update
+												data-toggle="modal" data-target="#updateUserModal">
+												<i class="icon-edit"></i>
 											</a>
-											|
+											
 											<a
-												onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">Suspend
+												class="bootstrap-tooltip" data-original-title="Suspend"
+												onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">
+												<i class="icon-warning-sign"></i>
 											</a>
-											| 
+											
 											<a
+												class="bootstrap-tooltip" data-original-title="Delete"
 												onclick="deleteForm('${users.getUserId() }', ' ${users.getUsername() } ')"
-												data-toggle="modal" data-target="#deleteModal">Delete
+												data-toggle="modal" data-target="#deleteModal">
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

@@ -134,6 +134,7 @@ td {
 										
 										<td class="align">
 											 <a
+											 	class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${facToCourse.getCisyId() }',
 													'${facToCourse.getFaculty().getFacultyId()}',
 													'${facToCourse.getAdditionAttribute()}',
@@ -145,15 +146,18 @@ td {
 													'${facToCourse.getCompHour().getCompHour_id() }',
 													'${facToCourse.getCourse().getCourseId() }',
 													'${facToCourse.getPrepTime().getPrepId() }')"
-												data-toggle="modal" data-target="#updateFacToCourseSemModal">Update
+												data-toggle="modal" data-target="#updateFacToCourseSemModal">
+												<i class="icon-edit"></i>
 											</a>
-											|
+											
 											<a
+												class="bootstrap-tooltip" data-original-title="Delete"
 												onclick="deleteForm('${facToCourse.getCisyId() }',
 													'${facToCourse.getCourse().getCourseCode() }',
 													'${facToCourse.getFaculty().getFacultyFirstName()}',
 													'${facToCourse.getFaculty().getFacultyLastName()}' )"
-												data-toggle="modal" data-target="#deleteModal">Delete
+												data-toggle="modal" data-target="#deleteModal">
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

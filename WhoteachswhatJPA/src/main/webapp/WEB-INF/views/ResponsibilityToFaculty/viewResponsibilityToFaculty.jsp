@@ -128,21 +128,25 @@ td {
 										<td>${repToFac.getHoursPerWeek() }</td>
 										<td class="align">
 											<a
+												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${repToFac.getRepToFac_id()}',
 													'${repToFac.getFaculty().getFacultyId()}',
 													'${repToFac.getResponsibility().getResponsibilityId()}', 
 													'${repToFac.getSemester().getSemesterId() }',
 													'${repToFac.getYear()}',
 													'${repToFac.getHoursPerWeek()}' )"
-												data-toggle="modal" data-target="#updateRepToFacModal">Update</a>
+												data-toggle="modal" data-target="#updateRepToFacModal">
+												<i class="icon-edit"></i>
+											</a>
 											
 											<a
+												class="bootstrap-tooltip" data-original-title="Delete"
 												onclick="deleteForm('${repToFac.getRepToFac_id()}', 
 													'${repToFac.getFaculty().getFacultyFirstName() }',
 													'${repToFac.getFaculty().getFacultyLastName() }',
 													'${repToFac.getResponsibility().getResponsibilityName() }' )"
 													data-toggle="modal" data-target="#deleteModal">
-												Delete
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

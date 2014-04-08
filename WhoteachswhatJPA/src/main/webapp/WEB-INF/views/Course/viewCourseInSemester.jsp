@@ -124,6 +124,7 @@ td {
 										
 										<td class="align">
 											<a
+												class="bootstrap-tooltip" data-original-title="Update" 
 												onclick="updateForm('${cis.getCisId()}', '${cis.getAdditionAttribute()}', 
 													'${cis.getEval1Ans()}','${cis.getEval2Ans()}', '${cis.getEval3Ans()}',
 													'${cis.getTotalSection() }', '${cis.getYear()}', 
@@ -132,15 +133,17 @@ td {
 													'${cis.getEvalFactor2().getEvalId()}',
 													'${cis.getEvalFactor3().getEvalId()}',
 													'${cis.getSemester().getSemesterId()}')"
-												data-toggle="modal" data-target="#updateCourseInSemesterModal">Update
+												data-toggle="modal" data-target="#updateCourseInSemesterModal">
+												<i class="icon-edit"></i>
 											</a>
-											|
+											
 											 <a
+											 	class="bootstrap-tooltip" data-original-title="Delete" 
 												onclick="deleteCourseInSemester('${cis.getCisId()}', 
 													'${cis.getCourse().getCourseCode()}', 
 													'${cis.getSemester().getSemesterName()}',
 													'${cis.getYear()}' )">
-												Delete
+												<i class="icon-trash"></i>
 											</a>	
 										</td>
 									</tr>

@@ -114,19 +114,26 @@ td {
 										<c:set var="courseId" value = "${ course.getCourseId() }"></c:set>
 
 										<td class="align">
-											<a href="viewCourseInSemester?id=${courseId}">Allocate Section(s)</a>
-											|
+											<a 
+												href="viewCourseInSemester?id=${courseId}"
+												class="bootstrap-tooltip" data-original-title="Allocate Section(s)">
+												<i class="icon-plus-sign"></i>
+											</a>
+											
 											<a
+												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
 													'${course.getCourseName() }','${course.getCrossover_course() }', 
 													'${course.getOld_course() }')"
-												data-toggle="modal" data-target="#updateCourseModal">Update
+												data-toggle="modal" data-target="#updateCourseModal">
+												<i class="icon-edit"></i>
 											</a>
-											|
+											
 											 <a
+											 	class="bootstrap-tooltip" data-original-title="Delete"
 												onclick="deleteForm('${course.getCourseId() }', ' ${course.getCourseCode() } ')"
 												data-toggle="modal" data-target="#deleteModal">
-												Delete
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

@@ -32,6 +32,14 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/manageAccessLevel' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.AccessLevel
+	 * @return
+	 * 		The view page to be rendered, along with a List of all AccessLevels through the ModelMap
+	 */
 	@RequestMapping(value = "/manageAccessLevel", method = RequestMethod.GET)
 	public String ViewPermission(ModelMap model) {
 		model.addAttribute("entityList", permissionService.getAll());

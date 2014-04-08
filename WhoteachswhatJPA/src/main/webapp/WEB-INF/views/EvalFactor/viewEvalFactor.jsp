@@ -112,15 +112,18 @@ td {
 										<td>${evalFactor.getFactorVal() }</td>
 										<td class="align">
 											<a
+												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${evalFactor.getEvalId() }', '${evalFactor.getEvalName() }',
 													'${evalFactor.getFactorVal()}' )"
-												data-toggle="modal" data-target="#updateEvalFactorModal">Update |
+												data-toggle="modal" data-target="#updateEvalFactorModal">
+												<i class="icon-edit"></i>
 											</a>
 											
 											 <a
+											 	class="bootstrap-tooltip" data-original-title="Delete" 
 												onclick="deleteForm('${evalFactor.getEvalId() }', ' ${evalFactor.getEvalName() } ')"
 												data-toggle="modal" data-target="#deleteModal">
-												Delete
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

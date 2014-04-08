@@ -113,12 +113,16 @@ td {
 										<td>${semester.getSemesterName() }</td>
 										<td class="align">
 											<a
+												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${semester.getSemesterId() }', '${semester.getSemesterName() }')"
-												data-toggle="modal" data-target="#updateSemesterModal">Update
+												data-toggle="modal" data-target="#updateSemesterModal">
+												<i class="icon-edit"></i>
 											</a>
 											<a 
+												class="bootstrap-tooltip" data-original-title="Delete" 
 												onclick="deleteForm('${semester.getSemesterId() }', ' ${semester.getSemesterName() } ')"
-												data-toggle="modal" data-target="#deleteModal">Delete
+												data-toggle="modal" data-target="#deleteModal">
+												<i class="icon-trash"></i>
 											</a>
 										</td>
 									</tr>

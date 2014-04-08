@@ -103,7 +103,6 @@
 								   <tr>
 										<th>#</th>
 										<th>Teaching Type</th>
-						
 										<th width="25%" style="text-align: right">Operation(s)</th>
 									</tr>
 							   </thead>
