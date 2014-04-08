@@ -102,14 +102,6 @@
 				</ul>
 			</div>
 		</li>
-		<li>
-			<a href="help" >
-				<i class="icon-photon info"></i>
-				<span class="nav-selection">Help</span>
-				<!--TODO: Create documentation page -->
-		
-			</a>
-		</li>
 		<li class="nav-logout">
 			<a href="logout">
 				<!--TODO: Create logout webservice -->

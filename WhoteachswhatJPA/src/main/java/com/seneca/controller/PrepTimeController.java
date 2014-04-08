@@ -21,17 +21,24 @@ import com.seneca.service.PrepTimeService;
 @Controller
 public class PrepTimeController {
 	/**
-	 * This class is the controller which regulates all evalfactor operations.
+	 * This class is the controller which regulates all CRUD operations for PrepTime
 	 * 
-	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi
-	 *         <anil.d.santokhI@gmail.com>
-	 * @lastmodified March 10, 2014
-	 * @version 0.0.1
+	 * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhI@gmail.com>
+	 * @lastmodified April 7, 2014
+	 * @version 1.0
 	 */
 
 	@Autowired
 	private PrepTimeService prepTimeService;
 
+	/**
+	 * This method accepts no parameters and maps the URL '/viewPrepTime' to a view page
+	 * 
+	 * @see
+	 * 		com.seneca.model.PrepTime
+	 * @return
+	 * 		The view page to be rendered, along with a List of all PrepTimes through the ModelMap
+	 */
 	@RequestMapping(value = "/viewPrepTime", method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("allPreptimes", prepTimeService.getAll());
@@ -42,15 +49,13 @@ public class PrepTimeController {
 	// REST API ENDPOINTS:
 
 	/**
-	 * This method accepts no parameters and returns all course in in the
-	 * database.
+	 * This method accepts no parameters and returns all prep times in the database.
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * 
-	 * @return JSON object with a list of course to display in datatable
+	 * @see
+	 * 		com.seneca.service.PrepTimeService
+	 * @return 
+	 * 		HashMap containing the Prep Time name, id and factor in JSON
 	 */
-
 	@RequestMapping(value = "/api/preptime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	List<Map<String, String>> listGetJSON() {
@@ -66,9 +71,14 @@ public class PrepTimeController {
 	}
 
 	/**
+	 * This method accepts an identifier and returns an PrepTime object with a matching id
 	 * 
+	 * @see 
+	 * 		com.seneca.service.PrepTimeService
 	 * @param id
-	 * @return
+	 * 		 Uniquely identifies an PrepTime object
+	 * @return 
+	 * 		HashMap containing the Prep time name and factor in JSON
 	 */
 	@RequestMapping(value = "/api/preptime/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
@@ -83,23 +93,17 @@ public class PrepTimeController {
 	}
 
 	/**
-	 * This method accepts data posted from the UpdateCourseForm and updates a
-	 * course using the appropriate service method
+	 * This method is accessed through a POST request and allows the creation of a PrepTime
 	 * 
-	 * @see com.seneca.service.CourseService
-	 * 
-	 * @param courseCode
-	 *            The six to eight digit course code
-	 * @param courseName
-	 *            The name of the course
-	 * @param crossoverCourse
-	 *            The course code that is syncronomous with this course code
-	 * @param oldCourse
-	 *            The previous course code of the course, if any
-	 * 
-	 * @return A String containing the name of the view to render
+	 * @see
+	 * 		com.seneca.service.PrepTimeService
+	 * @param preptimeName
+	 * 		The name of the prep time. Can only be 1-2 characters
+	 * @param preptimeFactor
+	 * 		The applied factor
+	 * @return
+	 * 		A HashMap containing the Prep Time id and a message containing the success of the operation in JSON
 	 */
-
 	@RequestMapping(value = "/api/preptime", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	Map<String, String> listAddJSON(
