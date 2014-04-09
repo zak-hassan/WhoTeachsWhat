@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seneca.model.EvalFactor;
 import com.seneca.model.Factor;
 import com.seneca.repository.FactorDao;
 
@@ -30,7 +29,6 @@ public class FactorService {
 	
 	public Factor add(String name, float f){
 			Factor eval= new Factor();
-
 			eval.setFactorName(name);
 			eval.setFactorValue(f);
 			logger.info("Entering courseDao.create : ");
