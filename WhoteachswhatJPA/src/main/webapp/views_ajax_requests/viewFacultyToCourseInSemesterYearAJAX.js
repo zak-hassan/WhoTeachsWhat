@@ -20,6 +20,7 @@
 	   var addForm = document.getElementById("addFacToCourseSemForm");
 	   var errors = new Array();
 	   var elementsId = new Array();
+	   var evalTotal = 0;
 	   
 	   var idPattern = new RegExp("[A-Za-z]+Id");
 	   
@@ -37,6 +38,7 @@
 	   var evalFactor1 = document.getElementById("evalFactor1");
 	   var evalFactor2 = document.getElementById("evalFactor2");
 	   var evalFactor3 = document.getElementById("evalFactor3");
+	   var factorId = document.getElementById("factorId");
 	   
 	   if (!facultyId || !facultyId.length) { // If no id in query string, use the one from the form
 			facultyId = document.getElementById("facultyId").value;
@@ -82,6 +84,20 @@
 			errors[j] = prepTimeId.getAttribute("name") + "  must be a number";
 			elementsId[j++] = prepTimeId.getAttribute("id");
 		}
+		
+		if (!validate_integer(factorId.value)) {
+			valid = false;
+			errors[j] = factorId.getAttribute("name") + "  must be a number";
+			elementsId[j++] = factorId.getAttribute("id");
+		}
+		
+		evalTotal = parseInt(evalFactor1.value) + parseInt(evalFactor2.value) + parseInt(evalFactor3.value);
+		
+		if (evalTotal != 100) {
+			valid = false;
+			errors[j] = "Evaluation factors must add up to 100.0";
+			elementsId[j++] = evalFactor1.getAttribute("id");
+		}
 	   
 	   if (valid) {
 			$.ajax({
@@ -98,7 +114,11 @@
 			   		courseId: courseId.value,
 			   		facultyId: facultyId,
 			   		prepTimeId: prepTimeId.value,
-			   		class_size: classSize.value
+			   		class_size: classSize.value,
+			   		evalFactor1: evalFactor1.value,
+			   		evalFactor2: evalFactor2.value,
+			   		evalFactor3: evalFactor3.value,
+			   		factorId: factorId.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -118,7 +138,7 @@
 			    		
 			    		$('#addFacToCourseSemModal').modal('hide');
 			    		
-			    		location.reload(); // Refresh page..
+			    		// location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -297,7 +317,7 @@
 	};	   
 
 	var updateForm=function(cisId, facId, additionAttribute, comphourAllowance, comphourAssigned, sectionNumber, semesterId,
-		year,comphourId, courseId, prepTimeId){
+		year,comphourId, courseId, prepTimeId, evalFactor1, evalFactor2, evalFactor3, factorId) {
 		$("#up_cisId").val(cisId);
 		$("#up_facultyId").val(facId);
 		$("#up_additionAttribute").val(additionAttribute); 
@@ -309,6 +329,10 @@
    		$("#up_comphourId").val(comphourId);
    		$("#up_courseId").val(courseId);
    		$("#up_prepTimeId").val(prepTimeId); 
+   		$("#up_evalFactor1").val(evalFactor1);
+   		$("#up_evalFactor2").val(evalFactor2);
+   		$("#up_evalFactor3").val(evalFactor3);
+   		$("#up_factorId").val(factorId);
 	};
 	
 	var deleteForm=function(cisId, courseName, fname, lname) {
@@ -339,4 +363,10 @@
 			document.getElementById(id + i++).disabled = true;
 			document.getElementById(id + i++).disabled = true;
 		}	
+	};
+	
+	var loadEvalFactor=function() {
+		var tempCourseId = document.getElementById("courseId").value;
+	//	alert("Checked!");
+
 	};

@@ -36,6 +36,7 @@
 		var errors = new Array();
 		var elementsId = new Array();
 		var addForm = document.getElementById("addCourseForm");
+		var evalTotal = 0;
 		
 		var i = 0;
 		var j = 0;
@@ -109,6 +110,9 @@
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor1.getAttribute("id");
 		}
+		else {
+			evalTotal += parseInt(evalFactor1.value);
+		}
 		
 		// Validate evaluation factor 2
 		
@@ -123,6 +127,10 @@
 		   	errors[j] = evalFactor2.getAttribute("name") + " must be " +
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor2.getAttribute("id");
+		   	
+		}
+		else {
+			evalTotal += parseInt(evalFactor2.value);
 		}
 		
 		// Validate evaluation factor 3
@@ -139,9 +147,17 @@
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor3.getAttribute("id");
 		}
+		else {
+			evalTotal += parseInt(evalFactor3.value);
+		}
+
+		if (evalTotal != 100) {
+			valid = false;
+			errors[j] = "Evaluation factors must add up to 100.0";
+			elementsId[j++] = evalFactor1.getAttribute("id");
+		}
 	   
 		if (valid) {
-			alert("eval1 is: " + evalFactor1.value + " eval2 is: " + evalFactor2.value + " eval3 is: " + evalFactor3.value);
 			$.ajax({
 				type: "POST",
 				url: "api/course",
@@ -194,6 +210,7 @@
 		var errors = new Array();
 		var elementsId = new Array();
 		var updateForm = document.getElementById("updateCourseForm");
+		var evalTotal = 0;
 		
 		var i = 0;
 		var j = 0;
@@ -268,6 +285,9 @@
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor1.getAttribute("id");
 		}
+		else {
+			evalTotal += parseInt(evalFactor1.value);
+		}
 		
 		// Validate evaluation factor 2
 		
@@ -283,6 +303,9 @@
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor2.getAttribute("id");
 		}
+		else {
+			evalTotal += parseInt(evalFactor2.value);
+		}
 		
 		// Validate evaluation factor 3
 		
@@ -297,6 +320,15 @@
 		   	errors[j] = evalFactor3.getAttribute("name") + " must be " +
 		   		"a number less than " + evalFactorLength + " digits long";
 		   	elementsId[j++] = evalFactor3.getAttribute("id");
+		}
+		else {
+			evalTotal += parseInt(evalFactor3.value);
+		}
+		
+		if (evalTotal != 100) {
+			valid = false;
+			errors[j] = "Evaluation factors must add up to 100.0";
+			elementsId[j++] = evalFactor1.getAttribute("id");
 		}
 		
 		// Validate course id

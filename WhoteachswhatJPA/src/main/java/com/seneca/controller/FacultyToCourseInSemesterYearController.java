@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.seneca.model.FacultyToCourseInSemesterYear;
 import com.seneca.service.CompHoursService;
 import com.seneca.service.CourseService;
+import com.seneca.service.FactorService;
 import com.seneca.service.FacultyService;
 import com.seneca.service.FacultyToCourseInSemesterYearService;
 import com.seneca.service.PrepTimeService;
@@ -50,6 +51,9 @@ public class FacultyToCourseInSemesterYearController {
 	
 	@Autowired
 	private CompHoursService compHoursService;
+	
+	@Autowired
+	private FactorService factorService;
 
 	/**
 	 * This method accepts no parameters and maps the URL '/viewFacultyToCourseInSemesterYear' to a view page
@@ -69,6 +73,7 @@ public class FacultyToCourseInSemesterYearController {
 		model.addAttribute("allCourses", courseService.getAll());
 		model.addAttribute("allPrepTime", prepTimeService.getAll());
 		model.addAttribute("allCompHours", compHoursService.getAll());
+		model.addAttribute("allFactors", factorService.getAll());
 		
 		return "FacultyToCourseInSemesterYear/viewFacultyToCourseInSemesterYear";
 	}
@@ -149,14 +154,22 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
 			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id,
-			@RequestParam(value = "class_size", required = true) Integer class_size) {
+			@RequestParam(value = "class_size", required = true) Integer class_size,
+			@RequestParam(value = "evalFactor1", required = true) String evalFactor1,
+			@RequestParam(value = "evalFactor2", required = true) String evalFactor2,
+			@RequestParam(value = "evalFactor3", required = true) String evalFactor3,
+			@RequestParam(value = "factorId", required = true) Integer factor_id) {
 		
+		Float eval1 = Float.parseFloat(evalFactor1);
+		Float eval2 = Float.parseFloat(evalFactor2);
+		Float eval3 = Float.parseFloat(evalFactor3);
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
+		
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
 	 FacultyToCourseInSemesterYear fcsyear=	facultyToCourseInSemesterYearService.add(faculty_id, prepTime_id,
 				course_id, compHour_id, year, semester_id, section_number,
-				comphoursAllowance, additionAttribute, comphourAssigned, class_size);
+				comphoursAllowance, additionAttribute, comphourAssigned, class_size, eval1, eval2, eval3, factor_id);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		list.put("id", fcsyear.getCisyId() + "");
@@ -211,15 +224,23 @@ public class FacultyToCourseInSemesterYearController {
 			@RequestParam(value = "courseId", required = true) Integer course_id,
 			@RequestParam(value = "facultyId", required = true) Integer faculty_id,
 			@RequestParam(value = "prepTimeId", required = true) Integer prepTime_id,
-			@RequestParam(value = "class_size", required = true) Integer class_size) {
+			@RequestParam(value = "class_size", required = true) Integer class_size,
+			@RequestParam(value = "evalFactor1", required = true) String evalFactor1,
+			@RequestParam(value = "evalFactor2", required = true) String evalFactor2,
+			@RequestParam(value = "evalFactor3", required = true) String evalFactor3,
+			@RequestParam(value = "factorId", required = true) Integer factor_id) {
 
+		Float eval1 = Float.parseFloat(evalFactor1);
+		Float eval2 = Float.parseFloat(evalFactor2);
+		Float eval3 = Float.parseFloat(evalFactor3);
 		float comphoursAllowance = Float.parseFloat(compHour_allowance);
 		float additionAttribute = Float.parseFloat(addition_attribute);
 		float comphourAssigned = Float.parseFloat(compHour_assigned);
+		
 		facultyToCourseInSemesterYearService.update(id, faculty_id,
 				prepTime_id, course_id, compHour_id, year, semester_id,
 				section_number, comphoursAllowance, additionAttribute,
-				comphourAssigned, class_size);
+				comphourAssigned, class_size, eval1, eval2, eval3, factor_id);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");

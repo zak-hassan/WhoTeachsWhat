@@ -3,13 +3,22 @@ package com.seneca.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seneca.bireports.Swift;
+import com.seneca.model.CompHour;
+import com.seneca.model.Course;
+import com.seneca.model.Faculty;
 import com.seneca.model.FacultyToCourseInSemesterYear;
+import com.seneca.model.PrepTime;
+import com.seneca.model.Semester;
 import com.seneca.repository.CompHourDao;
 import com.seneca.repository.CourseDao;
 import com.seneca.repository.FacultyDao;
@@ -46,7 +55,8 @@ public class FacultyToCourseInSemesterYearService {
 			Integer prepType_id, Integer course_id, Integer compHour_id,
 			Integer year, Integer semester_id, Integer section_number,
 			float comphoursAllowance, float additionAttribute,
-			float comphourAssigned, Integer class_size) {
+			float comphourAssigned, Integer class_size, Float evalFactor1, Float evalFactor2,
+			Float evalFactor3, Integer factor_id) {
 
 			// TODO: You need to map the semester to a semester id
 			FacultyToCourseInSemesterYear rToFaculty = new FacultyToCourseInSemesterYear();
@@ -60,6 +70,12 @@ public class FacultyToCourseInSemesterYearService {
 			rToFaculty.setCompHour_allowance(comphoursAllowance);
 			rToFaculty.setAdditionAttribute(additionAttribute);
 			rToFaculty.setCompHour_assigned(comphourAssigned);
+			
+			rToFaculty.setEvalFactor1(evalFactor1);
+			rToFaculty.setEvalFactor2(evalFactor2);
+			rToFaculty.setEvalFactor3(evalFactor3);
+			rToFaculty.setFactorId(factor_id);
+			
 		return facultyToCourseInSemesterYearDao.create(rToFaculty);
 	}
 
@@ -67,7 +83,8 @@ public class FacultyToCourseInSemesterYearService {
 			Integer prepType_id, Integer course_id, Integer compHour_id,
 			Integer year, Integer semester_id, Integer section_number,
 			float comphoursAllowance, float additionAttribute,
-			float comphourAssigned, Integer class_size) {
+			float comphourAssigned, Integer class_size, Float evalFactor1, Float evalFactor2,
+			Float evalFactor3, Integer factor_id) {
 
 		FacultyToCourseInSemesterYear rToFaculty = facultyToCourseInSemesterYearDao
 				.getById(id);
@@ -85,6 +102,11 @@ public class FacultyToCourseInSemesterYearService {
 		rToFaculty.setCompHour_allowance(comphoursAllowance);
 		rToFaculty.setAdditionAttribute(additionAttribute);
 		rToFaculty.setCompHour_assigned(comphourAssigned);
+		
+		rToFaculty.setEvalFactor1(evalFactor1);
+		rToFaculty.setEvalFactor2(evalFactor2);
+		rToFaculty.setEvalFactor3(evalFactor3);
+		rToFaculty.setFactorId(factor_id);
 
 		facultyToCourseInSemesterYearDao.update(rToFaculty);
 		return rToFaculty;

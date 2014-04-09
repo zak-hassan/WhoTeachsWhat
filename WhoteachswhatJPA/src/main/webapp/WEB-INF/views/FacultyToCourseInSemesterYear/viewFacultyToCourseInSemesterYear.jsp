@@ -145,7 +145,12 @@ td {
 													'${facToCourse.getYear() }',
 													'${facToCourse.getCompHour().getCompHour_id() }',
 													'${facToCourse.getCourse().getCourseId() }',
-													'${facToCourse.getPrepTime().getPrepId() }')"
+													'${facToCourse.getPrepTime().getPrepId() }',
+													'${facToCourse.getEvalFactor1() }',
+													'${facToCourse.getEvalFactor2() }',
+													'${facToCourse.getEvalFactor3() }',
+													'${facToCourse.getFactorId() }'
+													)"
 												data-toggle="modal" data-target="#updateFacToCourseSemModal">
 												<i class="icon-edit"></i>
 											</a>
@@ -325,9 +330,9 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Factor:</span> <br /> <select
 									class="form-control" id="factorId" name="Factor id">
-									<c:forEach items="${allPrepTime}" var="pt">
-									<option value="${pt.getPrepId() }">
-										${pt.getPrepName() }
+									<c:forEach items="${allFactors}" var="factor">
+									<option value="${factor.getFactorId() }">
+										${factor.getFactorName() }
 									</option>
 									</c:forEach>
 								</select>
@@ -345,7 +350,6 @@ td {
 		</div>
 
 		<!--  END OF ADD MODAL -->
-
 			<!-- Modal -->
 		<div class="modal fade" id="updateFacToCourseSemModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -469,9 +473,9 @@ td {
 							<div class="input-group">
 								<span class="input-group-addon">Factor:</span> <br /> <select
 									class="form-control" id="up_factorId" name="Factor id">
-									<c:forEach items="${allPrepTime}" var="pt">
-									<option value="${pt.getPrepId() }">
-										${pt.getPrepName() }
+									<c:forEach items="${allFactors}" var="factor">
+									<option value="${factor.getFactorId() }">
+										${factor.getFactorName() }
 									</option>
 									</c:forEach>
 								</select>
@@ -488,7 +492,7 @@ td {
 				</div>
 			</div>
 		</div>
-
+		
 		<!--  END OF UPDATE MODAL -->
 		
 		<!--  BEGIN DELETE MODAL -->
