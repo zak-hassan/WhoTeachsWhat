@@ -73,18 +73,18 @@ public class CoursesInSemester implements Serializable {
 		this.courses = courses;
 	}
 
-	public Course addCours(Course cours) {
-		getCourses().add(cours);
-		cours.setCoursesInSemester(this);
+	public Course addCourse(Course course) {
+		getCourses().add(course);
+		course.setCoursesInSemester(this);
 
-		return cours;
+		return course;
 	}
 
-	public Course removeCours(Course cours) {
-		getCourses().remove(cours);
-		cours.setCoursesInSemester(null);
+	public Course removeCourse(Course course) {
+		getCourses().remove(course);
+		course.setCoursesInSemester(null);
 
-		return cours;
+		return course;
 	}
 
 	public Course getCourse() {

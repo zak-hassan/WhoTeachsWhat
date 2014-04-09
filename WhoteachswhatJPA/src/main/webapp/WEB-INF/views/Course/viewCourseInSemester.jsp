@@ -134,10 +134,11 @@ td {
 											
 											 <a
 											 	class="bootstrap-tooltip" data-original-title="Delete" 
-												onclick="deleteCourseInSemester('${cis.getCisId()}', 
+												onclick="deleteForm('${cis.getCisId()}', 
 													'${cis.getCourse().getCourseCode()}', 
 													'${cis.getSemester().getSemesterName()}',
-													'${cis.getYear()}' )">
+													'${cis.getYear()}' )"
+												data-toggle="modal" data-target="#deleteModal">
 												<i class="icon-trash"></i>
 											</a>	
 										</td>
@@ -219,7 +220,7 @@ td {
 							
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="sectionNumber" id="Section number" />
+									type="text" class="form-control" name="Section number" id="sectionNumber" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> 
@@ -310,6 +311,29 @@ td {
 		</div>
 
 		<!--  END OF UPDATE MODAL -->
+		
+		<!--  BEGIN DELETE MODAL -->
+		
+		<div id="deleteModal" class="modal hide fade">
+			<input type="hidden" id="del_cisId" name="Course in Semester id" />
+			<input type="hidden" id="del_courseCode" />
+			<input type="hidden" id="del_semesterName" />
+			<input type="hidden" id="del_year" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+				Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn" data-dismiss="modal">Close</a>
+                <a href="javascript:;" class="btn btn-primary" data-dismiss="modal"
+                	onclick="deleteCourseInSemester()">Yes</a>
+            </div>
+        </div>
+		
+		<!--  END DELETE MODAL -->
 	</div>
 </body>
 </html>

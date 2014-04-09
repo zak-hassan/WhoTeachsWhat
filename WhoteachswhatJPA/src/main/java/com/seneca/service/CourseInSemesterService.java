@@ -43,21 +43,8 @@ public class CourseInSemesterService {
 	private SemesterDao semesterDao;
 
 	// CRUD OPERATIONS:
-	/*
-	 * 
-	 * Table CoursesInSemester ======================= cis_id,
-	 * addition_attribute, eval_1_ans, eval_2_ans, eval_3_ans, total_section,
-	 * year, course_id, eval_1, eval_2, eval_3, semester_id
-	 * ----------------------- cis_id int(11) PK addition_attribute int(11)
-	 * eval_1_ans float eval_2_ans float eval_3_ans float total_section int(11)
-	 * year int(11) course_id int(11) eval_1 int(11) eval_2 int(11) eval_3
-	 * int(11) semester_id int(11)
-	 */
 
-	public void add(Integer addition_attribute, float e1_ans, float e2_ans,
-			float e3_ans, Integer eval_1, Integer eval_2, Integer eval_3,
-			Integer sectionNumbers, Integer year, Integer course_id,
-			Integer semester_id) {
+	public void add(Integer sectionNumbers, Integer year, Integer course_id, Integer semester_id) {
 		CoursesInSemester course = new CoursesInSemester();
 		course.setTotalSection(sectionNumbers);
 		course.setYear(year);
@@ -66,9 +53,7 @@ public class CourseInSemesterService {
 		courseInSemesterDao.create(course);
 	}
 
-	public CoursesInSemester update(Integer id, Integer addition_attribute,
-			float e1_ans, float e2_ans, float e3_ans, Integer eval_1,
-			Integer eval_2, Integer eval_3, Integer sectionNumbers,
+	public CoursesInSemester update(Integer id, Integer sectionNumbers,
 			Integer year, Integer course_id, Integer semester_id) {
 
 		CoursesInSemester course = courseInSemesterDao.getById(id);

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.seneca.model.Course;
 import com.seneca.model.CoursesInSemester;
 import com.seneca.service.CourseInSemesterService;
 import com.seneca.service.CourseService;
@@ -96,20 +95,6 @@ public class CourseInSemesterController {
 	 * 
 	 * @see
 	 * 		com.seneca.service.CourseInSemesterService
-	 * @param addition_attribute
-	 * 		An additional attribution of hours
-	 * @param eval_1_ans
-	 * 		To be deleted
-	 * @param eval_2_ans
-	 * 		To be deleted
-	 * @param eval_3_ans
-	 * 		To be deleted
-	 * @param eval_1
-	 * 		To be deleted
-	 * @param eval_2
-	 * 		To be deleted
-	 * @param eval_3
-	 * 		To be deleted
 	 * @param sectionNumbers
 	 * 		The number of sections a course has
 	 * @param year
@@ -123,26 +108,13 @@ public class CourseInSemesterController {
 	 */
 	@RequestMapping(value = "/api/courseinsemester", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	Map<String, String> listAddJSON(
-			@RequestParam(value = "addition_attribute", required = true) Integer addition_attribute,
-			@RequestParam(value = "eval_1_ans", required = true) String eval_1_ans,
-			@RequestParam(value = "eval_2_ans", required = true) String eval_2_ans,
-			@RequestParam(value = "eval_3_ans", required = true) String eval_3_ans,
-			@RequestParam(value = "eval_1", required = true) Integer eval_1,
-			@RequestParam(value = "eval_2", required = true) Integer eval_2,
-			@RequestParam(value = "eval_3", required = true) Integer eval_3,
-			@RequestParam(value = "sectionNumber", required = true) Integer sectionNumbers,
+	Map<String, String> listAddJSON(@RequestParam(value = "sectionNumber", required = true) Integer sectionNumbers,
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "course_id", required = true) Integer course_id,
 			@RequestParam(value = "semester_id", required = true) Integer semester_id) {
 
-		// TODO: Convert all `string` to `float` ...
-		float e1_ans = Float.valueOf(eval_1_ans);
-		float e2_ans = Float.valueOf(eval_2_ans);
-		float e3_ans = Float.valueOf(eval_3_ans);
 
-		courseInSemesterService.add(addition_attribute, e1_ans, e2_ans, e3_ans,
-				eval_1, eval_2, eval_3, sectionNumbers, year, course_id,
+		courseInSemesterService.add(sectionNumbers, year, course_id,
 				semester_id);
 		
 		Map<String, String> list = new HashMap<String, String>();
@@ -158,20 +130,6 @@ public class CourseInSemesterController {
 	 * 		com.seneca.service.CourseInSemesterService
 	 * @param id
 	 * 		Uniquely identifies the object
-	 * @param addition_attribute
-	 * 		An additional attribution of hours
-	 * @param eval_1_ans
-	 * 		To be deleted
-	 * @param eval_2_ans
-	 * 		To be deleted
-	 * @param eval_3_ans
-	 * 		To be deleted
-	 * @param eval_1
-	 * 		To be deleted
-	 * @param eval_2
-	 * 		To be deleted
-	 * @param eval_3
-	 * 		To be deleted
 	 * @param sectionNumbers
 	 * 		The number of sections a course has
 	 * @param year
@@ -187,24 +145,12 @@ public class CourseInSemesterController {
 	public @ResponseBody
 	Map<String, String> listUpdateJSON(
 			@PathVariable("id") Integer id,
-			@RequestParam(value = "addition_attribute", required = true) Integer addition_attribute,
-			@RequestParam(value = "eval_1_ans", required = true) String eval_1_ans,
-			@RequestParam(value = "eval_2_ans", required = true) String eval_2_ans,
-			@RequestParam(value = "eval_3_ans", required = true) String eval_3_ans,
-			@RequestParam(value = "eval_1", required = true) Integer eval_1,
-			@RequestParam(value = "eval_2", required = true) Integer eval_2,
-			@RequestParam(value = "eval_3", required = true) Integer eval_3,
 			@RequestParam(value = "sectionNumber", required = true) Integer sectionNumbers,
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "course_id", required = true) Integer course_id,
 			@RequestParam(value = "semester_id", required = true) Integer semester_id) {
-		// TODO: Convert all `string` to `float` ...
-		float e1_ans = Float.valueOf(eval_1_ans);
-		float e2_ans = Float.valueOf(eval_2_ans);
-		float e3_ans = Float.valueOf(eval_3_ans);
-		courseInSemesterService.update(id, addition_attribute, e1_ans, e2_ans,
-				e3_ans, eval_1, eval_2, eval_3, sectionNumbers, year,
-				course_id, semester_id);
+
+		courseInSemesterService.update(id, sectionNumbers, year, course_id, semester_id);
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
 		return list;
