@@ -105,6 +105,7 @@ td {
 							<tbody>
 								<c:forEach items="${allCourses }" var="course">
 									<tr>
+									
 										<td>${course.getCourseCode() }</td>
 										<td>${course.getCourseName() }</td>
 										<c:set var="courseId" value = "${ course.getCourseId() }"></c:set>
@@ -114,12 +115,11 @@ td {
 												class="bootstrap-tooltip" data-original-title="Allocate Section(s)">
 												<i class="icon-plus-sign"></i>
 											</a>
-											
 											<a
 												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
-													'${course.getCourseName() }','${course.getCrossover_course() }', 
-													'${course.getOld_course() }')"
+													'${course.getCourseName() }','${course.getCrossoverCourse() }', 
+													'${course.getOldCourse() }')"
 												data-toggle="modal" data-target="#updateCourseModal">
 												<i class="icon-edit"></i>
 											</a>
