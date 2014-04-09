@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.hibernate:hibernate-core:4.3.4-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.4-SNAPSHOT/hibernate-core-4.3.4-20140228.211954-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.4-SNAPSHOT/hibernate-core-4.3.4-20140228.211954-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.4-SNAPSHOT/hibernate-core-4.3.4-20140228.211954-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
