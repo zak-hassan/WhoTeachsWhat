@@ -7,6 +7,10 @@
   <context:component-scan base-package="com.seneca.service"/>
   <context:component-scan base-package="com.seneca.controller"/>
   
+  <mvc:interceptors>
+	    <bean id="SecurityHandlerInterceptor" class="com.seneca.domain.SecurityHandlerInterceptor"   />
+	</mvc:interceptors>
+  
 <!--   
   <bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" id="viewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>

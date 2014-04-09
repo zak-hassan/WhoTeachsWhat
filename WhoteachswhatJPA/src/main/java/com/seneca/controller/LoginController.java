@@ -63,9 +63,6 @@ public class LoginController {
 			}
 		} catch (Exception ae) {
 
-			// logger.info("Navigator: Exception occurred!!!");
-			// TODO: handle exception
-
 			list.put("exception", ae.getMessage());
 			list.put("success", "false");
 		}
@@ -131,7 +128,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.setAttribute(LoginController.ACCOUNT_ATTRIBUTE, null);
+
 		return "redirect:/";
 	}
 
