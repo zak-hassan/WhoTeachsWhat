@@ -135,5 +135,4 @@
 			parseFloat(weeklyCompHourAssigned);
 		
 		// Add new row with totals
-		
 	};
