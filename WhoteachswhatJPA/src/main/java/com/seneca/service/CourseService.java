@@ -33,23 +33,29 @@ public class CourseService {
 	
 	
 	public Course add(String course_code, String course_name, String crossover,
-			String oldcourse) {
+			String oldcourse, Float evalFactor1, Float evalFactor2, Float evalFactor3) {
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
 			course.setCrossoverCourse(crossover);
 			course.setOldCourse(oldcourse);
+			course.setEvalFactor1(evalFactor1);
+			course.setEvalFactor2(evalFactor2);
+			course.setEvalFactor3(evalFactor3);
 		return courseDao.create(course);
 	}
 
 	
 	public Course update(Integer id, String course_code, String course_name,
-			String crossover, String oldcourse) {
+			String crossover, String oldcourse, Float evalFactor1, Float evalFactor2, Float evalFactor3) {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
 		course.setCrossoverCourse(crossover);
 		course.setOldCourse(oldcourse);
+		course.setEvalFactor1(evalFactor1);
+		course.setEvalFactor2(evalFactor2);
+		course.setEvalFactor3(evalFactor3);
 		courseDao.update(course);
 		
 		return course;

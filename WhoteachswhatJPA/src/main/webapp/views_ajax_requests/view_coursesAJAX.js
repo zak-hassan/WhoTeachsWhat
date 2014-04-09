@@ -141,6 +141,7 @@
 		}
 	   
 		if (valid) {
+			alert("eval1 is: " + evalFactor1.value + " eval2 is: " + evalFactor2.value + " eval3 is: " + evalFactor3.value);
 			$.ajax({
 				type: "POST",
 				url: "api/course",
@@ -148,7 +149,10 @@
 					course_code: courseCode.value,
 		  	   		course_name: courseName.value,
 		  	   		crossover_input: crossoverInput.value,
-		  	   		reference_input: referenceInput.value
+		  	   		reference_input: referenceInput.value,
+		  	   		evalFactor1: evalFactor1.value,
+		  	   		evalFactor2: evalFactor2.value,
+		  	   		evalFactor3: evalFactor3.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -168,7 +172,7 @@
 			    		
 			    		$('#addCourseModal').modal('hide');
 			    		
-			    		location.reload(); // Refresh page..
+			    		// location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -311,7 +315,10 @@
 					course_code: courseCode.value,
 		  	   		course_name: courseName.value,
 		  	   		crossover_input: crossoverInput.value,
-		  	   		reference_input: referenceInput.value
+		  	   		reference_input: referenceInput.value,
+		  	   		evalFactor1: evalFactor1.value,
+		  	   		evalFactor2: evalFactor2.value,
+		  	   		evalFactor3: evalFactor3.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -385,12 +392,16 @@
 		}
 	};	  	   
 
-	var updateForm=function(up_course_id, up_course_code, up_course_name, up_crossover_input, up_reference_input){
+	var updateForm=function(up_course_id, up_course_code, up_course_name, up_crossover_input, up_reference_input,
+		up_evalFactor1, up_evalFactor2, up_evalFactor3){
 		$("#up_course_id").val(up_course_id);
 		$("#up_course_code").val(up_course_code);
 		$("#up_course_name").val(up_course_name);
 		$("#up_crossover_input").val(up_crossover_input);
 		$("#up_reference_input").val(up_reference_input);
+		$("#up_evalFactor1").val(up_evalFactor1);
+		$("#up_evalFactor2").val(up_evalFactor2);
+		$("#up_evalFactor3").val(up_evalFactor3);
 	};
 	
 	var deleteForm=function(del_course_id, del_course_code){

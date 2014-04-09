@@ -119,7 +119,8 @@ td {
 												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${course.getCourseId() }', '${course.getCourseCode() }', 
 													'${course.getCourseName() }','${course.getCrossoverCourse() }', 
-													'${course.getOldCourse() }')"
+													'${course.getOldCourse() }', '${course.getEvalFactor1() }',
+													'${course.getEvalFactor2() }','${course.getEvalFactor3() }' )"
 												data-toggle="modal" data-target="#updateCourseModal">
 												<i class="icon-edit"></i>
 											</a>

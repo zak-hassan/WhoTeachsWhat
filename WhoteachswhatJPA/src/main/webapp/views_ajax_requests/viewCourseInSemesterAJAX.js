@@ -56,8 +56,8 @@
 		
 		if (!validate_integer(courseId.value)) {
 			valid = false;
-			errors[j] = courseId.getAttribute("name") + "  must be a number";
-			elementsId[j++] = courseId.getAttribute("id");
+			errors[j] = document.getElementById("courseId").getAttribute("name") + "  must be a number";
+			elementsId[j++] = document.getElementById("courseId").getAttribute("id");
 		}
 		
 		if (valid) {
@@ -156,11 +156,10 @@
 		
 		if (!validate_integer(courseId.value)) {
 			valid = false;
-			errors[j] = courseId.getAttribute("name") + "  must be a number";
-			elementsId[j++] = courseId.getAttribute("id");
+			errors[j] = document.getElementById("up_courseId").getAttribute("name") + "  must be a number";
+			elementsId[j++] = document.getElementById("up_courseId").getAttribute("id");
 		}
 	   
-	   	
 	   if (valid) {
 			$.ajax({
 				type: "POST",

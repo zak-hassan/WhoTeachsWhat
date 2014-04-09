@@ -116,10 +116,17 @@ public class CourseController {
 			@RequestParam(value = "course_code", required = true) String courseCode,
 			@RequestParam(value = "course_name", required = true) String courseName,
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
-			@RequestParam(value = "reference_input", required = false) String oldCourse) {
+			@RequestParam(value = "reference_input", required = false) String oldCourse,
+			@RequestParam(value = "evalFactor1", required = true) String evalFactor1,
+			@RequestParam(value = "evalFactor2", required = true) String evalFactor2,
+			@RequestParam(value = "evalFactor3", required = true) String evalFactor3) {
 
+		Float eval1 = Float.parseFloat(evalFactor1);
+		Float eval2 = Float.parseFloat(evalFactor2);
+		Float eval3 = Float.parseFloat(evalFactor3);
+		
 		Course course = courseService.add(courseCode, courseName,
-				crossoverCourse, oldCourse);
+				crossoverCourse, oldCourse, eval1, eval2, eval3);
 
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
@@ -152,10 +159,17 @@ public class CourseController {
 			@RequestParam(value = "course_code", required = true) String courseCode,
 			@RequestParam(value = "course_name", required = true) String courseName,
 			@RequestParam(value = "crossover_input", required = false) String crossoverCourse,
-			@RequestParam(value = "reference_input", required = false) String oldCourse) {
+			@RequestParam(value = "reference_input", required = false) String oldCourse,
+			@RequestParam(value = "evalFactor1", required = true) String evalFactor1,
+			@RequestParam(value = "evalFactor2", required = true) String evalFactor2,
+			@RequestParam(value = "evalFactor3", required = true) String evalFactor3) {
 
+		Float eval1 = Float.parseFloat(evalFactor1);
+		Float eval2 = Float.parseFloat(evalFactor2);
+		Float eval3 = Float.parseFloat(evalFactor3);
+		
 		courseService.update(id, courseCode, courseName, crossoverCourse,
-				oldCourse);
+				oldCourse, eval1, eval2, eval3);
 		
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
