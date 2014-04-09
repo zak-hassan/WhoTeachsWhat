@@ -42,7 +42,7 @@ public class Course implements Serializable {
 
 	//bi-directional many-to-one association to CoursesInSemester
 	@ManyToOne
-	@JoinColumn(name="course_id", referencedColumnName="course_id")
+	@JoinColumn(name="course_in_semester", referencedColumnName="course_id")
 	private CoursesInSemester coursesInSemester;
 
 	//bi-directional many-to-one association to CourseInProgramCurSem
