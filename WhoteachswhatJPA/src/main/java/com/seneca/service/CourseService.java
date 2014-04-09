@@ -34,10 +34,11 @@ public class CourseService {
 	
 	public Course add(String course_code, String course_name, String crossover,
 			String oldcourse) {
-		
 			Course course= new Course();
 			course.setCourseCode(course_code);
 			course.setCourseName(course_name);
+			course.setCrossoverCourse(crossover);
+			course.setOldCourse(oldcourse);
 		return courseDao.create(course);
 	}
 
@@ -47,6 +48,8 @@ public class CourseService {
 		Course course=courseDao.getById(id);
 		course.setCourseCode(course_code);
 		course.setCourseName(course_name);
+		course.setCrossoverCourse(crossover);
+		course.setOldCourse(oldcourse);
 		courseDao.update(course);
 		
 		return course;
@@ -65,8 +68,6 @@ public class CourseService {
 	}
 
 	public Course getById(Integer id) {
-		// TODO Auto-generated method stub
 		return courseDao.getById(id);
 	}
-	
 }
