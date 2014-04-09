@@ -88,15 +88,6 @@
 			<div class="sub-nav">
 				<ul class="nav">
 					<li>
-						<a href="whoTeachesWhat">Who Teaches What</a>
-					</li>
-					<li>
-						<a href="coursesOfferingNextSemester">Courses Offered Next Semester</a>
-					</li>
-					<li>
-						<a href="teachingHistory">Teaching History</a>
-					</li>
-					<li>
 						<a href="facultyswiftreport">Swift Report</a>
 					</li>
 				</ul>
