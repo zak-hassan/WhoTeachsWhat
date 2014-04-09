@@ -138,7 +138,7 @@
 			    		
 			    		$('#addFacToCourseSemModal').modal('hide');
 			    		
-			    		// location.reload(); // Refresh page..
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});

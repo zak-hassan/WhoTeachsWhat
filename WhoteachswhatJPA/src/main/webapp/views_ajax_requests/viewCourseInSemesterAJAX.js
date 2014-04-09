@@ -11,7 +11,11 @@
 	var floatLength = 10;
 	
 	$(document).ready(function () {
-		// $("#preptimeName").attr('maxlength', prepTimeLength);
+		$("#sectionNumber").attr('maxlength', floatLength);
+		$("#up_sectionNumber").attr('maxlength', floatLength);
+		
+		$("#year").attr('maxlength', floatLength);
+		$("#up_year").attr('maxlength', floatLength);
 	});
 	
 	var addCourseInSemester=function() {
@@ -89,7 +93,7 @@
 			    		
 			    		$('#addCourseInSemesterModal').modal('hide');
 			    		
-			    		//location.reload(); // Refresh page..
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -189,7 +193,7 @@
 			    		
 			    		$('#updateCourseInSemesterModal').modal('hide');
 			    		
-			    		//location.reload(); // Refresh page..
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -231,7 +235,7 @@
 							text : 'Course sections has been removed for ' + document.getElementById("del_semesterName").value
 								+ ' ' + document.getElementById("del_year").value
 						});
-	    		//	location.reload();
+	    			location.reload();
 	  				}
 	  	 		 }
 	 		});

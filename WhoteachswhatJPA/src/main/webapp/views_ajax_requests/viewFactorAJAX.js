@@ -73,7 +73,7 @@
 			    		
 			    		$('#addFactorModal').modal('hide');
 			    		
-			    		// location.reload(); // Refresh page..
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
@@ -156,7 +156,7 @@
 			    		
 			    		$('#updateFactorModal').modal('hide');
 			    		
-			    		//location.reload(); // Refresh page..
+			    		location.reload(); // Refresh page..
 				   	}
 				}
 			});
