@@ -28,18 +28,18 @@ public class FactorService {
 	@Autowired
 	private FactorDao factorDao;
 	
-	public Factor add(String evalName, Float Factor){
+	public Factor add(String name, float f){
 			Factor eval= new Factor();
-			eval.setFactorName(evalName);
-			eval.setFactorValue(Factor);
+			eval.setFactorName(name);
+			eval.setFactorValue(f);
 			logger.info("Entering courseDao.create : ");
 			return factorDao.create(eval);
 	}
 	
-	public Factor update(Integer id, String evalName, Float evalFactor){
+	public Factor update(Integer id, String name, float f){
 		Factor eval= factorDao.getById(id);
-		eval.setFactorName(evalName);
-		eval.setFactorValue(evalFactor);
+		eval.setFactorName(name);
+		eval.setFactorValue(f);
 		factorDao.update(eval);
 		return eval;
 	}

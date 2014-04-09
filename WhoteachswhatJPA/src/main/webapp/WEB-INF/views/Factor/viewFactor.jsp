@@ -110,12 +110,12 @@ td {
 										<td>${factor.getFactorId() }</td>
 
 										<td>${factor.getFactorName() }</td>
-										<td>${factor.getFactorVal() }</td>
+										<td>${factor.getFactorValue() }</td>
 										<td class="align">
 											<a
 												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${factor.getFactorId() }', '${factor.getFactorName() }',
-													'${factor.getFactorVal() }' )"
+													'${factor.getFactorValue() }' )"
 												data-toggle="modal" data-target="#updateFactorModal">
 												<i class="icon-edit"></i>
 											</a>
