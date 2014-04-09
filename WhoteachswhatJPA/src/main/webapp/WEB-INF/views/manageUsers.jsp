@@ -111,7 +111,7 @@ td {
 								<c:forEach items="${allUsers }" var="users">
 									<tr>
 
-										<td>${users.getUserId() }</td>
+										<td>${users.getId() }</td>
 
 										<td>${users.getUsername() }</td>
 										
@@ -119,7 +119,7 @@ td {
 										<td class="align">
 											 <a
 											 	class="bootstrap-tooltip" data-original-title="Update" 
-												onclick="updateForm('${users.getUserId() }', '${users.getUsername() }',
+												onclick="updateForm('${users.getId() }', '${users.getUsername() }',
 													'${users.accessLevel.getAccessId()}' )"
 												data-toggle="modal" data-target="#updateUserModal">
 												<i class="icon-edit"></i>
@@ -127,13 +127,13 @@ td {
 											
 											<a
 												class="bootstrap-tooltip" data-original-title="Suspend"
-												onclick="suspendUser('${users.getUserId() }', ' ${users.getUsername() } ')">
+												onclick="suspendUser('${users.getId() }', ' ${users.getUsername() } ')">
 												<i class="icon-warning-sign"></i>
 											</a>
 											
 											<a
 												class="bootstrap-tooltip" data-original-title="Delete"
-												onclick="deleteForm('${users.getUserId() }', ' ${users.getUsername() } ')"
+												onclick="deleteForm('${users.getId() }', ' ${users.getUsername() } ')"
 												data-toggle="modal" data-target="#deleteModal">
 												<i class="icon-trash"></i>
 											</a>
