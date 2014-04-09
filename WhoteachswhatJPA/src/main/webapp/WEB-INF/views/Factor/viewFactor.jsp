@@ -104,7 +104,6 @@ td {
 								</tr>
 							</thead>
 							<tbody>
-								<%-- 
 								<c:forEach items="${allFactors }" var="factor">
 									<tr>
 
@@ -128,7 +127,6 @@ td {
 										</td>
 									</tr>
 								</c:forEach>
-								--%>
 							</tbody>
 						</table>
 					</div>
