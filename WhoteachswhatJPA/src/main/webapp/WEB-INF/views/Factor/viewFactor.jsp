@@ -74,7 +74,7 @@
 				<small>Add, Update and Delete teaching factors</small>
 			</h3>
 		</header>
-		<form method="post" action="api/semester" id="manageSemesterForm" class="form-horizontal">
+		<form class="form-horizontal">
 			<div class="container-fluid">
 				<!-- START OF NEW CONTENT -->
 
@@ -104,18 +104,18 @@ td {
 								</tr>
 							</thead>
 							<tbody>
+								<%-- 
 								<c:forEach items="${allFactors }" var="factor">
 									<tr>
 
 										<td>${factor.getFactorId() }</td>
-
 										<td>${factor.getFactorName() }</td>
-										<td>${factor.getFactorVal() }</td>
+										<td>${factor.getFactorValue() }</td>
 										<td class="align">
 											<a
 												class="bootstrap-tooltip" data-original-title="Update"
 												onclick="updateForm('${factor.getFactorId() }', '${factor.getFactorName() }',
-													'${factor.getFactorVal() }' )"
+													'${factor.getFactorValue() }' )"
 												data-toggle="modal" data-target="#updateFactorModal">
 												<i class="icon-edit"></i>
 											</a>
@@ -128,6 +128,7 @@ td {
 										</td>
 									</tr>
 								</c:forEach>
+								--%>
 							</tbody>
 						</table>
 					</div>

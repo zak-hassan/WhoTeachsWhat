@@ -31,7 +31,7 @@ public class FactorService {
 	public Factor add(String evalName, Float Factor){
 			Factor eval= new Factor();
 			eval.setFactorName(evalName);
-			eval.setFactorVal(Factor);
+			eval.setFactorValue(Factor);
 			logger.info("Entering courseDao.create : ");
 			return factorDao.create(eval);
 	}
@@ -39,7 +39,7 @@ public class FactorService {
 	public Factor update(Integer id, String evalName, Float evalFactor){
 		Factor eval= factorDao.getById(id);
 		eval.setFactorName(evalName);
-		eval.setFactorVal(evalFactor);
+		eval.setFactorValue(evalFactor);
 		factorDao.update(eval);
 		return eval;
 	}
