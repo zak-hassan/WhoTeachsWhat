@@ -224,6 +224,14 @@
 			errors[j] = prepTimeId.getAttribute("name") + "  must be a number";
 			elementsId[j++] = prepTimeId.getAttribute("id");
 		}
+		
+		evalTotal = parseInt(evalFactor1.value) + parseInt(evalFactor2.value) + parseInt(evalFactor3.value);
+		
+		if (evalTotal != 100) {
+			valid = false;
+			errors[j] = "Evaluation factors must add up to 100.0";
+			elementsId[j++] = evalFactor1.getAttribute("id");
+		}
 	   
 		if (valid) {
 			$.ajax({
@@ -240,7 +248,11 @@
 			   		courseId: courseId.value,
 			   		facultyId: facultyId,
 			   		prepTimeId: prepTimeId.value,
-			   		class_size: classSize.value
+			   		class_size: classSize.value,
+			   		evalFactor1: evalFactor1.value,
+			   		evalFactor2: evalFactor2.value,
+			   		evalFactor3: evalFactor3.value,
+			   		factorId: factorId.value
 			   	},
 				dataType: "json",
 				cache: false,
@@ -365,8 +377,25 @@
 		}	
 	};
 	
-	var loadEvalFactor=function() {
-		var tempCourseId = document.getElementById("courseId").value;
+	var loadEvalFactor=function(course) {
+		var tempCourseId = course.value;
 	//	alert("Checked!");
-
+		$.ajax({
+	 		type:"GET", 
+		  	url : "api/facToCourseInSemYearGetCourseEval/"+tempCourseId,
+		  	data : null,
+		  	cache : false,
+		  	success : function(data){
+		  		var upPattern = new RegExp("up_");
+				var i = 1;
+				var id = "evalFactor";
+				
+				if (upPattern.test(course.getAttribute("id"))) {
+					id = "up_" + id;
+				}
+		  		document.getElementById(id + i++).value = data.evalFactor1;
+		  		document.getElementById(id + i++).value = data.evalFactor2;
+		  		document.getElementById(id + i++).value = data.evalFactor3;
+		  	}
+		});
 	};

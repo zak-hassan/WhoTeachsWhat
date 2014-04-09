@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.seneca.model.Course;
 import com.seneca.model.FacultyToCourseInSemesterYear;
 import com.seneca.service.CompHoursService;
 import com.seneca.service.CourseService;
@@ -108,6 +109,20 @@ public class FacultyToCourseInSemesterYearController {
 			items.add(map);
 		}
 		return items;
+	}
+	
+	@RequestMapping(value = "/api/facToCourseInSemYearGetCourseEval/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+		Map<String, String> listGetCourseEvalJSON(@PathVariable("id") Integer id) {
+		
+		Course tempCourse = courseService.getById(id);
+		
+		Map<String, String> list = new HashMap<String, String>();
+		list.put("evalFactor1", tempCourse.getEvalFactor1() + "");
+		list.put("evalFactor2", tempCourse.getEvalFactor2() + "");
+		list.put("evalFactor3", tempCourse.getEvalFactor3() + "");
+		
+		return list;
 	}
 
 	/**

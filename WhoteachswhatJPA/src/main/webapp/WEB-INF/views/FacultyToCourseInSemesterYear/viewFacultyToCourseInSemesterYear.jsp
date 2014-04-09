@@ -211,7 +211,8 @@ td {
 		</form>
 		<!-- Button trigger modal -->
 		<button class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#addFacToCourseSemModal">Add Faculty to Course</button>
+			data-target="#addFacToCourseSemModal" onclick="loadEvalFactor(document.getElementById('courseId'))">
+			Add Faculty to Course</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="addFacToCourseSemModal" tabindex="-1" role="dialog"
@@ -283,7 +284,8 @@ td {
 								<span class="input-group-addon">Course:</span> <br /> <select
 									class="form-control" id="courseId" name="Course id">
 									<c:forEach items="${allCourses }" var="course">
-									<option value="${course.getCourseId() }">
+									<option value="${course.getCourseId() }" 
+										onclick="loadEvalFactor(document.getElementById('courseId'))">
 										${course.getCourseCode() }
 									</option>
 									</c:forEach>
@@ -422,7 +424,8 @@ td {
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Course:</span> <br /> <select
-									class="form-control" id="up_courseId" name="Course id">
+									class="form-control" id="up_courseId" name="Course id"
+									onclick="loadEvalFactor(document.getElementById('up_courseId'))">
 									<c:forEach items="${allCourses }" var="course">
 									<option value="${course.getCourseId() }">
 										${course.getCourseCode() }
