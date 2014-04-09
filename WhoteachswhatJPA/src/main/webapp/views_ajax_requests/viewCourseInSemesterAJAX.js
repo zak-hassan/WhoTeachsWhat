@@ -29,9 +29,7 @@
 	   if (!courseId|| !courseId.length) { // If no id in query string, use the one from the form
 			courseId = document.getElementById("courseId").value;
 	   }
-	   
-	   alert(courseId);
-		
+	   		
 	   	for (var i = 0, j = 0; i < addForm.length - 2; ++i) {
 			if (validate_empty(addForm.elements[i].value)) {
 				valid = false;
@@ -116,9 +114,9 @@
 	   
 		var idPattern = new RegExp("[A-Za-z]+Id");
 	   
-		var sectionNumber = document.getElementById("sectionNumber");
-		var semesterId = document.getElementById("semesterId");
-		var year = document.getElementById("year");
+		var sectionNumber = document.getElementById("up_sectionNumber");
+		var semesterId = document.getElementById("up_semesterId");
+		var year = document.getElementById("up_year");
 		
 		var cisId = document.getElementById("cisId");
 
@@ -131,7 +129,7 @@
 	   		if (validate_empty(updateForm.elements[i].value)) {
 				valid = false;
 				errors[j] = updateForm.elements[i].getAttribute("name") + " is required";
-				elementsId[j++] = addForm.elements[i].getAttribute("id");
+				elementsId[j++] = updateForm.elements[i].getAttribute("id");
 			}
 			else {
 				if (!idPattern.test(updateForm.elements[i].getAttribute("id")) 

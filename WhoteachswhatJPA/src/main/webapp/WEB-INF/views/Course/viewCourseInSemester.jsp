@@ -281,8 +281,7 @@ td {
 							</c:if>
 							<div class="input-group">
 								<span class="input-group-addon">Section Number:</span><br /> <input
-									type="text" class="form-control" name="Section number" id="up_sectionNumber"
-									placeholder="Subject Name" />
+									type="text" class="form-control" name="Section number" id="up_sectionNumber" />
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Semester:</span> <br /> 
