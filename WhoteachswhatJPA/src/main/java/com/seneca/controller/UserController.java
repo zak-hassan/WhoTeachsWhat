@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.seneca.model.Account;
 import com.seneca.service.AccessLevelService;
 import com.seneca.service.AccountService;
@@ -71,8 +69,8 @@ public class UserController {
 		for (Account account : accounts) {
 			Map<String, String> mapAccount = new HashMap<String, String>();
 			mapAccount.put("username", account.getUsername());
-			mapAccount.put("accessLevel", account.get()
-					.getAccessName());
+			mapAccount.put("accessLevel", account.getAccessLevel()
+					.getAccessName()+"");
 			mapAccount.put("accessLevelID", account.getAccessLevel()
 					.getAccessId() + "");
 			items.add(mapAccount);
@@ -100,7 +98,7 @@ public class UserController {
 			Map<String, String> list = new HashMap<String, String>();
 
 			list.put("username", account.getUsername());
-			list.put("accessLevel", account.().getAccessName());
+			list.put("accessLevel", account.getAccessLevel().getAccessName());
 			list.put("accessLevelID", account.getAccessLevel().getAccessId() + "");
 
 			return list;
@@ -140,7 +138,7 @@ public class UserController {
 		logger.info("FINISH: Adding Account");
 		Map<String, String> list = new HashMap<String, String>();
 		list.put("success", "true");
-		list.put("id", account.getUserId() + "");
+		list.put("id", account.getId() + "");
 		return list;
 	}
 
