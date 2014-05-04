@@ -122,23 +122,26 @@ public class FacultyToCourseInSemesterYearService {
 
 	public List<Swift> getAllSwifts(Integer id, Integer semester, Integer year) {
 
+		List<FacultyToCourseInSemesterYear> swiftContents = this.getAll();
+		int swiftContentsSize = swiftContents.size();
 		List swiftList= new ArrayList<Swift>();
-
-		for(int i=0; i<5; i++) {
-			Swift s= new Swift();
-			s.setAdditional_attr_hours(2.00);
-			s.setAttr_hours(1.20);
-			s.setClass_size(32);
-			s.setComp_hours_allowed(0);
-			s.setAttr_hours(0);
-			s.setComp_hours_assigned(0);
-			s.setCourse_code("PRJ666");
-			s.setEval_e_percent(10);
-			s.setEval_p_percent(20);
-			s.setEval_r_percent(70);
+		
+		for (FacultyToCourseInSemesterYear sc : swiftContents) {
+			Swift s = new Swift();
+			
+			s.setAdditional_attr_hours(sc.getAdditionAttribute());
+			s.setAttr_hours(sc.getAdditionAttribute()); // Need attribute
+			s.setClass_size(30); // Need attribute
+			s.setComp_hours_allowed(sc.getCompHour_allowance());
+			s.setAttr_hours(20); // Need attribute
+			s.setComp_hours_assigned(sc.getCompHour_assigned());
+			s.setCourse_code(sc.getCourse().getCourseCode());
+			s.setEval_e_percent((int)sc.getCourse().getEvalFactor1());
+			s.setEval_p_percent((int)sc.getCourse().getEvalFactor2());
+			s.setEval_r_percent((int)sc.getCourse().getEvalFactor3());
 			s.setLang('E');
-			s.setTeaching_hours(0);
-			s.setEval_factor(1.20);
+			s.setTeaching_hours(sc.getFaculty().getHoursToTeach());
+			s.setEval_factor(1.7);
 			s.setRef('Y');
 			s.setPrep_type("DA");
 			s.setPrep_additional_hours(0);
@@ -149,5 +152,4 @@ public class FacultyToCourseInSemesterYearService {
 		
 		return swiftList;
 	}
-
 }

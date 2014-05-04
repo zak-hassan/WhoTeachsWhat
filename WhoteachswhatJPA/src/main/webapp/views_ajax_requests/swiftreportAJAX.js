@@ -82,6 +82,8 @@
 		var rowStart = 2;
 		var table = document.getElementById('swiftTable');
 		var oldRowsLength = document.getElementById('swiftTable').rows.length;
+		var i = 0;
+		var cellsPerRow = 17;
 		
 		var weeklyAssignedTeachingHours = 0;
 		var weeklyPrepAttributedHours = 0;
@@ -92,13 +94,12 @@
 		var weeklyCompHourAssigned = 0;
 		var weeklyTotal = 0;
 		
-		
-		for (var i = oldRowsLength - 1; i >= rowStart; --i) // Clear previous table data, if any
+		for (i = oldRowsLength - 1; i >= rowStart; --i) // Clear previous table data, if any
 			table.deleteRow(i);
 
 		var curRowsLength = data.swift.length;
 				
-		for(var i = 0; i < curRowsLength; ++i) {
+		for(i = 0; i < curRowsLength; ++i) {
 			var row = table.insertRow(rowStart+i);
 			row.insertCell(0).innerHTML = data.swift[i].course_code;
 			row.insertCell(1).innerHTML = data.swift[i].teaching_hours;
@@ -118,6 +119,14 @@
 			row.insertCell(15).innerHTML = data.swift[i].comp_hours_assigned;
 			row.insertCell(16).innerHTML = data.swift[i].ref;
 			
+			// Add row totals
+			
+			var rowTotal = parseFloat(data.swift[i].teaching_hours) + parseFloat(data.swift[i].prep_attributed_hours) +
+			parseFloat(data.swift[i].prep_additional_hours) + parseFloat(data.swift[i].attr_hours) +
+			parseFloat(data.swift[i].additional_attr_hours);
+			
+			row.insertCell(17).innerHTML = rowTotal;
+			
 			weeklyAssignedTeachingHours += parseFloat(data.swift[i].teaching_hours);
 			weeklyPrepAttributedHours += parseFloat(data.swift[i].prep_attributed_hours);
 			weeklyPrepAdditionalAttributedHours += parseFloat(data.swift[i].prep_additional_hours);
@@ -125,14 +134,39 @@
 			weeklyEvalAdditionalAttributedHours += parseFloat(data.swift[i].additional_attr_hours);
 			weeklyCompHoursAllow += parseFloat(data.swift[i].comp_hours_allowed);
 			weeklyCompHourAssigned += parseFloat(data.swift[i].comp_hours_assigned);
-		}
-		
-		// Add totals
-		
-		weeklyTotal = parseFloat(weeklyAssignedTeachingHours) + parseFloat(weeklyPrepAttributedHours) +
-			parseFloat(weeklyPrepAdditionalAttributedHours) + parseFloat(weeklyEvalAttributedHours) +
-			parseFloat(weeklyEvalAdditionalAttributedHours) + parseFloat(weeklyCompHoursAllow) +
-			parseFloat(weeklyCompHourAssigned);
+			
+			weeklyTotal += rowTotal;
+		} // End for loop
 		
 		// Add new row with totals
+		var row = table.insertRow(rowStart+i);
+		
+		for (var i = 0; i <= cellsPerRow; ++i) {
+			row.insertCell(i);
+		}
+		
+		row.cells[0].innerHTML = "WKLY TOTALS";
+		row.cells[1].innerHTML = weeklyAssignedTeachingHours;
+		row.cells[5].innerHTML = weeklyPrepAttributedHours;
+		row.cells[6].innerHTML = weeklyPrepAdditionalAttributedHours;
+		row.cells[12].innerHTML = weeklyEvalAttributedHours;
+		row.cells[13].innerHTML = weeklyEvalAdditionalAttributedHours;
+		row.cells[14].innerHTML = weeklyCompHoursAllow;
+		row.cells[15].innerHTML = weeklyCompHourAssigned;
+		row.cells[17].innerHTML = weeklyTotal;
+		
+		var swiftCourseSummaryTable = document.getElementById('swiftCourseSummary');
+		
+		swiftCourseSummaryTable.rows[0].cells[1].innerHTML = "YAY"; // Number of courses
+		swiftCourseSummaryTable.rows[1].cells[1].innerHTML = "YAY"; // Number of sections
+		swiftCourseSummaryTable.rows[2].cells[1].innerHTML = "YAY"; // Number of languagess
+		
+		var swiftWeeklyTotalsTable = document.getElementById('swiftWeeklyTotals');
+		
+		swiftWeeklyTotalsTable.rows[0].cells[1].innerHTML = "YAY"; // Assigned teaching hours
+		swiftWeeklyTotalsTable.rows[1].cells[1].innerHTML = "YAY"; // Preparation hours
+		swiftWeeklyTotalsTable.rows[2].cells[1].innerHTML = "YAY"; // Evaluation feedback hours
+		swiftWeeklyTotalsTable.rows[3].cells[1].innerHTML = "YAY"; // Compliementary hours allowance
+		swiftWeeklyTotalsTable.rows[4].cells[1].innerHTML = "YAY"; // Complimentary hours assigned
+		swiftWeeklyTotalsTable.rows[5].cells[0].innerHTML = "YAY"; // Total
 	};

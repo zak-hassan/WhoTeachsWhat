@@ -85,6 +85,7 @@
 				<span class="nav-selection">Reports</span>
 				<i class="icon-menu-arrow"></i>   
 			</a>
+			<!--  
 			<div class="sub-nav">
 				<ul class="nav">
 					<li>
@@ -92,6 +93,7 @@
 					</li>
 				</ul>
 			</div>
+			-->
 		</li>
 		<li class="nav-logout">
 			<a href="logout">
