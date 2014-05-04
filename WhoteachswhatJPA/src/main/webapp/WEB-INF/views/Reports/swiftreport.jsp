@@ -161,7 +161,60 @@
 				</div>
 
 				<!--Sortable Non-responsive Table end-->
-
+				
+				<br/>
+				<p>PREPARATION HOURS/SUBJECT = FACTOR x TEACHING CONTACT HOURS</p>
+				<p>EVALUATION FEEDBACK HOURS/SUBJECT = FACTOR x CLASS SIZE x TEACHING CONTACT HOURS</p>
+				
+				<div style="border-style:solid; width:50%;">
+					<table id="swiftCourseSummary" style="border-style:none;">
+						<tr>
+							<td>NUMBER OF DIFFERENT COURSE PREPARATIONS:</td>
+							<td align="right">10</td>
+						</tr>
+						<tr>
+							<td>NUMBER OF DIFFERENT SECTIONS:</td>
+							<td align="right">10</td>
+						</tr>
+						<tr>
+							<td>NUMBER OF LANGUAGES OF INSTRUCTION:</td>
+							<td align="right">1</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				
+				<div style="width:50%">
+					<p align="center">SUMMARY OF WEEKLY TOTALS</p>
+				</div>
+				<div style="border-style:solid; width:50%;">
+					<table id="swiftWeeklyTotals" style="border-style:none;">
+						<tr>
+							<td>ASSIGNED TEACHING CONTACT HOURS/WEEK:</td>
+							<td align="right">10</td>
+						</tr>
+						<tr>
+							<td>PREPARATION HOURS/WEEK:</td>
+							<td align="right">10</td>
+						</tr>
+						<tr>
+							<td>EVALUATION FEEDBACK HOURS/WEEK:</td>
+							<td align="right">1</td>
+						</tr>
+						<tr>
+							<td>COMPLIMENTARY HOURS(ALLOWANCE)/WEEK (MINIMUM 5):</td>
+							<td align="right">1</td>
+						</tr>
+						<tr>
+							<td>COMPLIMENTARY HOURS(ASSIGNED)/WEEK:</td>
+							<td align="right">1</td>
+						</tr>
+						<tr>
+							<td align="right" rowspan="2">1</td>
+						</tr>
+					</table>
+				</div>
+				
 				<script>
 
 					   $(document).ready(function() {
