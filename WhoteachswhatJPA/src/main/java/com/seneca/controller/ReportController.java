@@ -12,9 +12,9 @@ import com.seneca.service.CourseService;
 /**
  * This class is the controller which regulates all faculty operations.
  * 
- * @author Zakeria Hassan <zak.hassan1010@gmail.com>
- * @lastmodified Dec 31, 2013
- * @version 0.0.1
+ * @author Zakeria Hassan <zak.hassan1010@gmail.com>, Anil Santokhi <anil.d.santokhi@gmail.com>
+ * @lastmodified May 3, 2014
+ * @version 1.0
  */
 
 @Controller
@@ -30,15 +30,7 @@ public class ReportController {
 	public String whoTeachesWhat(ModelMap model) {
 		model.addAttribute("entityList", courseService.getAll());
 		// TODO: make a fetch from the database for who teachs what course
-		return "who_teaches_what";
-	}
-
-	@RequestMapping(value = "/coursesOfferingNextSemester", method = RequestMethod.GET)
-	public String CourseNextSem(ModelMap model) {
-		// TODO: you need a predicate to search for courses offered next
-		// semester.
-		model.addAttribute("entityList", courseService.getAll());
-		return "Anil_CoursesOfferedNextSemester";
+		return "Reports/whoteacheswhat";
 	}
 
 	@RequestMapping(value = "/teachingHistory", method = RequestMethod.GET)

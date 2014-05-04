@@ -90,6 +90,9 @@
 					<li>
 						<a href="facultyswiftreport">Swift Report</a>
 					</li>
+					<li>
+						<a href="Reports/whoteacheswhat">Who Teaches What</a>
+					</li>
 				</ul>
 			</div>
 		</li>
