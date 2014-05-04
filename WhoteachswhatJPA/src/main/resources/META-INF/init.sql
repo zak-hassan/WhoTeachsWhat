@@ -1,415 +1,176 @@
--- ADDING DEFAULT VALUES FOR ACCESSLEVEL
+-- -----------------------------------------------------
+-- Data for table `mydb`.`EvalFactor`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`EvalFactor` (`eval_id`, `eval_name`) VALUES (NULL, 'E');
+INSERT INTO `mydb`.`EvalFactor` (`eval_id`, `eval_name`) VALUES (NULL, 'R');
+INSERT INTO `mydb`.`EvalFactor` (`eval_id`, `eval_name`) VALUES (NULL, 'P');
 
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('noaccess');
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('administrator');
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('levelone');
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('leveltwo');
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('webmaster');
-INSERT INTO `mydb`.`AccessLevel` (`access_name`) VALUES('scheduler');
-
--- ADDING DEFAULT TEACHING TYPES:
-
-INSERT INTO `mydb`.`TeachingType` (`teachingType_name`) VALUES('fulltime');
-INSERT INTO `mydb`.`TeachingType` (`teachingType_name`) VALUES('parttime');
-INSERT INTO `mydb`.`TeachingType` (`teachingType_name`) VALUES('seasonal');
-
--- TODO: Create a unique constraint on course_code because we don't want to add the same course again.
--- ADDING COURSES: IFS
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OPS105','Operating Systems: Practices'); 
--- $1 can be between 1- 185 , $2 1-2  $3 WHICH Semester  1-8
-INSERT INTO `mydb`.`CourseInProgramCurSem` (`course_id`, `curriculumSemester_id`, `program_id`) VALUES (1,1,1);
-
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OPS110','Operating Systems: Principles'); 
--- INSERT INTO `mydb`.`CourseInProgramCurSem` (`course_id`, `curriculumSemester_id`, `program_id`) VALUES (2,1,2);
-
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('RIS120','Introduction to Web Management'); 
--- INSERT INTO `mydb`.`CourseInProgramCurSem` (`course_id`, `curriculumSemester_id`, `program_id`) VALUES (3,1,4);
-
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN130','Computer Architecture & Networking'); 
--- INSERT INTO `mydb`.`CourseInProgramCurSem` (`course_id`, `curriculumSemester_id`, `program_id`) VALUES (4,2,3);
-
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC140','Critical Thinking and Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR200','Security Principles: Cryptography & Encryption'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT210','The Pragmatic Art of Administration'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('RIS220','Foundations of Database Management'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN230','Protocols: Standards & Models'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC240','Interpersonal Communications in Organizations'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC340','Business Presentations'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT311','Secure Scripting'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR300','Principles of Computer & Network Security'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('RIS320','Risk Management: Data Management & Protection'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN330','Data Comm: Real World Interconnectivity'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT411','Security Arts: Digital Data Analysis'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR401','Security Principles: Forensics'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('RIS420','Risk Management: Public and Private Systems'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN430','Data Comm: Wireless & Mobile'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTR491','Investigative Research Project'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT511','Security Arts: Ethics'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR500','Security Principles: Defenses'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('RIS520','Risk Management: Emergent Technologies'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PRJ505','System Analysis & Project Management'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR600','Security Principles: Detection'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT611','Security Arts: Privacy Issues'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('REA605','Research Methodologies'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CPP600','Co-op Professional Practice'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DPIXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTW699','Coop Work Term'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT711','Business Continuity Planning'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT710','Law, Property & Legislation'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('REA705','Research Project Work'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CPP700','Co-op Integration and Career Planning'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DPIXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTW799','Coop Work Term'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SRT810','Technology Planning and Acquisition'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SPR800','Security Audit'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('REA820','Capstone Project'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DPIXXX','Professional Option'); 
-
--- ADDING COURSE: BSD
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP100','Programming Fundamentals using C'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTB110','Accounting for the Business Environment'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTO120','Operating Systems for Programmers - UNIX'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTO130','Operating Systems for Programmers - Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC140','Critical Thinking and Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP200','The Object-Oriented Paradigm using C++'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTD210','Database Design Principles'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTI220','Internet Architecture and Development'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC240','Interpersonal Communications in Organizations'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP300','Object Oriented Software Development I - C++'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTD310','SQL Database Design using Oracle'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTI320','Web Programming on UNIX'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS330','Business Requirements Analysis using OO Models'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC340','Business Presentations'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP400','Object-Oriented Software Development II - Java'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTN410','Data Communications - Networks'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTI420','Web Programming on Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS430','System Analysis and Design using UML'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC440','Business and Technical Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTR490','Investigative Research Internship'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP500','Data Structures and Algorithms'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTB520','Canadian Business Environment'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTH540','Design for User Interfaces'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS530','Major Project - Plannng and Design'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTP600','Design Patterns in UML'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTE620','Law, Ethics and Social Responsibility'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS630','Major Project - Implementation'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTC640','Multimedia Presentations'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CPP600','Co-op Professional Practice'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTW699','Coop Work Term'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTN710','Information Security'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTB720 -or- BAB235 ','Marketing Principles and Practices -or- Introduction to Marketing (during Fall 2013) '); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS730','Project Management Methodologies'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTH740','Human Factors in Computing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CPP700','Co-op Integration and Career Planning'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTW799','Coop Work Term'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTR820','Research Methodologies and Project'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('BTS830','Technology Planning and Acquisition'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LSOXXX','Liberal Studies Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-
--- ADD CPA
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('APC100','Applied Professional Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IPC144','Introduction to Programming Using C'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ULI101','Introduction to Unix/Linux and the Internet'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IOS110','Introduction to Operating Systems Using Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC150','College English'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IBC233','iSERIES Business Computing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OOP244','Introduction to Object Oriented Programming'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('INT222','Internet I - Internet Fundamentals'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DBS201','Introduction to Database Design and SQL'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DBS301','Database Design II and SQL using Oracle'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('INT322','Internet II - Web Programming on UNIX'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SYS366','Requirements Gathering using OO Models'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OOP344','Object Oriented Programming II Using C++'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN455','Data Communications Networks'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC397','Business Report Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('INT422','Internet III - Web Programming on Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SYS466','Analysis and Design using OO Models'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('JAC444','Introduction to Java for C++ Programmers'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PRJ566','Project Planning and Management'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PRJ666','Project Implementation'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PROXXX','Professional Option'); 
-
--- ADD CPD
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('APC100','Applied Professional Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IPC144','Introduction to Programming Using C'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ULI101','Introduction to Unix/Linux and the Internet'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IOS110','Introduction to Operating Systems Using Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC150','College English'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IBC233','iSERIES Business Computing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OOP244','Introduction to Object Oriented Programming'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('INT222','Internet I - Internet Fundamentals'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DBS201','Introduction to Database Design and SQL'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DBS301','Database Design II and SQL using Oracle'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('INT322','Internet II - Web Programming on UNIX'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SYS366','Requirements Gathering using OO Models'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-
--- ADD CNS
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('APC100','Applied Professional Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('HWD101','PC Hardware I'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ULI101','Introduction to Unix/Linux and the Internet'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IOS110','Introduction to Operating Systems Using Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC150','College English'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN210','Basic Administration of Microsoft Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN286','Introduction to Data Communications Technology'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN213','Introduction To Scripting and Powershell'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OPS235','Introduction to Open System Servers'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN310','Microsoft Windows Network Infrastructure'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN386','Advance Data Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC397','Business Report Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DAT702','Introduction to databases for administrators'); 
+COMMIT;
 
 
--- ADD CTY
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('APC100','Applied Professional Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('HWD101','PC Hardware I'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ULI101','Introduction to Unix/Linux and the Internet'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('IOS110','Introduction to Operating Systems Using Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC150','College English'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN210','Basic Administration of Microsoft Windows'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN286','Introduction to Data Communications Technology'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN213','Introduction to Scripting and Powershell'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('OPS235','Introduction to Open System Servers'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('LIBXXX','English and Liberal Studies Elective'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('WIN310','Microsoft Windows Network Infrastructure'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DCN386','Advance Data Communications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('EAC397','Business Report Writing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DAT702','Introduction to databases for administrators'); 
+-- -----------------------------------------------------
+-- Data for table `mydb`.`PrepTime`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`PrepTime` (`prep_id`, `prep_name`, `prep_factor`) VALUES (NULL, 'P1', 1.4);
+INSERT INTO `mydb`.`PrepTime` (`prep_id`, `prep_name`, `prep_factor`) VALUES (NULL, 'P2', 1.6);
+INSERT INTO `mydb`.`PrepTime` (`prep_id`, `prep_name`, `prep_factor`) VALUES (NULL, 'P3', 0.7);
 
--- ADD DAD
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ULI705','UNIX/Linux and Internet Programming'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SQL710','Database Administration using SQL Server'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DES715','Database Design'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('ORA725','SQL and PL/SQL using ORACLE'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('JAV745','Programming using JAVA'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CJV805','Database Connectivity using JAVA'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('CVB815','Database Connectivity using VISUAL BASIC'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('DBW825','Data Warehousing'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('SEC835','Security in Databases and Web Applications'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PRJ845','Project Management and Implementation'); 
-
--- ADD PMC
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC100','IT Project Management Fundamentals'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC110','Project Management Tools and Techniques'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC120','Business Systems Environments'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC130','Fundamentals of Systems Development'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC140','Project Leadership'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC150','Business Finance'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC200','Advanced IT Project Management'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC210','Project Management Communication Skills'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC220','Contract Law, Ethics, and IT Professionalism'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC230','IT Project Management Case Studies'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC240','Quality Assurance and mydbing in IT projects'); 
-INSERT INTO `mydb`.`Course` (`course_code`, `course_name`)  VALUES ('PMC250','Applied IT Project Management'); 
-
-INSERT INTO `mydb`.`Responsibility`
-(
-`responsibility_code`,
-`responsibility_name`)
-VALUES
-("RAAA_CODE",
-"RAA_NAME");
-
--- ADD SEMESTERS
-INSERT INTO `mydb`.`Semester` (`semester_name`) VALUES ('WINTER');
-INSERT INTO `mydb`.`Semester` (`semester_name`) VALUES ('SUMMER');
-INSERT INTO `mydb`.`Semester` (`semester_name`) VALUES ('FALL');
+COMMIT;
 
 
--- ADD DUMMY DATA FOR FACULTY
-INSERT INTO `mydb`.`Faculty` (`faculty_first_name`, `faculty_last_name`,`hours_to_teach`,`teachingType_id`) VALUES('thao','diep',1,1);
-INSERT INTO `mydb`.`Faculty` (`faculty_first_name`, `faculty_last_name`,`hours_to_teach`,`teachingType_id`) VALUES('lisa','sheehan', 1,1);
-INSERT INTO `mydb`.`Faculty` (`faculty_first_name`, `faculty_last_name`, `hours_to_teach`,`teachingType_id`) VALUES('paul','ravetti',1,1);
-INSERT INTO `mydb`.`Faculty` (`faculty_first_name`, `faculty_last_name`, `hours_to_teach`,`teachingType_id`) VALUES('janice','tee', 1,1);
-INSERT INTO `mydb`.`Faculty` (`faculty_first_name`, `faculty_last_name`, `hours_to_teach`,`teachingType_id`) VALUES('phil','francisco', 1,1);
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Course`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Course` (`course_id`, `course_code`, `course_name`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `old_course`, `crossover_course`) VALUES (NULL, 'IPC144', 'Introduction to Programming Using C', 60, 30, 10, NULL, NULL);
+INSERT INTO `mydb`.`Course` (`course_id`, `course_code`, `course_name`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `old_course`, `crossover_course`) VALUES (NULL, 'ULI101', 'Introduction To Unix/linux, & The Internet', 70, 10, 20, NULL, NULL);
+INSERT INTO `mydb`.`Course` (`course_id`, `course_code`, `course_name`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `old_course`, `crossover_course`) VALUES (NULL, 'APC100', 'Applied Professional Communications', 60, 20, 20, NULL, NULL);
+INSERT INTO `mydb`.`Course` (`course_id`, `course_code`, `course_name`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `old_course`, `crossover_course`) VALUES (NULL, 'IOS110', 'Introduction to Operation Systems Using Windows', 80, 10, 10, NULL, NULL);
+INSERT INTO `mydb`.`Course` (`course_id`, `course_code`, `course_name`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `old_course`, `crossover_course`) VALUES (NULL, 'DCN455', 'Data Communications Network', 50, 30, 20, NULL, NULL);
+
+COMMIT;
 
 
--- ADD RESPONSIBILITY
-INSERT INTO `mydb`.`Responsibility` (`responsibility_code`,`responsibility_name`) VALUES('RESEARCH','Research');
-INSERT INTO `mydb`.`Responsibility` (`responsibility_code`,`responsibility_name`) VALUES('TEACHING','Teaching');
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Semester`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Semester` (`semester_id`, `semester_name`) VALUES (NULL, 'Winter');
+INSERT INTO `mydb`.`Semester` (`semester_id`, `semester_name`) VALUES (NULL, 'Summer');
+INSERT INTO `mydb`.`Semester` (`semester_id`, `semester_name`) VALUES (NULL, 'Fall');
+
+COMMIT;
 
 
--- ADD ResponsibilityToFaculty
+-- -----------------------------------------------------
+-- Data for table `mydb`.`TeachingType`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`TeachingType` (`teachingType_id`, `teachingType_name`) VALUES (NULL, 'Full time');
+INSERT INTO `mydb`.`TeachingType` (`teachingType_id`, `teachingType_name`) VALUES (NULL, 'Part time');
+INSERT INTO `mydb`.`TeachingType` (`teachingType_id`, `teachingType_name`) VALUES (NULL, 'Seasonal');
 
-INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`,`responsibility_id`,`year`,`semester_id`,`hours_per_week`) VALUES(1,1,2014,1,5);
-INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`,`responsibility_id`,`year`,`semester_id`,`hours_per_week`) VALUES(2,2,2014,2,10);
-
-
--- ADD CompHour
-INSERT INTO `mydb`.`CompHour` (`compHour_code`,`compHour_name`) VALUES ('CODE1','NAME1');
-INSERT INTO `mydb`.`CompHour` (`compHour_code`,`compHour_name`) VALUES ('CODE2','NAME2');
-
--- ADD prepTime
-INSERT INTO `mydb`.`PrepTime` (`prep_name`,`prep_factor`) VALUES('PREP1',10.0);
-INSERT INTO `mydb`.`PrepTime` (`prep_name`,`prep_factor`) VALUES('PREP2',13.0);
-
--- ADD Program
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('CPD','Computer Programmer Diploma', 4);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('CPA','Computer Programming and Analysis', 6);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('DAD','Database Application Developer', 2);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('PMC','Project Management - Information Technology', 8);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('CNS','Computer Networking & Technical Support', 4);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('CTY','Computer Systems Technology', 4);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('BSD','Bachelor of Technology (Software Development)', 8);
-INSERT INTO `mydb`.`Program` (`program_code`, `program_name`, `total_semester`) VALUES('IFS','Bachelor of Technology (Informatics & Security)',8);
-
--- ADD curriculumSemester  This is equivalent to semester 1 , semester 2 , semester 3 ,....
-
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum1');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum2');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum3');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum4');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum5');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum6');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum7');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum8');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum9');
-INSERT INTO `mydb`.`CurriculumSemester` (`name`) VALUES('Curriculum10');
+COMMIT;
 
 
+-- -----------------------------------------------------
+-- Data for table `mydb`.`AccessLevel`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'noaccess');
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'administrator');
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'level one coordinator');
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'level two coordinator');
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'web master');
+INSERT INTO `mydb`.`AccessLevel` (`access_id`, `access_name`) VALUES (NULL, 'scheduler');
+
+COMMIT;
 
 
--- ADD evalFactor
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Responsibility`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Responsibility` (`responsibility_id`, `responsibility_code`, `responsibility_name`) VALUES (NULL, 'TEACH', 'Teaching');
+INSERT INTO `mydb`.`Responsibility` (`responsibility_id`, `responsibility_code`, `responsibility_name`) VALUES (NULL, 'RSCH', 'Research');
+INSERT INTO `mydb`.`Responsibility` (`responsibility_id`, `responsibility_code`, `responsibility_name`) VALUES (NULL, 'OTHER', 'Other');
 
-INSERT INTO `mydb`.`EvalFactor` (`eval_name`,`eval_factor`) VALUES('Evaluation1',12.0);
-INSERT INTO `mydb`.`EvalFactor` (`eval_name`,`eval_factor`) VALUES('Evaluation2',24.0);
-
-
--- ADD CourseToProgram
--- INCORRECT datatype for field(s) course_id, program_id
-INSERT INTO `mydb`.`CourseToProgram`
-(`course_id`,
-`program_id`)
-VALUES (1,1);
-INSERT INTO `mydb`.`CourseToProgram`
-(`course_id`,
-`program_id`)
-VALUES (3,2);
-INSERT INTO `mydb`.`CourseToProgram`
-(`course_id`,
-`program_id`)
-VALUES (4,4);
- 
-INSERT INTO `mydb`.`Account`
-(`password`,
-`access_id`,
-`username`)
-VALUES
-("a12345",2,
-"Emile.Ohan");
+COMMIT;
 
 
-INSERT INTO `mydb`.`Account`
-(`password`,
-`access_id`,
-`username`)
-VALUES
-("a12345",2,
-"Diana.Steward");
+-- -----------------------------------------------------
+-- Data for table `mydb`.`CompHour`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`CompHour` (`compHour_id`, `compHour_code`, `compHour_name`) VALUES (NULL, 'CP1', 'CompHour1');
+INSERT INTO `mydb`.`CompHour` (`compHour_id`, `compHour_code`, `compHour_name`) VALUES (NULL, 'CP2', 'CompHour2');
+INSERT INTO `mydb`.`CompHour` (`compHour_id`, `compHour_code`, `compHour_name`) VALUES (NULL, 'CP3', 'CompHour3');
 
-INSERT INTO `mydb`.`Account`
-(`password`,
-`access_id`,
-`username`)
-VALUES
-("a12345",2,
-"Fred.Flinstron");
-
-INSERT INTO `mydb`.`Account`
-(`password`,
-`access_id`,
-`username`)
-VALUES
-("a12345",2,
-"Jim.Carey");
+COMMIT;
 
 
--- ADDING COURSESINSEMESTER - FK: course_id (1-185), semester_id (1-4) , eval_id(1-2) , semester_id (1-4)
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Faculty`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Faculty` (`faculty_id`, `faculty_first_name`, `faculty_last_name`, `teachingType_id`, `hours_to_teach`) VALUES (NULL, 'Emile', 'Ohan', 1, 35);
+INSERT INTO `mydb`.`Faculty` (`faculty_id`, `faculty_first_name`, `faculty_last_name`, `teachingType_id`, `hours_to_teach`) VALUES (NULL, 'Test', 'Faculty', 3, 16);
+INSERT INTO `mydb`.`Faculty` (`faculty_id`, `faculty_first_name`, `faculty_last_name`, `teachingType_id`, `hours_to_teach`) VALUES (NULL, 'Arta', 'Kogan', 1, 35);
+INSERT INTO `mydb`.`Faculty` (`faculty_id`, `faculty_first_name`, `faculty_last_name`, `teachingType_id`, `hours_to_teach`) VALUES (NULL, 'Zak', 'Hassan', 2, 15);
 
-INSERT INTO `mydb`.`CoursesInSemester`
-(`addition_attribute`,
-`eval_1_ans`,
-`eval_2_ans`,
-`eval_3_ans`,
-`total_section`,
-`year`,
-`course_id`,
-`eval_1`,
-`eval_2`,
-`eval_3`,
-`semester_id`)
-VALUES
-(
-1,
-0.1,
-0.2,
-0.3,
-4,
-2014,
-160,
-1,
-2,
-2,
-4
-);
-
-INSERT INTO `mydb`.`CoursesInSemester`
-(`addition_attribute`,
-`eval_1_ans`,
-`eval_2_ans`,
-`eval_3_ans`,
-`total_section`,
-`year`,
-`course_id`,
-`eval_1`,
-`eval_2`,
-`eval_3`,
-`semester_id`)
-VALUES
-(
-1,
-0.1,
-0.5,
-0.2,
-4,
-2014,
-158,
-1,
-2,
-2,
-4
-);
+COMMIT;
 
 
--- ADD CourseInProgramCurSem
+-- -----------------------------------------------------
+-- Data for table `mydb`.`ResponsibilityToFaculty`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`, `responsibility_id`, `year`, `semester_id`, `hours_per_week`, `repToFac_id`) VALUES (1, 1, 2014, 1, 35, NULL);
+INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`, `responsibility_id`, `year`, `semester_id`, `hours_per_week`, `repToFac_id`) VALUES (2, 1, 2014, 2, 16, NULL);
+INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`, `responsibility_id`, `year`, `semester_id`, `hours_per_week`, `repToFac_id`) VALUES (3, 2, 2013, 3, 35, NULL);
+INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`, `responsibility_id`, `year`, `semester_id`, `hours_per_week`, `repToFac_id`) VALUES (4, 3, 2014, 2, 15, NULL);
+INSERT INTO `mydb`.`ResponsibilityToFaculty` (`faculty_id`, `responsibility_id`, `year`, `semester_id`, `hours_per_week`, `repToFac_id`) VALUES (5, 2, 2014, 2, NULL, NULL);
+
+COMMIT;
 
 
--- ADD facultyToCourseInSemesterYear
--- INCORRECT datatype for field(s) course_id
--- FACULTY ID: between 1 - 10
--- COURSE ID: 1 - 370
--- PREP TIME: 1 - 2 
--- COMPHOUR_ID: 1-2
+-- -----------------------------------------------------
+-- Data for table `mydb`.`CoursesInSemester`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`CoursesInSemester` (`cis_id`, `course_id`, `semester_id`, `year`, `total_section`) VALUES (NULL, 1, 2, 2014, 4);
+INSERT INTO `mydb`.`CoursesInSemester` (`cis_id`, `course_id`, `semester_id`, `year`, `total_section`) VALUES (NULL, 2, 1, 2013, 6);
+INSERT INTO `mydb`.`CoursesInSemester` (`cis_id`, `course_id`, `semester_id`, `year`, `total_section`) VALUES (NULL, 3, 3, 2014, 3);
+INSERT INTO `mydb`.`CoursesInSemester` (`cis_id`, `course_id`, `semester_id`, `year`, `total_section`) VALUES (NULL, 4, 1, 2010, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`FacultyToCourseInSemesterYear`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`FacultyToCourseInSemesterYear` (`cisy_id`, `faculty_id`, `course_id`, `prepType_id`, `addition_attribute`, `compHour_id`, `compHour_allowance`, `compHour_assigned`, `section_number`, `year`, `semester_id`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `factor_id`) VALUES (NULL, 1, 1, 1, 10, 1, 20, 11, 2, 2014, 1, 60, 30, 10, 1);
+INSERT INTO `mydb`.`FacultyToCourseInSemesterYear` (`cisy_id`, `faculty_id`, `course_id`, `prepType_id`, `addition_attribute`, `compHour_id`, `compHour_allowance`, `compHour_assigned`, `section_number`, `year`, `semester_id`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `factor_id`) VALUES (NULL, 4, 2, 2, 5, 2, 15, 15, 1, 2014, 2, 70, 10, 20, 2);
+INSERT INTO `mydb`.`FacultyToCourseInSemesterYear` (`cisy_id`, `faculty_id`, `course_id`, `prepType_id`, `addition_attribute`, `compHour_id`, `compHour_allowance`, `compHour_assigned`, `section_number`, `year`, `semester_id`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `factor_id`) VALUES (NULL, 1, 2, 1, 10, 1, 20, 9, 2, 2014, 1, 70, 10, 20, 1);
+INSERT INTO `mydb`.`FacultyToCourseInSemesterYear` (`cisy_id`, `faculty_id`, `course_id`, `prepType_id`, `addition_attribute`, `compHour_id`, `compHour_allowance`, `compHour_assigned`, `section_number`, `year`, `semester_id`, `eval_factor1`, `eval_factor2`, `eval_factor3`, `factor_id`) VALUES (NULL, 3, 5, 3, 20, 3, 25, 20, 1, 2014, 3, 50, 30, 20, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Account`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Account` (`id`, `username`, `password`, `accessLevel_id`) VALUES (NULL, 'Anil.Santokhi', 'a12345', 1);
+INSERT INTO `mydb`.`Account` (`id`, `username`, `password`, `accessLevel_id`) VALUES (NULL, 'Zak.Hassan', 'a12345', 2);
+INSERT INTO `mydb`.`Account` (`id`, `username`, `password`, `accessLevel_id`) VALUES (NULL, 'Emile.Ohan', 'a12345', 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Factor`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Factor` (`factor_id`, `factor_name`, `factor_value`) VALUES (NULL, 'Taught Before', 1.2);
+INSERT INTO `mydb`.`Factor` (`factor_id`, `factor_name`, `factor_value`) VALUES (NULL, 'First Time Taught', 0.9);
+INSERT INTO `mydb`.`Factor` (`factor_id`, `factor_name`, `factor_value`) VALUES (NULL, 'Sample Factor', 1.1);
+
+COMMIT;
